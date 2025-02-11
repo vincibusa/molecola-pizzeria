@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import ReservationModal from "./ReservationModal";
@@ -23,6 +23,11 @@ const Navbar = () => {
     // Check posizione scroll al mount
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
+  }, [location.pathname]);
+
+  // Close mobile menu when route changes
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
   // Se siamo nella home ("/") utilizziamo bg-transparent o bg-black/80
@@ -64,34 +69,22 @@ const Navbar = () => {
             >
               <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-8 p-4 lg:p-0">
                 <li>
-                  <Link
-                    to="/"
-                    className={`text-white ${hoverClass} transition-colors`}
-                  >
+                  <Link to="/" className={`text-white ${hoverClass} transition-colors`}>
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/menu"
-                    className={`text-white ${hoverClass} transition-colors`}
-                  >
+                  <Link to="/menu" className={`text-white ${hoverClass} transition-colors`}>
                     Menu
                   </Link>
                 </li>
                 <li>
-                  <button
-                    onClick={() => setIsReservationModalOpen(true)}
-                    className={`text-white ${hoverClass} transition-colors`}
-                  >
+                  <button onClick={() => setIsReservationModalOpen(true)} className={`text-white ${hoverClass} transition-colors`}>
                     Prenotazioni
                   </button>
                 </li>
                 <li>
-                  <Link
-                    to="/contatti"
-                    className={`text-white ${hoverClass} transition-colors`}
-                  >
+                  <Link to="/contatti" className={`text-white ${hoverClass} transition-colors`}>
                     Contatti
                   </Link>
                 </li>
@@ -100,10 +93,7 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      <ReservationModal
-        isOpen={isReservationModalOpen}
-        onClose={() => setIsReservationModalOpen(false)}
-      />
+      <ReservationModal isOpen={isReservationModalOpen} onClose={() => setIsReservationModalOpen(false)} />
     </>
   );
 };
