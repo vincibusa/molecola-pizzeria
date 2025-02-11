@@ -22,21 +22,22 @@ export const addReservation = async (reservation: Reservation): Promise<string |
   }
 };
 
-export const getReservations = async (): Promise<Reservation[]> => {
-  try {
-    const reservationsRef = database.ref('reservations');
-    const snapshot = await reservationsRef.get();
+export const subscribeToReservations = (
+  callback: (reservations: Reservation[]) => void
+): (() => void) => {
+  const reservationsRef = database.ref('reservations');
+  const listener = reservationsRef.on('value', (snapshot) => {
     const reservations: Reservation[] = [];
     snapshot.forEach((childSnapshot) => {
       const reservation: Reservation = childSnapshot.val();
-      reservation.id = childSnapshot.key;
+      reservation.id = childSnapshot.key ?? "";
       reservations.push(reservation);
     });
-    return reservations;
-  } catch (error) {
-    console.error('Error getting reservations: ', error);
-    throw error;
-  }
+    callback(reservations);
+  });
+  return () => {
+    reservationsRef.off('value', listener);
+  };
 };
 
 export const deleteReservation = async (key: string): Promise<void> => {

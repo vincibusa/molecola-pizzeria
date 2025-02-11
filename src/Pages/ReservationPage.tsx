@@ -2,15 +2,20 @@ import React, { useState, useCallback, useEffect, ChangeEvent } from "react";
 import { FiEdit2, FiTrash2, FiCalendar, FiClock, FiUsers } from "react-icons/fi";
 import { format } from "date-fns";
 import { toast, ToastContainer } from "react-toastify";
-import { Reservation, getReservations, updateReservation, deleteReservation } from "../services/Reservation";
+import {
+  Reservation,
+  subscribeToReservations,
+  updateReservation,
+  deleteReservation
+} from "../services/Reservation";
 
 interface ReservationFormData {
-    fullName: string;
-    phone: string;
-    date: string;
-    time: string;
-    seats: number;
-    specialRequests?: string;
+  fullName: string;
+  phone: string;
+  date: string;
+  time: string;
+  seats: number;
+  specialRequests?: string;
 }
 
 const ReservationPage: React.FC = () => {
@@ -26,19 +31,15 @@ const ReservationPage: React.FC = () => {
     seats: 1
   });
 
-  // Carica le prenotazioni al mount del componente
+  // Sottoscrizione realtime alle prenotazioni
   useEffect(() => {
-    const fetchReservations = async () => {
-      try {
-        const reservationsData = await getReservations();
-        setReservations(reservationsData);
-        console.log(reservationsData);
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      } catch (error) {
-        toast.error("Errore nel recuperare le prenotazioni");
-      }
+    const unsubscribe = subscribeToReservations((reservationsData) => {
+      setReservations(reservationsData);
+      console.log(reservationsData);
+    });
+    return () => {
+      unsubscribe();
     };
-    fetchReservations();
   }, []);
 
   const handleEdit = useCallback((reservation: Reservation) => {
@@ -46,9 +47,11 @@ const ReservationPage: React.FC = () => {
     setFormData({
       fullName: reservation.fullName,
       phone: reservation.phone,
-      date: format(reservation.date, "yyyy-MM-dd"),
+      // Conversione della stringa in Date per formattarla correttamente
+      date: format(new Date(reservation.date), "yyyy-MM-dd"),
       time: reservation.time,
-      seats: reservation.seats
+      seats: reservation.seats,
+      specialRequests: reservation.specialRequests || ""
     });
     setIsEditModalOpen(true);
   }, []);
@@ -69,12 +72,12 @@ const ReservationPage: React.FC = () => {
       toast.error("Please fill all fields");
       return;
     }
-  
+
     if (selectedReservation && selectedReservation.id) {
       const updatedReservation: Reservation = {
         ...selectedReservation,
         ...formData,
-        // Rimuoviamo la conversione in Date e usiamo direttamente la stringa della data
+        // La data viene salvata come stringa, quindi la usiamo così com'è
         date: formData.date
       };
       try {
@@ -94,7 +97,7 @@ const ReservationPage: React.FC = () => {
   }, [formData, selectedReservation]);
 
   const handleConfirmDelete = useCallback(async () => {
-    if (selectedReservation && selectedReservation.id !== undefined) {
+    if (selectedReservation && selectedReservation.id) {
       try {
         await deleteReservation(selectedReservation.id.toString());
         setReservations((prev) =>
@@ -145,7 +148,7 @@ const ReservationPage: React.FC = () => {
               <div className="space-y-2">
                 <div className="flex items-center text-accent">
                   <FiCalendar className="mr-2" />
-                  <span>{format(reservation.date, "MMMM dd, yyyy")}</span>
+                  <span>{format(new Date(reservation.date), "MMMM dd, yyyy")}</span>
                 </div>
                 <div className="flex items-center text-accent">
                   <FiClock className="mr-2" />
@@ -155,10 +158,11 @@ const ReservationPage: React.FC = () => {
                   <FiUsers className="mr-2" />
                   <span>{reservation.seats} seats</span>
                 </div>
-                <div className="flex items-center text-accent">
-     ì
-                  <span>{reservation.specialRequests} seats</span>
-                </div>
+                {reservation.specialRequests && (
+                  <div className="flex items-center text-accent">
+                    <span>{reservation.specialRequests}</span>
+                  </div>
+                )}
               </div>
             </div>
           ))}
