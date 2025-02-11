@@ -87,7 +87,9 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
     <div
     onClick={onClose}
      className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-4 z-[200] overflow-y-hidden ">
-      <div className="relative max-w-md w-full bg-card rounded-lg shadow-lg p-8 my-10">
+      <div 
+            onClick={(e) => e.stopPropagation()}
+      className="relative max-w-md w-full bg-card rounded-lg shadow-lg p-8 my-10">
        
 
         <div className="text-center mb-8 flex items-center justify-between">    
