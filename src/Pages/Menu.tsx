@@ -95,21 +95,21 @@ const Menu = () => {
   const filteredItems =
     menuItems.filter((cat) => cat.category === activeCategory)[0]?.items || [];
 
-  useEffect(() => {
-    let scrollTimeout: number;
-    const handleScroll = () => {
-      setIsStickyVisible(false);
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
-        setIsStickyVisible(true);
-      }, 250);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      if (scrollTimeout) clearTimeout(scrollTimeout);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+useEffect(() => {
+  let scrollTimeout: ReturnType<typeof setTimeout>;
+  const handleScroll = () => {
+    setIsStickyVisible(false);
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    scrollTimeout = setTimeout(() => {
+      setIsStickyVisible(true);
+    }, 250);
+  };
+  window.addEventListener("scroll", handleScroll);
+  return () => {
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+    window.removeEventListener("scroll", handleScroll);
+  };
+}, []);
 
   return (
     <div className="min-h-screen p-4 md:p-8">
