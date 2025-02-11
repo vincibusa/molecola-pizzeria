@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import HomePage from './Pages/HomePage';
 import Menu from './Pages/Menu';
+import ReservationPage from './Pages/ReservationPage';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
 <Route path="/menu" element={<Menu />} />
+<Route path="/reservation" element={<ReservationPage />} />
       </Routes>
     </ContentWrapper></>
   );
