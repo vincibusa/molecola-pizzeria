@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { FaBars } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import ReservationModal from "./ReservationModal";
+import logo from "../assets/logo.png";
 
 const Navbar = () => {
   const location = useLocation();
@@ -54,7 +55,10 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="text-white text-2xl font-bold">Fermento 2.0</div>
+            <Link to="/">
+              <img src={logo} alt="Pizzeria Fermento 2.0" className="h-12" />
+            </Link>
+           
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden text-white"

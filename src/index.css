@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 body {
-  /* Gradiente da un beige caldo (#F5E9D0) a un taupe chiaro (#E9E0C6) */
-  background-image: linear-gradient(to bottom right, #F5E9D0, #E9E0C6);
+  background-color: #d9d9db
 }
+
+
+
+

@@ -132,7 +132,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
             {errors.phone && <p className="mt-1 text-sm text-destructive">{errors.phone}</p>}
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div>
               <label className="block text-sm font-body text-foreground mb-2">Data</label>
               <div className="relative">
