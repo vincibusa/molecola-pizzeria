@@ -7,20 +7,31 @@ export default {
   theme: {
     extend: {
       colors: {
+        eden: "#0c4b43",
+        iron: "#d9d9db",
+        mojo: "#bf4a3a",
+        kabul: "#63483f",
+        mineralGreen: "#436464",
+        grannySmith: "#7c9b9b",
+        codGray: "#0c0c0c",
+        gumbo: "#80a4a4",
+        cascade: "#84a49c",
+        lisbonBrown: "#3e391c",
+
         primary: {
-          DEFAULT: "#7c483c",
+          DEFAULT: "#0c4b43", // Eden
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#503837",
+          DEFAULT: "#63483f", // Kabul
           foreground: "#FFFFFF",
         },
-        darkBg: "#281e1e",
+        darkBg: "#0c0c0c", // Cod Gray
         accent: {
-          DEFAULT: "#b6472a",
+          DEFAULT: "#bf4a3a", // Mojo
           foreground: "#FFFFFF",
         },
-        background: "#FAFAFB",
+        background: "#d9d9db", // Iron
         foreground: "#020817",
         card: {
           DEFAULT: "#FFFFFF",
@@ -31,18 +42,18 @@ export default {
           foreground: "#020817",
         },
         muted: {
-          DEFAULT: "#F0F1F3",
+          DEFAULT: "#7c9b9b", // Granny Smith
           foreground: "#6D7074",
         },
         destructive: {
           DEFAULT: "#FF4C4C",
           foreground: "#FFFFFF",
         },
-        border: "#E0E0E0",
-        input: "#E0E0E0",
-        ring: "#b6472a",
+        border: "#80a4a4", // Gumbo
+        input: "#80a4a4",
+        ring: "#bf4a3a", // Mojo
         chart: {
-          1: "#FF6F61",
+          1: "#84a49c", // Cascade
           2: "#4CAF50",
           3: "#03A9F4",
           4: "#FFC107",
@@ -50,38 +61,38 @@ export default {
         },
         dark: {
           primary: {
-            DEFAULT: "#7c483c",
+            DEFAULT: "#0c4b43", // Eden
             foreground: "#FFFFFF",
           },
           secondary: {
-            DEFAULT: "#503837",
+            DEFAULT: "#63483f", // Kabul
             foreground: "#FAFAFB",
           },
           accent: {
-            DEFAULT: "#b6472a",
+            DEFAULT: "#bf4a3a", // Mojo
             foreground: "#FAFAFB",
           },
-          background: "#281e1e",
+          background: "#0c0c0c", // Cod Gray
           foreground: "#FAFAFB",
           card: {
-            DEFAULT: "#121212",
+            DEFAULT: "#3e391c", // Lisbon Brown
             foreground: "#FAFAFB",
           },
           popover: {
-            DEFAULT: "#121212",
+            DEFAULT: "#3e391c", // Lisbon Brown
             foreground: "#FAFAFB",
           },
           muted: {
-            DEFAULT: "#1E1E2C",
+            DEFAULT: "#436464", // Mineral Green
             foreground: "#6D7074",
           },
           destructive: {
             DEFAULT: "#FF4C4C",
             foreground: "#FFFFFF",
           },
-          border: "#3C3C3C",
-          input: "#3C3C3C",
-          ring: "#b6472a",
+          border: "#80a4a4", // Gumbo
+          input: "#80a4a4",
+          ring: "#bf4a3a", // Mojo
         },
       },
       borderRadius: {
@@ -105,4 +116,4 @@ export default {
   },
   plugins: [],
   darkMode: "class",
-} 
+};
