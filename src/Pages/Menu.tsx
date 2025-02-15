@@ -1,12 +1,10 @@
-
-import  { useState, useEffect } from "react";
+import { useState } from "react";
 import { FaPizzaSlice, FaWineGlass } from "react-icons/fa";
 import { GiFullPizza, GiHotMeal } from "react-icons/gi";
 import { BiDrink } from "react-icons/bi";
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState("Pizze Classiche");
-  const [isStickyVisible, setIsStickyVisible] = useState(true);
 
   const categories = [
     { name: "Pizze Classiche", icon: <FaPizzaSlice /> },
@@ -25,56 +23,70 @@ const Menu = () => {
           description: "Pomodoro, mozzarella, basilico fresco",
           price: "€10",
           dietary: ["vegetarian"],
-          image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002"
+          image:
+            "https://images.unsplash.com/photo-1574071318508-1cdbab80d002"
         },
         {
           name: "Marinara",
           description: "Pomodoro, aglio, origano, olio d'oliva",
           price: "€9",
           dietary: ["vegan"],
-          image: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47"
+          image:
+            "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47"
         },
         {
           name: "Capricciosa",
-          description: "Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive",
+          description:
+            "Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive",
           price: "€12",
           dietary: ["meat"],
-          image: "https://images.unsplash.com/photo-1600273571173-a4a5c3c7ff21"
+          image:
+            "https://images.unsplash.com/photo-1600273571173-a4a5c3c7ff21"
         },
         {
           name: "Quattro Formaggi",
-          description: "Mozzarella, gorgonzola, parmigiano, fontina",
+          description:
+            "Mozzarella, gorgonzola, parmigiano, fontina",
           price: "€11",
           dietary: ["vegetarian"],
-          image: "https://images.unsplash.com/photo-1584642857260-26c0f14f8c0d"
+          image:
+            "https://images.unsplash.com/photo-1584642857260-26c0f14f8c0d"
         },
         {
           name: "Diavola",
-          description: "Pomodoro, mozzarella, salame piccante",
+          description:
+            "Pomodoro, mozzarella, salame piccante",
           price: "€12",
           dietary: ["spicy"],
-          image: "https://images.unsplash.com/photo-1513104890138-7c749659a591"
+          image:
+            "https://images.unsplash.com/photo-1513104890138-7c749659a591"
         },
         {
           name: "Prosciutto e Funghi",
-          description: "Mozzarella, prosciutto crudo, funghi porcini",
+          description:
+            "Mozzarella, prosciutto crudo, funghi porcini",
           price: "€13",
           dietary: ["meat"],
-          image: "https://images.unsplash.com/photo-1594007650023-b2c514e8b5c8"
+          image:
+            "https://images.unsplash.com/photo-1594007650023-b2c514e8b5c8"
         },
         {
           name: "Napoli",
-          description: "Pomodoro, mozzarella, acciughe, capperi, olive",
+          description:
+            "Pomodoro, mozzarella, acciughe, capperi, olive",
           price: "€11",
           dietary: ["pescatarian"],
-          image: "https://images.unsplash.com/photo-1610129628831-2ae396bc4357"
+          image:
+            "https://images.unsplash.com/photo-1610129628831-2ae396bc4357"
         },
         {
           name: "Ortolana",
-          description: "Mozzarella, verdure miste, pomodorini e basilico",
+          description:
+            "Mozzarella, verdure miste, pomodorini e basilico",
           price: "€10",
           dietary: ["vegan"],
-          image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
+          image:
+            "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
         }
       ]
     },
@@ -83,44 +95,27 @@ const Menu = () => {
       items: [
         {
           name: "Diavola",
-          description: "Pomodoro, mozzarella, salame piccante",
+          description:
+            "Pomodoro, mozzarella, salame piccante",
           price: "€12",
           dietary: ["spicy"],
-          image: "https://images.unsplash.com/photo-1513104890138-7c749659a591"
+          image:
+            "https://images.unsplash.com/photo-1513104890138-7c749659a591"
         }
       ]
     }
   ];
 
   const filteredItems =
-    menuItems.filter((cat) => cat.category === activeCategory)[0]?.items || [];
-
-useEffect(() => {
-  let scrollTimeout: ReturnType<typeof setTimeout>;
-  const handleScroll = () => {
-    setIsStickyVisible(false);
-    if (scrollTimeout) clearTimeout(scrollTimeout);
-    scrollTimeout = setTimeout(() => {
-      setIsStickyVisible(true);
-    }, 250);
-  };
-  window.addEventListener("scroll", handleScroll);
-  return () => {
-    if (scrollTimeout) clearTimeout(scrollTimeout);
-    window.removeEventListener("scroll", handleScroll);
-  };
-}, []);
+    menuItems.filter((cat) => cat.category === activeCategory)[0]?.items ||
+    [];
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
-      <div className="max-w-4xl mx-auto">
-        {/* Wrapper sticky per le categorie */}
-        <div
-  className={`sticky top-[80px] z-50 transition-opacity duration-300 ${
-    isStickyVisible ? "opacity-100" : "opacity-0"
-  }`}
->
-          <div className="overflow-x-auto pb-4 mb-12 -mx-4 px-4">
+    <div className="h-screen p-4 md:p-8 overflow-hidden">
+      <div className="max-w-4xl mx-auto h-full flex flex-col">
+        {/* Sezione categorie fissa in alto */}
+        <div className="mb-4">
+          <div className="overflow-x-auto pb-4 -mx-4 px-4">
             <div className="flex gap-4 min-w-max">
               {categories.map((category) => (
                 <button
@@ -140,7 +135,8 @@ useEffect(() => {
           </div>
         </div>
 
-        <div className="space-y-6">
+        {/* Sezione scrollabile dei filtered items */}
+        <div className="flex-1 overflow-y-auto space-y-6">
           {filteredItems.map((item, index) => (
             <div
               key={index}
