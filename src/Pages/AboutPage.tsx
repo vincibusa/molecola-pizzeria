@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion,  } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FaUtensils, FaLeaf, FaWineGlass } from "react-icons/fa";
 import { IoArrowUp } from "react-icons/io5";
@@ -13,8 +14,7 @@ interface TeamMember {
 
 const AboutPage: React.FC = () => {
   const [showTopBtn, setShowTopBtn] = useState<boolean>(false);
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+
 
   useEffect(() => {
     const handleScroll = (): void => {
