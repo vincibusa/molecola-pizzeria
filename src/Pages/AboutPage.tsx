@@ -4,9 +4,11 @@ import { useInView } from "react-intersection-observer";
 import { FaUtensils, FaLeaf, FaWineGlass } from "react-icons/fa";
 import { IoArrowUp } from "react-icons/io5";
 import { Link } from "react-router-dom";
-import { ourHistory } from "../data/data";
-import FotoFratelli from "../assets/FotoFratelli.jpeg";
 
+import FotoFratelli from "../assets/FotoFratelli.jpeg";
+import foto1 from "../assets/fermento 2.0 FOTO/DSC_0346.jpg"
+import foto2 from "../assets/fermento 2.0 FOTO/DSC_0418.jpg"
+import foto3 from "../assets/fermento 2.0 FOTO/DSC_0567.jpg"
 const AboutPage: React.FC = () => {
   const [showTopBtn, setShowTopBtn] = useState<boolean>(false);
 
@@ -27,15 +29,15 @@ const AboutPage: React.FC = () => {
   const teamMembers = [
     {
       name: "Chef John Doe",
-      image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c",
+      image: foto1,
     },
     {
       name: "Sarah Smith",
-      image: "https://images.unsplash.com/photo-1583394293214-28ded15ee548",
+      image: foto2,
     },
     {
       name: "Mike Johnson",
-      image: "https://images.unsplash.com/photo-1581299894007-aaa50297cf16",
+      image: foto3,
     },
   ];
 
@@ -62,10 +64,10 @@ const AboutPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-heading font-serif text-center mb-16 text-4xl lg:text-6xl"
+            className="text-heading font-serif text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
             style={{ fontFamily: '"Gambetta", Sans-serif' }}
           >
-            La nostra storia
+            LA NOSTRA STORIA
           </motion.h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -75,15 +77,26 @@ const AboutPage: React.FC = () => {
               className="space-y-6 bg-opacity-80 p-6"
             >
               {/* <h3 className="text-2xl lg:text-4xl font-serif mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>La passione per la pizza</h3> */}
-              {ourHistory.map((text, index) => (
+             
                 <p
-                  key={index}
+                
                   className="text-foreground md:text-lg"
                   style={{ fontFamily: '"Gambetta", Sans-serif' }}
                 >
-                  {text}
+                 Nel cuore del centro storico di Cefalù, a pochissimi passi dal Duomo, Fermento 2.0 è il progetto 
+                 dei due fratelli <b>Salvatore e Rosario Mirenda</b> che nasce nel 2021 con 
+                 l’intento di far vivere un’esperienza di gusto e sperimentazione. 
+                
                 </p>
-              ))}
+                <p
+                
+                className="text-foreground md:text-lg"
+                style={{ fontFamily: '"Gambetta", Sans-serif' }}
+              >
+                 In un locale dallo stile industrial e dal carattere personale, la pizza proposta è una napoletana che parla contemporaneo. L’<b>impasto unico</b> e leggero dalla trama rustica conquista anche i palati più esigenti, rendendo giustizia alle materie prime del territorio. 
+                 Non una pizza ma un racconto gustativo che porta in tavola tutti i sapori della Sicilia.
+                </p>
+            
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 100 }}
@@ -115,10 +128,10 @@ const AboutPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-heading font-serif text-center mb-16 text-4xl"
+             className="text-heading font-serif text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
             style={{ fontFamily: '"Gambetta", Sans-serif' }}
           >
-            La nostra squadra
+           GALLERIA
           </motion.h2>
           <motion.div 
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
@@ -164,7 +177,7 @@ const AboutPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-heading font-serif text-center mb-16 text-4xl"
+          className="text-heading font-serif text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
             style={{ fontFamily: '"Gambetta", Sans-serif' }}
           >
             La nostra filosofia culinaria
@@ -197,8 +210,8 @@ const AboutPage: React.FC = () => {
                 <div className="text-accent flex justify-center items-center">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-semibold mb-2" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{item.title}</h3>
-                <p className="text-foreground" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{item.description}</p>
+                <h3 className="text-xl md:text-2xl font-semibold mb-2" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{item.title}</h3>
+                <p  className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{item.description}</p>
             </motion.div>
             ))}
         </div>
