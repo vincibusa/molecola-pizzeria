@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import { motion,  } from "framer-motion";
 import { useInView } from "react-intersection-observer";
@@ -79,49 +78,47 @@ const AboutPage: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
             className="text-heading font-serif text-center mb-16 text-4xl"
+            style={{ fontFamily: '"Gambetta", Sans-serif' }}
           >
-            Our Artisanal Dough Process
+            La nostra storia
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
               className="space-y-6 bg-opacity-80 p-6"
             >
-              <h3 className="text-2xl font-serif mb-4">Traditional Method</h3>
-              <p className="text-foreground">
-                Our dough is crafted using a century-old recipe, requiring 48
-                hours of natural fermentation. This slow process allows the
-                flavors to develop fully and creates the perfect texture.
+              <h3 className="text-2xl font-serif mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>La passione per la pizza</h3>
+              <p className="text-foreground" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+                La nostra storia inizia nel cuore di Napoli, dove i fratelli Marco e Giulia Rossi sono cresciuti respirando l'aroma inconfondibile della pizza appena sfornata. Fin da piccoli, hanno imparato i segreti dell'arte della pizza napoletana dai loro nonni, maestri pizzaioli da generazioni.
               </p>
-              <div className="space-y-4">
-                <div className="flex items-center space-x-4">
-                  <span className="text-accent font-semibold">1.</span>
-                  <p>Selection of premium 00 flour from Italian mills</p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <span className="text-accent font-semibold">2.</span>
-                  <p>Mixing with pure spring water at precise temperatures</p>
-                </div>
-                <div className="flex items-center space-x-4">
-                  <span className="text-accent font-semibold">3.</span>
-                  <p>Natural levain fermentation process</p>
-                </div>
-              </div>
+              <p className="text-foreground" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+                Nel 2010, Marco e Giulia hanno deciso di portare la loro passione e tradizione familiare a Roma, aprendo Fermento 2.0. Il loro obiettivo era semplice: offrire l'autentica pizza napoletana, preparata con ingredienti di prima qualità e cotta nel tradizionale forno a legna.
+              </p>
+              <p className="text-foreground" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+                Oggi, Fermento 2.0 è diventato un punto di riferimento per gli amanti della vera pizza napoletana a Roma, mantenendo viva la tradizione e l'amore per questo piatto iconico italiano.
+              </p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="rounded-lg overflow-hidden shadow-2xl"
+              className="relative h-[500px] w-full"
             >
-              <img
-                src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f"
-                alt="Dough making process"
-                className="w-full h-full object-cover rounded-lg transform hover:scale-105 transition-transform duration-300"
-              />
-            </motion.div>
+              <div className="absolute inset-0 bg-primary rounded-lg transform -rotate-3 shadow-xl"></div>
+              <div className="absolute inset-0 bg-white rounded-lg transform rotate-3 shadow-xl overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1588123190131-1c3fac394f4b"
+                  alt="Marco e Giulia Rossi"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg transform rotate-3">
+                <p className="text-primary font-bold" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Marco & Giulia Rossi</p>
+                <p className="text-sm text-gray-600" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Fondatori di Fermento 2.0</p>
+              </div>
+                </motion.div>
           </div>
         </div>
       </section>
@@ -143,9 +140,8 @@ const AboutPage: React.FC = () => {
                 threshold: 0.3,
                 triggerOnce: true,
               });
-
               return (
-                <motion.div
+            <motion.div
                   key={member.name}
                   ref={ref}
                   variants={cardVariants}
@@ -153,7 +149,7 @@ const AboutPage: React.FC = () => {
                   animate={inView ? "visible" : "hidden"}
                   transition={{ duration: 0.8, delay: index * 0.2 }}
                   className=" rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
-                >
+            >
                   <img
                     src={member.image}
                     alt={member.name}
@@ -164,10 +160,10 @@ const AboutPage: React.FC = () => {
                     <p className="text-accent mb-2">{member.role}</p>
                     <p className="text-muted">{member.bio}</p>
                   </div>
-                </motion.div>
+            </motion.div>
               );
             })}
-          </div>
+    </div>
         </div>
       </section>
 

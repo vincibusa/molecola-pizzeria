@@ -103,6 +103,7 @@ export default {
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        gambetta: ['"Gambetta"', 'Sans-serif'],
       },
       fontSize: {
         heading: "36px",
