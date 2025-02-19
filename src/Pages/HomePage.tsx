@@ -3,8 +3,7 @@ import { Link } from "react-router-dom";
 import ReservationModal from "../components/ReservationModal";
 import AboutPage from "./AboutPage";
 import { motion } from "framer-motion";
-import Sfondo from "../assets/sfondo.jpg";
-import VideoBack from "../assets/VideoBack.mp4";
+import VideoBack from "../assets/PIZZE_SPOT_2.mp4";
 
 const HomePage = () => {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
@@ -31,8 +30,8 @@ const HomePage = () => {
           <div className="absolute inset-0 bg-black/50" />
         </div>
         <div className="relative w-full h-full flex flex-col items-center justify-center px-4 lg:px-16 text-center lg:text-left">
-          <div className="w-full flex flex-col lg:flex-row items-center lg:items-start justify-between mb-8 lg:mb-0 lg:mt-[200px]">
-            <motion.h1
+          <div className="w-full h-full mb-20 flex flex-col items-center  justify-end mb-8  lg:mt-[200px]">
+            {/* <motion.h1
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.5 }}
@@ -40,9 +39,9 @@ const HomePage = () => {
               style={{ fontFamily: '"Gambetta", Sans-serif' }}
           >
               Fermento 2.0
-            </motion.h1>
-            <div className="lg:w-fit flex flex-col items-center lg:items-end">
-            <motion.p
+            </motion.h1> */}
+            <div className="lg:w-fit flex flex-col items-center lg:items-end ">
+            {/* <motion.p
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 0.7 }}
@@ -50,7 +49,7 @@ const HomePage = () => {
                 style={{ fontFamily: '"Gambetta", Sans-serif' }}
             >
               Autenticità in ogni morso
-            </motion.p>
+            </motion.p> */}
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}

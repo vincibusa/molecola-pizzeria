@@ -4,7 +4,8 @@ import { format } from "date-fns";
 import { addReservation } from "../services/Reservation";
 
 interface FormData {
-  fullName: string;
+  firstName: string;
+  lastName: string;
   phone: string;
   date: string;
   time: string;
@@ -19,7 +20,8 @@ interface ReservationModalProps {
 
 const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) => {
   const [formData, setFormData] = useState<FormData>({
-    fullName: "",
+    firstName: "",
+    lastName: "",
     phone: "",
     date: "",
     time: "",
@@ -38,8 +40,11 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = "Nome completo richiesto";
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "Nome richiesto";
+    }
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Cognome richiesto";
     }
     if (!formData.phone.trim()) {
       newErrors.phone = "Numero di telefono richiesto";
@@ -54,29 +59,31 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
     return Object.keys(newErrors).length === 0;
   };
 
-const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  if (validateForm()) {
-    setIsSubmitting(true);
-    try {
-      // Mappa i dati del form nello shape richiesto, senza includere l'id
-      const reservation = {
-        fullName: formData.fullName,
-        phone: formData.phone,
-        date: formData.date,
-        time: formData.time,
-        seats: formData.seats,
-        specialRequests: formData.specialRequests
-      };
-      await addReservation(reservation);
-      setShowSuccess(true);
-    } catch (error) {
-      console.error("Error:", error);
-    } finally {
-      setIsSubmitting(false);
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (validateForm()) {
+      setIsSubmitting(true);
+      try {
+        // Combiniamo firstName e lastName per ottenere il fullName
+        const fullName = `${formData.firstName} ${formData.lastName}`;
+        const reservation = {
+          fullName,
+          phone: formData.phone,
+          date: formData.date,
+          time: formData.time,
+          seats: formData.seats,
+          specialRequests: formData.specialRequests
+        };
+        await addReservation(reservation);
+        setShowSuccess(true);
+      } catch (error) {
+        console.error("Error:", error);
+      } finally {
+        setIsSubmitting(false);
+      }
     }
-  }
-};
+  };
+
   const handleInputChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -93,149 +100,172 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
   if (!isOpen) return null;
 
   return (
-<div
-        onClick={onClose}
-        className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-2 z-[200]"
+    <div
+      onClick={onClose}
+      className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-2 z-[200]"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="transform scale-90 sm:scale-100 relative w-full max-w-md bg-card rounded-lg shadow-lg p-4 sm:p-8 my-2 sm:my-10"
       >
-        <div
-          onClick={(e) => e.stopPropagation()}
-          className="transform scale-90 sm:scale-100 relative w-full max-w-md bg-card rounded-lg shadow-lg p-4 sm:p-8 my-2 sm:my-10"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-lg sm:text-xl font-heading text-accent">
-              Prenota il tuo tavolo
-            </p>
-            <button onClick={onClose} className="text-accent hover:text-foreground transition-colors">
-              <FiX size={24} />
-            </button>
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-lg sm:text-xl font-heading text-accent">
+            Prenota il tuo tavolo
+          </p>
+          <button onClick={onClose} className="text-accent hover:text-foreground transition-colors">
+            <FiX size={24} />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Campo Nome */}
+          <div>
+            <label className="block text-sm font-body text-foreground mb-2">
+              Nome
+            </label>
+            <input
+              type="text"
+              name="firstName"
+              value={formData.firstName}
+              onChange={handleInputChange}
+              className={`w-full px-4 py-2 rounded-md border ${
+                errors.firstName ? "border-destructive" : "border-input"
+              } focus:outline-none focus:ring-2 focus:ring-ring`}
+              placeholder="Inserisci il nome"
+            />
+            {errors.firstName && <p className="mt-1 text-sm text-destructive">{errors.firstName}</p>}
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          {/* Campo Cognome */}
+          <div>
+            <label className="block text-sm font-body text-foreground mb-2">
+              Cognome
+            </label>
+            <input
+              type="text"
+              name="lastName"
+              value={formData.lastName}
+              onChange={handleInputChange}
+              className={`w-full px-4 py-2 rounded-md border ${
+                errors.lastName ? "border-destructive" : "border-input"
+              } focus:outline-none focus:ring-2 focus:ring-ring`}
+              placeholder="Inserisci il cognome"
+            />
+            {errors.lastName && <p className="mt-1 text-sm text-destructive">{errors.lastName}</p>}
+          </div>
+
+          {/* Numero di Telefono */}
+          <div>
+            <label className="block text-sm font-body text-foreground mb-2">
+              Numero di Telefono
+            </label>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleInputChange}
+              className={`w-full px-4 py-2 rounded-md border ${
+                errors.phone ? "border-destructive" : "border-input"
+              } focus:outline-none focus:ring-2 focus:ring-ring`}
+              placeholder="+39 123 456 7890"
+            />
+            {errors.phone && <p className="mt-1 text-sm text-destructive">{errors.phone}</p>}
+          </div>
+
+          <div className="grid grid-cols-2 gap-4">
+            {/* Campo Data */}
             <div>
               <label className="block text-sm font-body text-foreground mb-2">
-                Nome Completo
-              </label>
-              <input
-                type="text"
-                name="fullName"
-                value={formData.fullName}
-                onChange={handleInputChange}
-                className={`w-full px-4 py-2 rounded-md border ${
-                  errors.fullName ? "border-destructive" : "border-input"
-                } focus:outline-none focus:ring-2 focus:ring-ring`}
-                placeholder="Nome e Cognome"
-              />
-              {errors.fullName && <p className="mt-1 text-sm text-destructive">{errors.fullName}</p>}
-            </div>
-
-            <div>
-              <label className="block text-sm font-body text-foreground mb-2">
-                Numero di Telefono
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleInputChange}
-                className={`w-full px-4 py-2 rounded-md border ${
-                  errors.phone ? "border-destructive" : "border-input"
-                } focus:outline-none focus:ring-2 focus:ring-ring`}
-                placeholder="+39 123 456 7890"
-              />
-              {errors.phone && <p className="mt-1 text-sm text-destructive">{errors.phone}</p>}
-            </div>
-
-            <div className="grid grid-cols-1 gap-4">
-              <div>
-                <label className="block text-sm font-body text-foreground mb-2">
-                  Data
-                </label>
-                <div className="relative">
-                  <FiCalendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
-                  <input
-                    type="date"
-                    name="date"
-                    value={formData.date}
-                    onChange={handleInputChange}
-                    min={format(new Date(), "yyyy-MM-dd")}
-                    className={`w-full pl-10 pr-4 py-2 rounded-md border ${
-                      errors.date ? "border-destructive" : "border-input"
-                    } focus:outline-none focus:ring-2 focus:ring-ring`}
-                  />
-                </div>
-                {errors.date && <p className="mt-1 text-sm text-destructive">{errors.date}</p>}
-              </div>
-
-              <div>
-                <label className="block text-sm font-body text-foreground mb-2">
-                  Ora
-                </label>
-                <div className="relative">
-                  <FiClock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
-                  <select
-                    name="time"
-                    value={formData.time}
-                    onChange={handleInputChange}
-                    className={`w-full pl-10 pr-4 py-2 rounded-md border ${
-                      errors.time ? "border-destructive" : "border-input"
-                    } focus:outline-none focus:ring-2 focus:ring-ring appearance-none`}
-                  >
-                    <option value="">Seleziona ora</option>
-                    {timeSlots.map((slot) => (
-                      <option key={slot} value={slot}>
-                        {slot}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                {errors.time && <p className="mt-1 text-sm text-destructive">{errors.time}</p>}
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-body text-foreground mb-2">
-                Numero di Persone
+                Data
               </label>
               <div className="relative">
-                <FiUsers className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
-                <select
-                  name="seats"
-                  value={formData.seats}
+                <FiCalendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
+                <input
+                  type="date"
+                  name="date"
+                  value={formData.date}
                   onChange={handleInputChange}
-                  className="w-full pl-10 pr-4 py-2 rounded-md border border-input focus:outline-none focus:ring-2 focus:ring-ring appearance-none"
+                  min={format(new Date(), "yyyy-MM-dd")}
+                  className={`w-full pl-10 pr-4 py-2 rounded-md border ${
+                    errors.date ? "border-destructive" : "border-input"
+                  } focus:outline-none focus:ring-2 focus:ring-ring`}
+                />
+              </div>
+              {errors.date && <p className="mt-1 text-sm text-destructive">{errors.date}</p>}
+            </div>
+
+            {/* Campo Ora */}
+            <div>
+              <label className="block text-sm font-body text-foreground mb-2">
+                Ora
+              </label>
+              <div className="relative">
+                <FiClock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
+                <select
+                  name="time"
+                  value={formData.time}
+                  onChange={handleInputChange}
+                  className={`w-full pl-10 pr-4 py-2 rounded-md border ${
+                    errors.time ? "border-destructive" : "border-input"
+                  } focus:outline-none focus:ring-2 focus:ring-ring appearance-none`}
                 >
-                  {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
-                    <option key={num} value={num}>
-                      {num} {num === 1 ? "persona" : "persone"}
+                  <option value="">Seleziona ora</option>
+                  {timeSlots.map((slot) => (
+                    <option key={slot} value={slot}>
+                      {slot}
                     </option>
                   ))}
                 </select>
               </div>
+              {errors.time && <p className="mt-1 text-sm text-destructive">{errors.time}</p>}
             </div>
+          </div>
 
-            <div>
-              <label className="block text-sm font-body text-foreground mb-2">
-                Richieste Speciali
-              </label>
-              <textarea
-                name="specialRequests"
-                value={formData.specialRequests}
+          {/* Numero di Persone */}
+          <div>
+            <label className="block text-sm font-body text-foreground mb-2">
+              Numero di Persone
+            </label>
+            <div className="relative">
+              <FiUsers className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
+              <select
+                name="seats"
+                value={formData.seats}
                 onChange={handleInputChange}
-                className="w-full px-4 py-2 rounded-md border border-input focus:outline-none focus:ring-2 focus:ring-ring h-24"
-                placeholder="Eventuali richieste speciali..."
-              />
+                className="w-full pl-10 pr-4 py-2 rounded-md border border-input focus:outline-none focus:ring-2 focus:ring-ring appearance-none"
+              >
+                {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                  <option key={num} value={num}>
+                    {num} {num === 1 ? "persona" : "persone"}
+                  </option>
+                ))}
+              </select>
             </div>
+          </div>
 
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="w-full bg-primary text-primary-foreground py-2 rounded-md font-body hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {isSubmitting ? "Prenotazione in corso..." : "Prenota Ora"}
-            </button>
-          </form>
-        </div>
+          {/* Richieste Speciali */}
+          <div>
+            <label className="block text-sm font-body text-foreground mb-2">
+              Richieste Speciali
+            </label>
+            <textarea
+              name="specialRequests"
+              value={formData.specialRequests}
+              onChange={handleInputChange}
+              className="w-full px-4 py-2 rounded-md border border-input focus:outline-none focus:ring-2 focus:ring-ring h-24"
+              placeholder="Eventuali richieste speciali..."
+            />
+          </div>
 
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-primary text-primary-foreground py-2 rounded-md font-body hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? "Prenotazione in corso..." : "Prenota Ora"}
+          </button>
+        </form>
+      </div>
 
       {showSuccess && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-2 z-50">
@@ -253,7 +283,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
             </div>
             <div className="space-y-2 mb-4">
               <p className="text-sm">
-                <strong>Nome:</strong> {formData.fullName}
+                <strong>Nome:</strong> {formData.firstName} {formData.lastName}
               </p>
               <p className="text-sm">
                 <strong>Data:</strong> {formData.date}
@@ -277,7 +307,7 @@ const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
           </div>
         </div>
       )}
-      </div>
+    </div>
   );
 };
 

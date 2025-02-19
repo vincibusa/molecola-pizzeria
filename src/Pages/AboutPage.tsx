@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion,  } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { FaUtensils, FaLeaf, FaWineGlass } from "react-icons/fa";
 import { IoArrowUp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { ourHistory } from "../data/data";
+import FotoFratelli from "../assets/FotoFratelli.jpeg";
 
 const AboutPage: React.FC = () => {
   const [showTopBtn, setShowTopBtn] = useState<boolean>(false);
-  const { scrollY } = useScroll();
-  const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+
+
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -61,7 +62,7 @@ const AboutPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-heading font-serif text-center mb-16 text-4xl"
+            className="text-heading font-serif text-center mb-16 text-4xl lg:text-6xl"
             style={{ fontFamily: '"Gambetta", Sans-serif' }}
           >
             La nostra storia
@@ -73,11 +74,11 @@ const AboutPage: React.FC = () => {
               transition={{ duration: 0.8 }}
               className="space-y-6 bg-opacity-80 p-6"
             >
-              <h3 className="text-2xl font-serif mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>La passione per la pizza</h3>
+              {/* <h3 className="text-2xl lg:text-4xl font-serif mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>La passione per la pizza</h3> */}
               {ourHistory.map((text, index) => (
                 <p
                   key={index}
-                  className="text-foreground"
+                  className="text-foreground md:text-lg"
                   style={{ fontFamily: '"Gambetta", Sans-serif' }}
                 >
                   {text}
@@ -90,16 +91,16 @@ const AboutPage: React.FC = () => {
               transition={{ duration: 0.8 }}
               className="relative h-[500px] w-full"
             >
-              <div className="absolute inset-0 bg-primary rounded-lg transform -rotate-3 shadow-xl"></div>
+              <div className="absolute inset-0 bg-primary/60 rounded-lg transform -rotate-3 shadow-xl"></div>
               <div className="absolute inset-0 bg-white rounded-lg transform rotate-3 shadow-xl overflow-hidden">
                 <img
-                  src="https://images.unsplash.com/photo-1588123190131-1c3fac394f4b"
-                  alt="Marco e Giulia Rossi"
+                  src={FotoFratelli}
+                  alt="Salvatore e Rosario Mirenda"
                   className="w-full h-full object-cover"
                 />
               </div>
               <div className="absolute bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg transform rotate-3">
-                <p className="text-primary font-bold" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Marco & Giulia Rossi</p>
+                <p className="text-primary font-bold" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Salvatore e Rosario Mirenda</p>
                 <p className="text-sm text-gray-600" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Fondatori di Fermento 2.0</p>
               </div>
                 </motion.div>
@@ -132,7 +133,7 @@ const AboutPage: React.FC = () => {
               }
             }}
           >
-            {teamMembers.map((member, index) => (
+            {teamMembers.map((member) => (
               <motion.div
                 key={member.name}
                 variants={cardVariants}
