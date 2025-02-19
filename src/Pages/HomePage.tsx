@@ -31,30 +31,14 @@ const HomePage = () => {
         </div>
         <div className="relative w-full h-full flex flex-col items-center justify-center px-4 lg:px-16 text-center lg:text-left">
           <div className="w-full h-full mb-20 flex flex-col items-center  justify-end mb-8  lg:mt-[200px]">
-            {/* <motion.h1
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.5 }}
-              className="text-5xl text-nowrap md:text-7xl lg:text-[150px] font-bold text-white mb-4 lg:mb-0 lg:w-1/2 lg:-mt-20 leading-none"
-              style={{ fontFamily: '"Gambetta", Sans-serif' }}
-          >
-              Fermento 2.0
-            </motion.h1> */}
+
             <div className="lg:w-fit flex flex-col items-center lg:items-end ">
-            {/* <motion.p
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 1, delay: 0.7 }}
-                className="text-2xl md:text-4xl lg:text-5xl text-white lg:mt-40"
-                style={{ fontFamily: '"Gambetta", Sans-serif' }}
-            >
-              Autenticità in ogni morso
-            </motion.p> */}
+
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.9 }}
-                className="flex flex-col sm:flex-row gap-4 lg:justify-around mt-8 w-full lg:mt-16"
+                className="flex flex-col sm:flex-row gap-4 lg:justify-around mt-8 w-full lg:mt-16 mb-20 lg:mb-0"
           >
             <button
               onClick={() => setIsReservationModalOpen(true)}
