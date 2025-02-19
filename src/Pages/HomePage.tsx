@@ -38,7 +38,7 @@ const HomePage = () => {
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 0.9 }}
-                className="flex flex-col sm:flex-row gap-4 lg:justify-around mt-8 w-full lg:mt-16 mb-20 lg:mb-0"
+                className="flex flex-col sm:flex-row gap-4 lg:justify-around mt-8 w-full lg:mt-16 mb-[120px] lg:mb-0"
           >
             <button
               onClick={() => setIsReservationModalOpen(true)}
