@@ -1,0 +1,3 @@
+export const ourHistory = [
+  'Nel cuore del centro storico di Cefalù, Fermento 2.0 nasce dall’intuizione dei due fratelli Salvatore e Rosario Mirenda, la cui filosofia abbraccia il gusto e la sperimentazione. Con uno stile del tutto personale, la pizza proposta è una napoletana che parla contemporaneo, con un impasto leggero che sposa le materie prime del territorio, portando nel piatto tutti i sapori della Sicilia.'
+];

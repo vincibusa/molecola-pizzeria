@@ -4,6 +4,7 @@ import ReservationModal from "../components/ReservationModal";
 import AboutPage from "./AboutPage";
 import { motion } from "framer-motion";
 import Sfondo from "../assets/sfondo.jpg";
+import VideoBack from "../assets/VideoBack.mp4";
 
 const HomePage = () => {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
@@ -17,11 +18,16 @@ const HomePage = () => {
         className="relative h-screen w-full"
       >
         <div className="absolute inset-0">
-          <img
-            src={Sfondo}
-            alt="Pizza background"
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover"
-          />
+          >
+            <source src={VideoBack} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
           <div className="absolute inset-0 bg-black/50" />
         </div>
         <div className="relative w-full h-full flex flex-col items-center justify-center px-4 lg:px-16 text-center lg:text-left">
