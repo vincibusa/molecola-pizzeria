@@ -19,12 +19,12 @@ const AboutPage: React.FC = () => {
       image: "https://www.allfoodsicily.it/wp-content/uploads/2024/10/Fermento-1-e1727942311536.jpeg",
       link: "https://www.allfoodsicily.it/fermento-2-0-la-pizzeria-dei-fratelli-mirenda-a-cefalu-conquista-il-gambero-rosso-pronti-ad-alzare-lasticella/"
     },
-    {
-      title: "La pizza di Fermento 2.0 a Cefalù è un viaggio tra sapori genuini e innovazione",
-      preview: "il locale immerso nel centro storico di Cefalù che punta tutto su un mix di tradizione e contemporaneità.",
-      image: "https://www.allfoodsicily.it/wp-content/uploads/2024/04/PRIMO-PIANO.jpeg",
-      link: "https://www.allfoodsicily.it/la-pizza-di-fermento-2-0-a-cefalu-e-un-viaggio-tra-sapori-genuini-e-innovazione/"
-    },
+    // {
+    //   title: "La pizza di Fermento 2.0 a Cefalù è un viaggio tra sapori genuini e innovazione",
+    //   preview: "il locale immerso nel centro storico di Cefalù che punta tutto su un mix di tradizione e contemporaneità.",
+    //   image: "https://www.allfoodsicily.it/wp-content/uploads/2024/04/PRIMO-PIANO.jpeg",
+    //   link: "https://www.allfoodsicily.it/la-pizza-di-fermento-2-0-a-cefalu-e-un-viaggio-tra-sapori-genuini-e-innovazione/"
+    // },
   
   ];
 
@@ -234,7 +234,7 @@ const AboutPage: React.FC = () => {
 </section>
 
  {/* Press e Riconoscimenti Section */}
- <section className="py-20 bg-background">
+ <section id="press" className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -246,21 +246,6 @@ const AboutPage: React.FC = () => {
             PRESS E RICONOSCIMENTI
           </motion.h2>
 
-          {/* Gambero Rosso Recognition */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="bg-primary text-white p-8 rounded-lg shadow-xl mb-12 text-center"
-          >
-            <h3 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
-              Inseriti nella prestigiosa guida Pizzerie d'Italia 2025 del Gambero Rosso
-            </h3>
-            <div className="flex items-center justify-center">
-              <FaPizzaSlice className="text-6xl md:text-8xl text-yellow-400 mr-4" />
-              <span className="text-5xl md:text-7xl font-bold">UNO SPICCHIO!</span>
-            </div>
-          </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <motion.div
@@ -271,9 +256,15 @@ const AboutPage: React.FC = () => {
             >
               <h3 className="text-2xl md:text-3xl font-semibold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Altri Riconoscimenti</h3>
               <ul className="list-disc list-inside space-y-2">
-                <li className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
-                  Miglior Pizza Contemporanea 2022 - Guida Pizzerie d'Italia
-                </li>
+<li className="text-foreground md:text-lg flex items-center " style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+
+<FaPizzaSlice className="text-accent mr-2 text-xl flex-shrink-0" />
+    <b>Inseriti nella prestigiosa guida Pizzerie d'Italia 2025 del Gambero Rosso - Uno spicchio</b>
+
+</li>
+
+
+
                 <li className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
                   Top 50 Pizzerie in Sicilia 2023 - Food & Wine Italia
                 </li>
@@ -288,7 +279,7 @@ const AboutPage: React.FC = () => {
               transition={{ duration: 0.8 }}
               className="space-y-8"
             >
-              <h3 className="text-2xl md:text-3xl font-semibold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Articoli</h3>
+              <h3 className="text-2xl md:text-3xl font-semibold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}></h3>
               {pressArticles.map((article, index) => (
                 <motion.div 
                   key={index} 
@@ -300,7 +291,7 @@ const AboutPage: React.FC = () => {
                   <img 
                     src={article.image} 
                     alt={article.title} 
-                    className="w-full h-48 object-cover"
+                    className="w-full h-48 object-fill"
                   />
                   <div className="p-6">
                     <h4 className="text-xl font-semibold mb-2" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{article.title}</h4>

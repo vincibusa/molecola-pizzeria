@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 import ReservationModal from "../components/ReservationModal";
 import AboutPage from "./AboutPage";
 import { motion } from "framer-motion";
@@ -9,7 +9,21 @@ import Loader from "../components/Loader";
 const HomePage = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
+  const location = useLocation();
 
+  useEffect(() => {
+    if (location.hash) {
+      // Rimuoviamo il carattere "#" per ottenere l'id
+      const id = location.hash.replace("#", "");
+      const element = document.getElementById(id);
+      if (element) {
+        // Un piccolo timeout può aiutare se l'elemento non è subito disponibile
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: "smooth" });
+        }, 100);
+      }
+    }
+  }, [location]);
   return (
     <>
       {/* Mostra il Loader finché il video non è caricato */}
@@ -33,7 +47,7 @@ const HomePage = () => {
             <source src={VideoBack} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
         <div className="relative w-full h-full flex flex-col items-center justify-center px-4 lg:px-16 text-center lg:text-left">
           <div className="w-full h-full flex flex-col items-center justify-end lg:mt-[200px]">

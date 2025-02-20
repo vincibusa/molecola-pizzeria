@@ -6,6 +6,7 @@ import ReservationModal from "./ReservationModal";
 import logo from "../assets/logo.png";
 import { useNavbar } from "../contexts/NavbarContenxt";
 
+
 const Navbar = () => {
   // Recupera la visibilità della navbar dal context
   const { isVisible } = useNavbar();
@@ -87,35 +88,60 @@ const Navbar = () => {
                         location.pathname === "/" && isMobileMenuOpen ? "bg-primary" : mobileMenuBg
                       }`}
                     >
-                      <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-8 p-4 lg:p-0">
-                        {["Home", "Menu","Galleria"].map((item, index) => (
-                          <motion.li
-                            key={item}
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3, delay: index * 0.1 }}
-                          >
-                            <Link
-                              to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                              className={`text-white ${hoverClass} transition-colors`}
-                            >
-                              {item}
-                            </Link>
-                          </motion.li>
-                        ))}
-                        <motion.li
-                          initial={{ opacity: 0, y: -20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3, delay: 0.3 }}
-                        >
-                          <button
-                            onClick={() => setIsReservationModalOpen(true)}
-                            className={`text-white ${hoverClass} transition-colors`}
-                          >
-                            Prenotazioni
-                          </button>
-                        </motion.li>
-                      </ul>
+                     <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-8 p-4 lg:p-0">
+  {["Home", "Menu", "Galleria"].map((item, index) => (
+    <motion.li
+      key={item}
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: index * 0.1 }}
+    >
+      <Link
+        to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+        className={`text-white ${hoverClass} transition-colors`}
+      >
+        {item}
+      </Link>
+    </motion.li>
+  ))}
+  {/* Nuova voce "Area Press" */}
+  <motion.li
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.3, delay: 0.4 }}
+  >
+     <Link
+          to="/#press"
+          className={`text-white ${hoverClass} transition-colors`}
+          onClick={(e) => {
+            // Se siamo già su home, gestiamo lo scroll manualmente
+            if (location.pathname === "/") {
+              e.preventDefault();
+              const pressSection = document.getElementById("press");
+              if (pressSection) {
+                pressSection.scrollIntoView({ behavior: "smooth" });
+              }
+            }
+          }}
+        >
+          Area Press
+        </Link>
+
+  </motion.li>
+  <motion.li
+    initial={{ opacity: 0, y: -20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.3, delay: 0.3 }}
+  >
+    <button
+      onClick={() => setIsReservationModalOpen(true)}
+      className={`text-white ${hoverClass} transition-colors`}
+    >
+      Prenotazioni
+    </button>
+  </motion.li>
+</ul>
+
                     </motion.div>
                   )}
                 </AnimatePresence>
