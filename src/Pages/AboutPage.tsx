@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion,  } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { FaUtensils, FaLeaf, FaWineGlass, FaPizzaSlice } from "react-icons/fa";
+import { FaUtensils, FaLeaf, FaWineGlass, } from "react-icons/fa";
 import { IoArrowUp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
