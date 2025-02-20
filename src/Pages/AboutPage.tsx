@@ -181,7 +181,7 @@ const AboutPage: React.FC = () => {
       </section>
 
       {/* Our Culinary Philosophy Section */}
-      <section className="py-20 bg-background relative">
+      <section className="py-10 bg-background relative">
         <div
           className="absolute inset-0 bg-fixed bg-cover bg-center opacity-10"
           style={{
