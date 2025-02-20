@@ -60,11 +60,12 @@ const Gallery: React.FC = () => {
     <div className="min-h-screen bg-background p-6 animate-fadeIn">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12 animate-slideDown">
-          <h1 className="text-4xl font-bold text-primary mb-4">
-            La Pizzeria Italiana
+          <h1   className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
+  style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}>
+            QUESTO E' FERMENTO 2.0
           </h1>
           <p className="text-accent text-lg">
-            Explore our authentic Italian pizzas and restaurant atmosphere
+            Impasto unico, ingredienti di prima scelta e un atmosfera calda e accogliente.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion,  } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { FaUtensils, FaLeaf, FaWineGlass } from "react-icons/fa";
+import { FaUtensils, FaLeaf, FaWineGlass, FaPizzaSlice } from "react-icons/fa";
 import { IoArrowUp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
@@ -12,6 +12,21 @@ import foto3 from "../assets/fermento 2.0 FOTO/DSC_0567.jpg"
 const AboutPage: React.FC = () => {
   const [showTopBtn, setShowTopBtn] = useState<boolean>(false);
 
+  const pressArticles = [
+    {
+      title: "Fermento 2.0: La pizzeria dei fratelli Mirenda a Cefalù conquista il Gambero Rosso",
+      preview: "I fratelli Salvatore e Rosario Mirenda hanno conquistato il prestigioso riconoscimento del Gambero Rosso con la loro pizzeria Fermento 2.0 a Cefalù. La guida 'Pizzerie d'Italia 2024' ha assegnato loro 'Uno Spicchio', premiando la loro dedizione all'arte della pizza e l'utilizzo di ingredienti di alta qualità.",
+      image: "https://www.allfoodsicily.it/wp-content/uploads/2024/10/Fermento-1-e1727942311536.jpeg",
+      link: "https://www.allfoodsicily.it/fermento-2-0-la-pizzeria-dei-fratelli-mirenda-a-cefalu-conquista-il-gambero-rosso-pronti-ad-alzare-lasticella/"
+    },
+    {
+      title: "La pizza di Fermento 2.0 a Cefalù è un viaggio tra sapori genuini e innovazione",
+      preview: "il locale immerso nel centro storico di Cefalù che punta tutto su un mix di tradizione e contemporaneità.",
+      image: "https://www.allfoodsicily.it/wp-content/uploads/2024/04/PRIMO-PIANO.jpeg",
+      link: "https://www.allfoodsicily.it/la-pizza-di-fermento-2-0-a-cefalu-e-un-viaggio-tra-sapori-genuini-e-innovazione/"
+    },
+  
+  ];
 
 
   useEffect(() => {
@@ -60,15 +75,16 @@ const AboutPage: React.FC = () => {
           }}
         ></div>
         <div className="container mx-auto px-4 relative z-10">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-heading font-serif text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
-            style={{ fontFamily: '"Gambetta", Sans-serif' }}
-          >
-            LA NOSTRA STORIA
-          </motion.h2>
+        <motion.h2
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8 }}
+  className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
+  style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
+>
+  LA NOSTRA STORIA
+</motion.h2>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
               initial={{ opacity: 0, x: -100 }}
@@ -94,7 +110,7 @@ const AboutPage: React.FC = () => {
                 style={{ fontFamily: '"Gambetta", Sans-serif' }}
               >
                  In un locale dallo stile industrial e dal carattere personale, la pizza proposta è una napoletana che parla contemporaneo. L’<b>impasto unico</b> e leggero dalla trama rustica conquista anche i palati più esigenti, rendendo giustizia alle materie prime del territorio. 
-                 Non una pizza ma un racconto gustativo che porta in tavola tutti i sapori della Sicilia.
+                 Non una semplice pizza  ma un racconto gustativo che porta in tavola tutti i sapori della Sicilia.
                 </p>
             
             </motion.div>
@@ -128,8 +144,8 @@ const AboutPage: React.FC = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-             className="text-heading font-serif text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
-            style={{ fontFamily: '"Gambetta", Sans-serif' }}
+            className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
+            style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
           >
            GALLERIA
           </motion.h2>
@@ -170,52 +186,140 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Our Culinary Philosophy Section */}
-      <section className="py-20 bg-background">
+{/* Our Culinary Philosophy Section */}
+<section className="py-20 bg-background relative">
+  <div
+    className="absolute inset-0 bg-fixed bg-cover bg-center opacity-10"
+    style={{
+      backgroundImage:
+        "url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
+    }}
+  ></div>
+  <div className="container mx-auto px-4 relative z-10">
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+      {[
+        {
+          icon: <FaUtensils className="text-5xl mb-4" />,
+          title: "Servizio e accoglienza",
+          description: "Amiamo prenderci cura dei nostri clienti"
+        },
+        {
+          icon: <FaLeaf className="text-5xl mb-4" />,
+          title: "Ingredienti di qualità",
+          description: "Selezioniamo con cura le farine e scegliamo i migliori prodotti di stagione"
+        },
+        {
+          icon: <FaWineGlass className="text-5xl mb-4" />,
+          title: "Abbinamenti Perfetti",
+          description: "La nostra carta di vini è ricca di proposte, non solo territoriali"
+        }
+      ].map((item, index) => (
+        <motion.div
+          key={item.title}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: index * 0.2 }}
+          className="p-6 flex flex-col items-center text-center  bg-opacity-80 "
+        >
+          <div className="text-accent flex justify-center items-center">
+            {item.icon}
+          </div>
+          <h3 className="text-xl md:text-2xl font-semibold mb-2" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{item.title}</h3>
+          <p className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{item.description}</p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+ {/* Press e Riconoscimenti Section */}
+ <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-          className="text-heading font-serif text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
-            style={{ fontFamily: '"Gambetta", Sans-serif' }}
+            className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
+            style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
           >
-            La nostra filosofia culinaria
+            PRESS E RICONOSCIMENTI
           </motion.h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            {[
-              {
-                icon: <FaUtensils className="text-5xl mb-4" />,
-                title: "Tecniche Tradizionali",
-                description: "Preserviamo i sapori autentici"
-              },
-              {
-                icon: <FaLeaf className="text-5xl mb-4" />,
-                title: "Ingredienti Freschi",
-                description: "Prodotti locali di stagione"
-              },
-              {
-                icon: <FaWineGlass className="text-5xl mb-4" />,
-                title: "Abbinamenti Perfetti",
-                description: "Selezione curata di vini"
-              }
-            ].map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                className="p-6 flex flex-col items-center text-center"
+
+          {/* Gambero Rosso Recognition */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8 }}
+            className="bg-primary text-white p-8 rounded-lg shadow-xl mb-12 text-center"
+          >
+            <h3 className="text-3xl md:text-4xl font-bold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+              Inseriti nella prestigiosa guida Pizzerie d'Italia 2025 del Gambero Rosso
+            </h3>
+            <div className="flex items-center justify-center">
+              <FaPizzaSlice className="text-6xl md:text-8xl text-yellow-400 mr-4" />
+              <span className="text-5xl md:text-7xl font-bold">UNO SPICCHIO!</span>
+            </div>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-6"
             >
-                <div className="text-accent flex justify-center items-center">
-                  {item.icon}
-                </div>
-                <h3 className="text-xl md:text-2xl font-semibold mb-2" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{item.title}</h3>
-                <p  className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{item.description}</p>
+              <h3 className="text-2xl md:text-3xl font-semibold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Altri Riconoscimenti</h3>
+              <ul className="list-disc list-inside space-y-2">
+                <li className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+                  Miglior Pizza Contemporanea 2022 - Guida Pizzerie d'Italia
+                </li>
+                <li className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+                  Top 50 Pizzerie in Sicilia 2023 - Food & Wine Italia
+                </li>
+                <li className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+                  Innovazione Culinaria dell'Anno 2023 - Gourmet Awards
+                </li>
+              </ul>
             </motion.div>
-            ))}
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="space-y-8"
+            >
+              <h3 className="text-2xl md:text-3xl font-semibold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Articoli</h3>
+              {pressArticles.map((article, index) => (
+                <motion.div 
+                  key={index} 
+                  className="bg-white rounded-lg shadow-md overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <img 
+                    src={article.image} 
+                    alt={article.title} 
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-6">
+                    <h4 className="text-xl font-semibold mb-2" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{article.title}</h4>
+                    <p className="text-foreground md:text-lg mb-4 line-clamp-3" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{article.preview}</p>
+                    <a 
+                      href={article.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary-dark transition-colors duration-300 inline-block mt-2"
+                      style={{ fontFamily: '"Gambetta", Sans-serif' }}
+                    >
+                      Leggi l'articolo completo
+                    </a>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
-    </div>
       </section>
 
       {/* Back to Top Button */}

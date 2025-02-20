@@ -79,9 +79,9 @@ const Footer: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.4 }}
             >
               <h3 className="text-xl font-semibold mb-4">Contatti</h3>
-              <p className="mb-2">Via Roma 123, 00100 Roma, Italia</p>
-              <p className="mb-2">+39 123 456 7890</p>
-              <p>info@fermento2.0.com</p>
+              <p className="mb-2">Via Giacomo Matteotti,29,90015,Cefalù,PA</p>
+              <p className="mb-2">+39 331 872 7612</p>
+              {/* <p>info@fermento2.0.com</p> */}
             </motion.div>
           </div>
 
