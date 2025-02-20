@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
 import ReservationModal from './ReservationModal'; // Assicurati che il percorso sia corretto
 
 const Footer: React.FC = () => {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
+  const location = useLocation();
 
   const socialLinks = [
     { icon: <FaFacebookF />, url: 'https://facebook.com' },
@@ -17,8 +18,8 @@ const Footer: React.FC = () => {
   const quickLinks = [
     { name: 'Home', path: '/' },
     { name: 'Menu', path: '/menu' },
+    { name: 'Area Press', path: '/#press' },
     { name: 'Prenotazioni', path: '/prenotazioni' },
-
   ];
 
   return (
@@ -59,6 +60,23 @@ const Footer: React.FC = () => {
                       >
                         {link.name}
                       </button>
+                    ) : link.name === 'Area Press' ? (
+                      <Link
+                        to={link.path}
+                        onClick={(e) => {
+                          // Se siamo già sulla home, scrolla manualmente alla sezione "press"
+                          if (location.pathname === '/') {
+                            e.preventDefault();
+                            const pressSection = document.getElementById('press');
+                            if (pressSection) {
+                              pressSection.scrollIntoView({ behavior: 'smooth' });
+                            }
+                          }
+                        }}
+                        className="hover:text-secondary transition-colors duration-300"
+                      >
+                        {link.name}
+                      </Link>
                     ) : (
                       <Link
                         to={link.path}
@@ -81,7 +99,6 @@ const Footer: React.FC = () => {
               <h3 className="text-xl font-semibold mb-4">Contatti</h3>
               <p className="mb-2">Via Giacomo Matteotti,29,90015,Cefalù,PA</p>
               <p className="mb-2">+39 331 872 7612</p>
-              {/* <p>info@fermento2.0.com</p> */}
             </motion.div>
           </div>
 

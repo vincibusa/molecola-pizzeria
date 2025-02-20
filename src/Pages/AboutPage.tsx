@@ -309,7 +309,24 @@ const AboutPage: React.FC = () => {
                 </motion.div>
               ))}
             </motion.div>
+
           </div>
+          <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      className="flex justify-center mt-12"
+    >
+      <a
+        href="https://www.allfoodsicily.it/?s=fermento+2.0" // Sostituisci con l'URL desiderato
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-primary text-white px-8 py-3 rounded-md transform hover:scale-105 transition-all duration-300 hover:shadow-lg text-lg"
+        style={{ fontFamily: '"Gambetta", Sans-serif' }}
+      >
+        Leggi altri articoli
+      </a>
+    </motion.div>
         </div>
       </section>
 
