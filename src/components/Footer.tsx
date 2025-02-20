@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
+
 import ReservationModal from './ReservationModal'; // Assicurati che il percorso sia corretto
 
 const Footer: React.FC = () => {
@@ -9,10 +11,9 @@ const Footer: React.FC = () => {
   const location = useLocation();
 
   const socialLinks = [
-    { icon: <FaFacebookF />, url: 'https://facebook.com' },
-    { icon: <FaInstagram />, url: 'https://instagram.com' },
-    { icon: <FaTwitter />, url: 'https://twitter.com' },
-    { icon: <FaYoutube />, url: 'https://youtube.com' },
+    { icon: <FaFacebookF />, url: 'https://www.facebook.com/fermento2.0cefalu/' },
+    { icon: <FaInstagram />, url: 'https://www.instagram.com/fermento2.0cefalu/' },
+
   ];
 
   const quickLinks = [
@@ -92,14 +93,44 @@ const Footer: React.FC = () => {
 
             {/* Contact Info */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <h3 className="text-xl font-semibold mb-4">Contatti</h3>
-              <p className="mb-2">Via Giacomo Matteotti,29,90015,Cefalù,PA</p>
-              <p className="mb-2">+39 331 872 7612</p>
-            </motion.div>
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: 0.4 }}
+  className="space-y-4"
+>
+  <h3 className="text-xl font-semibold mb-4">Contatti</h3>
+  
+  <div className="flex items-center space-x-2">
+    <FaMapMarkerAlt className="text-white " />
+    <p>Via Giacomo Matteotti, 29</p>
+  </div>
+  
+  <div className="flex items-center space-x-2">
+    <FaMapMarkerAlt className="text-white " />
+    <p>90015, Cefalù, PA</p>
+  </div>
+  
+  <div className="flex items-center space-x-2">
+    <FaPhone className="ttext-white" />
+    <p> tel: +39 331 872 7612</p>
+  </div>
+  
+  <div className="flex items-center space-x-2">
+    <FaEnvelope className="text-white" />
+    <p>info@fermento2.0.com</p>
+  </div>
+  
+  <div className="flex items-center space-x-2">
+    <FaClock className="text-white" />
+    <p>Lunedi: chiuso</p>
+
+  </div>
+  <div className="flex items-center space-x-2">
+    <FaClock className="text-white" />
+
+    <p>Martedi-Domenica: 19:00-23:00</p>
+  </div>
+</motion.div>
           </div>
 
           {/* Social Links */}

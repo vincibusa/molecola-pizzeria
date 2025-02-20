@@ -9,6 +9,7 @@ import FotoFratelli from "../assets/FotoFratelli.jpeg";
 import foto1 from "../assets/fermento 2.0 FOTO/DSC_0346.jpg"
 import foto2 from "../assets/fermento 2.0 FOTO/DSC_0418.jpg"
 import foto3 from "../assets/fermento 2.0 FOTO/DSC_0567.jpg"
+import Bollino from "../assets/bollino_pizzerie_1spicchio.png"
 const AboutPage: React.FC = () => {
   const [showTopBtn, setShowTopBtn] = useState<boolean>(false);
 
@@ -248,31 +249,39 @@ const AboutPage: React.FC = () => {
 
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 items-start">
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8 }}
-              className="space-y-6"
-            >
-              <h3 className="text-2xl md:text-3xl font-semibold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Altri Riconoscimenti</h3>
-              <ul className="list-disc list-inside space-y-2">
-<li className="text-foreground md:text-lg flex items-center " style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+        <motion.div
+  initial={{ opacity: 0, x: -100 }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.8 }}
+  className="space-y-6"
+>
+ 
+    <div className="aspect-w-16 aspect-h-9 overflow-hidden">
+    <motion.img
+        src={Bollino}
+        alt="Riconoscimento Gambero Rosso"
+        className="w-3/4 h-3/4 object-contain" // Modificato per centrare e ridimensionare l'immagine
+        initial={{ opacity: 0, rotate: -180, scale: 0.5 }}
+        whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 50,
+          damping: 10,
+          duration: 5
+        }}
+      />
+    </div>
+    <div className="p-6">
+      <h3 className="text-2xl md:text-3xl font-semibold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+        Riconoscimento Gambero Rosso
+      </h3>
+      <p className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+        Siamo orgogliosi di annunciare che Fermento 2.0 è stato inserito nella prestigiosa guida Pizzerie d'Italia 2025 del Gambero Rosso, ottenendo il riconoscimento di "Uno Spicchio". Questo premio testimonia il nostro impegno costante nella ricerca dell'eccellenza e nella valorizzazione della tradizione pizzaiola italiana.
+      </p>
+    </div>
+  
+</motion.div>
 
-<FaPizzaSlice className="text-accent mr-2 text-xl flex-shrink-0" />
-    <b>Inseriti nella prestigiosa guida Pizzerie d'Italia 2025 del Gambero Rosso - Uno spicchio</b>
-
-</li>
-
-
-
-                <li className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
-                  Top 50 Pizzerie in Sicilia 2023 - Food & Wine Italia
-                </li>
-                <li className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
-                  Innovazione Culinaria dell'Anno 2023 - Gourmet Awards
-                </li>
-              </ul>
-            </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 100 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -317,7 +326,7 @@ const AboutPage: React.FC = () => {
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
-      className="flex justify-center mt-12"
+      className="flex justify-start"
     >
       <a
         href="https://www.allfoodsicily.it/?s=fermento+2.0" // Sostituisci con l'URL desiderato
