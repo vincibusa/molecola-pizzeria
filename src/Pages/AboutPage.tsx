@@ -256,7 +256,7 @@ const AboutPage: React.FC = () => {
   className="space-y-6"
 >
  
-    <div className="aspect-w-16 aspect-h-9 overflow-hidden">
+    <div className="aspect-w-16 aspect-h-9 overflow-hidden flex items-center justify-center">
     <motion.img
         src={Bollino}
         alt="Riconoscimento Gambero Rosso"
