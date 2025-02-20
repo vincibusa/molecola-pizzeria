@@ -117,7 +117,7 @@ const Footer: React.FC = () => {
   
   <div className="flex items-center space-x-2">
     <FaEnvelope className="text-white" />
-    <p>info@fermento2.0.com</p>
+    <p>fratellimirenda@gmail.com</p>
   </div>
   
   <div className="flex items-center space-x-2">
