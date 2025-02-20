@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { FiX, } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
 import { useNavbar } from "../contexts/NavbarContenxt";
+import Loader from "../components/Loader";
 
 interface Image {
   id: number;
@@ -35,6 +36,32 @@ const Gallery: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const imagesPerPage = 9;
 
+  // Stato per il caricamento delle immagini
+  const [imagesLoadedCount, setImagesLoadedCount] = useState(0);
+  const [allImagesLoaded, setAllImagesLoaded] = useState(false);
+
+  // Calcola le immagini correnti in base alla pagina
+  const indexOfLastImage = currentPage * imagesPerPage;
+  const indexOfFirstImage = indexOfLastImage - imagesPerPage;
+  const currentImages = filteredImages.slice(indexOfFirstImage, indexOfLastImage);
+
+  // Resetta il contatore e lo stato del loader quando cambia la pagina
+  useEffect(() => {
+    setImagesLoadedCount(0);
+    setAllImagesLoaded(false);
+  }, [currentPage]);
+
+  // Quando tutte le immagini della pagina corrente sono caricate, aggiorna lo stato
+  useEffect(() => {
+    if (currentImages.length > 0 && imagesLoadedCount === currentImages.length) {
+      setAllImagesLoaded(true);
+    }
+  }, [imagesLoadedCount, currentImages.length]);
+
+  const handleImageLoad = () => {
+    setImagesLoadedCount(prev => prev + 1);
+  };
+
   const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Escape" && selectedImage) {
       setSelectedImage(null);
@@ -50,18 +77,18 @@ const Gallery: React.FC = () => {
     setIsVisible(!selectedImage);
   }, [selectedImage, setIsVisible]);
 
-  const indexOfLastImage = currentPage * imagesPerPage;
-  const indexOfFirstImage = indexOfLastImage - imagesPerPage;
-  const currentImages = filteredImages.slice(indexOfFirstImage, indexOfLastImage);
-
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
     <div className="min-h-screen bg-background p-6 animate-fadeIn">
-      <div className="max-w-7xl mx-auto">
+      {/* Mostra il loader finché le immagini della pagina corrente non sono tutte caricate */}
+      {!allImagesLoaded && <Loader />}
+      <div className="max-w-7xl mx-auto" style={{ display: allImagesLoaded ? "block" : "none" }}>
         <div className="text-center mb-12 animate-slideDown">
-          <h1   className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
-  style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}>
+          <h1
+            className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
+            style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
+          >
             QUESTO E' FERMENTO 2.0
           </h1>
           <p className="text-accent text-lg">
@@ -79,12 +106,12 @@ const Gallery: React.FC = () => {
               <img
                 src={image.url}
                 alt={image.alt}
+                onLoad={handleImageLoad}
                 className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 ease-in-out flex items-center justify-center">
                 <div className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
-                  <p className="text-lg font-semibold">{image.category}</p>
-                  <p className="text-sm">{image.tags.join(", ")}</p>
+              
                 </div>
               </div>
             </div>
@@ -96,7 +123,7 @@ const Gallery: React.FC = () => {
               key={i}
               onClick={() => paginate(i + 1)}
               className={`mx-1 px-3 py-1 rounded ${
-                currentPage === i + 1 ? 'bg-primary text-white' : 'bg-gray-200 text-gray-700'
+                currentPage === i + 1 ? "bg-primary text-white" : "bg-gray-200 text-gray-700"
               }`}
             >
               {i + 1}
