@@ -247,7 +247,7 @@ const AboutPage: React.FC = () => {
           </motion.h2>
 
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 items-start">
             <motion.div
               initial={{ opacity: 0, x: -100 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -281,37 +281,39 @@ const AboutPage: React.FC = () => {
             >
               <h3 className="text-2xl md:text-3xl font-semibold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}></h3>
               {pressArticles.map((article, index) => (
-                <motion.div 
-                  key={index} 
-                  className="bg-white rounded-lg shadow-md overflow-hidden"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <img 
-                    src={article.image} 
-                    alt={article.title} 
-                    className="w-full h-48 object-fill"
-                  />
-                  <div className="p-6">
-                    <h4 className="text-xl font-semibold mb-2" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{article.title}</h4>
-                    <p className="text-foreground md:text-lg mb-4 line-clamp-3" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{article.preview}</p>
-                    <a 
-                      href={article.link} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-primary hover:text-primary-dark transition-colors duration-300 inline-block mt-2"
-                      style={{ fontFamily: '"Gambetta", Sans-serif' }}
-                    >
-                      Leggi l'articolo completo
-                    </a>
-                  </div>
-                </motion.div>
+                <motion.div
+  key={index}
+  className="bg-white rounded-lg shadow-md overflow-hidden"
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5, delay: index * 0.1 }}
+>
+  <div className="aspect-w-16 aspect-h-9 overflow-hidden">
+    <img
+      src={article.image}
+      alt={article.title}
+      className="w-full h-full object-cover"
+    />
+  </div>
+  <div className="p-6">
+    <h4 className="text-xl font-semibold mb-2" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{article.title}</h4>
+    <p className="text-foreground md:text-lg mb-4 line-clamp-3" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{article.preview}</p>
+    <a
+      href={article.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="text-primary hover:text-primary-dark transition-colors duration-300 inline-block mt-2"
+      style={{ fontFamily: '"Gambetta", Sans-serif' }}
+    >
+      Leggi l'articolo completo
+    </a>
+  </div>
+</motion.div>
+
               ))}
             </motion.div>
-
-          </div>
-          <motion.div
+     <div></div>
+            <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
@@ -327,6 +329,8 @@ const AboutPage: React.FC = () => {
         Leggi altri articoli
       </a>
     </motion.div>
+          </div>
+   
         </div>
       </section>
 
