@@ -42,7 +42,7 @@ const Navbar = () => {
 
   const mobileMenuBg = navbarBg;
   const hoverClass =
-    location.pathname === "/" ? "hover:text-primary" : "hover:text-black";
+    location.pathname === "/" ? "hover:text-black" : "hover:text-black";
 
   return (
     <>
