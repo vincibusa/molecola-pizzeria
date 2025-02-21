@@ -34,7 +34,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
             <source src={VideoBack} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <div className="absolute inset-0 bg-black/40" />
+          <div className="absolute inset-0 bg-black/30" />
         </div>
         <div className="relative w-full h-full flex flex-col items-center justify-center px-4 lg:px-16 text-center lg:text-left">
           <div className="w-full h-full flex flex-col items-center justify-end lg:mt-[220px]">
