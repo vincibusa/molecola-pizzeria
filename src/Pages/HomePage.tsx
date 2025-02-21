@@ -3,7 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import ReservationModal from "../components/ReservationModal";
 import AboutPage from "./AboutPage";
 import { motion } from "framer-motion";
-import VideoBack from "../assets/PIZZE_SPOT_logopiccolo.mp4";
+import VideoBack from "../assets/videoOtt.mp4";
 import Loader from "../components/Loader";
 
 const HomePage = () => {
