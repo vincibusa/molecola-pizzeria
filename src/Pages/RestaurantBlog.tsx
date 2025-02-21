@@ -31,14 +31,14 @@ const RestaurantBlog: React.FC = () => {
     },
     {
         id: 2,
-        title: "La pizza di Fermento 2.0 a Cefalù è un viaggio tra sapori genuini e innovazione",
-        excerpt: "il locale immerso nel centro storico di Cefalù che punta tutto su un mix di tradizione e contemporaneità",
+        title: "Fermento 2.0, la scommessa di due fratelli e della loro pizzeria nel cuore di Cefalù",
+        excerpt: "fatto di attenzione per gli ingredienti usati, di complessità e intensità dei profumi e dei sapori e dagli impasti perfetti, leggeri e fragranti, arriva un imprimatur da parte di nuove realtà che si stanno imponendo in una clientela sempre più esigente e competente",
      
      
-        date:"20-06-2024",
-        image: "https://www.allfoodsicily.it/wp-content/uploads/2024/04/PRIMO-PIANO.jpeg",
+        date:"11-04-2024",
+        image: "	https://www.allfoodsicily.it/wp-content/uploads/2024/04/Pizzeria-Fermento-20-1.jpg",
        
-        link:"https://www.allfoodsicily.it/la-pizza-di-fermento-2-0-a-cefalu-e-un-viaggio-tra-sapori-genuini-e-innovazione/"
+        link:"https://www.allfoodsicily.it/fermento-2-0-la-scommessa-di-due-fratelli-e-della-loro-pizzeria-nel-cuore-di-cefalu/"
       },
    
   ];
