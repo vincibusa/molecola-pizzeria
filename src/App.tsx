@@ -9,6 +9,7 @@ import Gallery from "./Pages/Gallery";
 import Footer from "./components/Footer";
 import ContentWrapper from "./components/ContentWrapper";
 import { NavbarProvider } from "./contexts/NavbarContenxt";
+import RestaurantBlog from "./Pages/RestaurantBlog";
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/reservation" element={<ReservationPage />} />
           <Route path="/contatti" element={<ContactPage />} />
           <Route path="/galleria" element={<Gallery />} />
+<Route path="/blog" element={<RestaurantBlog />} />
         </Routes>
       </ContentWrapper>
       <Footer />

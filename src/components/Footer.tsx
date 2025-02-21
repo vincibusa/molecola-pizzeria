@@ -22,6 +22,8 @@ const Footer: React.FC = () => {
     { name: 'Menu', path: '/menu' },
     { name: 'Area Press', path: '/#press' },
     { name: 'Prenotazioni', path: '/prenotazioni' },
+   
+    { name: 'Galleria', path: '/galleria' },
   ];
 
   return (
@@ -39,32 +41,38 @@ const Footer: React.FC = () => {
   <motion.img
     src={logo}
     alt="Fermento 2.0 Logo"
-    className="h-16 mb-4" // Regola l'altezza del logo secondo le tue necessità
+    className="h-32 mb-4" // Regola l'altezza del logo secondo le tue necessità
     initial={{ opacity: 0, scale: 0.8 }}
     animate={{ opacity: 1, scale: 1 }}
     transition={{ duration: 0.5 }}
   />
-  <p className="text-sm">
+  <p className="text-md">
     Autenticità in ogni morso.
     </p>
-  <p className="text-sm mt-2">
+  <p className="text-md mt-2">
   La nostra passione per la pizza si riflette in ogni piatto che serviamo!
   </p>
-  <div className="flex justify-center space-x-6 mt-10">
-              {socialLinks.map((link, index) => (
-                <motion.a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                  className="text-white hover:text-secondary transition-colors duration-300"
-                >
-                  {link.icon}
-                </motion.a>
-              ))}
-            </div>
+  <div className="flex justify-center space-x-8 mt-10">
+  {socialLinks.map((link, index) => (
+    <motion.a
+      key={index}
+      href={link.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ y: -5, scale: 1.1 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: 'spring', stiffness: 300 }}
+      className="text-white hover:text-secondary transition-colors duration-300"
+    >
+      <motion.div
+        className="bg-primary hover:bg-secondary rounded-full p-3"
+        whileHover={{ rotate: 15 }}
+      >
+        {React.cloneElement(link.icon, { size: 24 })}
+      </motion.div>
+    </motion.a>
+  ))}
+</div>
 </motion.div>
 
             {/* Quick Links */}
@@ -74,7 +82,7 @@ const Footer: React.FC = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <h3 className="text-xl font-semibold mb-4">Link Rapidi</h3>
-              <ul className="space-y-2">
+              <ul className="space-y-4">
                 {quickLinks.map((link) => (
                   <motion.li
                     key={link.name}
@@ -125,7 +133,7 @@ const Footer: React.FC = () => {
   transition={{ duration: 0.5, delay: 0.4 }}
   className="space-y-4"
 >
-  <h3 className="text-xl font-semibold mb-4">Contatti</h3>
+  <h3 className="text-xl font-semibold mb-4 ">Contatti</h3>
   
   <div className="flex items-center space-x-2">
     <FaMapMarkerAlt className="text-white " />
@@ -133,13 +141,13 @@ const Footer: React.FC = () => {
   </div>
   
   <div className="flex items-center space-x-2">
-    <FaMapMarkerAlt className="text-white " />
+  
     <p>90015, Cefalù, PA</p>
   </div>
   
   <div className="flex items-center space-x-2">
-    <FaPhone className="ttext-white" />
-    <p> tel: +39 331 872 7612</p>
+    <FaPhone className="text-white" style={{ transform: 'scaleX(-1)' }} />
+    <p> Tel: +39 331 872 7612</p>
   </div>
   
   <div className="flex items-center space-x-2">
@@ -149,13 +157,14 @@ const Footer: React.FC = () => {
   
   <div className="flex items-center space-x-2">
     <FaClock className="text-white" />
-    <p>Lunedi: chiuso</p>
+    <p>Martedi-Domenica: 19:00-23:00</p>
+    
 
   </div>
   <div className="flex items-center space-x-2">
-    <FaClock className="text-white" />
+    
 
-    <p>Martedi-Domenica: 19:00-23:00</p>
+    <p>Lunedi: chiuso</p>
   </div>
 </motion.div>
           </div>

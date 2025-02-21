@@ -86,7 +86,7 @@ const Gallery: React.FC = () => {
       <div className="max-w-7xl mx-auto" style={{ display: allImagesLoaded ? "block" : "none" }}>
         <div className="text-center mb-12 animate-slideDown">
           <h1
-            className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
+            className="text-heading text-center mb-5 md:mb-10 text-4xl lg:text-6xl"
             style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
           >
            QUESTO È FERMENTO 2.0
