@@ -89,7 +89,7 @@ const Gallery: React.FC = () => {
             className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
             style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
           >
-            QUESTO E' FERMENTO 2.0
+           QUESTO È FERMENTO 2.0
           </h1>
           <p className="text-accent text-lg">
             Impasto unico, ingredienti di prima scelta e un atmosfera calda e accogliente.

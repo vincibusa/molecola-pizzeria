@@ -9,7 +9,7 @@ import FotoFratelli from "../assets/FotoFratelli.jpeg";
 import foto1 from "../assets/fermento 2.0 FOTO/DSC_0346.jpg"
 import foto2 from "../assets/fermento 2.0 FOTO/DSC_0418.jpg"
 import foto3 from "../assets/fermento 2.0 FOTO/DSC_0567.jpg"
-import Bollino from "../assets/bollino_pizzerie_1spicchio.png"
+import Bollino from "../assets/bollino fermento nuovo.png"
 const AboutPage: React.FC = () => {
   const [showTopBtn, setShowTopBtn] = useState<boolean>(false);
 
@@ -110,8 +110,16 @@ const AboutPage: React.FC = () => {
                 className="text-foreground md:text-lg"
                 style={{ fontFamily: '"Gambetta", Sans-serif' }}
               >
-                 In un locale dallo stile industrial e dal carattere personale, la pizza proposta è una napoletana che parla contemporaneo. L’<b>impasto unico</b> e leggero dalla trama rustica conquista anche i palati più esigenti, rendendo giustizia alle materie prime del territorio. 
-                 Non una semplice pizza  ma un racconto gustativo che porta in tavola tutti i sapori della Sicilia.
+                In un locale dallo stile industrial e dal carattere personale, la <b>pizza</b> proposta è una napoletana che parla contemporaneo. Da un <b>blend di farina di tipo 1 e integrale</b>, con una lievitazione tra le sedici e le venti ore, prende vita un impasto leggero dalla trama rustica, in grado di conquistare anche i palati più esigenti. Non una semplice pizza ma un <b>racconto gustativo</b> che porta in tavola tutti i sapori della Sicilia.
+               
+                </p>
+                <p
+                
+                className="text-foreground md:text-lg"
+                style={{ fontFamily: '"Gambetta", Sans-serif' }}
+              >
+               
+                Non mancano opzioni alternative come la <b>pizza in doppia cottura</b>, prima fritta e poi passata al forno per una maggiore croccantezza, o il <b>padellino</b> che prevede l’utilizzo di un impasto pre-fermentato e rimpastato per poi essere cotto e farcito, rendendo giustizia alle <b>materie prime</b> del territorio.
                 </p>
             
             </motion.div>
@@ -253,14 +261,14 @@ const AboutPage: React.FC = () => {
   initial={{ opacity: 0, x: -100 }}
   whileInView={{ opacity: 1, x: 0 }}
   transition={{ duration: 0.8 }}
-  className="space-y-6"
+  className=""
 >
  
     <div className="aspect-w-16 aspect-h-9 overflow-hidden flex items-center justify-center">
     <motion.img
         src={Bollino}
         alt="Riconoscimento Gambero Rosso"
-        className="w-3/4 h-3/4 object-contain" // Modificato per centrare e ridimensionare l'immagine
+        className="w-full h-full object-contain" // Modificato per centrare e ridimensionare l'immagine
         initial={{ opacity: 0, rotate: -180, scale: 0.5 }}
         whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
         transition={{
@@ -271,12 +279,15 @@ const AboutPage: React.FC = () => {
         }}
       />
     </div>
-    <div className="p-6">
-      <h3 className="text-2xl md:text-3xl font-semibold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
-        Riconoscimento Gambero Rosso
-      </h3>
+    <div className="px-6 ">
+     
       <p className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
-        Siamo orgogliosi di annunciare che Fermento 2.0 è stato inserito nella prestigiosa guida Pizzerie d'Italia 2025 del Gambero Rosso, ottenendo il riconoscimento di "Uno Spicchio". Questo premio testimonia il nostro impegno costante nella ricerca dell'eccellenza e nella valorizzazione della tradizione pizzaiola italiana.
+      Un prestigioso riconoscimento, quello del Gambero Rosso che ci ha inseriti nella Guida Pizzerie d'Italia 2025 con "Uno Spicchio". 
+      
+      </p>
+        <p className="italic text-foreground md:text-lg mt-3" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+        “I fratelli Salvatore e Rosario Mirenda entrano nel filone della pizza contemporanea di qualità, 
+        che ha già da tempo, in Sicilia alzato l’asticella. E lo fanno con uno stile e identità del tutto personali"
       </p>
     </div>
   

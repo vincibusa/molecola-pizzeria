@@ -5,6 +5,7 @@ import { FaFacebookF, FaInstagram, } from 'react-icons/fa';
 import { FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock } from 'react-icons/fa';
 
 import ReservationModal from './ReservationModal'; // Assicurati che il percorso sia corretto
+import logo from '../assets/logo.png';
 
 const Footer: React.FC = () => {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState(false);
@@ -30,15 +31,41 @@ const Footer: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Logo and Description */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-2xl font-bold mb-4">Fermento 2.0</h2>
-              <p className="text-sm">
-                Autenticità in ogni morso. La nostra passione per la pizza si riflette in ogni piatto che serviamo.
-              </p>
-            </motion.div>
+  initial={{ opacity: 0, y: 20 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.5 }}
+  className="flex flex-col items-start"
+>
+  <motion.img
+    src={logo}
+    alt="Fermento 2.0 Logo"
+    className="h-16 mb-4" // Regola l'altezza del logo secondo le tue necessità
+    initial={{ opacity: 0, scale: 0.8 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.5 }}
+  />
+  <p className="text-sm">
+    Autenticità in ogni morso.
+    </p>
+  <p className="text-sm mt-2">
+  La nostra passione per la pizza si riflette in ogni piatto che serviamo!
+  </p>
+  <div className="flex justify-center space-x-6 mt-10">
+              {socialLinks.map((link, index) => (
+                <motion.a
+                  key={index}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ y: -5 }}
+                  transition={{ type: 'spring', stiffness: 300 }}
+                  className="text-white hover:text-secondary transition-colors duration-300"
+                >
+                  {link.icon}
+                </motion.a>
+              ))}
+            </div>
+</motion.div>
 
             {/* Quick Links */}
             <motion.div
@@ -140,21 +167,7 @@ const Footer: React.FC = () => {
             transition={{ duration: 0.5, delay: 0.6 }}
             className="mt-8 pt-8 border-t border-white border-opacity-20"
           >
-            <div className="flex justify-center space-x-6">
-              {socialLinks.map((link, index) => (
-                <motion.a
-                  key={index}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -5 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                  className="text-white hover:text-secondary transition-colors duration-300"
-                >
-                  {link.icon}
-                </motion.a>
-              ))}
-            </div>
+    
           </motion.div>
 
           {/* Copyright */}
@@ -162,7 +175,7 @@ const Footer: React.FC = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.8 }}
-            className="mt-8 text-center text-sm text-white text-opacity-60"
+            className=" text-center text-sm text-white text-opacity-60"
           >
             © {new Date().getFullYear()} Fermento 2.0. Tutti i diritti riservati.
           </motion.div>
