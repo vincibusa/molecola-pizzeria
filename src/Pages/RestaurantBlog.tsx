@@ -6,7 +6,7 @@ interface Article {
   id: number;
   title: string;
   excerpt: string;
-  category: string;
+
 
   date: string;
   image: string;
@@ -22,7 +22,7 @@ const RestaurantBlog: React.FC = () => {
       id: 1,
       title: "La pizza di Fermento 2.0 a Cefalù è un viaggio tra sapori genuini e innovazione",
       excerpt: "il locale immerso nel centro storico di Cefalù che punta tutto su un mix di tradizione e contemporaneità",
-      category: "Recipes",
+     
    
       date:"20-06-2024",
       image: "https://www.allfoodsicily.it/wp-content/uploads/2024/04/PRIMO-PIANO.jpeg",
@@ -33,7 +33,7 @@ const RestaurantBlog: React.FC = () => {
         id: 2,
         title: "La pizza di Fermento 2.0 a Cefalù è un viaggio tra sapori genuini e innovazione",
         excerpt: "il locale immerso nel centro storico di Cefalù che punta tutto su un mix di tradizione e contemporaneità",
-        category: "Recipes",
+     
      
         date:"20-06-2024",
         image: "https://www.allfoodsicily.it/wp-content/uploads/2024/04/PRIMO-PIANO.jpeg",
@@ -60,9 +60,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => (
         className="absolute top-0 left-0 w-full h-full object-cover"
         loading="lazy"
       />
-      <span className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-1 rounded-full text-sm">
-        {article.category}
-      </span>
+   
     </div>
     <div className="p-6 flex flex-col flex-grow">
       <h3 className="text-xl font-bold mb-2 text-foreground line-clamp-2">{article.title}</h3>
@@ -87,7 +85,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({ article }) => (
     <div className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-3xl font-extrabold text-center text-foreground mb-8">
-          Our Latest Articles
+          Parlano di noi
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {articles.map(article => (

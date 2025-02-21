@@ -35,7 +35,7 @@ const HistorySection: React.FC = () => {
             className="space-y-6 bg-opacity-80 p-6"
           >
             <p
-              className="text-foreground md:text-lg"
+              className="text-foreground md:text-lg hidden lg:block"
               style={{ fontFamily: '"Gambetta", Sans-serif' }}
             >
               Nel cuore del centro storico di Cefalù, a pochissimi passi dal Duomo,
@@ -43,16 +43,22 @@ const HistorySection: React.FC = () => {
               l’intento di far vivere un’esperienza di gusto e sperimentazione.
             </p>
             <p
-              className="text-foreground md:text-lg"
+              className="text-foreground md:text-lg hidden lg:block"
               style={{ fontFamily: '"Gambetta", Sans-serif' }}
             >
               In un locale dallo stile industrial e dal carattere personale, la <b>pizza</b> proposta è una napoletana che parla contemporaneo. Da un <b>blend di farina di tipo 1 e integrale</b>, con una lievitazione tra le sedici e le venti ore, prende vita un impasto leggero dalla trama rustica, in grado di conquistare anche i palati più esigenti. Non una semplice pizza ma un <b>racconto gustativo</b> che porta in tavola tutti i sapori della Sicilia.
             </p>
             <p
-              className="text-foreground md:text-lg"
+              className="text-foreground md:text-lg hidden lg:block"
               style={{ fontFamily: '"Gambetta", Sans-serif' }}
             >
               Non mancano opzioni alternative come la <b>pizza in doppia cottura</b>, prima fritta e poi passata al forno per una maggiore croccantezza, o il <b>padellino</b> che prevede l’utilizzo di un impasto pre-fermentato e rimpastato per poi essere cotto e farcito, rendendo giustizia alle <b>materie prime</b> del territorio.
+            </p>
+            <p
+              className="text-foreground text-lg block lg:hidden"
+              style={{ fontFamily: '"Gambetta", Sans-serif' }}
+            >
+             Nel cuore del centro storico di Cefalù, a pochissimi passi dal Duomo, Fermento 2.0 è il progetto dei due <b>fratelli Salvatore e Rosario Mirenda</b> che nasce nel 2021 con l’intento di far vivere un’esperienza di gusto e sperimentazione. In un locale dallo stile industrial e dal carattere personale, la <b>pizza</b> proposta è una napoletana che parla contemporaneo. L’impasto unico e leggero dalla trama rustica conquista anche i palati più esigenti, rendendo giustizia alle <b>materie prime</b> del territorio. Non una pizza ma un <b>racconto gustativo</b> che porta in tavola tutti i sapori della Sicilia.
             </p>
           </motion.div>
 
