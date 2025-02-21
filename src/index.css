@@ -8,4 +8,9 @@ body {
 
 
 
+h1, h2, h3 {
+  font-family: "DM Serif Display", serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
 

@@ -20,10 +20,11 @@ const Footer: React.FC = () => {
   const quickLinks = [
     { name: 'Home', path: '/' },
     { name: 'Menu', path: '/menu' },
+    { name: 'Galleria', path: '/galleria' },
     { name: 'Area Press', path: '/#press' },
     { name: 'Prenotazioni', path: '/prenotazioni' },
    
-    { name: 'Galleria', path: '/galleria' },
+   
   ];
 
   return (
@@ -135,15 +136,12 @@ const Footer: React.FC = () => {
 >
   <h3 className="text-xl font-semibold mb-4 ">Contatti</h3>
   
-  <div className="flex items-center space-x-2">
-    <FaMapMarkerAlt className="text-white " />
-    <p>Via Giacomo Matteotti, 29</p>
+  <div className="flex items-center ">
+    <FaMapMarkerAlt className="text-white mr-2 " />
+    <p>Via Giacomo Matteotti, 29 ,</p>
+    <p> 90015 , Cefalù, PA</p>
   </div>
-  
-  <div className="flex items-center space-x-2">
-  
-    <p>90015, Cefalù, PA</p>
-  </div>
+
   
   <div className="flex items-center space-x-2">
     <FaPhone className="text-white" style={{ transform: 'scaleX(-1)' }} />
@@ -158,14 +156,10 @@ const Footer: React.FC = () => {
   <div className="flex items-center space-x-2">
     <FaClock className="text-white" />
     <p>Martedi-Domenica: 19:00-23:00</p>
-    
-
-  </div>
-  <div className="flex items-center space-x-2">
-    
-
     <p>Lunedi: chiuso</p>
+
   </div>
+
 </motion.div>
           </div>
 

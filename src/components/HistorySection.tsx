@@ -58,7 +58,13 @@ const HistorySection: React.FC = () => {
               className="text-foreground text-lg block lg:hidden"
               style={{ fontFamily: '"Gambetta", Sans-serif' }}
             >
-             Nel cuore del centro storico di Cefalù, a pochissimi passi dal Duomo, Fermento 2.0 è il progetto dei due <b>fratelli Salvatore e Rosario Mirenda</b> che nasce nel 2021 con l’intento di far vivere un’esperienza di gusto e sperimentazione. In un locale dallo stile industrial e dal carattere personale, la <b>pizza</b> proposta è una napoletana che parla contemporaneo. L’impasto unico e leggero dalla trama rustica conquista anche i palati più esigenti, rendendo giustizia alle <b>materie prime</b> del territorio. Non una pizza ma un <b>racconto gustativo</b> che porta in tavola tutti i sapori della Sicilia.
+             Nel cuore del centro storico di Cefalù, a pochissimi passi dal Duomo, Fermento 2.0 è il progetto dei due <b>fratelli Salvatore e Rosario Mirenda</b> che nasce nel 2021 con l’intento di far vivere un’esperienza di gusto e sperimentazione.
+            </p>
+            <p
+              className="text-foreground text-lg block lg:hidden"
+              style={{ fontFamily: '"Gambetta", Sans-serif' }}
+            >
+ In un locale dallo stile industrial e dal carattere personale, la <b>pizza</b> proposta è una napoletana che parla contemporaneo. L’impasto unico e leggero dalla trama rustica conquista anche i palati più esigenti, rendendo giustizia alle <b>materie prime</b> del territorio. Non una pizza ma un <b>racconto gustativo</b> che porta in tavola tutti i sapori della Sicilia.
             </p>
           </motion.div>
 
