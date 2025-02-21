@@ -1,34 +1,31 @@
 import React, { useState, useEffect } from "react";
-import { motion,  } from "framer-motion";
+import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { FaUtensils, FaLeaf, FaWineGlass, } from "react-icons/fa";
+import { FaUtensils, FaLeaf, FaWineGlass } from "react-icons/fa";
 import { IoArrowUp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 import FotoFratelli from "../assets/FotoFratelli.jpeg";
-import foto1 from "../assets/fermento 2.0 FOTO/DSC_0346.jpg"
-import foto2 from "../assets/fermento 2.0 FOTO/DSC_0418.jpg"
-import foto3 from "../assets/fermento 2.0 FOTO/DSC_0567.jpg"
-import Bollino from "../assets/bollino fermento nuovo.png"
+import foto1 from "../assets/fermento 2.0 FOTO/DSC_0346.jpg";
+import foto2 from "../assets/fermento 2.0 FOTO/DSC_0418.jpg";
+import foto3 from "../assets/fermento 2.0 FOTO/DSC_0567.jpg";
+import Bollino from "../assets/bollino_pizzerie_1spicchio.png";
+
 const AboutPage: React.FC = () => {
   const [showTopBtn, setShowTopBtn] = useState<boolean>(false);
 
   const pressArticles = [
     {
-      title: "Fermento 2.0: La pizzeria dei fratelli Mirenda a Cefalù conquista il Gambero Rosso",
-      preview: "I fratelli Salvatore e Rosario Mirenda hanno conquistato il prestigioso riconoscimento del Gambero Rosso con la loro pizzeria Fermento 2.0 a Cefalù. La guida 'Pizzerie d'Italia 2024' ha assegnato loro 'Uno Spicchio', premiando la loro dedizione all'arte della pizza e l'utilizzo di ingredienti di alta qualità.",
-      image: "https://www.allfoodsicily.it/wp-content/uploads/2024/10/Fermento-1-e1727942311536.jpeg",
+      title:
+        "Fermento 2.0: La pizzeria dei fratelli Mirenda a Cefalù conquista il Gambero Rosso",
+      preview:
+        "I fratelli Salvatore e Rosario Mirenda hanno conquistato il prestigioso riconoscimento del Gambero Rosso con la loro pizzeria Fermento 2.0 a Cefalù. La guida 'Pizzerie d'Italia 2024' ha assegnato loro 'Uno Spicchio', premiando la loro dedizione all'arte della pizza e l'utilizzo di ingredienti di alta qualità.",
+      image:
+        "https://www.allfoodsicily.it/wp-content/uploads/2024/10/Fermento-1-e1727942311536.jpeg",
       link: "https://www.allfoodsicily.it/fermento-2-0-la-pizzeria-dei-fratelli-mirenda-a-cefalu-conquista-il-gambero-rosso-pronti-ad-alzare-lasticella/"
     },
-    // {
-    //   title: "La pizza di Fermento 2.0 a Cefalù è un viaggio tra sapori genuini e innovazione",
-    //   preview: "il locale immerso nel centro storico di Cefalù che punta tutto su un mix di tradizione e contemporaneità.",
-    //   image: "https://www.allfoodsicily.it/wp-content/uploads/2024/04/PRIMO-PIANO.jpeg",
-    //   link: "https://www.allfoodsicily.it/la-pizza-di-fermento-2-0-a-cefalu-e-un-viaggio-tra-sapori-genuini-e-innovazione/"
-    // },
-  
+    // altri articoli...
   ];
-
 
   useEffect(() => {
     const handleScroll = (): void => {
@@ -45,21 +42,21 @@ const AboutPage: React.FC = () => {
   const teamMembers = [
     {
       name: "Chef John Doe",
-      image: foto1,
+      image: foto1
     },
     {
       name: "Sarah Smith",
-      image: foto2,
+      image: foto2
     },
     {
       name: "Mike Johnson",
-      image: foto3,
-    },
+      image: foto3
+    }
   ];
 
   const cardVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0 },
+    visible: { opacity: 1, y: 0 }
   };
 
   const { ref } = useInView({ threshold: 0.5 });
@@ -72,19 +69,19 @@ const AboutPage: React.FC = () => {
           className="absolute inset-0 bg-fixed bg-cover bg-center opacity-10"
           style={{
             backgroundImage:
-              "url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
+              "url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"
           }}
         ></div>
         <div className="container mx-auto px-4 relative z-10">
-        <motion.h2
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-  className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
-  style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
->
-  LA NOSTRA STORIA
-</motion.h2>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
+            style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
+          >
+            LA NOSTRA STORIA
+          </motion.h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -93,35 +90,26 @@ const AboutPage: React.FC = () => {
               transition={{ duration: 0.8 }}
               className="space-y-6 bg-opacity-80 p-6"
             >
-              {/* <h3 className="text-2xl lg:text-4xl font-serif mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}>La passione per la pizza</h3> */}
-             
-                <p
-                
-                  className="text-foreground md:text-lg"
-                  style={{ fontFamily: '"Gambetta", Sans-serif' }}
-                >
-                 Nel cuore del centro storico di Cefalù, a pochissimi passi dal Duomo, Fermento 2.0 è il progetto 
-                 dei due fratelli <b>Salvatore e Rosario Mirenda</b> che nasce nel 2021 con 
-                 l’intento di far vivere un’esperienza di gusto e sperimentazione. 
-                
-                </p>
-                <p
-                
+              <p
+                className="text-foreground md:text-lg"
+                style={{ fontFamily: '"Gambetta", Sans-serif' }}
+              >
+                Nel cuore del centro storico di Cefalù, a pochissimi passi dal Duomo,
+                Fermento 2.0 è il progetto dei due fratelli <b>Salvatore e Rosario Mirenda</b> che nasce nel 2021 con
+                l’intento di far vivere un’esperienza di gusto e sperimentazione.
+              </p>
+              <p
                 className="text-foreground md:text-lg"
                 style={{ fontFamily: '"Gambetta", Sans-serif' }}
               >
                 In un locale dallo stile industrial e dal carattere personale, la <b>pizza</b> proposta è una napoletana che parla contemporaneo. Da un <b>blend di farina di tipo 1 e integrale</b>, con una lievitazione tra le sedici e le venti ore, prende vita un impasto leggero dalla trama rustica, in grado di conquistare anche i palati più esigenti. Non una semplice pizza ma un <b>racconto gustativo</b> che porta in tavola tutti i sapori della Sicilia.
-               
-                </p>
-                <p
-                
+              </p>
+              <p
                 className="text-foreground md:text-lg"
                 style={{ fontFamily: '"Gambetta", Sans-serif' }}
               >
-               
                 Non mancano opzioni alternative come la <b>pizza in doppia cottura</b>, prima fritta e poi passata al forno per una maggiore croccantezza, o il <b>padellino</b> che prevede l’utilizzo di un impasto pre-fermentato e rimpastato per poi essere cotto e farcito, rendendo giustizia alle <b>materie prime</b> del territorio.
-                </p>
-            
+              </p>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 100 }}
@@ -138,10 +126,14 @@ const AboutPage: React.FC = () => {
                 />
               </div>
               <div className="absolute bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg transform rotate-3">
-                <p className="text-primary font-bold" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Salvatore e Rosario Mirenda</p>
-                <p className="text-sm text-gray-600" style={{ fontFamily: '"Gambetta", Sans-serif' }}>Fondatori di Fermento 2.0</p>
+                <p className="text-primary font-bold" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+                  Salvatore e Rosario Mirenda
+                </p>
+                <p className="text-sm text-gray-600" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
+                  Fondatori di Fermento 2.0
+                </p>
               </div>
-                </motion.div>
+            </motion.div>
           </div>
         </div>
       </section>
@@ -156,9 +148,9 @@ const AboutPage: React.FC = () => {
             className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
             style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
           >
-           GALLERIA
+            GALLERIA
           </motion.h2>
-          <motion.div 
+          <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-8"
             initial="hidden"
             whileInView="visible"
@@ -172,10 +164,7 @@ const AboutPage: React.FC = () => {
             }}
           >
             {teamMembers.map((member) => (
-              <motion.div
-                key={member.name}
-                variants={cardVariants}
-              >
+              <motion.div key={member.name} variants={cardVariants}>
                 <Link to="/galleria">
                   <motion.div
                     className="rounded-lg shadow-lg overflow-hidden transform hover:scale-105 transition-transform duration-300 cursor-pointer"
@@ -195,55 +184,64 @@ const AboutPage: React.FC = () => {
         </div>
       </section>
 
-{/* Our Culinary Philosophy Section */}
-<section className="py-20 bg-background relative">
-  <div
-    className="absolute inset-0 bg-fixed bg-cover bg-center opacity-10"
-    style={{
-      backgroundImage:
-        "url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
-    }}
-  ></div>
-  <div className="container mx-auto px-4 relative z-10">
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-      {[
-        {
-          icon: <FaUtensils className="text-5xl mb-4" />,
-          title: "Servizio e accoglienza",
-          description: "Amiamo prenderci cura dei nostri clienti"
-        },
-        {
-          icon: <FaLeaf className="text-5xl mb-4" />,
-          title: "Ingredienti di qualità",
-          description: "Selezioniamo con cura le farine e scegliamo i migliori prodotti di stagione"
-        },
-        {
-          icon: <FaWineGlass className="text-5xl mb-4" />,
-          title: "Abbinamenti Perfetti",
-          description: "La nostra carta di vini è ricca di proposte, non solo territoriali"
-        }
-      ].map((item, index) => (
-        <motion.div
-          key={item.title}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: index * 0.2 }}
-          className="p-6 flex flex-col items-center text-center  bg-opacity-80 "
-        >
-          <div className="text-accent flex justify-center items-center">
-            {item.icon}
+      {/* Our Culinary Philosophy Section */}
+      <section className="py-10 bg-background relative">
+        <div
+          className="absolute inset-0 bg-fixed bg-cover bg-center opacity-10"
+          style={{
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"
+          }}
+        ></div>
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            {[
+              {
+                icon: <FaUtensils className="text-5xl mb-4" />,
+                title: "Servizio e accoglienza",
+                description: "Amiamo prenderci cura dei nostri clienti"
+              },
+              {
+                icon: <FaLeaf className="text-5xl mb-4" />,
+                title: "Ingredienti di qualità",
+                description: "Selezioniamo con cura le farine e scegliamo i migliori prodotti di stagione"
+              },
+              {
+                icon: <FaWineGlass className="text-5xl mb-4" />,
+                title: "Abbinamenti Perfetti",
+                description: "La nostra carta di vini è ricca di proposte, non solo territoriali"
+              }
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.2 }}
+                className="p-6 flex flex-col items-center text-center bg-opacity-80"
+              >
+                <div className="text-accent flex justify-center items-center">
+                  {item.icon}
+                </div>
+                <h3
+                  className="text-xl md:text-2xl font-semibold mb-2"
+                  style={{ fontFamily: '"Gambetta", Sans-serif' }}
+                >
+                  {item.title}
+                </h3>
+                <p
+                  className="text-foreground md:text-lg"
+                  style={{ fontFamily: '"Gambetta", Sans-serif' }}
+                >
+                  {item.description}
+                </p>
+              </motion.div>
+            ))}
           </div>
-          <h3 className="text-xl md:text-2xl font-semibold mb-2" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{item.title}</h3>
-          <p className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{item.description}</p>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
+        </div>
+      </section>
 
- {/* Press e Riconoscimenti Section */}
- <section id="press" className="py-20 bg-background">
+      {/* Press e Riconoscimenti Section */}
+      <section id="press" className="py-20 bg-background">
         <div className="container mx-auto px-4">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -255,43 +253,43 @@ const AboutPage: React.FC = () => {
             PRESS E RICONOSCIMENTI
           </motion.h2>
 
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 items-start">
-        <motion.div
-  initial={{ opacity: 0, x: -100 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.8 }}
-  className=""
->
- 
-    <div className="aspect-w-16 aspect-h-9 overflow-hidden flex items-center justify-center">
-    <motion.img
-        src={Bollino}
-        alt="Riconoscimento Gambero Rosso"
-        className="w-full h-full object-contain" // Modificato per centrare e ridimensionare l'immagine
-        initial={{ opacity: 0, rotate: -180, scale: 0.5 }}
-        whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
-        transition={{
-          type: "spring",
-          stiffness: 50,
-          damping: 10,
-          duration: 5
-        }}
-      />
-    </div>
-    <div className="px-6 ">
-     
-      <p className="text-foreground md:text-lg" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
-      Un prestigioso riconoscimento, quello del Gambero Rosso che ci ha inseriti nella Guida Pizzerie d'Italia 2025 con "Uno Spicchio". 
-      
-      </p>
-        <p className="italic text-foreground md:text-lg mt-3" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
-        “I fratelli Salvatore e Rosario Mirenda entrano nel filone della pizza contemporanea di qualità, 
-        che ha già da tempo, in Sicilia alzato l’asticella. E lo fanno con uno stile e identità del tutto personali"
-      </p>
-    </div>
+            <motion.div
+              initial={{ opacity: 0, x: -100 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <div className="aspect-w-16 aspect-h-9 overflow-hidden flex items-center justify-center">
+                <motion.img
+                  src={Bollino}
+                  alt="Riconoscimento Gambero Rosso"
+                  className="w-full h-full object-contain"
+                  initial={{ opacity: 0, rotate: -180, scale: 0.5 }}
+                  whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 50,
+                    damping: 10,
+                    duration: 5
+                  }}
+                />
+              </div>
+              <div className="px-6">
+                <p
+                  className="text-foreground md:text-lg"
+                  style={{ fontFamily: '"Gambetta", Sans-serif' }}
+                >
+                  Un prestigioso riconoscimento, quello del Gambero Rosso che ci ha inseriti nella Guida Pizzerie d'Italia 2025 con "Uno Spicchio".
+                </p>
+                <p
+                  className="italic text-foreground md:text-lg mt-3"
+                  style={{ fontFamily: '"Gambetta", Sans-serif' }}
+                >
+                  “I fratelli Salvatore e Rosario Mirenda entrano nel filone della pizza contemporanea di qualità, che ha già da tempo, in Sicilia alzato l’asticella. E lo fanno con uno stile e identità del tutto personali"
+                </p>
+              </div>
+            </motion.div>
   
-</motion.div>
 
             <motion.div
               initial={{ opacity: 0, x: 100 }}
@@ -299,58 +297,65 @@ const AboutPage: React.FC = () => {
               transition={{ duration: 0.8 }}
               className="space-y-8"
             >
-              <h3 className="text-2xl md:text-3xl font-semibold mb-4" style={{ fontFamily: '"Gambetta", Sans-serif' }}></h3>
               {pressArticles.map((article, index) => (
                 <motion.div
-  key={index}
-  className="bg-white rounded-lg shadow-md overflow-hidden"
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.5, delay: index * 0.1 }}
->
-  <div className="aspect-w-16 aspect-h-9 overflow-hidden">
-    <img
-      src={article.image}
-      alt={article.title}
-      className="w-full h-full object-cover"
-    />
-  </div>
-  <div className="p-6">
-    <h4 className="text-xl font-semibold mb-2" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{article.title}</h4>
-    <p className="text-foreground md:text-lg mb-4 line-clamp-3" style={{ fontFamily: '"Gambetta", Sans-serif' }}>{article.preview}</p>
-    <a
-      href={article.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="text-primary hover:text-primary-dark transition-colors duration-300 inline-block mt-2"
-      style={{ fontFamily: '"Gambetta", Sans-serif' }}
-    >
-      Leggi l'articolo completo
-    </a>
-  </div>
-</motion.div>
-
+                  key={index}
+                  className="bg-white rounded-lg shadow-md overflow-hidden"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <div className="aspect-w-16 aspect-h-9 overflow-hidden">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                  <div className="p-6">
+                    <h4
+                      className="text-xl font-semibold mb-2"
+                      style={{ fontFamily: '"Gambetta", Sans-serif' }}
+                    >
+                      {article.title}
+                    </h4>
+                    <p
+                      className="text-foreground md:text-lg mb-4 line-clamp-3"
+                      style={{ fontFamily: '"Gambetta", Sans-serif' }}
+                    >
+                      {article.preview}
+                    </p>
+                    <a
+                      href={article.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-primary hover:text-primary-dark transition-colors duration-300 inline-block mt-2"
+                      style={{ fontFamily: '"Gambetta", Sans-serif' }}
+                    >
+                      Leggi l'articolo completo
+                    </a>
+                  </div>
+                </motion.div>
               ))}
             </motion.div>
-     <div></div>
+            <div></div>
             <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, delay: 0.2 }}
-      className="flex justify-start"
-    >
-      <a
-        href="https://www.allfoodsicily.it/?s=fermento+2.0" // Sostituisci con l'URL desiderato
-        target="_blank"
-        rel="noopener noreferrer"
-        className="bg-primary text-white px-8 py-3 rounded-md transform hover:scale-105 transition-all duration-300 hover:shadow-lg text-lg"
-        style={{ fontFamily: '"Gambetta", Sans-serif' }}
-      >
-        Leggi altri articoli
-      </a>
-    </motion.div>
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex justify-start"
+            >
+              <a
+                href="https://www.allfoodsicily.it/?s=fermento+2.0"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-primary text-white px-8 py-3 rounded-md transform hover:scale-105 transition-all duration-300 hover:shadow-lg text-lg"
+                style={{ fontFamily: '"Gambetta", Sans-serif' }}
+              >
+                Leggi altri articoli
+              </a>
+            </motion.div>
           </div>
-   
         </div>
       </section>
 
