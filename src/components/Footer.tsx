@@ -21,7 +21,7 @@ const Footer: React.FC = () => {
     { name: 'Home', path: '/' },
     { name: 'Menu', path: '/menu' },
     { name: 'Galleria', path: '/galleria' },
-    { name: 'Area Press', path: '/#press' },
+    { name: 'Press', path: '/#press' },
     { name: 'Prenotazioni', path: '/prenotazioni' },
    
    
@@ -97,7 +97,7 @@ const Footer: React.FC = () => {
                       >
                         {link.name}
                       </button>
-                    ) : link.name === 'Area Press' ? (
+                    ) : link.name === 'Press' ? (
                       <Link
                         to={link.path}
                         onClick={(e) => {
@@ -136,29 +136,36 @@ const Footer: React.FC = () => {
 >
   <h3 className="text-xl font-semibold mb-4 ">Contatti</h3>
   
-  <div className="flex items-center ">
-    <FaMapMarkerAlt className="text-white mr-2 " />
-    <p>Via Giacomo Matteotti, 29 ,</p>
-    <p> 90015 , Cefalù, PA</p>
+  <div className="flex items-center space-x-2">
+    <FaMapMarkerAlt className="text-white " />
+    <p>Via Giacomo Matteotti, 29</p>
   </div>
-
   
   <div className="flex items-center space-x-2">
-    <FaPhone className="text-white" style={{ transform: 'scaleX(-1)' }} />
-    <p> Tel: +39 331 872 7612</p>
+  <div className='w-4'></div>
+    <p>90015, Cefalù, PA</p>
+  </div>
+  
+  <div className="flex items-center space-x-2">
+    <FaPhone className="ttext-white" />
+    <p> tel: +39 331 872 7612</p>
   </div>
   
   <div className="flex items-center space-x-2">
     <FaEnvelope className="text-white" />
-    <p>fratellimirenda@gmail.com</p>
+    <p>info@fermento2.0.com</p>
   </div>
-  
   <div className="flex items-center space-x-2">
     <FaClock className="text-white" />
+
     <p>Martedi-Domenica: 19:00-23:00</p>
+  </div>
+  <div className="flex items-center space-x-2">
+  <div className='w-4'></div>
     <p>Lunedi: chiuso</p>
 
   </div>
+
 
 </motion.div>
           </div>

@@ -92,7 +92,7 @@ const Gallery: React.FC = () => {
            QUESTO È FERMENTO 2.0
           </h1>
           <p className="text-accent text-lg">
-            Impasto unico, ingredienti di prima scelta e un atmosfera calda e accogliente.
+            Impasto unico, ingredienti di prima scelta e un'atmosfera calda e accogliente.
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

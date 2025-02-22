@@ -1,7 +1,7 @@
 // src/components/PressSection.tsx
 import React from "react";
 import { motion } from "framer-motion";
-import Bollino from "../assets/bollino_pizzerie_1spicchio.png";
+import Bollino from "../assets/web gambero-02.png";
 import { Link } from "react-router-dom";
 
 interface PressArticle {
@@ -35,7 +35,7 @@ const PressSection: React.FC = () => {
           className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
           style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
         >
-          PRESS E RICONOSCIMENTI
+           RICONOSCIMENTI E PRESS 
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 items-start">
@@ -43,6 +43,7 @@ const PressSection: React.FC = () => {
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
+            className="space-y-8"
           >
             <div className="aspect-w-16 aspect-h-9 overflow-hidden flex items-center justify-center">
               <motion.img

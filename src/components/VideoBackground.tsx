@@ -2,9 +2,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Loader from "./Loader";
-import VideoBack from "../assets/PIZZE_SPOT_NOLOGO_1-ott.mp4";
+import VideoBack from "../assets/videoDef.mp4";
 import CallToActionButtons from "./CallToActionButtons";
-import logo from "../assets/logo.png";
 
 interface VideoBackgroundProps {
   onReservationClick: () => void;
@@ -35,28 +34,10 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
             <source src={VideoBack} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-black/20" />
         </div>
-        <div className="relative w-full h-full flex flex-col items-center justify-between">
-          <div className="absolute inset-0 flex items-center justify-center">
-          <motion.div
-              className="flex  items-center opacity-70"
-            initial={{ opacity: 0, y: -50 }}
-            animate={{ opacity: 0.9, y: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            <img
-              src={logo}
-              alt="Fermento 2.0 Logo"
-                className="w-40 md:w-52 lg:w-64 mb-4 opacity-70"
-            />
-              <div className="opacity-70 text-gray-300 text-6xl md:text-7xl lg:text-8xl font-bold text-center" style={{ fontFamily: '"Gambetta", Sans-serif' }}>
-              <div className="flex">Fer</div>
-              <div className="flex">Mento2.0</div>
-            </div>
-          </motion.div>
-        </div>
-          <div className="absolute bottom-20 lg:bottom-0 left-0 right-0 flex justify-center">
+        <div className="relative w-full h-full flex flex-col items-center justify-center px-4 lg:px-16 text-center lg:text-left">
+          <div className="w-full h-full flex flex-col items-center justify-end lg:mt-[220px]">
             <CallToActionButtons onReservationClick={onReservationClick} />
           </div>
         </div>

@@ -124,7 +124,7 @@ const Navbar = () => {
             }
           }}
         >
-          Area Press
+          Press
         </Link>
 
   </motion.li>
