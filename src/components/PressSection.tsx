@@ -65,7 +65,7 @@ const PressSection: React.FC = () => {
                 className="text-foreground md:text-lg"
                 style={{ fontFamily: '"Gambetta", Sans-serif' }}
               >
-                Un prestigioso riconoscimento, quello del Gambero Rosso che ci ha inseriti nella Guida Pizzerie d'Italia 2025 con "Uno Spicchio".
+                Un prestigioso riconoscimento, quello del Gambero Rosso che ci ha inseriti nella <b>Guida Pizzerie d'Italia 2025 con "Uno Spicchio".</b>
               </p>
               <p
                 className="italic text-foreground md:text-lg mt-3"
