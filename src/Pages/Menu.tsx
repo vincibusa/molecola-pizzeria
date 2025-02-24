@@ -21,15 +21,15 @@ const Menu = () => {
       items: [
         {
           name: "Margherita",
-          description: "Pomodoro, mozzarella, basilico fresco",
-          price: "€10",
+          description: "Salsa di pomodoro siccagno, fior di latte, basilico fresco",
+          price: "€8",
           dietary: ["vegetarian"],
           image:
             "https://images.unsplash.com/photo-1574071318508-1cdbab80d002"
         },
         {
-          name: "Marinara",
-          description: "Pomodoro, aglio, origano, olio d'oliva",
+          name: "Napoli",
+          description: "Pomodoro San Marzano, fior di latte, accciughe locali e",
           price: "€9",
           dietary: ["vegan"],
           image:
