@@ -1,5 +1,3 @@
-// src/components/CallToActionButtons.tsx
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 
 interface CallToActionButtonsProps {
@@ -7,7 +5,8 @@ interface CallToActionButtonsProps {
 }
 
 const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservationClick }) => {
-  const buttonClasses = "w-full sm:w-auto px-4 sm:px-8 py-3 rounded-md transform hover:scale-105 transition-all duration-300 hover:shadow-lg text-base sm:text-lg whitespace-nowrap max-w-[180px] sm:max-w-none";
+  const buttonClasses =
+    "w-full sm:w-auto px-4 sm:px-8 py-3 rounded-md transform hover:scale-105 transition-all duration-300 hover:shadow-lg text-base sm:text-lg whitespace-nowrap max-w-[180px] sm:max-w-none";
 
   return (
     <motion.div
@@ -24,7 +23,12 @@ const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservation
       >
         Prenota il tavolo
       </button>
-      <Link to="/menu" className="w-full sm:w-auto max-w-[180px] sm:max-w-none">
+      <a
+        href="/Menu_FEB2025_STMP.pdf" // Assicurati che il file sia presente nella cartella public
+        target="_blank"
+        rel="noopener noreferrer"
+        className="w-full sm:w-auto max-w-[180px] sm:max-w-none"
+      >
         <button
           className={`${buttonClasses} bg-white text-primary`}
           style={{ fontFamily: '"Gambetta", Sans-serif' }}
@@ -32,7 +36,7 @@ const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservation
         >
           Visualizza il Menù
         </button>
-      </Link>
+      </a>
     </motion.div>
   );
 };
