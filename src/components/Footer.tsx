@@ -147,8 +147,8 @@ const Footer: React.FC = () => {
                 <p>90015, Cefalù, PA</p>
               </div>
               <div className="flex items-center space-x-2">
-                <FaPhone className="text-white" />
-                <p>tel: +39 331 872 7612</p>
+                <FaPhone className="text-white transform scale-x-[-1]" />
+                <p>Tel: +39 331 872 7612</p>
               </div>
               <div className="flex items-center space-x-2">
                 <FaEnvelope className="text-white" />

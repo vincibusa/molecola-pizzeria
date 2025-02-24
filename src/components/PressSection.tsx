@@ -46,19 +46,20 @@ const PressSection: React.FC = () => {
             className="space-y-8"
           >
             <div className="aspect-w-16 aspect-h-9 overflow-hidden flex items-center justify-center">
-              <motion.img
-                src={Bollino}
-                alt="Riconoscimento Gambero Rosso"
-                className="w-full h-full object-contain"
-                initial={{ opacity: 0, rotate: -180, scale: 0.5 }}
-                whileInView={{ opacity: 1, rotate: 0, scale: 1 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 50,
-                  damping: 10,
-                  duration: 5
-                }}
-              />
+         <motion.img
+  src={Bollino}
+  alt="Riconoscimento Gambero Rosso"
+  className="w-full h-full object-contain"
+  initial={{ opacity: 0, x: "-100%" }}
+  whileInView={{ opacity: 1, x: 0 }}
+  transition={{
+    type: "spring",
+    stiffness: 50,
+    damping: 20,
+    duration: 1.5
+  }}
+/>
+
             </div>
             <div className="px-6">
               <p
@@ -71,7 +72,7 @@ const PressSection: React.FC = () => {
                 className="italic text-foreground md:text-lg mt-3"
                 style={{ fontFamily: '"Gambetta", Sans-serif' }}
               >
-                “I fratelli Salvatore e Rosario Mirenda entrano nel filone della pizza contemporanea di qualità, che ha già da tempo, in Sicilia alzato l’asticella. E lo fanno con uno stile e identità del tutto personali"
+                “I fratelli Salvatore e Rosario Mirenda entrano nel filone della pizza contemporanea di qualità, che ha già da tempo, in Sicilia alzato l’asticella. E lo fanno con uno stile e identità del tutto personali".
               </p>
             </div>
           </motion.div>

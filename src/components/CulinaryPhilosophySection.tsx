@@ -12,7 +12,7 @@ const philosophyItems = [
   {
     icon: <FaLeaf className="text-5xl mb-4" />,
     title: "Ingredienti di qualità",
-    description: "Selezioniamo con cura le farine e scegliamo i migliori prodotti di stagione"
+    description: "Selezioniamo le farine e scegliamo i migliori prodotti di stagione"
   },
   {
     icon: <FaWineGlass className="text-5xl mb-4" />,

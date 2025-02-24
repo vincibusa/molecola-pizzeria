@@ -4,6 +4,7 @@ import ReservationModal from "../components/ReservationModal";
 import AboutPage from "./AboutPage";
 import VideoBackground from "../components/VideoBackground";
 import useScrollToHash from "../hooks/useScrollToHash";
+import SocialPosts from "../components/SocialPosts";
 
 const HomePage: React.FC = () => {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState<boolean>(false);
@@ -23,6 +24,7 @@ const HomePage: React.FC = () => {
         onClose={() => setIsReservationModalOpen(false)}
       />
       <AboutPage />
+      <SocialPosts/>
     </>
   );
 };
