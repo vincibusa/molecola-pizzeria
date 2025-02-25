@@ -80,12 +80,12 @@ const SocialPosts: React.FC = () => {
   const itemVariants = {
     hidden: { 
       opacity: 0, 
-      y: 20,
+      x: -20,
       scale: 0.95
     },
     visible: { 
       opacity: 1, 
-      y: 0,
+      x: 0,
       scale: 1,
       transition: {
         duration: 0.5,
@@ -114,68 +114,88 @@ const SocialPosts: React.FC = () => {
   ];
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
+    <div className="relative w-full overflow-hidden px-4">
       <CookieConsentModal />
+      
+      {/* Contenitore scrollabile */}
+      <div className="relative">
       <motion.div 
-        className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="flex overflow-x-auto gap-6 pb-4 snap-x snap-mandatory hide-scrollbar"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-      >
-        {posts.map((post, index) => (
-          <motion.div 
-            key={index}
-            variants={itemVariants}
-            className=""
-          >
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="h-full "
-            >
-              {post.type === "instagram" ? (
-                <blockquote
-                  className="instagram-media shadow-lg rounded-lg"
-                  data-instgrm-permalink={post.url}
-                  data-instgrm-version="14"
                   style={{
-                    background: "#FFF",
-                    border: 0,
-                    borderRadius: "12px",
-                    boxShadow: "none",
-                    display: "block",
-                    margin: 0,
-                    minWidth: "326px",
-                    padding: 0,
-                    width: "100%",
+            scrollbarWidth: 'none',  // Firefox
+            msOverflowStyle: 'none',  // IE and Edge
                   }}
-                ></blockquote>
-              ) : (
-                cookiesAccepted ? (
-                  <div
-                    className="fb-post"
-                    data-href={post.url}
-                    data-width="100%"
-                    data-show-text="true"
-                  ></div>
+        >
+          {posts.map((post, index) => (
+            <motion.div
+              key={index}
+              variants={itemVariants}
+              className="flex-none w-[326px] snap-center"
+            >
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="h-full"
+              >
+                {post.type === "instagram" ? (
+                  <blockquote
+                    className="instagram-media shadow-lg rounded-lg"
+                    data-instgrm-permalink={post.url}
+                    data-instgrm-version="14"
+                    style={{
+                      background: "#FFF",
+                      border: 0,
+                      borderRadius: "12px",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+                      display: "block",
+                      margin: 0,
+                      minWidth: "326px",
+                      padding: 0,
+                      width: "100%",
+                    }}
+                  ></blockquote>
                 ) : (
-                  <div className="bg-gray-100 p-8 text-center rounded-lg">
-                    <p className="text-gray-600">
-                      Accetta i cookie per visualizzare questo post.
-                    </p>
-                  </div>
-                )
-              )}
+                  cookiesAccepted ? (
+                    <div
+                      className="fb-post"
+                      data-href={post.url}
+                      data-width="326"
+                      data-show-text="true"
+                    ></div>
+                  ) : (
+                    <div className="bg-gray-100 p-8 text-center rounded-lg">
+                      <p className="text-gray-600">
+                        Accetta i cookie per visualizzare questo post.
+                      </p>
+    </div>
+                  )
+                )}
+              </motion.div>
             </motion.div>
-          </motion.div>
-        ))}
-      </motion.div>
+          ))}
+        </motion.div>
+      </div>
+
+      {/* Indicatore di scroll */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200">
+        <motion.div
+          className="h-full bg-primary"
+          initial={{ width: "0%" }}
+          whileInView={{ width: "100%" }}
+          transition={{ duration: 0.8 }}
+        />
+      </div>
+
+      {/* Loading indicator */}
       {postsLoaded < posts.length && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
-          className="text-center mt-8 p-4 bg-gray-50 rounded-lg shadow-sm"
+          className="text-center mt-4"
         >
           <div className="animate-pulse">
             Caricamento post in corso...
@@ -185,5 +205,6 @@ const SocialPosts: React.FC = () => {
     </div>
   );
 };
+
 
 export default SocialPosts;
