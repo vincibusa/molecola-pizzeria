@@ -109,14 +109,12 @@ const Footer: React.FC = () => {
                         {link.name}
                       </Link>
                     ) : link.name === 'Menu' ? (
-                      <a
-                        href="/Menu_FEB2025_STMP.pdf" // Assicurati che "menu.pdf" sia nella cartella public
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="hover:text-secondary transition-colors duration-300"
-                      >
-                        {link.name}
-                      </a>
+                      <Link
+                      to="/menu"
+                      className="hover:text-secondary transition-colors duration-300"
+                    >
+                      {link.name}
+                    </Link>
                     ) : (
                       <Link
                         to={link.path}

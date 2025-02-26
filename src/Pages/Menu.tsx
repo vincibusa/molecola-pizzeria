@@ -1,112 +1,27 @@
 import { useState } from "react";
-import { FaPizzaSlice, FaWineGlass } from "react-icons/fa";
-import { GiFullPizza, GiHotMeal } from "react-icons/gi";
+import { FaPizzaSlice, } from "react-icons/fa";
+import { GiFullPizza, GiHotMeal, GiFrenchFries, GiCookingPot } from "react-icons/gi";
 import { BiDrink } from "react-icons/bi";
+import { MdLocalPizza } from "react-icons/md";
+import { IoIosPizza } from "react-icons/io";
 import {motion} from "framer-motion";
+import menuItems from "../data/menuData";
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState("Pizze Classiche");
 
-  const categories = [
+ const categories = [
+
+  { name: "Antipasti", icon: <GiFrenchFries /> },
     { name: "Pizze Classiche", icon: <FaPizzaSlice /> },
-    { name: "Pizze Speciali", icon: <GiFullPizza /> },
-    { name: "Calzoni", icon: <GiHotMeal /> },
-    { name: "Antipasti", icon: <FaWineGlass /> },
+    { name: "Pizze Speciali", icon: <FaPizzaSlice /> },
+    { name: "Pizze fritte", icon: <MdLocalPizza /> },
+    { name: "Pizze 180 Grammi", icon: <IoIosPizza /> },
+    { name: "Pizze al Padellino", icon: <GiCookingPot /> },
+    { name: "Padellino Farcito", icon: <GiHotMeal /> },
+    { name: "Pizze Doppia Cottura", icon: <GiFullPizza /> },
     { name: "Bevande", icon: <BiDrink /> }
   ];
-
-  const menuItems = [
-    {
-      category: "Pizze Classiche",
-      items: [
-        {
-          name: "Margherita",
-          description: "Salsa di pomodoro siccagno, fior di latte, basilico fresco",
-          price: "€8",
-          dietary: ["vegetarian"],
-          image:
-            "https://images.unsplash.com/photo-1574071318508-1cdbab80d002"
-        },
-        {
-          name: "Napoli",
-          description: "Pomodoro San Marzano, fior di latte, accciughe locali e",
-          price: "€9",
-          dietary: ["vegan"],
-          image:
-            "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47"
-        },
-        {
-          name: "Capricciosa",
-          description:
-            "Pomodoro, mozzarella, prosciutto cotto, funghi, carciofi, olive",
-          price: "€12",
-          dietary: ["meat"],
-          image:
-            "https://images.unsplash.com/photo-1600273571173-a4a5c3c7ff21"
-        },
-        {
-          name: "Quattro Formaggi",
-          description:
-            "Mozzarella, gorgonzola, parmigiano, fontina",
-          price: "€11",
-          dietary: ["vegetarian"],
-          image:
-            "https://images.unsplash.com/photo-1584642857260-26c0f14f8c0d"
-        },
-        {
-          name: "Diavola",
-          description:
-            "Pomodoro, mozzarella, salame piccante",
-          price: "€12",
-          dietary: ["spicy"],
-          image:
-            "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-        },
-        {
-          name: "Prosciutto e Funghi",
-          description:
-            "Mozzarella, prosciutto crudo, funghi porcini",
-          price: "€13",
-          dietary: ["meat"],
-          image:
-            "https://images.unsplash.com/photo-1594007650023-b2c514e8b5c8"
-        },
-        {
-          name: "Napoli",
-          description:
-            "Pomodoro, mozzarella, acciughe, capperi, olive",
-          price: "€11",
-          dietary: ["pescatarian"],
-          image:
-            "https://images.unsplash.com/photo-1610129628831-2ae396bc4357"
-        },
-        {
-          name: "Ortolana",
-          description:
-            "Mozzarella, verdure miste, pomodorini e basilico",
-          price: "€10",
-          dietary: ["vegan"],
-          image:
-            "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-        }
-      ]
-    },
-    {
-      category: "Pizze Speciali",
-      items: [
-        {
-          name: "Diavola",
-          description:
-            "Pomodoro, mozzarella, salame piccante",
-          price: "€12",
-          dietary: ["spicy"],
-          image:
-            "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-        }
-      ]
-    }
-  ];
-
   const filteredItems =
     menuItems.filter((cat) => cat.category === activeCategory)[0]?.items ||
     [];
@@ -174,17 +89,7 @@ const Menu = () => {
                 {item.description}
               </p>
               <div className="flex flex-wrap gap-2">
-                {item.dietary.map((diet, dietIndex) => (
-                  <motion.span
-                    key={dietIndex}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3, delay: (index * 0.1) + (dietIndex * 0.05) }}
-                    className="px-2 py-0.5 text-xs rounded-full bg-primary/10 dark:bg-dark-primary/10 text-primary dark:text-dark-primary"
-                  >
-                    {diet}
-                  </motion.span>
-                ))}
+        
               </div>
             </div>
             <motion.span 

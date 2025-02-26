@@ -96,14 +96,12 @@ const Navbar = () => {
                             transition={{ duration: 0.3, delay: index * 0.1 }}
                           >
                             {item === "Menu" ? (
-                              <a
-                                href="/Menu_FEB2025_STMP.pdf" // Assicurati che "menu.pdf" sia nella cartella public
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className={`text-white ${hoverClass} transition-colors`}
-                              >
-                                {item}
-                              </a>
+                             <Link
+                             to="/menu"
+                             className={`text-white ${hoverClass} transition-colors`}
+                           >
+                             {item}
+                           </Link>
                             ) : (
                               <Link
                                 to={item === "Home" ? "/" : `/${item.toLowerCase()}`}

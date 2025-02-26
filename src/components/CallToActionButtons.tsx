@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 interface CallToActionButtonsProps {
   onReservationClick: () => void;
@@ -23,10 +24,8 @@ const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservation
       >
         Prenota il tavolo
       </button>
-      <a
-        href="/Menu_FEB2025_STMP.pdf" // Assicurati che il file sia presente nella cartella public
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        to="/menu"
         className="w-full sm:w-auto max-w-[180px] sm:max-w-none"
       >
         <button
@@ -36,7 +35,7 @@ const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservation
         >
           Visualizza il Menù
         </button>
-      </a>
+      </Link>
     </motion.div>
   );
 };
