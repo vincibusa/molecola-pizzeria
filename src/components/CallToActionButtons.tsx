@@ -18,7 +18,7 @@ const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservation
     >
       <button
         onClick={onReservationClick}
-        className={`${buttonClasses} bg-primary text-white`}
+        className={`${buttonClasses} bg-primary text-white lg:min-w-[210px]`}
         style={{ fontFamily: '"Gambetta", Sans-serif' }}
         aria-label="Prenota il tavolo"
       >
@@ -29,7 +29,7 @@ const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservation
         className="w-full sm:w-auto max-w-[180px] sm:max-w-none"
       >
         <button
-          className={`${buttonClasses} bg-white text-primary`}
+          className={`${buttonClasses} bg-white text-primary lg:min-w-[210px]`}
           style={{ fontFamily: '"Gambetta", Sans-serif' }}
           aria-label="Visualizza il Menù"
         >

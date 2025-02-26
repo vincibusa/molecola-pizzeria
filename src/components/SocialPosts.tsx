@@ -7,7 +7,7 @@ const SocialPosts: React.FC = () => {
   const [cookieConsent, setCookieConsent] = useState<CookiePreferences | null>(null);
   // I post Facebook verranno caricati solo se la preferenza "marketing" è true
   const cookiesAccepted = cookieConsent?.marketing === true;
-  const [postsLoaded, setPostsLoaded] = useState<number>(0);
+  const [, setPostsLoaded] = useState<number>(0);
 
   // Aggiorna periodicamente lo stato delle preferenze dal localStorage
   useEffect(() => {
@@ -114,7 +114,14 @@ const SocialPosts: React.FC = () => {
   ];
 
   return (
-    <div className="relative w-full overflow-hidden px-4">
+    <div className="relative w-full overflow-hidden px-4 py-10">
+            <div
+        className="absolute inset-0 bg-fixed bg-cover bg-center opacity-10"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"
+        }}
+      ></div>
       <CookieConsentModal />
       
       {/* Contenitore scrollabile */}
@@ -189,19 +196,7 @@ const SocialPosts: React.FC = () => {
         />
       </div>
 
-      {/* Loading indicator */}
-      {postsLoaded < posts.length && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          className="text-center mt-4"
-        >
-          <div className="animate-pulse">
-            Caricamento post in corso...
-          </div>
-        </motion.div>
-      )}
+  
     </div>
   );
 };
