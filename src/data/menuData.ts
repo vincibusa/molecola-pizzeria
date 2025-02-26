@@ -567,7 +567,7 @@
                                     category: "Bevande",
                                     items: [
                                         {
-                                            name: "Acuqa",
+                                            name: "Acuqa Panna / San Pellegrino",
                                             description:
                                               "Naturale / Frizzante 75CL",
                                             price: "€3",
@@ -576,7 +576,7 @@
                                               "https://images.unsplash.com/photo-1513104890138-7c749659a591"
                                           },
                                           {
-                                            name: "Coca cola, coca cola 0",
+                                            name: "Coca cola, coca cola zero",
                                             description:
                                               "",
                                             price: "€3",
