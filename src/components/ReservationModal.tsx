@@ -1,7 +1,7 @@
-import React, { useState, ChangeEvent, FormEvent } from "react";
-import { FiCalendar, FiClock, FiUsers, FiCheck, FiX } from "react-icons/fi";
+import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import { FiCalendar, FiClock, FiUsers, FiCheck, FiX, FiAlertCircle } from "react-icons/fi";
 import { format } from "date-fns";
-import { addReservation } from "../services/Reservation";
+import { addReservation, getShiftsForDate } from "../services/Reservation";
 
 interface FormData {
   firstName: string;
@@ -32,11 +32,37 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
+  // Nuovi stati per la gestione dell'errore
+  const [showError, setShowError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const timeSlots: string[] = [
-    "12:00", "12:30", "13:00", "13:30", "14:00",
-    "19:00", "19:30", "20:00", "20:30", "21:00"
-  ];
+  // Stato per memorizzare solo gli orari disponibili (enabled true) per la data selezionata
+  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
+
+  // Quando la data cambia, carichiamo gli shift e filtriamo quelli abilitati
+  useEffect(() => {
+    const loadAvailableTimes = async () => {
+      if (formData.date) {
+        try {
+          const shifts = await getShiftsForDate(formData.date);
+          // Filtriamo solo quelli con enabled true
+          const available = shifts.filter((shift) => shift.enabled).map((shift) => shift.time);
+          setAvailableTimeSlots(available);
+          // Se l'orario selezionato non è più disponibile, resettiamo il campo
+          if (!available.includes(formData.time)) {
+            setFormData((prev) => ({ ...prev, time: "" }));
+          }
+        } catch (error) {
+          console.error("Errore nel caricamento degli orari disponibili", error);
+          setAvailableTimeSlots([]);
+        }
+      } else {
+        setAvailableTimeSlots([]);
+      }
+    };
+
+    loadAvailableTimes();
+  }, [formData.date, formData.time]);
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
@@ -64,7 +90,6 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
     if (validateForm()) {
       setIsSubmitting(true);
       try {
-        // Combiniamo firstName e lastName per ottenere il fullName
         const fullName = `${formData.firstName} ${formData.lastName}`;
         const reservation = {
           fullName,
@@ -76,8 +101,11 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
         };
         await addReservation(reservation);
         setShowSuccess(true);
-      } catch (error) {
+      } catch (error: any) {
         console.error("Error:", error);
+        // In caso di errore, impostiamo il messaggio e mostriamo la modal d'errore
+        setErrorMessage(error.message || "Errore durante la prenotazione");
+        setShowError(true);
       } finally {
         setIsSubmitting(false);
       }
@@ -210,11 +238,15 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
                   } focus:outline-none focus:ring-2 focus:ring-ring appearance-none`}
                 >
                   <option value="">Seleziona ora</option>
-                  {timeSlots.map((slot) => (
-                    <option key={slot} value={slot}>
-                      {slot}
-                    </option>
-                  ))}
+                  {availableTimeSlots.length > 0 ? (
+                    availableTimeSlots.map((slot) => (
+                      <option key={slot} value={slot}>
+                        {slot}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="">Nessuna fascia disponibile</option>
+                  )}
                 </select>
               </div>
               {errors.time && <p className="mt-1 text-sm text-destructive">{errors.time}</p>}
@@ -234,7 +266,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
                 onChange={handleInputChange}
                 className="w-full pl-10 pr-4 py-2 rounded-md border border-input focus:outline-none focus:ring-2 focus:ring-ring appearance-none"
               >
-                {[1, 2, 3, 4, 5, 6, 7, 8].map((num) => (
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                   <option key={num} value={num}>
                     {num} {num === 1 ? "persona" : "persone"}
                   </option>
@@ -267,6 +299,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
         </form>
       </div>
 
+      {/* Modal di Successo */}
       {showSuccess && (
         <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-2 z-50">
           <div className="transform scale-90 sm:scale-100 bg-card p-4 sm:p-6 rounded-lg shadow-lg max-w-sm w-full">
@@ -279,6 +312,9 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               </h2>
               <p className="text-accent text-sm">
                 Grazie per aver scelto Pizzeria Fermento 2.0
+              </p>
+              <p className="text-accent text-sm">
+                Il tavolo rimarrà riservato per 15 minuti oltre l'orario di prenotazione
               </p>
             </div>
             <div className="space-y-2 mb-4">
@@ -301,6 +337,34 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
                 onClose();
               }}
               className="w-full bg-primary text-primary-foreground py-2 rounded-md font-body hover:bg-primary/90 transition-colors"
+            >
+              Chiudi
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Modal di Errore */}
+      {showError && (
+        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-2 z-50">
+          <div className="transform scale-90 sm:scale-100 bg-card p-4 sm:p-6 rounded-lg shadow-lg max-w-sm w-full border border-destructive">
+            <div className="mb-4 text-center">
+              <div className="mx-auto w-12 h-12 bg-destructive/10 rounded-full flex items-center justify-center mb-4">
+                <FiAlertCircle className="text-destructive text-xl" />
+              </div>
+              <h2 className="text-lg sm:text-xl font-heading text-foreground mb-2">
+                Errore nella Prenotazione
+              </h2>
+              <p className="text-destructive text-sm">
+                {errorMessage}
+              </p>
+              <p className="text-primary text-sm">
+                Contattaci telefonicamente: +39 331 872 7612
+              </p>
+            </div>
+            <button
+              onClick={() => setShowError(false)}
+              className="w-full bg-destructive text-white py-2 rounded-md font-body hover:bg-destructive/90 transition-colors"
             >
               Chiudi
             </button>
