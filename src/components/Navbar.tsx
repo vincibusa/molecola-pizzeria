@@ -5,9 +5,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import ReservationModal from "./ReservationModal";
 import logo from "../assets/logo.png";
 import { useNavbar } from "../contexts/NavbarContenxt";
+import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
-  // Recupera la visibilità della navbar dal context
+  const { t } = useTranslation();
   const { isVisible } = useNavbar();
   const location = useLocation();
   const [isNavbarTransparent, setIsNavbarTransparent] = useState(true);
@@ -43,6 +44,13 @@ const Navbar = () => {
   const hoverClass =
     location.pathname === "/" ? "hover:text-black" : "hover:text-black";
 
+  // Definisci gli elementi della navbar con le rispettive chiavi di traduzione e rotte
+  const navItems = [
+    { key: "home", label: t("navbar.home"), route: "/" },
+    { key: "menu", label: t("navbar.menu"), route: "/menu" },
+    { key: "gallery", label: t("navbar.gallery"), route: "/galleria" },
+  ];
+
   return (
     <>
       <AnimatePresence>
@@ -64,7 +72,11 @@ const Navbar = () => {
                   transition={{ duration: 0.5 }}
                 >
                   <Link to="/">
-                    <img src={logo} alt="Pizzeria Fermento 2.0" className="h-12" />
+                    <img
+                      src={logo}
+                      alt={t("navbar.logoAlt")}
+                      className="h-12"
+                    />
                   </Link>
                 </motion.div>
                 <motion.button
@@ -72,7 +84,7 @@ const Navbar = () => {
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   className="lg:hidden text-white"
-                  aria-label="Toggle menu"
+                  aria-label={t("navbar.toggleMenu")}
                 >
                   <FaBars size={24} />
                 </motion.button>
@@ -83,33 +95,28 @@ const Navbar = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.3 }}
-                      className={`lg:flex ${isMobileMenuOpen ? "block" : "hidden"} absolute lg:relative top-full left-0 w-full lg:w-auto ${
-                        location.pathname === "/" && isMobileMenuOpen ? "bg-primary" : mobileMenuBg
+                      className={`lg:flex ${
+                        isMobileMenuOpen ? "block" : "hidden"
+                      } absolute lg:relative top-full left-0 w-full lg:w-auto ${
+                        location.pathname === "/" && isMobileMenuOpen
+                          ? "bg-primary"
+                          : mobileMenuBg
                       }`}
                     >
                       <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-8 p-4 lg:p-0">
-                        {["Home", "Menu", "Galleria"].map((item, index) => (
+                        {navItems.map((item, index) => (
                           <motion.li
-                            key={item}
+                            key={item.key}
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.3, delay: index * 0.1 }}
                           >
-                            {item === "Menu" ? (
-                             <Link
-                             to="/menu"
-                             className={`text-white ${hoverClass} transition-colors`}
-                           >
-                             {item}
-                           </Link>
-                            ) : (
-                              <Link
-                                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
-                                className={`text-white ${hoverClass} transition-colors`}
-                              >
-                                {item}
-                              </Link>
-                            )}
+                            <Link
+                              to={item.route}
+                              className={`text-white ${hoverClass} transition-colors`}
+                            >
+                              {item.label}
+                            </Link>
                           </motion.li>
                         ))}
                         <motion.li
@@ -130,7 +137,7 @@ const Navbar = () => {
                               }
                             }}
                           >
-                            Press
+                            {t("navbar.press")}
                           </Link>
                         </motion.li>
                         <motion.li
@@ -142,7 +149,7 @@ const Navbar = () => {
                             onClick={() => setIsReservationModalOpen(true)}
                             className={`text-white ${hoverClass} transition-colors`}
                           >
-                            Prenotazioni
+                            {t("navbar.reservation")}
                           </button>
                         </motion.li>
                       </ul>

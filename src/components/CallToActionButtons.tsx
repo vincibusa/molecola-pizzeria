@@ -1,11 +1,14 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface CallToActionButtonsProps {
   onReservationClick: () => void;
 }
 
 const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservationClick }) => {
+  const { t } = useTranslation();
+
   const buttonClasses =
     "w-full sm:w-auto px-4 sm:px-8 py-3 rounded-md transform hover:scale-105 transition-all duration-300 hover:shadow-lg text-base sm:text-lg whitespace-nowrap max-w-[180px] sm:max-w-none";
 
@@ -20,9 +23,9 @@ const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservation
         onClick={onReservationClick}
         className={`${buttonClasses} bg-primary text-white lg:min-w-[210px]`}
         style={{ fontFamily: '"Gambetta", Sans-serif' }}
-        aria-label="Prenota il tavolo"
+        aria-label={t("reservationButton")}
       >
-        Prenota il tavolo
+        {t("reservationButton")}
       </button>
       <Link
         to="/menu"
@@ -31,9 +34,9 @@ const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservation
         <button
           className={`${buttonClasses} bg-white text-primary lg:min-w-[210px]`}
           style={{ fontFamily: '"Gambetta", Sans-serif' }}
-          aria-label="Visualizza il Menù"
+          aria-label={t("viewMenuButton")}
         >
-          Visualizza il Menù
+          {t("viewMenuButton")}
         </button>
       </Link>
     </motion.div>

@@ -10,6 +10,8 @@ import Footer from "./components/Footer";
 import ContentWrapper from "./components/ContentWrapper";
 import { NavbarProvider } from "./contexts/NavbarContenxt";
 import RestaurantBlog from "./Pages/RestaurantBlog";
+import LanguageSelector from "./components/LanguageSelector";
+
 
 
 function App() {
@@ -25,7 +27,9 @@ function App() {
           <Route path="/galleria" element={<Gallery />} />
 <Route path="/blog" element={<RestaurantBlog />} />
         </Routes>
+  
       </ContentWrapper>
+<LanguageSelector />
       <Footer />
     </NavbarProvider>
   );

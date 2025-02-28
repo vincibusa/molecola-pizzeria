@@ -14,6 +14,7 @@ const Menu = () => {
   { name: "Antipasti", icon: <GiFrenchFries /> },
     { name: "Pizze Classiche", icon: <FaPizzaSlice /> },
     { name: "Pizze Speciali", icon: <FaPizzaSlice /> },
+    { name: "Vegetariane", icon: <FaPizzaSlice /> },
     { name: "Pizze fritte", icon: <MdLocalPizza /> },
     { name: "Pizze 180 Grammi", icon: <IoIosPizza /> },
     { name: "Pizze al Padellino", icon: <GiCookingPot /> },

@@ -51,6 +51,15 @@
             "https://images.unsplash.com/photo-1513104890138-7c749659a591"
         },
         {
+          name: "Sfincione palermitano",
+          description:
+            "Cipolla cotta con salsa di pomodoro Siccagno, caciocavallo, mollica e acciughe",
+          price: "€12",
+      
+          image:
+            "https://images.unsplash.com/photo-1513104890138-7c749659a591"
+        },
+        {
           name: "Diavola",
           description:
             "Salsa di pomodoro siccagno, fior di latte, spinnata piccante Levoni",
@@ -534,7 +543,7 @@
                                           "https://images.unsplash.com/photo-1513104890138-7c749659a591"
                                       },   
                                       {
-                                        name: "La tradizione ",
+                                        name: "Montanarine della tradizione ",
                                         description:
                                           "Salsa di pomodoro siccagno, Grana padano, basilico ,2 pezzi",
                                         price: "€5",
@@ -543,7 +552,7 @@
                                           "https://images.unsplash.com/photo-1513104890138-7c749659a591"
                                       },   
                                       {
-                                        name: "In fermento 2 pezzi",
+                                        name: "Montanarine in fermento 2 pezzi",
                                         description:
                                           "1) Mortadella l'Artemano Levoni, pesto di pistacchio e stracciatella. 2) Bresaola IGP della Valtellina Levoni, Grana Padano e pesto di rucola",
                                         price: "€6",
@@ -552,7 +561,7 @@
                                           "https://images.unsplash.com/photo-1513104890138-7c749659a591"
                                       },  
                                       {
-                                        name: "Nobili 2 pezzi",
+                                        name: "Montanarine nobili 2 pezzi",
                                         description:
                                           "1) Prosciuttoi crudo 24 mesi l'Artemano Levoni, stracciatella e pomodorino confit , 2) Stracciatella e Carpaccio di Black Angus affumicato",
                                         price: "€7,50",

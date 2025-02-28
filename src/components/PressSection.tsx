@@ -1,8 +1,8 @@
-// src/components/PressSection.tsx
 import React from "react";
 import { motion } from "framer-motion";
-import Bollino from "../assets/web gambero-02.png";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import Bollino from "../assets/web gambero-02.png";
 
 interface PressArticle {
   title: string;
@@ -19,12 +19,14 @@ const pressArticles: PressArticle[] = [
       "I fratelli Salvatore e Rosario Mirenda hanno conquistato il prestigioso riconoscimento del Gambero Rosso con la loro pizzeria Fermento 2.0 a Cefalù. La guida 'Pizzerie d'Italia 2024' ha assegnato loro 'Uno Spicchio', premiando la loro dedizione all'arte della pizza e l'utilizzo di ingredienti di alta qualità.",
     image:
       "https://www.allfoodsicily.it/wp-content/uploads/2024/10/Fermento-1-e1727942311536.jpeg",
-    link: "https://www.allfoodsicily.it/fermento-2-0-la-pizzeria-dei-fratelli-mirenda-a-cefalu-conquista-il-gambero-rosso-pronti-ad-alzare-lasticella/"
-  }
+    link: "https://www.allfoodsicily.it/fermento-2-0-la-pizzeria-dei-fratelli-mirenda-a-cefalu-conquista-il-gambero-rosso-pronti-ad-alzare-lasticella/",
+  },
   // altri articoli...
 ];
 
 const PressSection: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="press" className="py-20 bg-background">
       <div className="container mx-auto px-4">
@@ -35,10 +37,11 @@ const PressSection: React.FC = () => {
           className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
           style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
         >
-           RICONOSCIMENTI E PRESS 
+          {t("pressSection.heading")}
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 items-start">
+          {/* Sezione sinistra con il bollino e le informazioni */}
           <motion.div
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -46,37 +49,37 @@ const PressSection: React.FC = () => {
             className="space-y-8"
           >
             <div className="aspect-w-16 aspect-h-9 overflow-hidden flex items-center justify-center">
-         <motion.img
-  src={Bollino}
-  alt="Riconoscimento Gambero Rosso"
-  className="w-full h-full object-contain"
-  initial={{ opacity: 0, x: "-100%" }}
-  whileInView={{ opacity: 1, x: 0 }}
-  transition={{
-    type: "spring",
-    stiffness: 50,
-    damping: 20,
-    duration: 1.5
-  }}
-/>
-
+              <motion.img
+                src={Bollino}
+                alt={t("pressSection.leftArticle.imageAlt")}
+                className="w-full h-full object-contain"
+                initial={{ opacity: 0, x: "-100%" }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{
+                  type: "spring",
+                  stiffness: 50,
+                  damping: 20,
+                  duration: 1.5,
+                }}
+              />
             </div>
             <div className="px-6">
               <p
                 className="text-foreground md:text-lg"
                 style={{ fontFamily: '"Gambetta", Sans-serif' }}
               >
-                𝗣𝗿𝗲𝗺𝗶𝗮𝘁𝗶 𝗱𝗮𝗹 𝗚𝗮𝗺𝗯𝗲𝗿𝗼 𝗥𝗼𝘀𝘀𝗼 𝗰𝗼𝗻 "𝗨𝗻𝗼 𝗦𝗽𝗶𝗰𝗰𝗵𝗶𝗼" 𝗻𝗲𝗹𝗹𝗮 𝗚𝘂𝗶𝗱𝗮 𝗣𝗶𝘇𝘇𝗲𝗿𝗶𝗲 𝗱'𝗜𝘁𝗮𝗹𝗶𝗮 𝟮𝟬𝟮𝟱
+                {t("pressSection.leftArticle.title")}
               </p>
               <p
                 className="italic text-foreground md:text-lg mt-3"
                 style={{ fontFamily: '"Gambetta", Sans-serif' }}
               >
-                “I fratelli Salvatore e Rosario Mirenda entrano nel filone della pizza contemporanea di qualità, che ha già da tempo, in Sicilia alzato l’asticella. E lo fanno con uno stile e identità del tutto personali".
+                {t("pressSection.leftArticle.preview")}
               </p>
             </div>
           </motion.div>
-  
+
+          {/* Sezione destra con gli articoli */}
           <motion.div
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -118,30 +121,28 @@ const PressSection: React.FC = () => {
                     className="text-primary hover:text-primary-dark transition-colors duration-300 inline-block mt-2"
                     style={{ fontFamily: '"Gambetta", Sans-serif' }}
                   >
-                    Leggi l'articolo completo
+                    {t("pressSection.article.readMore")}
                   </a>
                 </div>
               </motion.div>
             ))}
-                      <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="flex justify-start"
-          >
-            <Link to="/blog"
-          
-            
-              className="bg-primary text-white px-8 py-3 rounded-md transform hover:scale-105 transition-all duration-300 hover:shadow-lg text-lg"
-              style={{ fontFamily: '"Gambetta", Sans-serif' }}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex justify-start"
             >
-              Leggi altri articoli
-            </Link>
-          </motion.div>
+              <Link
+                to="/blog"
+                className="bg-primary text-white px-8 py-3 rounded-md transform hover:scale-105 transition-all duration-300 hover:shadow-lg text-lg"
+                style={{ fontFamily: '"Gambetta", Sans-serif' }}
+              >
+                {t("pressSection.readMoreArticles")}
+              </Link>
+            </motion.div>
           </motion.div>
 
           <div></div>
-
         </div>
       </div>
     </section>

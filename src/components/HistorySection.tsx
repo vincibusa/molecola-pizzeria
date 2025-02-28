@@ -1,11 +1,12 @@
-// src/components/HistorySection.tsx
 import React from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { useTranslation, Trans } from "react-i18next";
 import FotoFratelli from "../assets/FotoFratelli.jpeg";
 
 const HistorySection: React.FC = () => {
   const { ref } = useInView({ threshold: 0.5 });
+  const { t } = useTranslation();
 
   return (
     <section id="about" ref={ref} className="py-20 bg-background relative">
@@ -13,7 +14,7 @@ const HistorySection: React.FC = () => {
         className="absolute inset-0 bg-fixed bg-cover bg-center opacity-10"
         style={{
           backgroundImage:
-            "url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')"
+            "url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
         }}
       ></div>
       <div className="container mx-auto px-4 relative z-10">
@@ -24,7 +25,7 @@ const HistorySection: React.FC = () => {
           className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
           style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
         >
-          LA NOSTRA STORIA
+          {t("historySection.title")}
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -34,37 +35,53 @@ const HistorySection: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="space-y-6 bg-opacity-80 p-6"
           >
+            {/* Testi lunghi per desktop */}
             <p
               className="text-foreground md:text-lg hidden lg:block"
               style={{ fontFamily: '"Gambetta", Sans-serif' }}
             >
-              Nel cuore del centro storico di Cefalù, a pochissimi passi dal Duomo,
-              Fermento 2.0 è il progetto dei due fratelli <b>Salvatore e Rosario Mirenda</b> che nasce nel 2021 con
-              l’intento di far vivere un’esperienza di gusto e sperimentazione.
+              <Trans
+                i18nKey="historySection.paragraph1"
+                components={{ b: <b /> }}
+              />
             </p>
             <p
               className="text-foreground md:text-lg hidden lg:block"
               style={{ fontFamily: '"Gambetta", Sans-serif' }}
             >
-              In un locale dallo stile industrial e dal carattere personale, la <b>pizza</b> proposta è una napoletana che parla contemporaneo. Da un <b>blend di farina di tipo 1 e integrale</b>, con una lievitazione tra le sedici e le venti ore, prende vita un impasto leggero dalla trama rustica, in grado di conquistare anche i palati più esigenti. Non una semplice pizza ma un <b>racconto gustativo</b> che porta in tavola tutti i sapori della Sicilia.
+              <Trans
+                i18nKey="historySection.paragraph2"
+                components={{ b: <b /> }}
+              />
             </p>
             <p
               className="text-foreground md:text-lg hidden lg:block"
               style={{ fontFamily: '"Gambetta", Sans-serif' }}
             >
-              Non mancano opzioni alternative come la <b>pizza in doppia cottura</b>, prima fritta e poi passata al forno per una maggiore croccantezza, o il <b>padellino</b> che prevede l’utilizzo di un impasto pre-fermentato e rimpastato per poi essere cotto e farcito, rendendo giustizia alle <b>materie prime</b> del territorio.
+              <Trans
+                i18nKey="historySection.paragraph3"
+                components={{ b: <b /> }}
+              />
+            </p>
+
+            {/* Testi brevi per mobile */}
+            <p
+              className="text-foreground text-lg block lg:hidden"
+              style={{ fontFamily: '"Gambetta", Sans-serif' }}
+            >
+              <Trans
+                i18nKey="historySection.shortParagraph1"
+                components={{ b: <b /> }}
+              />
             </p>
             <p
               className="text-foreground text-lg block lg:hidden"
               style={{ fontFamily: '"Gambetta", Sans-serif' }}
             >
-             Nel cuore del centro storico di Cefalù, a pochissimi passi dal Duomo, Fermento 2.0 è il progetto dei due <b>fratelli Salvatore e Rosario Mirenda</b> che nasce nel 2021 con l’intento di far vivere un’esperienza di gusto e sperimentazione.
-            </p>
-            <p
-              className="text-foreground text-lg block lg:hidden"
-              style={{ fontFamily: '"Gambetta", Sans-serif' }}
-            >
- In un locale dallo stile industrial e dal carattere personale, la <b>pizza</b> proposta è una napoletana che parla contemporaneo. L’impasto unico e leggero dalla trama rustica conquista anche i palati più esigenti, rendendo giustizia alle <b>materie prime</b> del territorio. Non una pizza ma un <b>racconto gustativo</b> che porta in tavola tutti i sapori della Sicilia.
+              <Trans
+                i18nKey="historySection.shortParagraph2"
+                components={{ b: <b /> }}
+              />
             </p>
           </motion.div>
 
@@ -78,7 +95,7 @@ const HistorySection: React.FC = () => {
             <div className="absolute inset-0 bg-white rounded-lg transform rotate-3 shadow-xl overflow-hidden">
               <img
                 src={FotoFratelli}
-                alt="Salvatore e Rosario Mirenda"
+                alt={t("historySection.image.alt")}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -87,13 +104,10 @@ const HistorySection: React.FC = () => {
                 className="text-primary font-bold"
                 style={{ fontFamily: '"Gambetta", Sans-serif' }}
               >
-                Salvatore e Rosario Mirenda
-              </p>
-              <p
-                className="text-sm text-gray-600"
-                style={{ fontFamily: '"Gambetta", Sans-serif' }}
-              >
-                Fondatori di Fermento 2.0
+                <Trans
+                  i18nKey="historySection.image.caption"
+                  components={{ b: <b /> }}
+                />
               </p>
             </div>
           </motion.div>

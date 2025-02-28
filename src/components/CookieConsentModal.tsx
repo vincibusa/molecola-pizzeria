@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaCookie } from "react-icons/fa";
+import { useTranslation } from "react-i18next";
 
 export interface CookiePreferences {
   essential: boolean;
@@ -8,9 +9,9 @@ export interface CookiePreferences {
 }
 
 const CookieConsentModal: React.FC = () => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  // Lo state per le preferenze non è utilizzato all'interno della modale,
-  // serve solo per salvare il consenso nel localStorage.
+  // Lo state per le preferenze viene usato solo per salvare il consenso nel localStorage.
   const [, setPreferences] = useState<CookiePreferences>({
     essential: true,
     analytics: false,
@@ -54,8 +55,7 @@ const CookieConsentModal: React.FC = () => {
         <div className="flex items-start gap-3">
           <FaCookie className="text-primary text-xl flex-shrink-0" />
           <p className="text-sm text-foreground">
-            Utilizziamo i cookie per migliorare la tua esperienza di navigazione.
-            Scegli le tue preferenze.
+            {t("cookieConsent.text")}
           </p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2 w-full">
@@ -63,13 +63,13 @@ const CookieConsentModal: React.FC = () => {
             onClick={handleAcceptAll}
             className="px-4 py-2 bg-primary text-primary-foreground rounded-lg text-sm hover:bg-primary/90 transition-colors w-full sm:w-auto"
           >
-            Accetta Tutti
+            {t("cookieConsent.acceptAll")}
           </button>
           <button
             onClick={handleRejectNonEssential}
             className="px-4 py-2 bg-secondary text-secondary-foreground rounded-lg text-sm hover:bg-secondary/90 transition-colors w-full sm:w-auto"
           >
-            Solo Essenziali
+            {t("cookieConsent.acceptEssential")}
           </button>
         </div>
       </div>

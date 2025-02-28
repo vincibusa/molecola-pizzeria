@@ -1,7 +1,7 @@
-// src/components/TeamGallerySection.tsx
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import foto1 from "../assets/fermento 2.0 FOTO/DSC_0346.jpg";
 import foto2 from "../assets/fermento 2.0 FOTO/DSC_0418.jpg";
 import foto3 from "../assets/fermento 2.0 FOTO/DSC_0567.jpg";
@@ -23,6 +23,8 @@ const cardVariants = {
 };
 
 const TeamGallerySection: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section className="py-20 bg-gradient-to-b from-background to-gray-100">
       <div className="container mx-auto px-4">
@@ -33,7 +35,7 @@ const TeamGallerySection: React.FC = () => {
           className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
           style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
         >
-          GALLERIA
+          {t("teamGallerySection.heading")}
         </motion.h2>
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-8"
