@@ -2,6 +2,7 @@ import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
 import { FiCalendar, FiClock, FiUsers, FiCheck, FiX, FiAlertCircle } from "react-icons/fi";
 import { format } from "date-fns";
 import { addReservation, getShiftsForDate } from "../services/Reservation";
+import { useTranslation } from "react-i18next";
 
 interface FormData {
   firstName: string;
@@ -19,6 +20,8 @@ interface ReservationModalProps {
 }
 
 const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -32,28 +35,26 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [showSuccess, setShowSuccess] = useState<boolean>(false);
-  // Nuovi stati per la gestione dell'errore
   const [showError, setShowError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  // Stato per memorizzare solo gli orari disponibili (enabled true) per la data selezionata
+  // Stato per memorizzare le fasce orarie disponibili per la data selezionata
   const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
 
-  // Quando la data cambia, carichiamo gli shift e filtriamo quelli abilitati
   useEffect(() => {
     const loadAvailableTimes = async () => {
       if (formData.date) {
         try {
           const shifts = await getShiftsForDate(formData.date);
-          // Filtriamo solo quelli con enabled true
+          // Filtriamo solo gli shift abilitati
           const available = shifts.filter((shift) => shift.enabled).map((shift) => shift.time);
           setAvailableTimeSlots(available);
-          // Se l'orario selezionato non è più disponibile, resettiamo il campo
+          // Se l'orario selezionato non è più disponibile, lo resettiamo
           if (!available.includes(formData.time)) {
             setFormData((prev) => ({ ...prev, time: "" }));
           }
         } catch (error) {
-          console.error("Errore nel caricamento degli orari disponibili", error);
+          console.error("Error loading available times", error);
           setAvailableTimeSlots([]);
         }
       } else {
@@ -67,19 +68,19 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};
     if (!formData.firstName.trim()) {
-      newErrors.firstName = "Nome richiesto";
+      newErrors.firstName = t("reservationModal.error.firstNameRequired");
     }
     if (!formData.lastName.trim()) {
-      newErrors.lastName = "Cognome richiesto";
+      newErrors.lastName = t("reservationModal.error.lastNameRequired");
     }
     if (!formData.phone.trim()) {
-      newErrors.phone = "Numero di telefono richiesto";
+      newErrors.phone = t("reservationModal.error.phoneRequired");
     }
     if (!formData.date) {
-      newErrors.date = "Data richiesta";
+      newErrors.date = t("reservationModal.error.dateRequired");
     }
     if (!formData.time) {
-      newErrors.time = "Ora richiesta";
+      newErrors.time = t("reservationModal.error.timeRequired");
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -103,8 +104,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
         setShowSuccess(true);
       } catch (error: any) {
         console.error("Error:", error);
-        // In caso di errore, impostiamo il messaggio e mostriamo la modal d'errore
-        setErrorMessage(error.message || "Errore durante la prenotazione");
+        setErrorMessage(error.message || t("reservationModal.error.general"));
         setShowError(true);
       } finally {
         setIsSubmitting(false);
@@ -138,7 +138,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
       >
         <div className="flex items-center justify-between mb-4">
           <p className="text-lg sm:text-xl font-heading text-accent">
-            Prenota il tuo tavolo
+            {t("reservationModal.title")}
           </p>
           <button onClick={onClose} className="text-accent hover:text-foreground transition-colors">
             <FiX size={24} />
@@ -149,7 +149,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
           {/* Campo Nome */}
           <div>
             <label className="block text-sm font-body text-foreground mb-2">
-              Nome
+              {t("reservationModal.firstNameLabel")}
             </label>
             <input
               type="text"
@@ -159,7 +159,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               className={`w-full px-4 py-2 rounded-md border ${
                 errors.firstName ? "border-destructive" : "border-input"
               } focus:outline-none focus:ring-2 focus:ring-ring`}
-              placeholder="Inserisci il nome"
+              placeholder={t("reservationModal.firstNamePlaceholder")}
             />
             {errors.firstName && <p className="mt-1 text-sm text-destructive">{errors.firstName}</p>}
           </div>
@@ -167,7 +167,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
           {/* Campo Cognome */}
           <div>
             <label className="block text-sm font-body text-foreground mb-2">
-              Cognome
+              {t("reservationModal.lastNameLabel")}
             </label>
             <input
               type="text"
@@ -177,7 +177,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               className={`w-full px-4 py-2 rounded-md border ${
                 errors.lastName ? "border-destructive" : "border-input"
               } focus:outline-none focus:ring-2 focus:ring-ring`}
-              placeholder="Inserisci il cognome"
+              placeholder={t("reservationModal.lastNamePlaceholder")}
             />
             {errors.lastName && <p className="mt-1 text-sm text-destructive">{errors.lastName}</p>}
           </div>
@@ -185,7 +185,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
           {/* Numero di Telefono */}
           <div>
             <label className="block text-sm font-body text-foreground mb-2">
-              Numero di Telefono
+              {t("reservationModal.phoneLabel")}
             </label>
             <input
               type="tel"
@@ -195,7 +195,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               className={`w-full px-4 py-2 rounded-md border ${
                 errors.phone ? "border-destructive" : "border-input"
               } focus:outline-none focus:ring-2 focus:ring-ring`}
-              placeholder="+39 123 456 7890"
+              placeholder={t("reservationModal.phonePlaceholder")}
             />
             {errors.phone && <p className="mt-1 text-sm text-destructive">{errors.phone}</p>}
           </div>
@@ -204,7 +204,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
             {/* Campo Data */}
             <div>
               <label className="block text-sm font-body text-foreground mb-2">
-                Data
+                {t("reservationModal.dateLabel")}
               </label>
               <div className="relative">
                 <FiCalendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
@@ -225,7 +225,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
             {/* Campo Ora */}
             <div>
               <label className="block text-sm font-body text-foreground mb-2">
-                Ora
+                {t("reservationModal.timeLabel")}
               </label>
               <div className="relative">
                 <FiClock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
@@ -237,7 +237,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
                     errors.time ? "border-destructive" : "border-input"
                   } focus:outline-none focus:ring-2 focus:ring-ring appearance-none`}
                 >
-                  <option value="">Seleziona ora</option>
+                  <option value="">{t("reservationModal.timePlaceholder")}</option>
                   {availableTimeSlots.length > 0 ? (
                     availableTimeSlots.map((slot) => (
                       <option key={slot} value={slot}>
@@ -245,7 +245,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
                       </option>
                     ))
                   ) : (
-                    <option value="">Nessuna fascia disponibile</option>
+                    <option value="">{t("reservationModal.noTimeSlots")}</option>
                   )}
                 </select>
               </div>
@@ -256,7 +256,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
           {/* Numero di Persone */}
           <div>
             <label className="block text-sm font-body text-foreground mb-2">
-              Numero di Persone
+              {t("reservationModal.peopleLabel")}
             </label>
             <div className="relative">
               <FiUsers className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
@@ -268,7 +268,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                   <option key={num} value={num}>
-                    {num} {num === 1 ? "persona" : "persone"}
+                    {num} {num === 1 ? t("reservationModal.personSingular") : t("reservationModal.personPlural")}
                   </option>
                 ))}
               </select>
@@ -278,14 +278,14 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
           {/* Richieste Speciali */}
           <div>
             <label className="block text-sm font-body text-foreground mb-2">
-              Richieste Speciali
+              {t("reservationModal.specialRequestsLabel")}
             </label>
             <textarea
               name="specialRequests"
               value={formData.specialRequests}
               onChange={handleInputChange}
               className="w-full px-4 py-2 rounded-md border border-input focus:outline-none focus:ring-2 focus:ring-ring h-24"
-              placeholder="Eventuali richieste speciali..."
+              placeholder={t("reservationModal.specialRequestsPlaceholder")}
             />
           </div>
 
@@ -294,7 +294,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
             disabled={isSubmitting}
             className="w-full bg-primary text-primary-foreground py-2 rounded-md font-body hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isSubmitting ? "Prenotazione in corso..." : "Prenota Ora"}
+            {isSubmitting ? t("reservationModal.submitting") : t("reservationModal.submitButton")}
           </button>
         </form>
       </div>
@@ -308,27 +308,27 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
                 <FiCheck className="text-primary text-xl" />
               </div>
               <h2 className="text-lg sm:text-xl font-heading text-foreground mb-2">
-                Prenotazione Confermata!
+                {t("reservationModal.successTitle")}
               </h2>
               <p className="text-accent text-sm">
-                Grazie per aver scelto Pizzeria Fermento 2.0
+                {t("reservationModal.successMessage")}
               </p>
               <p className="text-accent text-sm">
-                Il tavolo rimarrà riservato per 15 minuti oltre l'orario di prenotazione
+                {t("reservationModal.holdTimeMessage")}
               </p>
             </div>
             <div className="space-y-2 mb-4">
               <p className="text-sm">
-                <strong>Nome:</strong> {formData.firstName} {formData.lastName}
+                <strong>{t("reservationModal.firstNameLabel")}:</strong> {formData.firstName} {formData.lastName}
               </p>
               <p className="text-sm">
-                <strong>Data:</strong> {formData.date}
+                <strong>{t("reservationModal.dateLabel")}:</strong> {formData.date}
               </p>
               <p className="text-sm">
-                <strong>Ora:</strong> {formData.time}
+                <strong>{t("reservationModal.timeLabel")}:</strong> {formData.time}
               </p>
               <p className="text-sm">
-                <strong>Persone:</strong> {formData.seats}
+                <strong>{t("reservationModal.peopleLabel")}:</strong> {formData.seats}
               </p>
             </div>
             <button
@@ -338,7 +338,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               }}
               className="w-full bg-primary text-primary-foreground py-2 rounded-md font-body hover:bg-primary/90 transition-colors"
             >
-              Chiudi
+              {t("reservationModal.closeButton")}
             </button>
           </div>
         </div>
@@ -353,20 +353,20 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
                 <FiAlertCircle className="text-destructive text-xl" />
               </div>
               <h2 className="text-lg sm:text-xl font-heading text-foreground mb-2">
-                Errore nella Prenotazione
+                {t("reservationModal.errorTitle")}
               </h2>
               <p className="text-destructive text-sm">
                 {errorMessage}
               </p>
               <p className="text-primary text-sm">
-                Contattaci telefonicamente: +39 331 872 7612
+                {t("reservationModal.contactInfo")}
               </p>
             </div>
             <button
               onClick={() => setShowError(false)}
               className="w-full bg-destructive text-white py-2 rounded-md font-body hover:bg-destructive/90 transition-colors"
             >
-              Chiudi
+              {t("reservationModal.closeButton")}
             </button>
           </div>
         </div>

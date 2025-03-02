@@ -1,629 +1,412 @@
-
-
-
-
-
-  const  menuItems = [
-    {
-      category: "Pizze Classiche",
-      items: [
-        {
-          name: "Margherita",
-          description: "Salsa di pomodoro siccagno, fior di latte, basilico fresco",
-          price: "€8",
-        
-          image:
-            "https://images.unsplash.com/photo-1574071318508-1cdbab80d002"
-        },
-        {
-          name: "Napoli",
-          description: "Pomodoro San Marzano, fior di latte, accciughe locali e origano",
-          price: "€9",
-       
-          image:
-            "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47"
-        },
-        {
-          name: "4 gusti",
-          description:
-            "Salsa di pomodoro siccagno, fior di latte, funghi, olive taggiasche DOP e prosciutto cotto Branchi di alta qualità",
-          price: "€11",
-    
-          image:
-            "https://images.unsplash.com/photo-1600273571173-a4a5c3c7ff21"
-        },
-        {
-          name: "Norma",
-          description:
-            "Pomodoro San Marzano, fior di latte, melenzane, ricotta salata e basilico",
-          price: "€10",
-       
-          image:
-            "https://images.unsplash.com/photo-1584642857260-26c0f14f8c0d"
-        },
-        {
-          name: "Sfincione bagherese",
-          description:
-            "Cipolla stufata, acciughe, ricotta fresca, primosale, caciocavallo, pangrattato, origano, olio Terraliva",
-          price: "€12",
-      
-          image:
-            "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-        },
-        {
-          name: "Sfincione palermitano",
-          description:
-            "Cipolla cotta con salsa di pomodoro Siccagno, caciocavallo, mollica e acciughe",
-          price: "€12",
-      
-          image:
-            "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-        },
-        {
-          name: "Diavola",
-          description:
-            "Salsa di pomodoro siccagno, fior di latte, spinnata piccante Levoni",
-          price: "€10",
-         
-          image:
-            "https://images.unsplash.com/photo-1594007650023-b2c514e8b5c8"
-        },
-        {
-          name: "Rustichella",
-          description:
-            "Fior di latte, salsiccia, patate e cipolla al forno, fonduta di grana padano",
-          price: "€12",
-      
-          image:
-            "https://images.unsplash.com/photo-1610129628831-2ae396bc4357"
-        },
-        {
-          name: "Tonno e cipolla ",
-          description:
-            "Fior di latte, cipolla cotta con salsa di pomodoro Siccagno, tranci di Tonno Callipo, origano",
-          price: "€12",
-       
-          image:
-            "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-        },
-        {
-            name: "Parma  ",
-            description:
-              "Prosciutto crudo 24 mesi l'Artemano Levoni, fior di latte datterino confit, basilico. Fuori forno: Bufala DOP",
-            price: "€14",
-         
-            image:
-              "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-          }
-          ,
-        {
-            name: "Barone  ",
-            description:
-              "Fior di latte, patate a vapore, prosciutto cotto Branchi alta qualità (fuori forno) , taleggio",
-            price: "€14",
-         
-            image:
-              "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-          }
-          ,
-        {
-            name: "Limograna",
-            description:
-              "Crema di grana, bresaola IGP della Valtellina Levoni, pesto di rucola e zeste di limone",
-            price: "€12",
-         
-            image:
-              "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-          }
-          ,
-        {
-            name: "5 formaggi ",
-            description:
-              "Fior di latte, gorgonzola, taleggio, caciocavallo e primosale",
-            price: "€12",
-         
-            image:
-              "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-          }
-          ,
-        {
-            name: "San marzano DOP",
-            description:
-              "Pomodoro San Marzano, bufala DOP e basilico",
-            price: "€12",
-         
-            image:
-              "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-          }
-          ,
-        {
-            name: "Branchi ",
-            description:
-              "Fior di latte, funghi, prosciutto cotto Branchi alta qualità (fuori forno), chips di grana padano, basilico, olio",
-            price: "€14",
-         
-            image:
-              "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-          }
-          ,
-        {
-            name: "Paesana",
-            description:
-              "Fior di latte, carciofi sotto'olio, salsiccia secca locale, pangrattato aromatizzato all'acciuga e caciocavallo",
-            price: "€12",
-         
-            image:
-              "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-          }
-          ,
-        {
-            name: "Bosco e sottobosco",
-            description:
-              "Fior di latte, funghi cardoncelli saltati con aglio, gorgonzola, rucola, capocollo e datterino confit",
-            price: "€15",
-         
-            image:
-              "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-          }
-          ,
-        {
-            name: "Brontese",
-            description:
-              "Pesto di pistacchio, fior di latte, datterino confit, prosciutto crudo 24 mesi l'Artemano Levoni, stracciatella, basilico, olio",
-            price: "€16,50",
-         
-            image:
-              "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95"
-          }
-      ]
-    },
-    {
-      category: "Pizze Speciali",
-      items: [
-        {
-          name: "Broccolo e Salsiccia",
-          description:
-            "Crema di broccolo, fior di latte, broccolo saltato, salsiccia semi stagionata, pangrattato e pomodoro secco",
-          price: "€13",
-      
-          image:
-            "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-        },
-        {
-            name: "Zucca e Provola",
-            description:
-              "Doppia consistenza di zucca (crema e marinata), mozzarella affumicata, capocollo e senape",
-            price: "€14",
-        
-            image:
-              "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-          }
-          ,
-        {
-            name: "Patate e Porchetta",
-            description:
-              "Crema di patate arrosto, mozzarella affumicata, porchetta Venditti, salsa verde e cipolla rossa marinata",
-            price: "€15",
-        
-            image:
-              "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-          }
-          ,
-          {
-              name: "Trentina",
-              description:
-                "Fior di latte , speck l'Artemano Levoni, carciofo arrosto, miele, semi di papavero",
-              price: "€14",
-          
-              image:
-                "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-            }
-            ,
-            {
-                name: "Saporita",
-                description:
-                  "Mozzarella affumicata campana, fungo cardoncello saltati con aglio, pangrattato all'aglio, prezzemolo",
-                price: "€12",
-            
-                image:
-                  "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-              }
-              ,
-              {
-                  name: "Mortazza",
-                  description:
-                    "Fior di latte, mortadella l'Artemano Levoni, pesto di pistacchio. Fuori forno: Bufala DOP",
-                  price: "€14",
-              
-                  image:
-                    "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                }
-                ,
-                {
-                    name: "Nebrodi e madonie",
-                    description:
-                      "Fior di latte, prosciutto crudo 24 mesi l'Artemano Levoni, caprino, miele, nocciole siciliane",
-                    price: "€16,50",
-                
-                    image:
-                      "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                  }
-                  ,
-                  {
-                      name: "Margherita 2.0",
-                      description:
-                        "Bufala DOP, datterino confit e basilico",
-                      price: "€12",
-                  
-                      image:
-                        "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                    }
-                    ,
-                    {
-                        name: "Marinara 2.0",
-                        description:
-                          "Salsa di pomodoro San Marzano, filetto di tonno (Linea TOP Selezione Delfino), olive nere marmellata di cipolla, capperi e origano",
-                        price: "€12",
-                    
-                        image:
-                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                      }
-                      ,
-                      {
-                          name: "Norma 2.0",
-                          description:
-                            "Crema di melenzane, fior di latte, chips di melenzane, datterino semi dry, fonduta di grana padano, basilico fritto",
-                          price: "€12",
-                      
-                          image:
-                            "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                        }
-      ]
-    }
-    ,
-    {
-        category: "Vegetariane",
-        items: [
-            {
-                name: "Vegetariana 2.0",
-                description:
-                  "Fior di latte, crema di melenzana, zucchina fritta, peperoni arrosto sott'olio, pomodorino arrosto",
-                price: "€12",
-            
-                image:
-                  "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-              },
-              {
-                name: "Broccolina",
-                description:
-                  "Crema di broccolo, fior di latte, broccolo saltato,  pangrattato e pomodoro secco",
-                price: "€10",
-            
-                image:
-                  "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-              },
-              {
-                name: "Zucca 2.0",
-                description:
-                  "Doppia consistenza di zucca (crema e marinata), mozzarella affumicata, senape",
-                price: "€10",
-            
-                image:
-                  "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-              },
-        ]
-        }
-        ,
-        {
-            category: "Pizze fritte",
-            items: [
-                {
-                    name: "Must",
-                    description:
-                      "Ricotta fresca, fior di latte, mortadella l'Artemano Levoni",
-                    price: "€12",
-                
-                    image:
-                      "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                  },
-                  {
-                    name: "Storia",
-                    description:
-                      "Pomodoro San Marzano e fior di latte",
-                    price: "€10",
-                
-                    image:
-                      "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                  },
-                  
-            ]
-            }
-            ,
-            {
-                category: "Pizze 180 Grammi",
-                items: [
-                    {
-                        name: "Arrita",
-                        description:
-                          "Salsa di pomodoro siccagno, fior di latte e basilico fresco",
-                        price: "€8",
-                    
-                        image:
-                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                      },
-                      {
-                        name: "Nara Mari",
-                        description:
-                          "Salsa di pomodoro siccagno, aglio, origano",
-                        price: "€10",
-                    
-                        image:
-                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                      },
-                      {
-                        name: "Langus",
-                        description:
-                          "Salsa di pomodoro siccagno, fior di latte, black angus",
-                        price: "€13",
-                    
-                        image:
-                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                      },
-                      {
-                        name: "Sal",
-                        description:
-                          "Salsa di pomodoro siccagno, fior di latte, salame dolce",
-                        price: "€10",
-                    
-                        image:
-                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                      },
-                      
-                      
-                ]
-                }
-                ,
-                {
-                    category: "Pizze al Padellino",
-                    items: [
-                        {
-                            name: "Woow",
-                            description:
-                              "Prosciutto crudo 24 mesi l'Artemano Levoni, stracciatella e datterino confit",
-                            price: "€14",
-                        
-                            image:
-                              "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                          },
-                          {
-                            name: "2.0",
-                            description:
-                              "Crema di melenzane fritte, pomodorino arrosto, fonduta di grana padano",
-                            price: "€14",
-                        
-                            image:
-                              "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                          },
-                          {
-                            name: "Romanaccia",
-                            description:
-                              "Salsa di pomodoro siccagno, fior di latte, prosciutto cotto Bracchi alta qualità, scaglie di grana",
-                            price: "€14",
-                        
-                            image:
-                              "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                          },   
-                          
-                    ]
-                    }
-                    ,
-                    {
-                        category: "Padellino Farcito",
-                        items: [
-                            {
-                                name: "Cunsatu",
-                                description:
-                                  "Acciughe, caciocavallo, pomodoro secco, marmellada di copolle, olio e origano",
-                                price: "€12",
-                            
-                                image:
-                                  "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                              },
-                              {
-                                name: "Mamma mia!",
-                                description:
-                                  "Crema di patate arrosto, porchetta Venditti, salsa verde e cipolla marinata",
-                                price: "€15",
-                            
-                                image:
-                                  "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                              },
-                              {
-                                name: "Labella",
-                                description:
-                                  "Mortadella l'Artemano Levoni, pesto di pistacchio, stracciatella",
-                                price: "€14",
-                            
-                                image:
-                                  "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                              },   
-                              
-                        ]
-                        }
-                        ,
-                        {
-                            category: "Pizze Doppia Cottura",
-                            items: [
-                                {
-                                    name: "Napoli 2.0",
-                                    description:
-                                      "Pomodoro San Marzano, stracciatella, acciughe e polvere di olive nere",
-                                    price: "€12",
-                                
-                                    image:
-                                      "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                  },
-                                  {
-                                    name: "Bufala DOP",
-                                    description:
-                                      "Salsa di pomodoro siccagno, pomodorino confit e pesto di basilico. Fuori forno : bufala DOP",
-                                    price: "€12",
-                                
-                                    image:
-                                      "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                  },
-                                  {
-                                    name: "Confit",
-                                    description:
-                                      "Prosciutto crudo 24 mesi l'Artemano Levoni, datterino confit, stracciatella",
-                                    price: "€14",
-                                
-                                    image:
-                                      "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                  },   
-                                  
-                            ]
-                            }
-                            ,
-                            {
-                                category: "Antipasti",
-                                items: [
-                                    {
-                                        name: "Patatine fritte",
-                                        description:
-                                          "Patatine fritte",
-                                        price: "€5",
-                                    
-                                        image:
-                                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                      },
-                                      {
-                                        name: "Antipasto caldo",
-                                        description:
-                                          "Patatine, panelle e crocchette",
-                                        price: "€8",
-                                    
-                                        image:
-                                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                      },
-                                      {
-                                        name: "Crocchetta",
-                                        description:
-                                          "crocchetta di patate con scamorza affumicata",
-                                        price: "€3",
-                                    
-                                        image:
-                                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                      },   
-                                      {
-                                        name: "Burdella",
-                                        description:
-                                          "Pasta fritta ripiena di burrata, mortadella l'Artemano Levoni e pesto di pistacchio",
-                                        price: "€3,50",
-                                    
-                                        image:
-                                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                      }, 
-                                      {
-                                        name: "Napulè",
-                                        description:
-                                          "Pasta fritta ripena di salsa di pomodoro siccagno, bufala e acciughe",
-                                        price: "€3,50",
-                                    
-                                        image:
-                                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                      },     
-                                      {
-                                        name: "Formaggio fritto",
-                                        description:
-                                          "primo sale servito con maionese aromatizzata 4 pezzi",
-                                        price: "€7",
-                                    
-                                        image:
-                                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                      },   
-                                      {
-                                        name: "Montanarine della tradizione ",
-                                        description:
-                                          "Salsa di pomodoro siccagno, Grana padano, basilico ,2 pezzi",
-                                        price: "€5",
-                                    
-                                        image:
-                                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                      },   
-                                      {
-                                        name: "Montanarine in fermento 2 pezzi",
-                                        description:
-                                          "1) Mortadella l'Artemano Levoni, pesto di pistacchio e stracciatella. 2) Bresaola IGP della Valtellina Levoni, Grana Padano e pesto di rucola",
-                                        price: "€6",
-                                    
-                                        image:
-                                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                      },  
-                                      {
-                                        name: "Montanarine nobili 2 pezzi",
-                                        description:
-                                          "1) Prosciuttoi crudo 24 mesi l'Artemano Levoni, stracciatella e pomodorino confit , 2) Stracciatella e Carpaccio di Black Angus affumicato",
-                                        price: "€7,50",
-                                    
-                                        image:
-                                          "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                      },    
-                                ]
-                                }
-                                ,
-                                {
-                                    category: "Bevande",
-                                    items: [
-                                        {
-                                            name: "Acuqa Panna / San Pellegrino",
-                                            description:
-                                              "Naturale / Frizzante 75CL",
-                                            price: "€3",
-                                        
-                                            image:
-                                              "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                          },
-                                          {
-                                            name: "Coca cola, coca cola zero",
-                                            description:
-                                              "",
-                                            price: "€3",
-                                        
-                                            image:
-                                              "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                          },
-                                          {
-                                            name: "Chinotto, Aranciata, Gazzosa",
-                                            description:
-                                              "",
-                                            price: "€3",
-                                        
-                                            image:
-                                              "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                          },   
-                                          {
-                                            name: "Schweppes",
-                                            description:
-                                              "Tonica / Lemon",
-                                            price: "€2",
-                                        
-                                            image:
-                                              "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                          }, 
-                                          {
-                                            name: "Te",
-                                            description:
-                                              "Pesca / Limone",
-                                            price: "€2,50",
-                                        
-                                            image:
-                                              "https://images.unsplash.com/photo-1513104890138-7c749659a591"
-                                          },     
-                                          
-                                    ]
-                                    }
-                                
-    ];
-
-  export default menuItems;
+export const menuItems = [
+  {
+    category: "Pizze Classiche",
+    items: [
+      {
+        name: "menu.items.pizzeClassiche.margherita.name",
+        description: "menu.items.pizzeClassiche.margherita.description",
+        price: "€8",
+        image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002",
+      },
+      {
+        name: "menu.items.pizzeClassiche.napoli.name",
+        description: "menu.items.pizzeClassiche.napoli.description",
+        price: "€9",
+        image: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47",
+      },
+      {
+        name: "menu.items.pizzeClassiche.4 gusti.name",
+        description: "menu.items.pizzeClassiche.4 gusti.description",
+        price: "€11",
+        image: "https://images.unsplash.com/photo-1600273571173-a4a5c3c7ff21",
+      },
+      {
+        name: "menu.items.pizzeClassiche.norma.name",
+        description: "menu.items.pizzeClassiche.norma.description",
+        price: "€10",
+        image: "https://images.unsplash.com/photo-1584642857260-26c0f14f8c0d",
+      },
+      {
+        name: "menu.items.pizzeClassiche.Sfincione bagherese.name",
+        description: "menu.items.pizzeClassiche.Sfincione bagherese.description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeClassiche.Sfincione palermitano.name",
+        description: "menu.items.pizzeClassiche.Sfincione palermitano.description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeClassiche.diavola.name",
+        description: "menu.items.pizzeClassiche.diavola.description",
+        price: "€10",
+        image: "https://images.unsplash.com/photo-1594007650023-b2c514e8b5c8",
+      },
+      {
+        name: "menu.items.pizzeClassiche.rustichella.name",
+        description: "menu.items.pizzeClassiche.rustichella.description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1610129628831-2ae396bc4357",
+      },
+      {
+        name: "menu.items.pizzeClassiche.Tonno e cipolla.name",
+        description: "menu.items.pizzeClassiche.Tonno e cipolla.description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95",
+      },
+      {
+        name: "menu.items.pizzeClassiche.Parma.name",
+        description: "menu.items.pizzeClassiche.Parma.description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95",
+      },
+      {
+        name: "menu.items.pizzeClassiche.Barone.name",
+        description: "menu.items.pizzeClassiche.Barone.description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95",
+      },
+      {
+        name: "menu.items.pizzeClassiche.Limograna.name",
+        description: "menu.items.pizzeClassiche.Limograna.description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95",
+      },
+      {
+        name: "menu.items.pizzeClassiche['5 formaggi'].name",
+        description: "menu.items.pizzeClassiche['5 formaggi'].description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95",
+      },
+      {
+        name: "menu.items.pizzeClassiche['San marzano DOP'].name",
+        description: "menu.items.pizzeClassiche['San marzano DOP'].description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95",
+      },
+      {
+        name: "menu.items.pizzeClassiche.Branchi.name",
+        description: "menu.items.pizzeClassiche.Branchi.description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95",
+      },
+      {
+        name: "menu.items.pizzeClassiche.Paesana.name",
+        description: "menu.items.pizzeClassiche.Paesana.description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95",
+      },
+      {
+        name: "menu.items.pizzeClassiche.Bosco e sottobosco.name",
+        description: "menu.items.pizzeClassiche.Bosco e sottobosco.description",
+        price: "€15",
+        image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95",
+      },
+      {
+        name: "menu.items.pizzeClassiche.Brontese.name",
+        description: "menu.items.pizzeClassiche.Brontese.description",
+        price: "€16,50",
+        image: "https://images.unsplash.com/photo-1552332386-f8dd00dc2f95",
+      },
+    ],
+  },
+  {
+    category: "Pizze Speciali",
+    items: [
+      {
+        name: "menu.items.pizzeSpeciali['Broccolo e Salsiccia'].name",
+        description: "menu.items.pizzeSpeciali['Broccolo e Salsiccia'].description",
+        price: "€13",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeSpeciali['Zucca e Provola'].name",
+        description: "menu.items.pizzeSpeciali['Zucca e Provola'].description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeSpeciali['Patate e Porchetta'].name",
+        description: "menu.items.pizzeSpeciali['Patate e Porchetta'].description",
+        price: "€15",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeSpeciali.Trentina.name",
+        description: "menu.items.pizzeSpeciali.Trentina.description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeSpeciali.Saporita.name",
+        description: "menu.items.pizzeSpeciali.Saporita.description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeSpeciali.Mortazza.name",
+        description: "menu.items.pizzeSpeciali.Mortazza.description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeSpeciali['Nebrodi e madonie'].name",
+        description: "menu.items.pizzeSpeciali['Nebrodi e madonie'].description",
+        price: "€16,50",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeSpeciali['Margherita 2.0'].name",
+        description: "menu.items.pizzeSpeciali['Margherita 2.0'].description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeSpeciali['Marinara 2.0'].name",
+        description: "menu.items.pizzeSpeciali['Marinara 2.0'].description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.pizzeSpeciali['Norma 2.0'].name",
+        description: "menu.items.pizzeSpeciali['Norma 2.0'].description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+    ],
+  },
+  {
+    category: "Vegetariane",
+    items: [
+      {
+        name: "menu.items.vegetariane['Vegetariana 2.0'].name",
+        description: "menu.items.vegetariane['Vegetariana 2.0'].description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.vegetariane.Broccolina.name",
+        description: "menu.items.vegetariane.Broccolina.description",
+        price: "€10",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.vegetariane['Zucca 2.0'].name",
+        description: "menu.items.vegetariane['Zucca 2.0'].description",
+        price: "€10",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+    ],
+  },
+  {
+    category: "Pizze fritte",
+    items: [
+      {
+        name: "menu.items['Pizze fritte'].Must.name",
+        description: "menu.items['Pizze fritte'].Must.description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items['Pizze fritte'].Storia.name",
+        description: "menu.items['Pizze fritte'].Storia.description",
+        price: "€10",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+    ],
+  },
+  {
+    category: "Pizze 180 Grammi",
+    items: [
+      {
+        name: "menu.items['Pizze 180 Grammi'].Arrita.name",
+        description: "menu.items['Pizze 180 Grammi'].Arrita.description",
+        price: "€8",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items['Pizze 180 Grammi'].NaraMari.name",
+        description: "menu.items['Pizze 180 Grammi'].NaraMari.description",
+        price: "€10",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items['Pizze 180 Grammi'].Langus.name",
+        description: "menu.items['Pizze 180 Grammi'].Langus.description",
+        price: "€13",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items['Pizze 180 Grammi'].Sal.name",
+        description: "menu.items['Pizze 180 Grammi'].Sal.description",
+        price: "€10",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+    ],
+  },
+  {
+    category: "Pizze al Padellino",
+    items: [
+      {
+        name: "menu.items['Pizze al Padellino'].Woow.name",
+        description: "menu.items['Pizze al Padellino'].Woow.description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items['Pizze al Padellino'].['2.0'].name",
+        description: "menu.items['Pizze al Padellino'].['2.0'].description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items['Pizze al Padellino'].Romanaccia.name",
+        description: "menu.items['Pizze al Padellino'].Romanaccia.description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+    ],
+  },
+  {
+    category: "Padellino Farcito",
+    items: [
+      {
+        name: "menu.items['Padellino Farcito'].Cunsatu.name",
+        description: "menu.items['Padellino Farcito'].Cunsatu.description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items['Padellino Farcito'].['Mamma mia!'].name",
+        description: "menu.items['Padellino Farcito'].['Mamma mia!'].description",
+        price: "€15",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items['Padellino Farcito'].Labella.name",
+        description: "menu.items['Padellino Farcito'].Labella.description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+    ],
+  },
+  {
+    category: "Pizze Doppia Cottura",
+    items: [
+      {
+        name: "menu.items['Pizze Doppia Cottura'].Napoli2.name",
+        description: "menu.items['Pizze Doppia Cottura'].Napoli2.description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items['Pizze Doppia Cottura']['Bufala DOP'].name",
+        description: "menu.items['Pizze Doppia Cottura']['Bufala DOP'].description",
+        price: "€12",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items['Pizze Doppia Cottura'].Confit.name",
+        description: "menu.items['Pizze Doppia Cottura'].Confit.description",
+        price: "€14",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+    ],
+  },
+  {
+    category: "Antipasti",
+    items: [
+      {
+        name: "menu.items.antipasti['Patatine fritte'].name",
+        description: "menu.items.antipasti['Patatine fritte'].description",
+        price: "€5",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.antipasti['Antipasto caldo'].name",
+        description: "menu.items.antipasti['Antipasto caldo'].description",
+        price: "€8",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.antipasti.Crocchetta.name",
+        description: "menu.items.antipasti.Crocchetta.description",
+        price: "€3",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.antipasti.Burdella.name",
+        description: "menu.items.antipasti.Burdella.description",
+        price: "€3,50",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.antipasti.Napulè.name",
+        description: "menu.items.antipasti.Napulè.description",
+        price: "€3,50",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.antipasti['Formaggio fritto'].name",
+        description: "menu.items.antipasti['Formaggio fritto'].description",
+        price: "€7",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.antipasti['Montanarine della tradizione'].name",
+        description: "menu.items.antipasti['Montanarine della tradizione'].description",
+        price: "€5",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.antipasti['Montanarine in fermento 2 pezzi'].name",
+        description: "menu.items.antipasti['Montanarine in fermento 2 pezzi'].description",
+        price: "€6",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.antipasti['Montanarine nobili 2 pezzi'].name",
+        description: "menu.items.antipasti['Montanarine nobili 2 pezzi'].description",
+        price: "€7,50",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+    ],
+  },
+  {
+    category: "Bevande",
+    items: [
+      {
+        name: "menu.items.bevande['Acuqa Panna / San Pellegrino'].name",
+        description: "menu.items.bevande['Acuqa Panna / San Pellegrino'].description",
+        price: "€3",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.bevande['Coca cola, coca cola zero'].name",
+        description: "menu.items.bevande['Coca cola, coca cola zero'].description",
+        price: "€3",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.bevande['Chinotto, Aranciata, Gazzosa'].name",
+        description: "menu.items.bevande['Chinotto, Aranciata, Gazzosa'].description",
+        price: "€3",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.bevande.Schweppes.name",
+        description: "menu.items.bevande.Schweppes.description",
+        price: "€2",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+      {
+        name: "menu.items.bevande.Te.name",
+        description: "menu.items.bevande.Te.description",
+        price: "€2,50",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591",
+      },
+    ],
+  },
+];
