@@ -8,6 +8,7 @@ interface FormData {
   firstName: string;
   lastName: string;
   phone: string;
+  email: string;
   date: string;
   time: string;
   seats: number;
@@ -26,6 +27,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
     firstName: "",
     lastName: "",
     phone: "",
+    email: "",
     date: "",
     time: "",
     seats: 1,
@@ -76,6 +78,11 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
     if (!formData.phone.trim()) {
       newErrors.phone = t("reservationModal.error.phoneRequired");
     }
+    if (!formData.email.trim()) {
+      newErrors.email = t("reservationModal.error.emailRequired");
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())) {
+      newErrors.email = t("reservationModal.error.emailInvalid");
+    }
     if (!formData.date) {
       newErrors.date = t("reservationModal.error.dateRequired");
     }
@@ -95,10 +102,12 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
         const reservation = {
           fullName,
           phone: formData.phone,
+          email: formData.email,
           date: formData.date,
           time: formData.time,
           seats: formData.seats,
-          specialRequests: formData.specialRequests
+          specialRequests: formData.specialRequests,
+          status: 'pending' as const
         };
         await addReservation(reservation);
         setShowSuccess(true);
@@ -198,6 +207,24 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               placeholder={t("reservationModal.phonePlaceholder")}
             />
             {errors.phone && <p className="mt-1 text-sm text-destructive">{errors.phone}</p>}
+          </div>
+
+          {/* Campo Email */}
+          <div>
+            <label className="block text-sm font-body text-foreground mb-2">
+              {t("reservationModal.emailLabel")}
+            </label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleInputChange}
+              className={`w-full px-4 py-2 rounded-md border ${
+                errors.email ? "border-destructive" : "border-input"
+              } focus:outline-none focus:ring-2 focus:ring-ring`}
+              placeholder={t("reservationModal.emailPlaceholder")}
+            />
+            {errors.email && <p className="mt-1 text-sm text-destructive">{errors.email}</p>}
           </div>
 
           <div className="grid grid-cols-2 gap-4">

@@ -1,5 +1,6 @@
 import { database } from '../firebase-config';
 
+
 export interface Reservation {
   id?: string;
   fullName: string;
@@ -8,6 +9,8 @@ export interface Reservation {
   time: string;   // formato "HH:mm" (es. "19:00", "19:30", ecc.)
   seats: number;
   specialRequests?: string;
+  status: 'pending' | 'accepted' | 'rejected';  // nuovo campo per lo stato
+  email: string;  // nuovo campo per l'email
 }
 
 export interface Shift {
@@ -93,9 +96,9 @@ export const addReservation = async (reservation: Reservation): Promise<string |
       throw new Error('Turno al completo');
     }
 
-    // Aggiunge la prenotazione
+    // Aggiunge la prenotazione con stato pending di default
     const newReservationRef = reservationsRef.push();
-    await newReservationRef.set(reservation);
+    await newReservationRef.set({ ...reservation, status: 'pending' });
     return newReservationRef.key;
   } catch (error) {
     console.error('Errore durante l\'aggiunta della prenotazione: ', error);
@@ -146,6 +149,32 @@ export const deleteReservation = async (key: string): Promise<void> => {
     await reservationRef.remove();
   } catch (error) {
     console.error('Errore durante l\'eliminazione della prenotazione: ', error);
+    throw error;
+  }
+};
+
+/**
+ * Accetta una prenotazione e invia email di conferma
+ */
+export const acceptReservation = async (key: string, reservation: Reservation): Promise<void> => {
+  try {
+    const reservationRef = database.ref(`reservations/${key}`);
+    await reservationRef.update({ ...reservation, status: 'accepted' });
+  } catch (error) {
+    console.error('Errore durante l\'accettazione della prenotazione: ', error);
+    throw error;
+  }
+};
+
+/**
+ * Rifiuta una prenotazione
+ */
+export const rejectReservation = async (key: string, reservation: Reservation): Promise<void> => {
+  try {
+    const reservationRef = database.ref(`reservations/${key}`);
+    await reservationRef.update({ ...reservation, status: 'rejected' });
+  } catch (error) {
+    console.error('Errore durante il rifiuto della prenotazione: ', error);
     throw error;
   }
 };

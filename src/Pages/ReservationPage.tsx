@@ -1,9 +1,10 @@
 // src/pages/ReservationPage.tsx
 import React, { useState, useCallback, useEffect, ChangeEvent } from "react";
-import { FiEdit2, FiTrash2, FiCalendar, FiClock, FiUsers } from "react-icons/fi";
+import { FiEdit2, FiTrash2, FiCalendar, FiClock, FiUsers, FiCheck, FiX } from "react-icons/fi";
 import { format } from "date-fns";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import emailjs from '@emailjs/browser';
 import {
   Reservation,
   Shift,
@@ -13,7 +14,9 @@ import {
   getShiftsForDate,
   updateShift,
   initializeShiftsForDate,
-  allTimes
+  allTimes,
+  acceptReservation,
+  rejectReservation
 } from "../services/Reservation";
 import ReservationModalEdit from "../components/ReservationModalEdit";
 
@@ -116,6 +119,60 @@ const ReservationPage: React.FC = () => {
     }
   };
 
+  const handleAccept = useCallback(async (reservation: Reservation) => {
+    try {
+      await acceptReservation(reservation.id!, reservation);
+      
+      // Invia email di conferma
+      const templateParams = {
+        to_name: reservation.fullName,
+        to_email: reservation.email,
+        reservation_date: format(new Date(reservation.date), "dd/MM/yyyy"),
+        reservation_time: reservation.time,
+        seats: reservation.seats
+      };
+
+      await emailjs.send(
+        'service_jlzz6px',
+        'template_5ltxf0t',
+        templateParams,
+        'iIz1ynV6Pc7STPfuf'
+      );
+
+      toast.success("Prenotazione accettata e email di conferma inviata");
+    } catch (error) {
+      toast.error("Errore nell'accettazione della prenotazione");
+      console.error(error);
+    }
+  }, []);
+
+  const handleReject = useCallback(async (reservation: Reservation) => {
+    try {
+      await rejectReservation(reservation.id!, reservation);
+      
+      // Invia email di rifiuto
+      const templateParams = {
+        to_name: reservation.fullName,
+        to_email: reservation.email,
+        reservation_date: format(new Date(reservation.date), "dd/MM/yyyy"),
+        reservation_time: reservation.time,
+        seats: reservation.seats
+      };
+
+      await emailjs.send(
+        'service_jlzz6px',
+        'template_3cehio9',
+        templateParams,
+        'iIz1ynV6Pc7STPfuf'
+      );
+
+      toast.success("Prenotazione rifiutata e email di notifica inviata");
+    } catch (error) {
+      toast.error("Errore nel rifiuto della prenotazione");
+      console.error(error);
+    }
+  }, []);
+
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
@@ -192,17 +249,47 @@ const ReservationPage: React.FC = () => {
                       {reservation.fullName}
                     </h3>
                     <p className="text-gray-600">{reservation.phone}</p>
+                    <p className="text-gray-600">{reservation.email}</p>
+                    <span className={`inline-block px-2 py-1 rounded-full text-sm ${
+                      reservation.status === 'accepted' ? 'bg-green-100 text-green-800' :
+                      reservation.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                      'bg-yellow-100 text-yellow-800'
+                    }`}>
+                      {reservation.status === 'accepted' ? 'Accettata' :
+                       reservation.status === 'rejected' ? 'Rifiutata' :
+                       'In attesa'}
+                    </span>
                   </div>
                   <div className="flex space-x-2">
+                    {(!reservation.status || reservation.status === 'pending') && (
+                      <>
+                        <button
+                          onClick={() => handleAccept(reservation)}
+                          className="p-2 text-green-600 hover:bg-green-600 hover:text-white rounded-full transition-all duration-200"
+                          title="Accetta prenotazione"
+                        >
+                          <FiCheck className="w-5 h-5" />
+                        </button>
+                        <button
+                          onClick={() => handleReject(reservation)}
+                          className="p-2 text-red-600 hover:bg-red-600 hover:text-white rounded-full transition-all duration-200"
+                          title="Rifiuta prenotazione"
+                        >
+                          <FiX className="w-5 h-5" />
+                        </button>
+                      </>
+                    )}
                     <button
                       onClick={() => handleEdit(reservation)}
                       className="p-2 text-blue-600 hover:bg-blue-600 hover:text-white rounded-full transition-all duration-200"
+                      title="Modifica prenotazione"
                     >
                       <FiEdit2 className="w-5 h-5" />
                     </button>
                     <button
                       onClick={() => handleDelete(reservation)}
                       className="p-2 text-red-600 hover:bg-red-600 hover:text-white rounded-full transition-all duration-200"
+                      title="Elimina prenotazione"
                     >
                       <FiTrash2 className="w-5 h-5" />
                     </button>

@@ -100,6 +100,10 @@ const resources = {
       "reservationModal.holdTimeMessage": "Your table will be held for 15 minutes after the booking time",
       "reservationModal.closeButton": "Close",
       "reservationModal.contactInfo": "Contact us by phone: +39 331 872 7612",
+      "reservationModal.emailLabel": "Email",
+      "reservationModal.emailPlaceholder": "Enter your email",
+      "reservationModal.error.emailRequired": "Email is required",
+      "reservationModal.error.emailInvalid": "Please enter a valid email",
 
       // Menu translations (Categories)
       "menu.categories.antipasti": "Appetizers",
@@ -352,6 +356,10 @@ const resources = {
       "reservationModal.holdTimeMessage": "Il tavolo rimarrà riservato per 15 minuti oltre l'orario di prenotazione",
       "reservationModal.closeButton": "Chiudi",
       "reservationModal.contactInfo": "Contattaci telefonicamente: +39 331 872 7612",
+      "reservationModal.emailLabel": "Email",
+      "reservationModal.emailPlaceholder": "Inserisci la tua email",
+      "reservationModal.error.emailRequired": "L'email è obbligatoria",
+      "reservationModal.error.emailInvalid": "Inserisci un'email valida",
 
       // Menu translations (Categorie)
       "menu.categories.antipasti": "Antipasti",
@@ -679,51 +687,51 @@ const resources = {
       
       // Menu Items - Vegetariane
       "menu.items.vegetariane['Vegetariana 2.0'].name": "Vegetariana 2.0",
-      "menu.items.vegetariane['Vegetariana 2.0'].description": "Fior di latte, crema di melanzana, zucchina fritta, peperoni arrosto sott'olio, pomodorino arrosto",
+      "menu.items.vegetariane['Vegetariana 2.0'].description": "Mozzarella, eggplant cream, fried zucchini, oil-cured roasted peppers, and roasted cherry tomatoes",
       "menu.items.vegetariane.Broccolina.name": "Broccolina",
-      "menu.items.vegetariane.Broccolina.description": "Crema di broccolo, fior di latte, broccolo saltato, pangrattato e pomodoro secco",
+      "menu.items.vegetariane.Broccolina.description": "Broccoli cream, mozzarella, sautéed broccoli, breadcrumbs and sun-dried tomato",
       "menu.items.vegetariane['Zucca 2.0'].name": "Zucca 2.0",
-      "menu.items.vegetariane['Zucca 2.0'].description": "Doppia consistenza di zucca (crema e marinata), mozzarella affumicata, senape",
+      "menu.items.vegetariane['Zucca 2.0'].description": "Double-textured pumpkin (cream and marinated), smoked mozzarella, mustard",
       
       // Menu Items - Pizze fritte
       "menu.items['Pizze fritte'].Must.name": "Must",
-      "menu.items['Pizze fritte'].Must.description": "Ricotta fresca, fior di latte, mortadella",
+      "menu.items['Pizze fritte'].Must.description": "Fresh ricotta, mozzarella, 24-month cured mortadella l'Artemano Levoni",
       "menu.items['Pizze fritte'].Storia.name": "Storia",
-      "menu.items['Pizze fritte'].Storia.description": "Pomodoro San Marzano e fior di latte",
+      "menu.items['Pizze fritte'].Storia.description": "San Marzano tomato and mozzarella",
       
       // Menu Items - Pizze 180 Grammi
       "menu.items['Pizze 180 Grammi'].Arrita.name": "Arrita",
-      "menu.items['Pizze 180 Grammi'].Arrita.description": "Salsa di pomodoro siccagno, fior di latte e basilico fresco",
+      "menu.items['Pizze 180 Grammi'].Arrita.description": "Sicilian tomato sauce, mozzarella and fresh basil",
       "menu.items['Pizze 180 Grammi'].NaraMari.name": "Nara Mari",
-      "menu.items['Pizze 180 Grammi'].NaraMari.description": "Salsa di pomodoro siccagno, aglio, origano",
+      "menu.items['Pizze 180 Grammi'].NaraMari.description": "Sicilian tomato sauce, garlic and oregano",
       "menu.items['Pizze 180 Grammi'].Langus.name": "Langus",
-      "menu.items['Pizze 180 Grammi'].Langus.description": "Salsa di pomodoro siccagno, fior di latte, Black Angus",
+      "menu.items['Pizze 180 Grammi'].Langus.description": "Sicilian tomato sauce, mozzarella and Black Angus",
       "menu.items['Pizze 180 Grammi'].Sal.name": "Sal",
-      "menu.items['Pizze 180 Grammi'].Sal.description": "Salsa di pomodoro siccagno, fior di latte, salame dolce",
+      "menu.items['Pizze 180 Grammi'].Sal.description": "Sicilian tomato sauce, mozzarella and sweet salami",
       
       // Menu Items - Pizze al Padellino
       "menu.items['Pizze al Padellino'].Woow.name": "Woow",
-      "menu.items['Pizze al Padellino'].Woow.description": "Prosciutto crudo 24 mesi, stracciatella e 'datterino' confit",
+      "menu.items['Pizze al Padellino'].Woow.description": "24-month cured prosciutto l'Artemano Levoni, stracciatella and 'datterino' confit",
       "menu.items['Pizze al Padellino'].['2.0'].name": "2.0",
-      "menu.items['Pizze al Padellino'].['2.0'].description": "Crema di melanzane fritte, pomodorino arrosto, fonduta di grana padano",
+      "menu.items['Pizze al Padellino'].['2.0'].description": "Fried eggplant cream, roasted cherry tomatoes, Grana Padano fondue",
       "menu.items['Pizze al Padellino'].Romanaccia.name": "Romanaccia",
-      "menu.items['Pizze al Padellino'].Romanaccia.description": "Salsa di pomodoro siccagno, fior di latte, prosciutto cotto di alta qualità, scaglie di grana",
+      "menu.items['Pizze al Padellino'].Romanaccia.description": "Sicilian tomato sauce, mozzarella, high-quality cooked Branchi ham and Grana shavings",
       
       // Menu Items - Padellino Farcito
       "menu.items['Padellino Farcito'].Cunsatu.name": "Cunsatu",
-      "menu.items['Padellino Farcito'].Cunsatu.description": "Acciughe, caciocavallo, pomodoro secco, marmellata di copolle, olio e origano",
+      "menu.items['Padellino Farcito'].Cunsatu.description": "Anchovies, caciocavallo, sun-dried tomato, caper marmalade, oil and oregano",
       "menu.items['Padellino Farcito'].['Mamma mia!'].name": "Mamma mia!",
-      "menu.items['Padellino Farcito'].['Mamma mia!'].description": "Crema di patate arrosto, porchetta, salsa verde e cipolla marinata",
+      "menu.items['Padellino Farcito'].['Mamma mia!'].description": "Roasted potato cream, Venditti porchetta, green sauce and marinated onion",
       "menu.items['Padellino Farcito'].Labella.name": "Labella",
-      "menu.items['Padellino Farcito'].Labella.description": "Mortadella, pesto di pistacchio, stracciatella",
+      "menu.items['Padellino Farcito'].Labella.description": "24-month cured mortadella l'Artemano Levoni, pistachio pesto and stracciatella",
       
       // Menu Items - Pizze Doppia Cottura
       "menu.items['Pizze Doppia Cottura'].Napoli2.name": "Napoli 2.0",
-      "menu.items['Pizze Doppia Cottura'].Napoli2.description": "Pomodoro San Marzano, stracciatella, acciughe e polvere di olive nere",
+      "menu.items['Pizze Doppia Cottura'].Napoli2.description": "San Marzano tomato, stracciatella, anchovies and black olive powder",
       "menu.items['Pizze Doppia Cottura']['Bufala DOP'].name": "Bufala DOP",
-      "menu.items['Pizze Doppia Cottura']['Bufala DOP'].description": "Salsa di pomodoro siccagno, pomodorino confit e pesto di basilico. Fuori forno: Bufala DOP",
+      "menu.items['Pizze Doppia Cottura']['Bufala DOP'].description": "Sicilian tomato sauce, confit cherry tomatoes and basil pesto. Oven: Bufala DOP",
       "menu.items['Pizze Doppia Cottura'].Confit.name": "Confit",
-      "menu.items['Pizze Doppia Cottura'].Confit.description": "Prosciutto crudo 24 mesi, 'datterino' confit, stracciatella",
+      "menu.items['Pizze Doppia Cottura'].Confit.description": "24-month cured prosciutto l'Artemano Levoni, 'datterino' confit and stracciatella",
       
       // Menu Items - Antipasti
       "menu.items.antipasti['Patatine fritte'].name": "Patatine fritte",
@@ -755,7 +763,11 @@ const resources = {
       "menu.items.bevande.Schweppes.name": "Schweppes",
       "menu.items.bevande.Schweppes.description": "Tonica / Lemon",
       "menu.items.bevande.Te.name": "Te",
-      "menu.items.bevande.Te.description": "Pesca / Limone"
+      "menu.items.bevande.Te.description": "Pesca / Limone",
+      "reservationModal.emailLabel": "Email",
+      "reservationModal.emailPlaceholder": "Inserisci la tua email",
+      "reservationModal.error.emailRequired": "L'email è obbligatoria",
+      "reservationModal.error.emailInvalid": "Inserisci un'email valida"
     },
   },
   de: {
@@ -952,7 +964,43 @@ const resources = {
       "menu.items['Pizze Doppia Cottura']['Bufala DOP'].name": "Bufala DOP",
       "menu.items['Pizze Doppia Cottura']['Bufala DOP'].description": "Salsa di Pomodoro Siccagno, Datterino Confit und Basilikum-Pesto. Im Ofen: Bufala DOP",
       "menu.items['Pizze Doppia Cottura'].Confit.name": "Confit",
-      "menu.items['Pizze Doppia Cottura'].Confit.description": "24 Monate Rohschinken l'Artemano Levoni, Datterino Confit und Stracciatella"
+      "menu.items['Pizze Doppia Cottura'].Confit.description": "24 Monate Rohschinken l'Artemano Levoni, 'datterino' confit, stracciatella",
+      
+      // Menu Items - Antipasti
+      "menu.items.antipasti['Patatine fritte'].name": "Patatine fritte",
+      "menu.items.antipasti['Patatine fritte'].description": "Patatine fritte",
+      "menu.items.antipasti['Antipasto caldo'].name": "Antipasto caldo",
+      "menu.items.antipasti['Antipasto caldo'].description": "Patatine, panelle e crocchette",
+      "menu.items.antipasti.Crocchetta.name": "Crocchetta",
+      "menu.items.antipasti.Crocchetta.description": "Crocchetta di patate con scamorza affumicata",
+      "menu.items.antipasti.Burdella.name": "Burdella",
+      "menu.items.antipasti.Burdella.description": "Pasta fritta ripiena di burrata, mortadella e pesto di pistacchio",
+      "menu.items.antipasti.Napulè.name": "Napulè",
+      "menu.items.antipasti.Napulè.description": "Pasta fritta ripiena di salsa di pomodoro, bufala e acciughe",
+      "menu.items.antipasti['Formaggio fritto'].name": "Formaggio fritto",
+      "menu.items.antipasti['Formaggio fritto'].description": "Primosale servito con maionese aromatizzata, 4 pezzi",
+      "menu.items.antipasti['Montanarine della tradizione'].name": "Montanarine della tradizione",
+      "menu.items.antipasti['Montanarine della tradizione'].description": "Salsa di pomodoro, Grana Padano, basilico, 2 pezzi",
+      "menu.items.antipasti['Montanarine in fermento 2 pezzi'].name": "Montanarine in fermento (2 pezzi)",
+      "menu.items.antipasti['Montanarine in fermento 2 pezzi'].description": "1) Mortadella, pesto di pistacchio e stracciatella. 2) Bresaola, Grana Padano e pesto di rucola",
+      "menu.items.antipasti['Montanarine nobili 2 pezzi'].name": "Montanarine nobili (2 pezzi)",
+      "menu.items.antipasti['Montanarine nobili 2 pezzi'].description": "1) Prosciutto crudo 24 mesi, stracciatella e pomodorino confit, 2) Stracciatella e carpaccio di Black Angus",
+      
+      // Menu Items - Bevande
+      "menu.items.bevande['Acuqa Panna / San Pellegrino'].name": "Acuqa Panna / San Pellegrino",
+      "menu.items.bevande['Acuqa Panna / San Pellegrino'].description": "Naturale / Frizzante 75CL",
+      "menu.items.bevande['Coca cola, coca cola zero'].name": "Coca cola, coca cola zero",
+      "menu.items.bevande['Coca cola, coca cola zero'].description": "",
+      "menu.items.bevande['Chinotto, Aranciata, Gazzosa'].name": "Chinotto, Aranciata, Gazzosa",
+      "menu.items.bevande['Chinotto, Aranciata, Gazzosa'].description": "",
+      "menu.items.bevande.Schweppes.name": "Schweppes",
+      "menu.items.bevande.Schweppes.description": "Tonica / Lemon",
+      "menu.items.bevande.Te.name": "Te",
+      "menu.items.bevande.Te.description": "Pesca / Limone",
+      "reservationModal.emailLabel": "E-Mail",
+      "reservationModal.emailPlaceholder": "Geben Sie Ihre E-Mail ein",
+      "reservationModal.error.emailRequired": "E-Mail ist erforderlich",
+      "reservationModal.error.emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
     }
   }
 };
