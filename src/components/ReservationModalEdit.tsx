@@ -119,7 +119,9 @@ const ReservationModalEdit: React.FC<ReservationModalProps> = ({ isOpen, onClose
           time: formData.time,
           seats: formData.seats,
           specialRequests: formData.specialRequests,
-          id: reservation?.id // mantieni l'ID se in modalità modifica
+          id: reservation?.id, // mantieni l'ID se in modalità modifica
+          status: reservation?.status || 'pending',
+          email: reservation?.email || ''
         };
         await onSubmit(updatedReservation);
         setShowSuccess(true);
