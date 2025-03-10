@@ -157,7 +157,7 @@ const ReservationModalEdit: React.FC<ReservationModalProps> = ({ isOpen, onClose
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="transform scale-90 sm:scale-100 relative w-full max-w-md bg-card rounded-lg shadow-lg p-4 sm:p-8 my-2 sm:my-10"
+        className="transform scale-80 sm:scale-100 relative w-full max-w-md bg-card rounded-lg shadow-lg p-4 sm:p-8 my-2 sm:my-10"
       >
         <div className="flex items-center justify-between mb-4">
           <p className="text-lg sm:text-xl font-heading text-accent">
