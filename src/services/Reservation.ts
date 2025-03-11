@@ -35,7 +35,7 @@ export const initializeShiftsForDate = async (date: string): Promise<void> => {
   const defaultShifts: Shift[] = allTimes.map((time) => {
     // Imposta attivi di default solo 19:00, 20:00 e 21:30
     const enabled = (time === "19:00" || time === "20:00" || time === "21:30");
-    return { time, enabled, maxReservations: 15 };
+    return { time, enabled, maxReservations: 100 };
   });
   for (const shift of defaultShifts) {
     await shiftsRef.child(shift.time).set(shift);
