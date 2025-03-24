@@ -1,17 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #d9d9db
+
+
+:root {
+  --pizza-red: #FF5A5F;
+  --pizza-green: #00897B;
+  --pizza-yellow: #FFB74D;
+  --pizza-brown: #5D4037;
+  --pizza-background: #F9F5F1;
 }
 
-
+body {
+  background-color: var(--pizza-background);
+  font-family: 'Montserrat', sans-serif;
+}
 
 h1, h2, h3 {
-  font-family: "DM Serif Display", serif !important;
-  font-weight: 400 !important;
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 700 !important;
   font-style: normal !important;
+}
+
+p {
+  font-family: 'Montserrat', sans-serif;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
@@ -23,21 +39,65 @@ h1, h2, h3 {
   scrollbar-width: none;
 }
 
-  input[type="date"]::-webkit-calendar-picker-indicator {
-    background: transparent;
-    bottom: 0;
-    color: transparent;
-    cursor: pointer;
-    height: auto;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: auto;
-  }
+input[type="date"]::-webkit-calendar-picker-indicator {
+  background: transparent;
+  bottom: 0;
+  color: transparent;
+  cursor: pointer;
+  height: auto;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: auto;
+}
 
-  @media (max-width: 640px) {
-    input[type="date"], select {
-      font-size: 16px;
-    }
+@media (max-width: 640px) {
+  input[type="date"], select {
+    font-size: 16px;
   }
+}
+
+/* Stili moderni per la pizzeria */
+.pizza-btn {
+  @apply rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-md;
+}
+
+.pizza-card {
+  @apply bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl;
+}
+
+.pizza-section {
+  @apply py-16 px-4 md:px-8;
+}
+
+.pizza-title {
+  @apply text-4xl md:text-5xl mb-6 text-pizza-brown relative;
+  font-family: 'Playfair Display', serif;
+}
+
+.pizza-title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  height: 3px;
+  width: 60px;
+  background-color: var(--pizza-red);
+}
+
+.pizza-subtitle {
+  @apply text-xl md:text-2xl mb-4 text-gray-700;
+}
+
+.menu-item {
+  @apply border-b border-gray-200 py-4 px-3 transition-all duration-200 hover:bg-gray-50;
+}
+
+.menu-item-image {
+  @apply rounded-full h-16 w-16 object-cover border-2 border-pizza-yellow;
+}
+
+.menu-item-price {
+  @apply text-pizza-red font-bold text-lg;
+}

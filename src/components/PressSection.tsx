@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { FaNewspaper, FaQuoteLeft, FaQuoteRight, FaExternalLinkAlt } from "react-icons/fa";
 import Bollino from "../assets/web gambero-02.png";
 
 interface PressArticle {
@@ -9,6 +10,8 @@ interface PressArticle {
   preview: string;
   image: string;
   link: string;
+  source?: string;
+  date?: string;
 }
 
 const pressArticles: PressArticle[] = [
@@ -20,6 +23,8 @@ const pressArticles: PressArticle[] = [
     image:
       "https://www.allfoodsicily.it/wp-content/uploads/2024/10/Fermento-1-e1727942311536.jpeg",
     link: "https://www.allfoodsicily.it/fermento-2-0-la-pizzeria-dei-fratelli-mirenda-a-cefalu-conquista-il-gambero-rosso-pronti-ad-alzare-lasticella/",
+    source: "AllFoodSicily",
+    date: "Ottobre 2024"
   },
   // altri articoli...
 ];
@@ -28,121 +33,172 @@ const PressSection: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section id="press" className="py-20 bg-background">
-      <div className="container mx-auto px-4">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
-          style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
-        >
-          {t("pressSection.heading")}
-        </motion.h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8 items-start">
-          {/* Sezione sinistra con il bollino e le informazioni */}
-          <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
+    <section id="press" className="pizza-section bg-pizza-background relative overflow-hidden">
+      {/* Pattern di sfondo */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute inset-0 bg-repeat" style={{ 
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'44\' height=\'44\' viewBox=\'0 0 44 44\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg id=\'Page-1\' fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg id=\'brick-wall\' fill=\'%23000000\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M0 0h22v22H0V0zm22 22h22v22H22V22z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
+        }}></div>
+      </div>
+      
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Intestazione sezione */}
+        <div className="text-center mb-16">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="inline-block bg-pizza-red text-white p-3 rounded-full mb-4"
           >
-            <div className="aspect-w-16 aspect-h-9 overflow-hidden flex items-center justify-center">
-              <motion.img
-                src={Bollino}
-                alt={t("pressSection.leftArticle.imageAlt")}
-                className="w-full h-full object-contain"
-                initial={{ opacity: 0, x: "-100%" }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{
-                  type: "spring",
-                  stiffness: 50,
-                  damping: 20,
-                  duration: 1.5,
-                }}
-              />
+            <FaNewspaper size={30} />
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="pizza-title"
+          >
+            {t("pressSection.heading")}
+          </motion.h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="h-1 w-24 bg-pizza-red mx-auto mt-6 mb-6"
+          />
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            className="text-gray-600 max-w-2xl mx-auto font-montserrat"
+          >
+            {t("pressSection.subtitle")}
+          </motion.p>
+        </div>
+
+        {/* Layout a due colonne */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 items-start">
+          {/* Sezione riconoscimento Gambero Rosso */}
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6 }}
+            className="pizza-card p-8 relative overflow-hidden"
+          >
+            {/* Ribbon */}
+            <div className="absolute top-5 -left-12 bg-pizza-red text-white py-1 px-12 transform -rotate-45 text-sm font-bold shadow-md">
+              {t("pressSection.award")}
             </div>
-            <div className="px-6">
-              <p
-                className="text-foreground md:text-lg"
-                style={{ fontFamily: '"Gambetta", Sans-serif' }}
+            
+            <div className="flex flex-col items-center">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ 
+                  type: "spring",
+                  stiffness: 100,
+                  damping: 15,
+                  delay: 0.3
+                }}
+                className="w-48 h-48 mb-6 relative"
               >
+                <img
+                  src={Bollino}
+                  alt={t("pressSection.leftArticle.imageAlt")}
+                  className="w-full h-full object-contain"
+                />
+                {/* Glow effect */}
+                <div className="absolute inset-0 bg-pizza-red opacity-10 rounded-full blur-xl"></div>
+              </motion.div>
+              
+              <FaQuoteLeft className="text-pizza-red opacity-30 text-3xl mb-4" />
+              
+              <h3 className="text-2xl font-playfair text-pizza-brown text-center mb-4">
                 {t("pressSection.leftArticle.title")}
-              </p>
-              <p
-                className="italic text-foreground md:text-lg mt-3"
-                style={{ fontFamily: '"Gambetta", Sans-serif' }}
-              >
+              </h3>
+              
+              <p className="italic text-gray-600 text-center font-montserrat mb-8 leading-relaxed">
                 {t("pressSection.leftArticle.preview")}
               </p>
+              
+              <FaQuoteRight className="text-pizza-red opacity-30 text-3xl mb-6" />
+              
+              <div className="border-t border-gray-200 pt-6 w-full">
+                <p className="text-center text-gray-500 font-montserrat text-sm">
+                  {t("pressSection.leftArticle.source")}
+                </p>
+              </div>
             </div>
           </motion.div>
 
-          {/* Sezione destra con gli articoli */}
-          <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
-          >
+          {/* Sezione articoli */}
+          <div className="space-y-8">
             {pressArticles.map((article, index) => (
-              <motion.div
+              <motion.a
                 key={index}
-                className="bg-white rounded-lg shadow-md overflow-hidden"
-                initial={{ opacity: 0, y: 20 }}
+                href={article.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="pizza-card flex flex-col md:flex-row overflow-hidden group transition-all duration-300 hover:shadow-xl"
               >
-                <div className="aspect-w-16 aspect-h-9 overflow-hidden">
+                {/* Image */}
+                <div className="w-full md:w-2/5 h-48 overflow-hidden relative">
                   <img
                     src={article.image}
                     alt={article.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
+                  {/* Source badge */}
+                  {article.source && (
+                    <div className="absolute top-3 left-3 bg-pizza-red text-white text-xs py-1 px-3 rounded-full">
+                      {article.source}
+                    </div>
+                  )}
                 </div>
-                <div className="p-6">
-                  <h4
-                    className="text-xl font-semibold mb-2"
-                    style={{ fontFamily: '"Gambetta", Sans-serif' }}
-                  >
-                    {article.title}
-                  </h4>
-                  <p
-                    className="text-foreground md:text-lg mb-4 line-clamp-3"
-                    style={{ fontFamily: '"Gambetta", Sans-serif' }}
-                  >
+                
+                {/* Content */}
+                <div className="p-6 w-full md:w-3/5">
+                  <div className="flex justify-between items-start">
+                    <h4 className="text-xl font-playfair text-pizza-brown group-hover:text-pizza-red transition-colors duration-300 mb-3 pr-6">
+                      {article.title}
+                    </h4>
+                    <FaExternalLinkAlt className="text-pizza-red opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  
+                  <p className="text-gray-600 font-montserrat text-sm mb-4 line-clamp-3">
                     {article.preview}
                   </p>
-                  <a
-                    href={article.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:text-primary-dark transition-colors duration-300 inline-block mt-2"
-                    style={{ fontFamily: '"Gambetta", Sans-serif' }}
-                  >
-                    {t("pressSection.article.readMore")}
-                  </a>
+                  
+                  <div className="flex justify-between items-center mt-auto">
+                    <span className="text-pizza-red font-medium text-sm">
+                      {t("pressSection.article.readMore")}
+                    </span>
+                    
+                    {article.date && (
+                      <span className="text-gray-400 text-xs">
+                        {article.date}
+                      </span>
+                    )}
+                  </div>
                 </div>
-              </motion.div>
+              </motion.a>
             ))}
+            
+            {/* CTA Button */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex justify-start"
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="flex justify-center mt-12"
             >
-              <Link
-                to="/blog"
-                className="bg-primary text-white px-8 py-3 rounded-md transform hover:scale-105 transition-all duration-300 hover:shadow-lg text-lg"
-                style={{ fontFamily: '"Gambetta", Sans-serif' }}
-              >
+              <Link to="/blog" className="pizza-btn bg-pizza-brown text-white px-8 py-3">
                 {t("pressSection.readMoreArticles")}
               </Link>
             </motion.div>
-          </motion.div>
-
-          <div></div>
+          </div>
         </div>
       </div>
     </section>

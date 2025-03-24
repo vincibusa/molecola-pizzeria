@@ -3,113 +3,137 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useTranslation, Trans } from "react-i18next";
 import FotoFratelli from "../assets/FotoFratelli.jpeg";
+import { FaPizzaSlice, FaHistory } from "react-icons/fa";
 
 const HistorySection: React.FC = () => {
   const { ref } = useInView({ threshold: 0.5 });
   const { t } = useTranslation();
 
   return (
-    <section id="about" ref={ref} className="py-20 bg-background relative">
+    <section id="about" ref={ref} className="pizza-section bg-pizza-background relative overflow-hidden">
+      {/* Pattern di sfondo */}
       <div
-        className="absolute inset-0 bg-fixed bg-cover bg-center opacity-10"
+        className="absolute inset-0 bg-fixed opacity-5"
         style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1517433670267-08bbd4be890f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80')",
+          backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'80\' height=\'80\' viewBox=\'0 0 80 80\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%235D4037\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M50 50c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10zM10 10c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10c0 5.523-4.477 10-10 10S0 25.523 0 20s4.477-10 10-10zm10 8c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm40 40c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z\' /%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
         }}
       ></div>
+      
       <div className="container mx-auto px-4 relative z-10">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-heading text-center mb-10 md:mb-16 text-4xl lg:text-6xl"
-          style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
-        >
-          {t("historySection.title")}
-        </motion.h2>
+        {/* Titolo con decorazione */}
+        <div className="text-center mb-16">
+          <motion.span 
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
+            className="inline-block bg-pizza-red text-white p-3 rounded-full mb-4"
+          >
+            <FaHistory size={30} />
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="pizza-title font-playfair text-5xl md:text-6xl"
+          >
+            {t("historySection.title")}
+          </motion.h2>
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="h-1 w-24 bg-pizza-red mx-auto mt-6"
+          />
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Contenuto testuale */}
           <motion.div
-            initial={{ opacity: 0, x: -100 }}
+            initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-6 bg-opacity-80 p-6"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="space-y-6 bg-white bg-opacity-90 p-8 rounded-xl shadow-lg"
           >
             {/* Testi lunghi per desktop */}
-            <p
-              className="text-foreground md:text-lg hidden lg:block"
-              style={{ fontFamily: '"Gambetta", Sans-serif' }}
-            >
-              <Trans
-                i18nKey="historySection.paragraph1"
-                components={{ b: <b /> }}
-              />
-            </p>
-            <p
-              className="text-foreground md:text-lg hidden lg:block"
-              style={{ fontFamily: '"Gambetta", Sans-serif' }}
-            >
-              <Trans
-                i18nKey="historySection.paragraph2"
-                components={{ b: <b /> }}
-              />
-            </p>
-            <p
-              className="text-foreground md:text-lg hidden lg:block"
-              style={{ fontFamily: '"Gambetta", Sans-serif' }}
-            >
-              <Trans
-                i18nKey="historySection.paragraph3"
-                components={{ b: <b /> }}
-              />
-            </p>
+            <div className="hidden lg:block space-y-6">
+              <p className="text-gray-700 text-lg font-montserrat leading-relaxed">
+                <Trans
+                  i18nKey="historySection.paragraph1"
+                  components={{ b: <span className="text-pizza-red font-medium" /> }}
+                />
+              </p>
+              <p className="text-gray-700 text-lg font-montserrat leading-relaxed">
+                <Trans
+                  i18nKey="historySection.paragraph2"
+                  components={{ b: <span className="text-pizza-red font-medium" /> }}
+                />
+              </p>
+              <p className="text-gray-700 text-lg font-montserrat leading-relaxed">
+                <Trans
+                  i18nKey="historySection.paragraph3"
+                  components={{ b: <span className="text-pizza-red font-medium" /> }}
+                />
+              </p>
+            </div>
 
             {/* Testi brevi per mobile */}
-            <p
-              className="text-foreground text-lg block lg:hidden"
-              style={{ fontFamily: '"Gambetta", Sans-serif' }}
-            >
-              <Trans
-                i18nKey="historySection.shortParagraph1"
-                components={{ b: <b /> }}
-              />
-            </p>
-            <p
-              className="text-foreground text-lg block lg:hidden"
-              style={{ fontFamily: '"Gambetta", Sans-serif' }}
-            >
-              <Trans
-                i18nKey="historySection.shortParagraph2"
-                components={{ b: <b /> }}
-              />
-            </p>
+            <div className="block lg:hidden space-y-4">
+              <p className="text-gray-700 text-base font-montserrat leading-relaxed">
+                <Trans
+                  i18nKey="historySection.shortParagraph1"
+                  components={{ b: <span className="text-pizza-red font-medium" /> }}
+                />
+              </p>
+              <p className="text-gray-700 text-base font-montserrat leading-relaxed">
+                <Trans
+                  i18nKey="historySection.shortParagraph2"
+                  components={{ b: <span className="text-pizza-red font-medium" /> }}
+                />
+              </p>
+            </div>
+            
+            {/* Dettaglio decorativo */}
+            <div className="absolute -bottom-3 -left-3 text-pizza-yellow opacity-20">
+              <FaPizzaSlice size={60} />
+            </div>
           </motion.div>
 
+          {/* Immagine */}
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
+            initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
             className="relative h-[500px] w-full"
           >
-            <div className="absolute inset-0 bg-primary/60 rounded-lg transform -rotate-3 shadow-xl"></div>
-            <div className="absolute inset-0 bg-white rounded-lg transform rotate-3 shadow-xl overflow-hidden">
+            {/* Effetti con stratificazione */}
+            <div className="absolute inset-0 bg-pizza-red rounded-2xl transform -rotate-3 shadow-xl"></div>
+            <motion.div 
+              className="absolute inset-0 bg-white rounded-2xl transform rotate-3 shadow-xl overflow-hidden"
+              whileHover={{ scale: 1.03, rotate: 0 }}
+              transition={{ duration: 0.5 }}
+            >
               <img
                 src={FotoFratelli}
                 alt={t("historySection.image.alt")}
                 className="w-full h-full object-cover"
               />
-            </div>
-            <div className="absolute bottom-4 right-4 bg-white p-4 rounded-lg shadow-lg transform rotate-3">
-              <p
-                className="text-primary font-bold"
-                style={{ fontFamily: '"Gambetta", Sans-serif' }}
-              >
+            </motion.div>
+            
+            {/* Didascalia */}
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+              className="absolute -bottom-6 right-8 bg-white p-4 rounded-lg shadow-lg transform rotate-3 max-w-[250px]"
+            >
+              <p className="text-pizza-brown font-medium font-montserrat flex items-center">
+                <FaPizzaSlice className="mr-2 text-pizza-red" />
                 <Trans
                   i18nKey="historySection.image.caption"
-                  components={{ b: <b /> }}
+                  components={{ b: <span className="text-pizza-red" /> }}
                 />
               </p>
-            </div>
+            </motion.div>
           </motion.div>
         </div>
       </div>

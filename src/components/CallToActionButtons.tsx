@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { FaUtensils, FaCalendarAlt } from "react-icons/fa";
 
 interface CallToActionButtonsProps {
   onReservationClick: () => void;
@@ -9,35 +10,32 @@ interface CallToActionButtonsProps {
 const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservationClick }) => {
   const { t } = useTranslation();
 
-  const buttonClasses =
-    "w-full sm:w-auto px-4 sm:px-8 py-3 rounded-md transform hover:scale-105 transition-all duration-300 hover:shadow-lg text-base sm:text-lg whitespace-nowrap max-w-[180px] sm:max-w-none";
-
   return (
     <motion.div
       initial={{ y: 20, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 1, delay: 0.9 }}
-      className="flex flex-col sm:flex-row gap-4 lg:gap-10 mt-8 lg:mt-16 mb-[120px] items-center sm:items-stretch"
+      transition={{ duration: 0.8, delay: 1.1 }}
+      className="flex flex-col sm:flex-row gap-4 items-center justify-center"
     >
-      <button
+      <motion.button
+        whileHover={{ scale: 1.05, backgroundColor: "#e03e52" }}
+        whileTap={{ scale: 0.98 }}
         onClick={onReservationClick}
-        className={`${buttonClasses} bg-primary text-white lg:min-w-[210px]`}
-        style={{ fontFamily: '"Gambetta", Sans-serif' }}
-        aria-label={t("reservationButton")}
+        className="pizza-btn bg-pizza-red text-white px-8 py-3 flex items-center justify-center space-x-2 min-w-[180px]"
       >
-        {t("reservationButton")}
-      </button>
-      <Link
-        to="/menu"
-        className="w-full sm:w-auto max-w-[180px] sm:max-w-none"
-      >
-        <button
-          className={`${buttonClasses} bg-white text-primary lg:min-w-[210px]`}
-          style={{ fontFamily: '"Gambetta", Sans-serif' }}
-          aria-label={t("viewMenuButton")}
+        <FaCalendarAlt className="mr-2" />
+        <span className="font-montserrat font-medium">{t("reservationButton")}</span>
+      </motion.button>
+
+      <Link to="/menu" className="min-w-[180px]">
+        <motion.button
+          whileHover={{ scale: 1.05, backgroundColor: "#FFB74D" }}
+          whileTap={{ scale: 0.98 }}
+          className="pizza-btn bg-pizza-yellow text-white px-8 py-3 w-full flex items-center justify-center"
         >
-          {t("viewMenuButton")}
-        </button>
+          <FaUtensils className="mr-2" />
+          <span className="font-montserrat font-medium">{t("viewMenuButton")}</span>
+        </motion.button>
       </Link>
     </motion.div>
   );

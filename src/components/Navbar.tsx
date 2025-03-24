@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaBars } from "react-icons/fa";
+import { FaPizzaSlice, FaShoppingCart } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ReservationModal from "./ReservationModal";
@@ -36,13 +36,19 @@ const Navbar = () => {
   const navbarBg =
     location.pathname === "/"
       ? isNavbarTransparent
-        ? "bg-transparent"
-        : "bg-primary"
-      : "bg-primary";
+        ? "bg-transparent backdrop-blur-sm bg-opacity-0"
+        : "bg-white shadow-md"
+      : "bg-white shadow-md";
 
-  const mobileMenuBg = navbarBg;
+  const textColor = 
+    location.pathname === "/" && isNavbarTransparent
+      ? "text-white"
+      : "text-pizza-brown";
+
   const hoverClass =
-    location.pathname === "/" ? "hover:text-black" : "hover:text-black";
+    location.pathname === "/" && isNavbarTransparent
+      ? "hover:text-pizza-yellow"
+      : "hover:text-pizza-red";
 
   // Definisci gli elementi della navbar con le rispettive chiavi di traduzione e rotte
   const navItems = [
@@ -59,104 +65,134 @@ const Navbar = () => {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             exit={{ y: -100 }}
-            transition={{ duration: 0.5 }}
-            className={`fixed top-0 w-full z-[100] transition-all duration-300 md:px-10 ${navbarBg} ${
-              isMobileMenuOpen && location.pathname === "/" ? "!bg-primary" : ""
-            }`}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className={`fixed top-0 w-full z-[100] transition-all duration-300 ${navbarBg}`}
           >
-            <div className="container mx-auto px-4 py-4">
+            <div className="container mx-auto px-4 py-3">
               <div className="flex items-center justify-between">
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5 }}
+                  className="flex items-center"
                 >
-                  <Link to="/">
+                  <Link to="/" className="flex items-center">
                     <img
                       src={logo}
                       alt={t("navbar.logoAlt")}
-                      className="h-12"
+                      className="h-14 mr-3"
                     />
+                    <span className={`font-playfair text-xl font-bold ${textColor}`}>
+                      Molecola
+                    </span>
                   </Link>
                 </motion.div>
+                
+                {/* Menu hamburger per mobile */}
                 <motion.button
                   whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="lg:hidden text-white"
+                  className="lg:hidden rounded-full p-2 bg-pizza-red text-white"
                   aria-label={t("navbar.toggleMenu")}
                 >
-                  <FaBars size={24} />
+                  <FaPizzaSlice size={20} />
                 </motion.button>
-                <AnimatePresence>
-                  {(isMobileMenuOpen || window.innerWidth >= 1024) && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -20 }}
-                      transition={{ duration: 0.3 }}
-                      className={`lg:flex ${
-                        isMobileMenuOpen ? "block" : "hidden"
-                      } absolute lg:relative top-full left-0 w-full lg:w-auto ${
-                        location.pathname === "/" && isMobileMenuOpen
-                          ? "bg-primary"
-                          : mobileMenuBg
-                      }`}
+                
+                {/* Menu desktop */}
+                <div className="hidden lg:flex items-center space-x-8">
+                  {navItems.map((item) => (
+                    <Link
+                      key={item.key}
+                      to={item.route}
+                      className={`${textColor} ${hoverClass} transition-colors font-medium`}
                     >
-                      <ul className="flex flex-col lg:flex-row space-y-4 lg:space-y-0 lg:space-x-8 p-4 lg:p-0">
-                        {navItems.map((item, index) => (
-                          <motion.li
-                            key={item.key}
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.3, delay: index * 0.1 }}
-                          >
-                            <Link
-                              to={item.route}
-                              className={`text-white ${hoverClass} transition-colors`}
-                            >
-                              {item.label}
-                            </Link>
-                          </motion.li>
-                        ))}
-                        <motion.li
-                          initial={{ opacity: 0, y: -20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3, delay: 0.4 }}
-                        >
-                          <Link
-                            to="/#press"
-                            className={`text-white ${hoverClass} transition-colors`}
-                            onClick={(e) => {
-                              if (location.pathname === "/") {
-                                e.preventDefault();
-                                const pressSection = document.getElementById("press");
-                                if (pressSection) {
-                                  pressSection.scrollIntoView({ behavior: "smooth" });
-                                }
-                              }
-                            }}
-                          >
-                            {t("navbar.press")}
-                          </Link>
-                        </motion.li>
-                        <motion.li
-                          initial={{ opacity: 0, y: -20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.3, delay: 0.3 }}
-                        >
-                          <button
-                            onClick={() => setIsReservationModalOpen(true)}
-                            className={`text-white ${hoverClass} transition-colors`}
-                          >
-                            {t("navbar.reservation")}
-                          </button>
-                        </motion.li>
-                      </ul>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                      {item.label}
+                    </Link>
+                  ))}
+                  <Link
+                    to="/#press"
+                    className={`${textColor} ${hoverClass} transition-colors font-medium`}
+                    onClick={(e) => {
+                      if (location.pathname === "/") {
+                        e.preventDefault();
+                        const pressSection = document.getElementById("press");
+                        if (pressSection) {
+                          pressSection.scrollIntoView({ behavior: "smooth" });
+                        }
+                      }
+                    }}
+                  >
+                    {t("navbar.press")}
+                  </Link>
+                  
+                  {/* Bottoni CTA */}
+                  <div className="flex items-center space-x-4">
+                    <button
+                      onClick={() => setIsReservationModalOpen(true)}
+                      className="pizza-btn bg-pizza-red text-white px-5 py-2 text-sm"
+                    >
+                      {t("navbar.reservation")}
+                    </button>
+                    <Link
+                      to="/menu"
+                      className="flex items-center justify-center w-10 h-10 rounded-full bg-pizza-brown text-white hover:bg-pizza-yellow transition-colors"
+                    >
+                      <FaShoppingCart />
+                    </Link>
+                  </div>
+                </div>
               </div>
+              
+              {/* Menu mobile */}
+              <AnimatePresence>
+                {isMobileMenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0 }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    exit={{ opacity: 0, height: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="lg:hidden mt-4"
+                  >
+                    <div className="flex flex-col py-4 space-y-4 bg-white rounded-xl shadow-lg p-4">
+                      {navItems.map((item) => (
+                        <Link
+                          key={item.key}
+                          to={item.route}
+                          className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg hover:bg-gray-100"
+                        >
+                          {item.label}
+                        </Link>
+                      ))}
+                      <Link
+                        to="/#press"
+                        className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg hover:bg-gray-100"
+                        onClick={(e) => {
+                          if (location.pathname === "/") {
+                            e.preventDefault();
+                            const pressSection = document.getElementById("press");
+                            if (pressSection) {
+                              pressSection.scrollIntoView({ behavior: "smooth" });
+                              setIsMobileMenuOpen(false);
+                            }
+                          }
+                        }}
+                      >
+                        {t("navbar.press")}
+                      </Link>
+                      <button
+                        onClick={() => {
+                          setIsReservationModalOpen(true);
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className="pizza-btn bg-pizza-red text-white px-5 py-2 text-sm w-full"
+                      >
+                        {t("navbar.reservation")}
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </motion.nav>
         )}
