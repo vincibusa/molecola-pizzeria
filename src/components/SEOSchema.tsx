@@ -12,7 +12,7 @@ interface SEOSchemaProps {
 }
 
 const SEOSchema: React.FC<SEOSchemaProps> = ({ type = "restaurant", articleData }) => {
-  const { t } = useTranslation();
+
 
   // Dati schema per ristorante
   const restaurantSchema = {
