@@ -10,15 +10,28 @@ import { NavbarProvider } from "./contexts/NavbarContenxt";
 import RestaurantBlog from "./Pages/RestaurantBlog";
 import LanguageSelector from "./components/LanguageSelector";
 import LoginPage from "./Pages/LoginPage";
+import SEOSchema from "./components/SEOSchema";
 
 function App() {
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
+  const isMenuPage = location.pathname === "/menu";
+  const isBlogPage = location.pathname === "/blog";
+
+  // Determina quale schema usare in base alla pagina corrente
+  const getSchemaType = () => {
+    if (isMenuPage) return "menu";
+    if (isBlogPage) return "article";
+    return "restaurant";
+  };
 
   return (
     <NavbarProvider>
       {/* Mostra la navbar solo se non è la pagina di login */}
       {!isLoginPage && <Navbar />}
+      
+      {/* Aggiungi il componente SEOSchema per i dati strutturati */}
+      <SEOSchema type={getSchemaType()} />
       
       <ContentWrapper>
         <Routes>

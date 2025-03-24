@@ -1,0 +1,12 @@
+# Permetti a tutti i robot di indicizzare il sito
+User-agent: *
+Allow: /
+
+# Escludi la pagina di login dalla indicizzazione
+Disallow: /login
+
+# Escludi l'area admin se esiste
+Disallow: /admin/
+
+# Percorso al sitemap
+Sitemap: https://www.fermento20.it/sitemap.xml 
