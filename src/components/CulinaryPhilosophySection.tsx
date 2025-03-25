@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaPizzaSlice, FaLeaf, FaWineGlassAlt, FaUtensils } from "react-icons/fa";
+import { FaPizzaSlice, FaLeaf, FaUtensils } from "react-icons/fa";
 import { GiCook, GiWheat } from "react-icons/gi";
 import { useTranslation } from "react-i18next";
 
