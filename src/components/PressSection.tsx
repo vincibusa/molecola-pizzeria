@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaNewspaper, FaQuoteLeft, FaQuoteRight, FaExternalLinkAlt } from "react-icons/fa";
-import { Trans } from "react-i18next";
+
 import Bollino from "../assets/web gambero-02.png";
 import OptimizedImage from "./OptimizedImage";
 

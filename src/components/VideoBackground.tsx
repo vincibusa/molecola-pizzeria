@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, useReducedMotion, AnimatePresence, useAnimation } from "framer-motion";
 import CallToActionButtons from "./CallToActionButtons";
-import { useTranslation, Trans } from "react-i18next";
+import { useTranslation,  } from "react-i18next";
 import { IoArrowForward, IoArrowBack } from "react-icons/io5";
 import OptimizedImage from "./OptimizedImage";
 
@@ -148,7 +148,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
   
   // Varianti di animazione per il carosello
   const slideVariants = {
-    enter: (direction: number) => ({
+    enter: () => ({
       opacity: 0,
       scale: 1.03,
     }),
@@ -160,7 +160,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
         scale: { duration: 1.5, ease: "easeOut" },
       }
     },
-    exit: (direction: number) => ({
+    exit: () => ({
       opacity: 0,
       scale: 1.05,
       transition: {
