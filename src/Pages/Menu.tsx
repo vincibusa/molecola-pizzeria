@@ -18,6 +18,15 @@ type CategoryName =
   | "Pizze Doppia Cottura"
   | "Bevande";
 
+// Interfaccia per gli elementi del menu
+interface MenuItem {
+  name: string;
+  description: string;
+  price: string;
+  image: string;
+  isVegetarian?: boolean;
+}
+
 const Menu = () => {
   const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<CategoryName>("Pizze Classiche");
@@ -167,7 +176,7 @@ const Menu = () => {
                       €{item.price}
                     </span>
                     
-                    {item.vegetarian && (
+                    {activeCategory === "Vegetariane" && (
                       <span className="flex items-center text-xs text-pizza-green mt-1">
                         <FaLeaf className="mr-1" />
                         {t("menu.vegetarian")}

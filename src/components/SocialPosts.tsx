@@ -186,15 +186,7 @@ const SocialPosts: React.FC = () => {
         </motion.div>
       </div>
 
-      {/* Indicatore di scroll */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200">
-        <motion.div
-          className="h-full bg-primary"
-          initial={{ width: "0%" }}
-          whileInView={{ width: "100%" }}
-          transition={{ duration: 0.8 }}
-        />
-      </div>
+
 
   
     </div>

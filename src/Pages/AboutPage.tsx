@@ -7,7 +7,7 @@ import TeamGallerySection from "../components/TeamGallerySection";
 import CulinaryPhilosophySection from "../components/CulinaryPhilosophySection";
 import PressSection from "../components/PressSection";
 import BackToTopButton from "../components/BackToTopButton";
-import { FaPizzaSlice } from "react-icons/fa";
+
 
 const AboutPage: React.FC = () => {
   const { t } = useTranslation();
@@ -50,25 +50,7 @@ const AboutPage: React.FC = () => {
       <CulinaryPhilosophySection />
       <PressSection />
       
-      {/* Separatore decorativo */}
-      <div className="py-16 bg-white relative overflow-hidden">
-        <div className="container mx-auto px-4 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-pizza-brown font-playfair text-3xl italic">
-              {t("aboutPage.quote")}
-            </p>
-            <div className="w-16 h-1 bg-pizza-red mx-auto my-6" />
-            <p className="text-gray-600 font-montserrat">
-              Molecola Pizzeria ~ {t("aboutPage.since")} 2020
-            </p>
-          </motion.div>
-        </div>
-      </div>
+  
       
       {/* Pulsante torna su */}
       {showTopBtn && <BackToTopButton onClick={goToTop} />}

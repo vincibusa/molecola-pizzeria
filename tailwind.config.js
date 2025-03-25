@@ -7,107 +7,100 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Nuova palette colori per la pizzeria moderna
-        pizzaRed: "#FF5A5F",
-        pizzaGreen: "#00897B",
-        pizzaYellow: "#FFB74D",
-        pizzaBrown: "#5D4037",
-        pizzaBackground: "#F9F5F1",
+        // Palette colori modernizzata per Molecola Pizzeria
+        "pizza-red": "#D32F2F",        // Rosso più intenso e caldo
+        "pizza-red-dark": "#B71C1C",   // Versione più scura per hover
+        "pizza-green": "#2E7D32",      // Verde più naturale
+        "pizza-yellow": "#FFC107",     // Giallo più brillante
+        "pizza-brown": "#5D4037",      // Marrone ricco per sfondo
+        "pizza-background": "#FCF8F3", // Beige chiaro per sfondo
+        "pizza-white": "#FFFFFF",      // Bianco puro
+        "pizza-black": "#212121",      // Nero profondo ma non puro
+        "pizza-gray": "#757575",       // Grigio per testi secondari
+        "pizza-accent": "#E65100",     // Arancione bruciato per accenti
         
-        // Mantengo i colori precedenti per retrocompatibilità
-        eden: "#0c4b43",
-        iron: "#d9d9db",
-        mojo: "#bf4a3a",
-        kabul: "#63483f",
-        mineralGreen: "#436464",
-        grannySmith: "#7c9b9b",
-        codGray: "#0c0c0c",
-        gumbo: "#80a4a4",
-        cascade: "#84a49c",
-        lisbonBrown: "#3e391c",
-
-        // Nuovi colori primari
-        "pizza-red": "var(--pizza-red)",
-        "pizza-green": "var(--pizza-green)",
-        "pizza-yellow": "var(--pizza-yellow)",
-        "pizza-brown": "var(--pizza-brown)",
-        "pizza-background": "var(--pizza-background)",
-
+        // Rimuovo i vecchi nomi per coerenza
+        pizzaRed: "#D32F2F",
+        pizzaGreen: "#2E7D32",
+        pizzaYellow: "#FFC107",
+        pizzaBrown: "#5D4037",
+        pizzaBackground: "#FCF8F3",
+        
         primary: {
-          DEFAULT: "#00897B", // Nuovo colore primario
+          DEFAULT: "#D32F2F", // Colore primario ora è il rosso pizza
           foreground: "#FFFFFF",
         },
         secondary: {
-          DEFAULT: "#5D4037", // Colore marrone
+          DEFAULT: "#5D4037", // Marrone pizzeria
           foreground: "#FFFFFF",
         },
-        darkBg: "#2D3748",
+        darkBg: "#212121",
         accent: {
-          DEFAULT: "#FF5A5F", // Colore rosso pizzeria
-          foreground: "#FFFFFF",
+          DEFAULT: "#FFC107", // Giallo come accento
+          foreground: "#212121",
         },
-        background: "#F9F5F1", // Sfondo chiaro
-        foreground: "#2D3748",
+        background: "#FCF8F3", // Sfondo beige chiaro
+        foreground: "#212121",
         card: {
           DEFAULT: "#FFFFFF",
-          foreground: "#2D3748",
+          foreground: "#212121",
         },
         popover: {
           DEFAULT: "#FFFFFF",
-          foreground: "#2D3748",
+          foreground: "#212121",
         },
         muted: {
-          DEFAULT: "#E2E8F0",
-          foreground: "#64748B",
+          DEFAULT: "#EEEEEE",
+          foreground: "#757575",
         },
         destructive: {
-          DEFAULT: "#E53E3E",
+          DEFAULT: "#C62828",
           foreground: "#FFFFFF",
         },
-        border: "#E2E8F0",
-        input: "#E2E8F0",
-        ring: "#FF5A5F",
+        border: "#E0E0E0",
+        input: "#EEEEEE",
+        ring: "#D32F2F",
         chart: {
-          1: "#00897B",
-          2: "#4CAF50",
-          3: "#03A9F4",
-          4: "#FFB74D",
-          5: "#FF5A5F",
+          1: "#D32F2F", // Rosso
+          2: "#2E7D32", // Verde
+          3: "#1976D2", // Blu
+          4: "#FFC107", // Giallo
+          5: "#E65100", // Arancione
         },
         dark: {
           primary: {
-            DEFAULT: "#00897B",
+            DEFAULT: "#EF5350", // Rosso più chiaro per tema scuro
             foreground: "#FFFFFF",
           },
           secondary: {
-            DEFAULT: "#5D4037",
-            foreground: "#FAFAFB",
-          },
-          accent: {
-            DEFAULT: "#FF5A5F",
-            foreground: "#FAFAFB",
-          },
-          background: "#1A202C",
-          foreground: "#F7FAFC",
-          card: {
-            DEFAULT: "#2D3748",
-            foreground: "#F7FAFC",
-          },
-          popover: {
-            DEFAULT: "#2D3748",
-            foreground: "#F7FAFC",
-          },
-          muted: {
-            DEFAULT: "#4A5568",
-            foreground: "#A0AEC0",
-          },
-          destructive: {
-            DEFAULT: "#E53E3E",
+            DEFAULT: "#8D6E63", // Marrone più chiaro per tema scuro
             foreground: "#FFFFFF",
           },
-          border: "#4A5568",
-          input: "#4A5568",
-          ring: "#FF5A5F",
+          accent: {
+            DEFAULT: "#FFCA28", // Giallo più chiaro per tema scuro
+            foreground: "#212121",
+          },
+          background: "#121212",
+          foreground: "#FFFFFF",
+          card: {
+            DEFAULT: "#1E1E1E",
+            foreground: "#FFFFFF",
+          },
+          popover: {
+            DEFAULT: "#1E1E1E",
+            foreground: "#FFFFFF",
+          },
+          muted: {
+            DEFAULT: "#333333",
+            foreground: "#BDBDBD",
+          },
+          destructive: {
+            DEFAULT: "#EF5350",
+            foreground: "#FFFFFF",
+          },
+          border: "#333333",
+          input: "#333333",
+          ring: "#EF5350",
         },
       },
       borderRadius: {
@@ -124,6 +117,8 @@ export default {
         md: "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
         lg: "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
         xl: "0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1)",
+        'pizza': '0 10px 30px -5px rgba(211, 47, 47, 0.2)',
+        'pizza-hover': '0 15px 40px -5px rgba(211, 47, 47, 0.3)',
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
@@ -138,6 +133,9 @@ export default {
       fontWeight: {
         heading: "700",
         body: "600",
+      },
+      backgroundImage: {
+        'pizza-pattern': "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D32F2F' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
       },
     },
   },
