@@ -81,8 +81,9 @@ const Navbar = () => {
                     <OptimizedImage
                       src={logo}
                       alt={t("navbar.logoAlt")}
-                      className=" mr-1"
-                      height={64}
+                      className="w-auto h-[45px] object-contain mr-1"
+                      height={45}
+                      width={160}
                       loading="eager"
                     />
                   </Link>

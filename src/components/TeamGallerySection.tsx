@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaUserFriends } from "react-icons/fa";
@@ -27,6 +27,19 @@ const cardVariants = {
 
 const TeamGallerySection: React.FC = () => {
   const { t } = useTranslation();
+  const prefersReducedMotion = useReducedMotion();
+
+  // Configura le proprietà di animazione in base alle preferenze dell'utente
+  const getAnimationProps = (delay = 0) => {
+    if (prefersReducedMotion) {
+      return { initial: "visible", animate: "visible" };
+    }
+    return {
+      initial: "hidden",
+      whileInView: "visible",
+      viewport: { once: true, amount: 0.1 }
+    };
+  };
 
   return (
     <section className="pizza-section bg-white relative overflow-hidden">
@@ -41,30 +54,34 @@ const TeamGallerySection: React.FC = () => {
         {/* Intestazione sezione */}
         <div className="text-center mb-16">
           <motion.span 
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+            initial={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0 }}
+            whileInView={prefersReducedMotion ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="inline-block bg-pizza-yellow text-white p-3 rounded-full mb-4"
           >
             <FaUserFriends size={30} />
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            whileInView={prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="pizza-title text-5xl md:text-6xl"
           >
             {t("teamGallerySection.heading")}
           </motion.h2>
           <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
+            initial={prefersReducedMotion ? { scaleX: 1 } : { scaleX: 0 }}
+            whileInView={prefersReducedMotion ? { scaleX: 1 } : { scaleX: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.4 }}
             className="h-1 w-24 bg-pizza-yellow mx-auto mt-6"
           />
           <motion.p 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={prefersReducedMotion ? { opacity: 1 } : { opacity: 0 }}
+            whileInView={prefersReducedMotion ? { opacity: 1 } : { opacity: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.5 }}
             className="text-gray-600 max-w-2xl mx-auto mt-6 font-montserrat"
           >
@@ -75,9 +92,9 @@ const TeamGallerySection: React.FC = () => {
         {/* Team members grid */}
         <motion.div
           className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
-          initial="hidden"
+          initial={prefersReducedMotion ? "visible" : "hidden"}
           whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.1 }}
           variants={{
             visible: { transition: { staggerChildren: 0.2 } }
           }}
@@ -86,23 +103,20 @@ const TeamGallerySection: React.FC = () => {
             <motion.div 
               key={member.name} 
               variants={cardVariants}
-              className="group"
+              className="group will-change-transform"
             >
               <Link to="/galleria" className="block">
                 <div className="pizza-card overflow-hidden group relative">
                   {/* Image */}
                   <div className="relative overflow-hidden h-[350px]">
-                    <motion.div
-                      whileHover={{ scale: 1.1 }}
-                      className="h-full w-full"
-                    >
+                    <div className="h-full w-full">
                       <OptimizedImage
                         src={member.image}
                         alt={member.name}
                         className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                         height={350}
                       />
-                    </motion.div>
+                    </div>
                     {/* Overlay gradiente */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                       <div className="text-white">
@@ -140,8 +154,8 @@ const TeamGallerySection: React.FC = () => {
         <div className="text-center">
           <Link to="/galleria">
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: "#5D4037" }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={prefersReducedMotion ? {} : { scale: 1.05, backgroundColor: "#5D4037" }}
+              whileTap={prefersReducedMotion ? {} : { scale: 0.98 }}
               className="pizza-btn bg-pizza-brown text-white px-8 py-3"
             >
               {t("teamGallerySection.viewGallery")}

@@ -189,13 +189,13 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
             animate={shouldReduceMotion ? { opacity: 1 } : "center"}
             exit={shouldReduceMotion ? { opacity: 1 } : "exit"}
             variants={slideVariants}
-            className="absolute inset-0"
+            className="absolute inset-0 will-change-transform"
           >
             <div className="relative w-full h-full">
               <OptimizedImage 
                 src={carouselImages[currentImage].src} 
                 alt={carouselImages[currentImage].alt}
-                className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-[8s] ease-out"
+                className="w-full h-full object-cover"
                 loading="eager"
                 onLoad={() => {
                   // Forzare il reflow per migliorare la qualità del rendering
@@ -288,7 +288,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
             animate: { opacity: 1, y: 0 },
             transition: { duration: 1 }
           })}
-          className="text-5xl md:text-7xl font-playfair mb-4 leading-tight text-white drop-shadow-lg"
+          className="text-5xl md:text-7xl font-playfair mb-4 leading-tight text-white drop-shadow-lg will-change-transform"
         >
           {t("heroSection.title")}
         </motion.h1>
@@ -299,7 +299,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
             animate: { scaleX: 1 },
             transition: { duration: 0.8, delay: 0.5 }
           })}
-          className="w-32 h-1 bg-pizza-red mx-auto mb-8"
+          className="w-32 h-1 bg-pizza-red mx-auto mb-8 will-change-transform"
         />
 
         <motion.p
@@ -308,7 +308,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
             animate: { opacity: 1 },
             transition: { duration: 0.8, delay: 0.7 }
           })}
-          className="text-xl md:text-2xl mb-12 max-w-2xl font-montserrat text-gray-100 drop-shadow-md"
+          className="text-xl md:text-2xl mb-12 max-w-2xl font-montserrat text-gray-100 drop-shadow-md will-change-transform"
         >
           {t("heroSection.subtitle")}
         </motion.p>
@@ -319,6 +319,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
             animate: { opacity: 1, y: 0 },
             transition: { duration: 0.8, delay: 0.9 }
           })}
+          className="will-change-transform"
         >
           <CallToActionButtons onReservationClick={onReservationClick} />
         </motion.div>
