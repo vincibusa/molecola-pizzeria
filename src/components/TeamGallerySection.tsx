@@ -29,17 +29,7 @@ const TeamGallerySection: React.FC = () => {
   const { t } = useTranslation();
   const prefersReducedMotion = useReducedMotion();
 
-  // Configura le proprietà di animazione in base alle preferenze dell'utente
-  const getAnimationProps = (delay = 0) => {
-    if (prefersReducedMotion) {
-      return { initial: "visible", animate: "visible" };
-    }
-    return {
-      initial: "hidden",
-      whileInView: "visible",
-      viewport: { once: true, amount: 0.1 }
-    };
-  };
+
 
   return (
     <section className="pizza-section bg-white relative overflow-hidden">
