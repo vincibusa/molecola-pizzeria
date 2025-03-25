@@ -26,6 +26,8 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  /* Migliora rendering */
+  text-rendering: optimizeSpeed;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -63,15 +65,6 @@ input, textarea, select {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
-  }
-  
-  .animate-slide-up,
-  .animate-fade-in {
-    animation: none !important;
-  }
-  
-  .hover-scale:hover {
-    transform: none !important;
   }
   
   /* Disabilita le trasformazioni hover che potrebbero causare jank */
@@ -114,59 +107,6 @@ input, textarea, select {
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
-    
-    .animate-slide-up,
-    .animate-fade-in {
-      animation: none !important;
-    }
-    
-    .hover-scale:hover {
-      transform: none !important;
-    }
-  }
-}
-
-/* Classi di utilità per animazioni */
-@layer utilities {
-  .animate-slide-up {
-    animation: slideUp 0.6s ease-out forwards;
-  }
-
-  .animate-fade-in {
-    animation: fadeIn 0.8s ease-out forwards;
-  }
-
-  .hover-scale {
-    transition: transform 0.3s ease;
-  }
-  
-  .hover-scale:hover {
-    transform: scale(1.05);
-  }
-  
-  .transition-all-300 {
-    transition: all 0.3s ease;
-  }
-}
-
-/* Keyframes per animazioni */
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
   }
 }
 
@@ -191,7 +131,7 @@ input, textarea, select {
 /* Stili moderni per la pizzeria */
 .pizza-btn {
   @apply rounded-full font-medium shadow-md;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
   transform-origin: center;
 }
 .pizza-btn:hover {
@@ -200,7 +140,7 @@ input, textarea, select {
 
 .pizza-card {
   @apply bg-white rounded-xl shadow-lg overflow-hidden;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.2s ease;
 }
 .pizza-card:hover {
   @apply shadow-xl;
@@ -231,7 +171,7 @@ input, textarea, select {
 
 .menu-item {
   @apply border-b border-gray-200 py-4 px-3;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 .menu-item:hover {
   @apply bg-gray-50;

@@ -1,11 +1,54 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { FaPizzaSlice, FaLeaf, FaUtensils } from "react-icons/fa";
 import { GiCook, GiWheat } from "react-icons/gi";
 import { useTranslation } from "react-i18next";
+import { useInView } from "react-intersection-observer";
+
+// Varianti migliorate per animazioni più fluide e lente
+const iconVariants = {
+  initial: { scale: 1, rotate: 0 },
+  hover: { scale: 1.15, rotate: 10, transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+const titleVariants = {
+  initial: { color: "var(--pizza-brown)" },
+  hover: { color: "var(--pizza-red)", transition: { duration: 0.6, ease: "easeOut" } }
+};
+
+// Overlay sempre visibile con opacità variabile
+const overlayVariants = {
+  initial: { opacity: 0.05 },
+  hover: { opacity: 0.2, transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+};
+
+const quoteVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    transition: { 
+      duration: 1.2, 
+      delay: 0.8, 
+      ease: "easeOut" 
+    } 
+  }
+};
 
 const CulinaryPhilosophySection: React.FC = () => {
   const { t } = useTranslation();
+  const prefersReducedMotion = useReducedMotion();
+  const shouldAnimate = !prefersReducedMotion;
+  
+  const { ref, inView } = useInView({
+    threshold: 0.1,
+    triggerOnce: true
+  });
 
   // Definiamo gli item utilizzando le chiavi di traduzione
   const philosophyItems = [
@@ -30,7 +73,7 @@ const CulinaryPhilosophySection: React.FC = () => {
   ];
 
   return (
-    <section className="pizza-section bg-pizza-brown relative text-white overflow-hidden">
+    <section ref={ref} className="pizza-section bg-pizza-brown relative text-white overflow-hidden">
       {/* Pattern di sfondo */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute inset-0 bg-repeat" style={{ 
@@ -44,15 +87,18 @@ const CulinaryPhilosophySection: React.FC = () => {
           <motion.span 
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
             className="inline-block bg-white text-pizza-brown p-3 rounded-full mb-4"
+            whileHover={shouldAnimate ? { scale: 1.1, rotate: 5, transition: { duration: 0.5 } } : {}}
           >
             <GiCook size={30} />
           </motion.span>
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="font-playfair text-5xl md:text-6xl mb-6"
           >
             {t("culinaryPhilosophy.title")}
@@ -60,13 +106,15 @@ const CulinaryPhilosophySection: React.FC = () => {
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
             className="h-1 w-24 bg-white mx-auto mb-6"
           />
           <motion.p 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
             className="text-gray-200 max-w-2xl mx-auto mb-12 font-montserrat"
           >
             {t("culinaryPhilosophy.subtitle")}
@@ -79,58 +127,107 @@ const CulinaryPhilosophySection: React.FC = () => {
           <motion.div 
             initial={{ opacity: 0, scale: 0 }}
             whileInView={{ opacity: 0.1, scale: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
             className="absolute -right-20 -top-20 text-white"
           >
             <FaPizzaSlice size={200} />
           </motion.div>
           
           {/* Le cards */}
-          {philosophyItems.map((item, index) => (
-            <motion.div
-              key={item.titleKey}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="relative pizza-card overflow-hidden bg-white text-gray-800 group"
-            >
-              {/* Colorful top section */}
-              <div className={`${item.color} p-8 flex justify-center items-center relative overflow-hidden`}>
-                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
-                <div className="z-10 transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6">
-                  {item.icon}
+          <AnimatePresence>
+            {inView && philosophyItems.map((item, index) => (
+              <motion.div
+                key={item.titleKey}
+                variants={cardVariants}
+                initial="hidden"
+                animate="visible"
+                transition={{ delay: index * 0.3 }}
+                className="relative pizza-card overflow-hidden bg-white text-gray-800 group"
+                whileHover="hover"
+              >
+                {/* Colorful top section */}
+                <div className={`${item.color} p-8 flex justify-center items-center relative overflow-hidden`}>
+                  {/* Overlay sempre visibile con opacità che cambia al passaggio del mouse */}
+                  <motion.div 
+                    className="absolute inset-0 bg-white" 
+                    initial={{ opacity: 0.05 }}
+                    variants={overlayVariants}
+                  />
+                  <motion.div 
+                    className="z-10" 
+                    variants={iconVariants}
+                    animate={{ 
+                      rotate: [0, 3, 0, -3, 0],
+                      scale: [1, 1.05, 1, 1.05, 1]
+                    }}
+                    transition={{
+                      duration: 8,
+                      repeat: Infinity,
+                      repeatType: "reverse",
+                      ease: "easeInOut"
+                    }}
+                  >
+                    {item.icon}
+                  </motion.div>
                 </div>
-              </div>
-              
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl md:text-2xl font-playfair mb-3 text-pizza-brown group-hover:text-pizza-red transition-colors">
-                  {t(item.titleKey)}
-                </h3>
-                <p className="text-gray-600 font-montserrat leading-relaxed">
-                  {t(item.descriptionKey)}
-                </p>
-              </div>
-              
-              {/* Decorative number */}
-              <div className="absolute top-4 right-4 border border-white/50 text-white rounded-full w-8 h-8 flex items-center justify-center">
-                <span className="text-sm font-medium">{index + 1}</span>
-              </div>
-            </motion.div>
-          ))}
+                
+                {/* Content */}
+                <div className="p-6">
+                  <motion.h3 
+                    className="text-xl md:text-2xl font-playfair mb-3"
+                    variants={titleVariants}
+                  >
+                    {t(item.titleKey)}
+                  </motion.h3>
+                  <motion.p 
+                    className="text-gray-600 font-montserrat leading-relaxed"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.3 + index * 0.2 }}
+                  >
+                    {t(item.descriptionKey)}
+                  </motion.p>
+                </div>
+                
+                {/* Decorative number */}
+                <motion.div 
+                  className="absolute top-4 right-4 border border-white/50 text-white rounded-full w-8 h-8 flex items-center justify-center"
+                  whileHover={{ scale: 1.2, rotate: 0, transition: { duration: 0.5 } }}
+                  initial={{ rotate: 10 }}
+                  animate={{ rotate: [10, 0, 10], transition: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
+                >
+                  <span className="text-sm font-medium">{index + 1}</span>
+                </motion.div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
         
         {/* Quote */}
         <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
+          variants={quoteVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
           className="mt-20 text-center"
         >
           <blockquote className="italic text-xl md:text-2xl font-playfair max-w-3xl mx-auto px-6 relative">
-            <div className="absolute -top-6 left-0 text-5xl text-white opacity-20">"</div>
+            <motion.div 
+              className="absolute -top-6 left-0 text-5xl text-white opacity-20"
+              animate={{ y: [0, -5, 0], opacity: [0.2, 0.3, 0.2] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              "
+            </motion.div>
             {t("culinaryPhilosophy.quote")}
-            <div className="absolute -bottom-6 right-0 text-5xl text-white opacity-20">"</div>
+            <motion.div 
+              className="absolute -bottom-6 right-0 text-5xl text-white opacity-20"
+              animate={{ y: [0, 5, 0], opacity: [0.2, 0.3, 0.2] }}
+              transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            >
+              "
+            </motion.div>
           </blockquote>
           <p className="mt-6 text-gray-200 font-montserrat">— {t("culinaryPhilosophy.quoteAuthor")}</p>
         </motion.div>

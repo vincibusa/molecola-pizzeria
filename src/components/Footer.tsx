@@ -43,7 +43,11 @@ const Footer: React.FC = () => {
         <div className="container mx-auto px-4 pt-16 pb-8 relative">
           {/* Logo con forma a fetta di pizza */}
           <div className="flex justify-center mb-10">
-            <div className="w-56 h-56 rounded-full bg-white p-3 shadow-xl transform rotate-12 hover:rotate-0 transition-all duration-300">
+            <motion.div 
+              className="w-56 h-56 rounded-full bg-white p-3 shadow-xl transform rotate-12"
+              whileHover={{ rotate: 0 }}
+              transition={{ duration: 0.3 }}
+            >
               <OptimizedImage
                 src={logo}
                 alt={t("navbar.logoAlt")}
@@ -51,7 +55,7 @@ const Footer: React.FC = () => {
                 width={224}
                 height={224}
               />
-            </div>
+            </motion.div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
@@ -78,9 +82,9 @@ const Footer: React.FC = () => {
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ y: -5, scale: 1.1 }}
+                    whileHover={{ y: -5, scale: 1.1, backgroundColor: "var(--pizza-red)" }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-white bg-opacity-20 hover:bg-pizza-red text-white p-3 rounded-full transition-all duration-300"
+                    className="bg-white bg-opacity-20 text-white p-3 rounded-full"
                   >
                     {React.cloneElement(link.icon, { size: 18 })}
                   </motion.a>
@@ -102,7 +106,11 @@ const Footer: React.FC = () => {
               </h3>
               <ul className="space-y-3 flex flex-col items-start">
                 {quickLinks.map((link) => (
-                  <li key={link.key} className="transition-transform hover:translate-x-2 flex items-center space-x-2">
+                  <motion.li 
+                    key={link.key} 
+                    className="flex items-center space-x-2"
+                    whileHover={{ x: 8 }}
+                  >
                     {link.key === "navbar.reservation" ? (
                       <button
                         onClick={() => setIsReservationModalOpen(true)}
@@ -133,7 +141,7 @@ const Footer: React.FC = () => {
                         <span>{t(link.key)}</span>
                       </Link>
                     )}
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
             </motion.div>
@@ -152,25 +160,37 @@ const Footer: React.FC = () => {
               </h3>
               
               <ul className="space-y-4 flex flex-col">
-                <li className="transition-transform hover:translate-x-2 flex items-center md:justify-end">
+                <motion.li 
+                  className="flex items-center md:justify-end"
+                  whileHover={{ x: 8 }}
+                >
                   <span className="inline-block w-6 text-center mr-2">
                     <FaMapMarkerAlt className="text-pizza-red inline-block" />
                   </span>
                   <span className="text-gray-200">{t("footer.address.line1")}</span>
-                </li>
-                <li className="transition-transform hover:translate-x-2 flex items-center md:justify-end">
+                </motion.li>
+                <motion.li 
+                  className="flex items-center md:justify-end"
+                  whileHover={{ x: 8 }}
+                >
                   <span className="inline-block w-6 text-center mr-2">
                     <FaPhone className="text-pizza-red transform rotate-90 inline-block" />
                   </span>
                   <span className="text-gray-200">{t("footer.phone")}</span>
-                </li>
-                <li className="transition-transform hover:translate-x-2 flex items-center md:justify-end">
+                </motion.li>
+                <motion.li 
+                  className="flex items-center md:justify-end"
+                  whileHover={{ x: 8 }}
+                >
                   <span className="inline-block w-6 text-center mr-2">
                     <FaEnvelope className="text-pizza-red inline-block" />
                   </span>
                   <span className="text-gray-200">{t("footer.email")}</span>
-                </li>
-                <li className="transition-transform hover:translate-x-2 flex items-center md:justify-end">
+                </motion.li>
+                <motion.li 
+                  className="flex items-center md:justify-end"
+                  whileHover={{ x: 8 }}
+                >
                   <span className="inline-block w-6 text-center mr-2">
                     <FaClock className="text-pizza-red inline-block" />
                   </span>
@@ -178,7 +198,7 @@ const Footer: React.FC = () => {
                     <p className="text-gray-200">{t("footer.hours.weekdays")}</p>
                     <p className="text-gray-200">{t("footer.hours.monday")}</p>
                   </div>
-                </li>
+                </motion.li>
               </ul>
             </motion.div>
           </div>

@@ -3,6 +3,7 @@ import { FiCalendar, FiClock, FiUsers, FiCheck, FiX, FiAlertCircle } from "react
 import { format } from "date-fns";
 import { addReservation, getShiftsForDate } from "../services/Reservation";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 
 interface FormData {
   firstName: string;
@@ -137,19 +138,27 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
   if (!isOpen) return null;
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
       onClick={onClose}
-      className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-2 z-[200] overflow-y-auto"
+      className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-2 z-[200] overflow-y-auto"
     >
-      <div
+      <motion.div
+        initial={{ scale: 0.9, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        transition={{ duration: 0.2 }}
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full max-w-md mx-auto bg-card rounded-lg shadow-lg p-4 sm:p-6 my-4 max-h-[90vh] overflow-y-auto"
+        className="relative w-full max-w-md mx-auto bg-white rounded-lg shadow-lg p-4 sm:p-6 my-4 max-h-[90vh] overflow-y-auto"
       >
         <div className="flex items-center justify-between mb-4">
-          <p className="text-lg sm:text-xl font-heading text-accent">
+          <p className="text-lg sm:text-xl font-heading text-pizza-red">
             {t("reservationModal.title")}
           </p>
-          <button onClick={onClose} className="text-accent hover:text-foreground transition-colors">
+          <button onClick={onClose} className="text-pizza-red hover:text-pizza-brown">
             <FiX size={24} />
           </button>
         </div>
@@ -157,7 +166,7 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Campo Nome */}
           <div>
-            <label className="block text-sm font-body text-foreground mb-2">
+            <label className="block text-sm font-body text-gray-800 mb-2">
               {t("reservationModal.firstNameLabel")}
             </label>
             <input
@@ -166,16 +175,16 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               value={formData.firstName}
               onChange={handleInputChange}
               className={`w-full px-4 py-2 rounded-md border ${
-                errors.firstName ? "border-destructive" : "border-input"
-              } focus:outline-none focus:ring-2 focus:ring-ring`}
+                errors.firstName ? "border-red-500" : "border-gray-300"
+              } focus:outline-none focus:ring-2 focus:ring-pizza-red`}
               placeholder={t("reservationModal.firstNamePlaceholder")}
             />
-            {errors.firstName && <p className="mt-1 text-sm text-destructive">{errors.firstName}</p>}
+            {errors.firstName && <p className="mt-1 text-sm text-red-500">{errors.firstName}</p>}
           </div>
 
           {/* Campo Cognome */}
           <div>
-            <label className="block text-sm font-body text-foreground mb-2">
+            <label className="block text-sm font-body text-gray-800 mb-2">
               {t("reservationModal.lastNameLabel")}
             </label>
             <input
@@ -184,16 +193,16 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               value={formData.lastName}
               onChange={handleInputChange}
               className={`w-full px-4 py-2 rounded-md border ${
-                errors.lastName ? "border-destructive" : "border-input"
-              } focus:outline-none focus:ring-2 focus:ring-ring`}
+                errors.lastName ? "border-red-500" : "border-gray-300"
+              } focus:outline-none focus:ring-2 focus:ring-pizza-red`}
               placeholder={t("reservationModal.lastNamePlaceholder")}
             />
-            {errors.lastName && <p className="mt-1 text-sm text-destructive">{errors.lastName}</p>}
+            {errors.lastName && <p className="mt-1 text-sm text-red-500">{errors.lastName}</p>}
           </div>
 
           {/* Numero di Telefono */}
           <div>
-            <label className="block text-sm font-body text-foreground mb-2">
+            <label className="block text-sm font-body text-gray-800 mb-2">
               {t("reservationModal.phoneLabel")}
             </label>
             <input
@@ -202,16 +211,16 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               value={formData.phone}
               onChange={handleInputChange}
               className={`w-full px-4 py-2 rounded-md border ${
-                errors.phone ? "border-destructive" : "border-input"
-              } focus:outline-none focus:ring-2 focus:ring-ring`}
+                errors.phone ? "border-red-500" : "border-gray-300"
+              } focus:outline-none focus:ring-2 focus:ring-pizza-red`}
               placeholder={t("reservationModal.phonePlaceholder")}
             />
-            {errors.phone && <p className="mt-1 text-sm text-destructive">{errors.phone}</p>}
+            {errors.phone && <p className="mt-1 text-sm text-red-500">{errors.phone}</p>}
           </div>
 
           {/* Campo Email */}
           <div>
-            <label className="block text-sm font-body text-foreground mb-2">
+            <label className="block text-sm font-body text-gray-800 mb-2">
               {t("reservationModal.emailLabel")}
             </label>
             <input
@@ -220,21 +229,21 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
               value={formData.email}
               onChange={handleInputChange}
               className={`w-full px-4 py-2 rounded-md border ${
-                errors.email ? "border-destructive" : "border-input"
-              } focus:outline-none focus:ring-2 focus:ring-ring`}
+                errors.email ? "border-red-500" : "border-gray-300"
+              } focus:outline-none focus:ring-2 focus:ring-pizza-red`}
               placeholder={t("reservationModal.emailPlaceholder")}
             />
-            {errors.email && <p className="mt-1 text-sm text-destructive">{errors.email}</p>}
+            {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email}</p>}
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             {/* Campo Data */}
             <div>
-              <label className="block text-sm font-body text-foreground mb-2">
+              <label className="block text-sm font-body text-gray-800 mb-2">
                 {t("reservationModal.dateLabel")}
               </label>
               <div className="relative">
-                <FiCalendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
+                <FiCalendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-pizza-red" />
                 <input
                   type="date"
                   name="date"
@@ -242,27 +251,27 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
                   onChange={handleInputChange}
                   min={format(new Date(), "yyyy-MM-dd")}
                   className={`w-full pl-10 pr-4 py-2 rounded-md border ${
-                    errors.date ? "border-destructive" : "border-input"
-                  } focus:outline-none focus:ring-2 focus:ring-ring`}
+                    errors.date ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-pizza-red`}
                 />
               </div>
-              {errors.date && <p className="mt-1 text-sm text-destructive">{errors.date}</p>}
+              {errors.date && <p className="mt-1 text-sm text-red-500">{errors.date}</p>}
             </div>
 
             {/* Campo Ora */}
             <div>
-              <label className="block text-sm font-body text-foreground mb-2">
+              <label className="block text-sm font-body text-gray-800 mb-2">
                 {t("reservationModal.timeLabel")}
               </label>
               <div className="relative">
-                <FiClock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
+                <FiClock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-pizza-red" />
                 <select
                   name="time"
                   value={formData.time}
                   onChange={handleInputChange}
                   className={`w-full pl-10 pr-4 py-2 rounded-md border ${
-                    errors.time ? "border-destructive" : "border-input"
-                  } focus:outline-none focus:ring-2 focus:ring-ring appearance-none`}
+                    errors.time ? "border-red-500" : "border-gray-300"
+                  } focus:outline-none focus:ring-2 focus:ring-pizza-red appearance-none`}
                 >
                   <option value="">{t("reservationModal.timePlaceholder")}</option>
                   {availableTimeSlots.length > 0 ? (
@@ -276,22 +285,22 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
                   )}
                 </select>
               </div>
-              {errors.time && <p className="mt-1 text-sm text-destructive">{errors.time}</p>}
+              {errors.time && <p className="mt-1 text-sm text-red-500">{errors.time}</p>}
             </div>
           </div>
 
           {/* Numero di Persone */}
           <div>
-            <label className="block text-sm font-body text-foreground mb-2">
+            <label className="block text-sm font-body text-gray-800 mb-2">
               {t("reservationModal.peopleLabel")}
             </label>
             <div className="relative">
-              <FiUsers className="absolute left-3 top-1/2 transform -translate-y-1/2 text-accent" />
+              <FiUsers className="absolute left-3 top-1/2 transform -translate-y-1/2 text-pizza-red" />
               <select
                 name="seats"
                 value={formData.seats}
                 onChange={handleInputChange}
-                className="w-full pl-10 pr-4 py-2 rounded-md border border-input focus:outline-none focus:ring-2 focus:ring-ring appearance-none"
+                className="w-full pl-10 pr-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pizza-red appearance-none"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
                   <option key={num} value={num}>
@@ -304,14 +313,14 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
 
           {/* Richieste Speciali */}
           <div>
-            <label className="block text-sm font-body text-foreground mb-2">
+            <label className="block text-sm font-body text-gray-800 mb-2">
               {t("reservationModal.specialRequestsLabel")}
             </label>
             <textarea
               name="specialRequests"
               value={formData.specialRequests}
               onChange={handleInputChange}
-              className="w-full px-4 py-2 rounded-md border border-input focus:outline-none focus:ring-2 focus:ring-ring h-24"
+              className="w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-pizza-red h-24"
               placeholder={t("reservationModal.specialRequestsPlaceholder")}
             />
           </div>
@@ -319,28 +328,38 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full bg-primary text-primary-foreground py-2 rounded-md font-body hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-pizza-red text-white py-2 rounded-md font-body hover:bg-pizza-red/90 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isSubmitting ? t("reservationModal.submitting") : t("reservationModal.submitButton")}
           </button>
         </form>
-      </div>
+      </motion.div>
 
       {/* Modal di Successo */}
       {showSuccess && (
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-2 z-50">
-          <div className="transform scale-90 sm:scale-100 bg-card p-4 sm:p-6 rounded-lg shadow-lg max-w-sm w-full">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-2 z-50"
+        >
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="transform scale-90 sm:scale-100 bg-white p-4 sm:p-6 rounded-lg shadow-lg max-w-sm w-full"
+          >
             <div className="mb-4 text-center">
-              <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                <FiCheck className="text-primary text-xl" />
+              <div className="mx-auto w-12 h-12 bg-pizza-red/10 rounded-full flex items-center justify-center mb-4">
+                <FiCheck className="text-pizza-red text-xl" />
               </div>
-              <h2 className="text-lg sm:text-xl font-heading text-foreground mb-2">
+              <h2 className="text-lg sm:text-xl font-heading text-gray-800 mb-2">
                 {t("reservationModal.successTitle")}
               </h2>
-              <p className="text-accent text-sm">
+              <p className="text-pizza-red text-sm">
                 {t("reservationModal.successMessage")}
               </p>
-              <p className="text-accent text-sm">
+              <p className="text-pizza-red text-sm">
                 {t("reservationModal.holdTimeMessage")}
               </p>
             </div>
@@ -363,42 +382,52 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
                 setShowSuccess(false);
                 onClose();
               }}
-              className="w-full bg-primary text-primary-foreground py-2 rounded-md font-body hover:bg-primary/90 transition-colors"
+              className="w-full bg-pizza-red text-white py-2 rounded-md font-body hover:bg-pizza-red/90"
             >
               {t("reservationModal.closeButton")}
             </button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
 
       {/* Modal di Errore */}
       {showError && (
-        <div className="fixed inset-0 bg-background/80 backdrop-blur-sm flex items-center justify-center p-2 z-50">
-          <div className="transform scale-90 sm:scale-100 bg-card p-4 sm:p-6 rounded-lg shadow-lg max-w-sm w-full border border-destructive">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-2 z-50"
+        >
+          <motion.div 
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="transform scale-90 sm:scale-100 bg-white p-4 sm:p-6 rounded-lg shadow-lg max-w-sm w-full border border-red-500"
+          >
             <div className="mb-4 text-center">
-              <div className="mx-auto w-12 h-12 bg-destructive/10 rounded-full flex items-center justify-center mb-4">
-                <FiAlertCircle className="text-destructive text-xl" />
+              <div className="mx-auto w-12 h-12 bg-red-500/10 rounded-full flex items-center justify-center mb-4">
+                <FiAlertCircle className="text-red-500 text-xl" />
               </div>
-              <h2 className="text-lg sm:text-xl font-heading text-foreground mb-2">
+              <h2 className="text-lg sm:text-xl font-heading text-gray-800 mb-2">
                 {t("reservationModal.errorTitle")}
               </h2>
-              <p className="text-destructive text-sm">
+              <p className="text-red-500 text-sm">
                 {errorMessage}
               </p>
-              <p className="text-primary text-sm">
+              <p className="text-pizza-red text-sm">
                 {t("reservationModal.contactInfo")}
               </p>
             </div>
             <button
               onClick={() => setShowError(false)}
-              className="w-full bg-destructive text-white py-2 rounded-md font-body hover:bg-destructive/90 transition-colors"
+              className="w-full bg-red-500 text-white py-2 rounded-md font-body hover:bg-red-500/90"
             >
               {t("reservationModal.closeButton")}
             </button>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
-    </div>
+    </motion.div>
   );
 };
 
