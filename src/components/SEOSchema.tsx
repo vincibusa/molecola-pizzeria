@@ -18,34 +18,40 @@ const SEOSchema: React.FC<SEOSchemaProps> = ({ type = "restaurant", articleData 
   const restaurantSchema = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
-    "name": "Pizzeria Fermento 2.0",
-    "image": "https://www.fermento20.it/path/to/og-image.jpg",
-    "url": "https://www.fermento20.it",
+    "name": "Molecola Pizzeria",
+    "image": "https://www.molecolapizzeria.it/images/molecola-pizzeria.jpg",
+    "url": "https://www.molecolapizzeria.it",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Via Giacomo Matteotti, 29",
-      "addressLocality": "Cefalù",
-      "postalCode": "90015",
+      "streetAddress": "Via Giuseppe Velasquez, 29/35",
+      "addressLocality": "Palermo",
+      "postalCode": "90141",
       "addressRegion": "PA",
       "addressCountry": "IT"
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": "38.0382736",
-      "longitude": "14.0182135"
+      "latitude": "38.123891",
+      "longitude": "13.355316"
     },
-    "telephone": "+39 331 872 7612",
-    "servesCuisine": "Pizzeria, Cucina Italiana",
+    "telephone": "+39 375 5600 247",
+    "servesCuisine": ["Pizza", "Cucina Innovativa", "Pizza Molecolare", "Italiana"],
     "priceRange": "€€",
     "openingHoursSpecification": [
       {
         "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        "opens": "19:00",
-        "closes": "23:00"
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Sunday"],
+        "opens": "17:00",
+        "closes": "21:30"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Friday", "Saturday"],
+        "opens": "17:00",
+        "closes": "22:00"
       }
     ],
-    "menu": "https://www.fermento20.it/menu",
+    "menu": "https://www.molecolapizzeria.it/menu",
     "acceptsReservations": "True"
   };
 
@@ -59,14 +65,14 @@ const SEOSchema: React.FC<SEOSchemaProps> = ({ type = "restaurant", articleData 
     "datePublished": articleData.datePublished,
     "author": {
       "@type": "Person",
-      "name": "Pizzeria Fermento 2.0"
+      "name": "Molecola Pizzeria"
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Pizzeria Fermento 2.0",
+      "name": "Molecola Pizzeria",
       "logo": {
         "@type": "ImageObject",
-        "url": "https://www.fermento20.it/logo.png"
+        "url": "https://www.molecolapizzeria.it/logo.png"
       }
     }
   } : null;
@@ -75,23 +81,32 @@ const SEOSchema: React.FC<SEOSchemaProps> = ({ type = "restaurant", articleData 
   const menuSchema = {
     "@context": "https://schema.org",
     "@type": "Menu",
-    "name": "Menu Pizzeria Fermento 2.0",
+    "name": "Menu Molecola",
     "hasMenuSection": [
       {
         "@type": "MenuSection",
-        "name": "Pizze Classiche",
+        "name": "Molecolari",
         "hasMenuItem": [
           {
             "@type": "MenuItem",
-            "name": "Margherita",
-            "description": "Pomodoro, mozzarella, basilico",
+            "name": "Essenza di Zucca",
+            "description": "Bufala Campana DOP, Crema di zucca in agrodolce, Prosciutto Crudo Levoni 18 mesi, Pinoli Tostati, Cialde di zucca cristallizzata",
             "offers": {
               "@type": "Offer",
-              "price": "8.00",
+              "price": "18.00",
+              "priceCurrency": "EUR"
+            }
+          },
+          {
+            "@type": "MenuItem",
+            "name": "Tre consistenze di Formaggi",
+            "description": "Crema di bufala DOP, Cialde di Grana padano 24 mesi, Spuma di blu di bufala, polvere di pomodoro Bio",
+            "offers": {
+              "@type": "Offer",
+              "price": "18.00",
               "priceCurrency": "EUR"
             }
           }
-          // Aggiungere altri elementi del menu se necessario
         ]
       }
     ]

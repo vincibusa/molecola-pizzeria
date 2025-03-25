@@ -3,9 +3,10 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaUserFriends } from "react-icons/fa";
-import foto1 from "../assets/fermento 2.0 FOTO/DSC_0346.jpg";
-import foto2 from "../assets/fermento 2.0 FOTO/DSC_0418.jpg";
-import foto3 from "../assets/fermento 2.0 FOTO/DSC_0567.jpg";
+import OptimizedImage from "./OptimizedImage";
+import foto1 from "../assets/molecola/DSCF8120.jpg";
+import foto2 from "../assets/molecola/DSCF8063.jpg";
+import foto3 from "../assets/molecola/DSCF8076.jpg";
 
 interface TeamMember {
   name: string;
@@ -14,9 +15,9 @@ interface TeamMember {
 }
 
 const teamMembers: TeamMember[] = [
-  { name: "Chef Giovanni", role: "Maestro Pizzaiolo", image: foto1 },
-  { name: "Maria Rossi", role: "Chef di Cucina", image: foto2 },
-  { name: "Antonio Bianchi", role: "Sommelier", image: foto3 }
+  { name: "Salvatore Capizzi", role: "Chef e Fondatore", image: foto1 },
+  { name: "Team Molecola", role: "Laboratorio Molecolare", image: foto2 },
+  { name: "Pizza Lab", role: "Innovazione Culinaria", image: foto3 }
 ];
 
 const cardVariants = {
@@ -91,12 +92,17 @@ const TeamGallerySection: React.FC = () => {
                 <div className="pizza-card overflow-hidden group relative">
                   {/* Image */}
                   <div className="relative overflow-hidden h-[350px]">
-                    <motion.img
-                      src={member.image}
-                      alt={member.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    <motion.div
                       whileHover={{ scale: 1.1 }}
-                    />
+                      className="h-full w-full"
+                    >
+                      <OptimizedImage
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        height={350}
+                      />
+                    </motion.div>
                     {/* Overlay gradiente */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
                       <div className="text-white">

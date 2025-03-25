@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import i18n from "../i18n"; // assicurati che il percorso sia corretto
+import OptimizedImage from "./OptimizedImage";
 
 interface Language {
   code: string;
@@ -41,14 +42,13 @@ const LanguageSelector: React.FC = () => {
         aria-label="Open language selector"
       >
         {currentLang ? (
-          <img
+          <OptimizedImage
             src={currentLang.flag}
             alt={`${currentLang.name} flag`}
             className="w-full h-full object-cover rounded-full"
-            onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-              (e.target as HTMLImageElement).src =
-                "https://via.placeholder.com/32x32.png?text=Flag";
-            }}
+            width={48}
+            height={48}
+            placeholder="https://via.placeholder.com/32x32.png?text=Flag"
           />
         ) : (
           <span>Lang</span>
@@ -72,14 +72,13 @@ const LanguageSelector: React.FC = () => {
                 aria-label={`Select ${lang.name}`}
               >
                 <div className="w-8 h-8 rounded-full overflow-hidden">
-                  <img
+                  <OptimizedImage
                     src={lang.flag}
                     alt={`${lang.name} flag`}
                     className="w-full h-full object-cover"
-                    onError={(e: React.SyntheticEvent<HTMLImageElement, Event>) => {
-                      (e.target as HTMLImageElement).src =
-                        "https://via.placeholder.com/32x32.png?text=Flag";
-                    }}
+                    width={32}
+                    height={32}
+                    placeholder="https://via.placeholder.com/32x32.png?text=Flag"
                   />
                 </div>
                 <span className="absolute left-full ml-2 px-2 py-1 bg-gray-800 text-white text-sm rounded opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap">

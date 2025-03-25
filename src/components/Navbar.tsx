@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { FaPizzaSlice, FaShoppingCart } from "react-icons/fa";
+import { FaPizzaSlice } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ReservationModal from "./ReservationModal";
 import logo from "../assets/logo.png";
 import { useNavbar } from "../contexts/NavbarContenxt";
 import { useTranslation } from "react-i18next";
+import OptimizedImage from "./OptimizedImage";
 
 const Navbar = () => {
   const { t } = useTranslation();
@@ -77,14 +78,13 @@ const Navbar = () => {
                   className="flex items-center"
                 >
                   <Link to="/" className="flex items-center">
-                    <img
+                    <OptimizedImage
                       src={logo}
                       alt={t("navbar.logoAlt")}
-                      className="h-14 mr-3"
+                      className=" mr-1"
+                      height={64}
+                      loading="eager"
                     />
-                    <span className={`font-playfair text-xl font-bold ${textColor}`}>
-                      Molecola
-                    </span>
                   </Link>
                 </motion.div>
                 
@@ -127,19 +127,13 @@ const Navbar = () => {
                   </Link>
                   
                   {/* Bottoni CTA */}
-                  <div className="flex items-center space-x-4">
+                  <div className="flex items-center">
                     <button
                       onClick={() => setIsReservationModalOpen(true)}
                       className="pizza-btn bg-pizza-red text-white px-5 py-2 text-sm"
                     >
                       {t("navbar.reservation")}
                     </button>
-                    <Link
-                      to="/menu"
-                      className="flex items-center justify-center w-10 h-10 rounded-full bg-pizza-brown text-white hover:bg-pizza-yellow transition-colors"
-                    >
-                      <FaShoppingCart />
-                    </Link>
                   </div>
                 </div>
               </div>

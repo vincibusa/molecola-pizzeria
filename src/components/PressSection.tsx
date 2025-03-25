@@ -3,7 +3,9 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { FaNewspaper, FaQuoteLeft, FaQuoteRight, FaExternalLinkAlt } from "react-icons/fa";
+import { Trans } from "react-i18next";
 import Bollino from "../assets/web gambero-02.png";
+import OptimizedImage from "./OptimizedImage";
 
 interface PressArticle {
   title: string;
@@ -17,16 +19,37 @@ interface PressArticle {
 const pressArticles: PressArticle[] = [
   {
     title:
-      "Fermento 2.0: La pizzeria dei fratelli Mirenda a Cefalù conquista il Gambero Rosso",
+      "Molecola: L'innovazione gastronomica nel cuore di Palermo conquista i foodie siciliani",
     preview:
-      "I fratelli Salvatore e Rosario Mirenda hanno conquistato il prestigioso riconoscimento del Gambero Rosso con la loro pizzeria Fermento 2.0 a Cefalù. La guida 'Pizzerie d'Italia 2024' ha assegnato loro 'Uno Spicchio', premiando la loro dedizione all'arte della pizza e l'utilizzo di ingredienti di alta qualità.",
+      "Nel centro di Palermo, a pochi passi da Piazza Politeama, Molecola si distingue per il suo approccio rivoluzionario alla pizza. Lo chef Salvatore Capizzi ha creato un menu che esplora tecniche molecolari avanzate, trasformando la tradizionale pizza siciliana in un'esperienza gastronomica multisensoriale che sta conquistando appassionati e critici.",
     image:
-      "https://www.allfoodsicily.it/wp-content/uploads/2024/10/Fermento-1-e1727942311536.jpeg",
-    link: "https://www.allfoodsicily.it/fermento-2-0-la-pizzeria-dei-fratelli-mirenda-a-cefalu-conquista-il-gambero-rosso-pronti-ad-alzare-lasticella/",
-    source: "AllFoodSicily",
-    date: "Ottobre 2024"
+      "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?q=80&w=2070&auto=format&fit=crop",
+    link: "https://molecolapizzeria.it/blog/innovazione-gastronomica-palermo",
+    source: "FoodBlogSicilia",
+    date: "Marzo 2024"
   },
-  // altri articoli...
+  {
+    title:
+      "Le nuove frontiere della pizza: Molecola Pizzeria presenta 'La Fluorescente'",
+    preview:
+      "Un'esperienza culinaria che va oltre il gusto: Molecola Pizzeria ha lanciato 'La Fluorescente', una pizza che utilizza ingredienti naturali con proprietà bioluminescenti che creano un effetto visivo sorprendente. Questo piatto rappresenta perfettamente la filosofia dello chef Capizzi di creare esperienze gastronomiche che coinvolgono tutti i sensi.",
+    image:
+      "https://images.unsplash.com/photo-1595854341625-f33e04f76a30?q=80&w=2070&auto=format&fit=crop",
+    link: "https://molecolapizzeria.it/blog/pizza-fluorescente",
+    source: "Palermo Today",
+    date: "Febbraio 2024"
+  },
+  {
+    title:
+      "Molecola Pizzeria: Quando la scienza incontra la tradizione siciliana",
+    preview:
+      "Dalla fermentazione controllata agli impasti arricchiti con ingredienti inaspettati, dalla cottura perfettamente calibrata alle presentazioni scenografiche, Molecola Pizzeria a Palermo sta ridefinendo cosa significhi essere una pizzeria in Sicilia. Con piatti che sembrano usciti da un laboratorio scientifico ma che mantengono saldo il legame con i sapori autentici dell'isola.",
+    image:
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop",
+    link: "https://molecolapizzeria.it/blog/scienza-incontra-tradizione",
+    source: "Sicilia Gourmet",
+    date: "Gennaio 2024"
+  }
 ];
 
 const PressSection: React.FC = () => {
@@ -102,10 +125,12 @@ const PressSection: React.FC = () => {
                 }}
                 className="w-48 h-48 mb-6 relative"
               >
-                <img
+                <OptimizedImage
                   src={Bollino}
                   alt={t("pressSection.leftArticle.imageAlt")}
                   className="w-full h-full object-contain"
+                  width={192}
+                  height={192}
                 />
                 {/* Glow effect */}
                 <div className="absolute inset-0 bg-pizza-red opacity-10 rounded-full blur-xl"></div>
@@ -146,10 +171,11 @@ const PressSection: React.FC = () => {
               >
                 {/* Image */}
                 <div className="w-full md:w-2/5 h-48 overflow-hidden relative">
-                  <img
+                  <OptimizedImage
                     src={article.image}
                     alt={article.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    height={192}
                   />
                   {/* Source badge */}
                   {article.source && (

@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 
 import ReservationModal from './ReservationModal';
 import logo from '../assets/logo.png';
+import OptimizedImage from './OptimizedImage';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -42,11 +43,13 @@ const Footer: React.FC = () => {
         <div className="container mx-auto px-4 pt-16 pb-8 relative">
           {/* Logo con forma a fetta di pizza */}
           <div className="flex justify-center mb-10">
-            <div className="w-32 h-32 rounded-full bg-white p-2 shadow-xl transform rotate-12 hover:rotate-0 transition-all duration-300">
-              <img
+            <div className="w-56 h-56 rounded-full bg-white p-3 shadow-xl transform rotate-12 hover:rotate-0 transition-all duration-300">
+              <OptimizedImage
                 src={logo}
                 alt={t("navbar.logoAlt")}
                 className="w-full h-full object-contain"
+                width={224}
+                height={224}
               />
             </div>
           </div>
@@ -97,21 +100,23 @@ const Footer: React.FC = () => {
                 <span className="relative z-10">{t("footer.quickLinksHeader")}</span>
                 <span className="absolute bottom-0 left-0 w-full h-1 bg-pizza-red"></span>
               </h3>
-              <ul className="space-y-3">
+              <ul className="space-y-3 flex flex-col items-start">
                 {quickLinks.map((link) => (
-                  <li key={link.key} className="transition-transform hover:translate-x-2">
+                  <li key={link.key} className="transition-transform hover:translate-x-2 flex items-center space-x-2">
                     {link.key === "navbar.reservation" ? (
                       <button
                         onClick={() => setIsReservationModalOpen(true)}
-                        className="text-gray-200 hover:text-white hover:underline flex items-center justify-center md:justify-start"
+                        className="text-gray-200 hover:text-white hover:underline flex items-center"
                       >
-                        <FaPizzaSlice className="mr-2 text-pizza-red" />
-                        {t(link.key)}
+                        <span className="inline-block w-6 text-center mr-2">
+                          <FaPizzaSlice className="text-pizza-red inline-block" />
+                        </span>
+                        <span>{t(link.key)}</span>
                       </button>
                     ) : (
                       <Link
                         to={link.path}
-                        className="text-gray-200 hover:text-white hover:underline flex items-center justify-center md:justify-start"
+                        className="text-gray-200 hover:text-white hover:underline flex items-center"
                         onClick={(e) => {
                           if (link.key === "navbar.press" && location.pathname === "/") {
                             e.preventDefault();
@@ -122,8 +127,10 @@ const Footer: React.FC = () => {
                           }
                         }}
                       >
-                        <FaPizzaSlice className="mr-2 text-pizza-red" />
-                        {t(link.key)}
+                        <span className="inline-block w-6 text-center mr-2">
+                          <FaPizzaSlice className="text-pizza-red inline-block" />
+                        </span>
+                        <span>{t(link.key)}</span>
                       </Link>
                     )}
                   </li>
@@ -144,49 +151,36 @@ const Footer: React.FC = () => {
                 <span className="absolute bottom-0 left-0 w-full h-1 bg-pizza-red"></span>
               </h3>
               
-              <div className="space-y-4">
-                <div className="flex items-center justify-center md:justify-end space-x-3">
-                  <FaMapMarkerAlt className="text-pizza-red" />
-                  <p className="text-gray-200">{t("footer.address.line1")}</p>
-                </div>
-                <div className="flex items-center justify-center md:justify-end space-x-3">
-                  <FaPhone className="text-pizza-red transform rotate-90" />
-                  <p className="text-gray-200">{t("footer.phone")}</p>
-                </div>
-                <div className="flex items-center justify-center md:justify-end space-x-3">
-                  <FaEnvelope className="text-pizza-red" />
-                  <p className="text-gray-200">{t("footer.email")}</p>
-                </div>
-                <div className="flex items-center justify-center md:justify-end space-x-3">
-                  <FaClock className="text-pizza-red" />
-                  <div>
+              <ul className="space-y-4 flex flex-col">
+                <li className="transition-transform hover:translate-x-2 flex items-center md:justify-end">
+                  <span className="inline-block w-6 text-center mr-2">
+                    <FaMapMarkerAlt className="text-pizza-red inline-block" />
+                  </span>
+                  <span className="text-gray-200">{t("footer.address.line1")}</span>
+                </li>
+                <li className="transition-transform hover:translate-x-2 flex items-center md:justify-end">
+                  <span className="inline-block w-6 text-center mr-2">
+                    <FaPhone className="text-pizza-red transform rotate-90 inline-block" />
+                  </span>
+                  <span className="text-gray-200">{t("footer.phone")}</span>
+                </li>
+                <li className="transition-transform hover:translate-x-2 flex items-center md:justify-end">
+                  <span className="inline-block w-6 text-center mr-2">
+                    <FaEnvelope className="text-pizza-red inline-block" />
+                  </span>
+                  <span className="text-gray-200">{t("footer.email")}</span>
+                </li>
+                <li className="transition-transform hover:translate-x-2 flex items-center md:justify-end">
+                  <span className="inline-block w-6 text-center mr-2">
+                    <FaClock className="text-pizza-red inline-block" />
+                  </span>
+                  <div className="text-left md:text-right">
                     <p className="text-gray-200">{t("footer.hours.weekdays")}</p>
                     <p className="text-gray-200">{t("footer.hours.monday")}</p>
                   </div>
-                </div>
-              </div>
+                </li>
+              </ul>
             </motion.div>
-          </div>
-
-          {/* Newsletter */}
-          <div className="mb-12 bg-white bg-opacity-10 rounded-xl p-6">
-            <div className="text-center">
-              <h3 className="text-xl font-playfair mb-4">{t("footer.newsletter.title")}</h3>
-              <p className="text-gray-200 mb-6">{t("footer.newsletter.description")}</p>
-              <form className="flex flex-col sm:flex-row max-w-md mx-auto gap-2">
-                <input 
-                  type="email" 
-                  placeholder={t("footer.newsletter.placeholder")}
-                  className="px-4 py-2 rounded-full flex-1 text-pizza-brown focus:outline-none" 
-                />
-                <button 
-                  type="submit" 
-                  className="pizza-btn bg-pizza-red text-white px-6 py-2"
-                >
-                  {t("footer.newsletter.button")}
-                </button>
-              </form>
-            </div>
           </div>
 
           {/* Copyright */}

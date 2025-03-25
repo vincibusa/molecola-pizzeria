@@ -56,10 +56,73 @@ input, textarea, select {
   background: var(--pizza-red-dark);
 }
 
+/* Ottimizzazione delle animazioni in base alle preferenze */
+:root[data-reduced-motion="true"] {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .animate-slide-up,
+  .animate-fade-in {
+    animation: none !important;
+  }
+  
+  .hover-scale:hover {
+    transform: none !important;
+  }
+  
+  /* Disabilita le trasformazioni hover che potrebbero causare jank */
+  .transition-all-300,
+  .transition-all,
+  .transition-transform,
+  .transition-colors,
+  .transition-opacity {
+    transition: none !important;
+  }
+  
+  /* Stabilizza la scrollbar per evitare salti */
+  body {
+    overflow-y: scroll;
+  }
+}
+
 /* Media query per dispositivi mobili */
 @media (max-width: 768px) {
+  /* Forza reduced motion su dispositivi mobili */
+  :root:not([data-reduced-motion="true"]) {
+    --reduced-motion: true;
+  }
+  
+  html:not([data-reduced-motion="true"]) {
+    content: attr(data-reduced-motion, "true");
+  }
+  
   .hide-on-mobile {
     display: none !important;
+  }
+
+  /* Ottimizzazione delle animazioni per dispositivi mobili */
+  @media (prefers-reduced-motion), (max-width: 768px) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    
+    .animate-slide-up,
+    .animate-fade-in {
+      animation: none !important;
+    }
+    
+    .hover-scale:hover {
+      transform: none !important;
+    }
   }
 }
 
@@ -127,11 +190,20 @@ input, textarea, select {
 
 /* Stili moderni per la pizzeria */
 .pizza-btn {
-  @apply rounded-full font-medium transition-all duration-300 transform hover:scale-105 shadow-md;
+  @apply rounded-full font-medium shadow-md;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+.pizza-btn:hover {
+  @apply scale-105;
 }
 
 .pizza-card {
-  @apply bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl;
+  @apply bg-white rounded-xl shadow-lg overflow-hidden;
+  transition: all 0.3s ease;
+}
+.pizza-card:hover {
+  @apply shadow-xl;
 }
 
 .pizza-section {
@@ -158,7 +230,11 @@ input, textarea, select {
 }
 
 .menu-item {
-  @apply border-b border-gray-200 py-4 px-3 transition-all duration-200 hover:bg-gray-50;
+  @apply border-b border-gray-200 py-4 px-3;
+  transition: all 0.2s ease;
+}
+.menu-item:hover {
+  @apply bg-gray-50;
 }
 
 .menu-item-image {

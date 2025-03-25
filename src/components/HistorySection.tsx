@@ -1,13 +1,24 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useTranslation, Trans } from "react-i18next";
-import FotoFratelli from "../assets/FotoFratelli.jpeg";
+import molecolaAbout from "../assets/molecolaAbout.jpeg";
 import { FaPizzaSlice, FaHistory } from "react-icons/fa";
+import OptimizedImage from "./OptimizedImage";
 
 const HistorySection: React.FC = () => {
   const { ref } = useInView({ threshold: 0.5 });
   const { t } = useTranslation();
+  const prefersReducedMotion = useReducedMotion();
+
+  // Non animare se l'utente preferisce animazioni ridotte
+  const animationProps = prefersReducedMotion
+    ? {}
+    : {
+        initial: { opacity: 0, scale: 0 },
+        whileInView: { opacity: 1, scale: 1 },
+        transition: { duration: 0.5 }
+      };
 
   return (
     <section id="about" ref={ref} className="pizza-section bg-pizza-background relative overflow-hidden">
@@ -23,25 +34,27 @@ const HistorySection: React.FC = () => {
         {/* Titolo con decorazione */}
         <div className="text-center mb-16">
           <motion.span 
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            {...animationProps}
             className="inline-block bg-pizza-red text-white p-3 rounded-full mb-4"
           >
             <FaHistory size={30} />
           </motion.span>
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            {...(prefersReducedMotion ? {} : {
+              initial: { opacity: 0, y: 20 },
+              whileInView: { opacity: 1, y: 0 },
+              transition: { duration: 0.5, delay: 0.2 }
+            })}
             className="pizza-title font-playfair text-5xl md:text-6xl"
           >
             {t("historySection.title")}
           </motion.h2>
           <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
+            {...(prefersReducedMotion ? {} : {
+              initial: { scaleX: 0 },
+              whileInView: { scaleX: 1 },
+              transition: { duration: 0.7, delay: 0.4 }
+            })}
             className="h-1 w-24 bg-pizza-red mx-auto mt-6"
           />
         </div>
@@ -112,10 +125,11 @@ const HistorySection: React.FC = () => {
               whileHover={{ scale: 1.03, rotate: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <img
-                src={FotoFratelli}
+              <OptimizedImage
+                src={molecolaAbout}
                 alt={t("historySection.image.alt")}
                 className="w-full h-full object-cover"
+                loading="eager"
               />
             </motion.div>
             

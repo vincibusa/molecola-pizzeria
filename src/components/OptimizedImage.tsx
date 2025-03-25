@@ -8,6 +8,7 @@ interface OptimizedImageProps {
   className?: string;
   loading?: 'lazy' | 'eager';
   placeholder?: string;
+  onLoad?: () => void;
 }
 
 const OptimizedImage: React.FC<OptimizedImageProps> = ({
@@ -17,7 +18,8 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   height,
   className = '',
   loading = 'lazy',
-  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIiAvPjwvc3ZnPg=='
+  placeholder = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIiAvPjwvc3ZnPg==',
+  onLoad
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [imgSrc, setImgSrc] = useState(placeholder);
@@ -40,7 +42,14 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     opacity: isLoaded ? 1 : 0.5,
     transition: 'opacity 0.3s',
     width: width ? `${width}px` : '100%',
-    height: height ? `${height}px` : 'auto',
+    height: height ? `${height}px` : '100%',
+  };
+
+  const handleImageLoad = () => {
+    setIsLoaded(true);
+    if (onLoad) {
+      onLoad();
+    }
   };
 
   return (
@@ -53,7 +62,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       loading={loading}
       style={imgStyle}
       decoding="async"
-      onLoad={() => setIsLoaded(true)}
+      onLoad={handleImageLoad}
     />
   );
 };

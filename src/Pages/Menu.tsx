@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaPizzaSlice, FaLeaf, FaWineGlassAlt } from "react-icons/fa";
 import { GiFullPizza, GiHotMeal, GiFrenchFries, GiCookingPot, GiChefToque, GiPizzaCutter } from "react-icons/gi";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import { menuItems } from "../data/menuData";
 import { JSX } from "react/jsx-runtime";
@@ -24,6 +24,8 @@ const Menu = () => {
   const { t } = useTranslation();
   const [activeCategory, setActiveCategory] = useState<CategoryName>("Pizze Classiche");
   const [animateItems, setAnimateItems] = useState(true);
+
+  const prefersReducedMotion = useReducedMotion();
 
   // Array delle categorie
   const categories: { name: CategoryName; icon: JSX.Element }[] = [
@@ -60,11 +62,29 @@ const Menu = () => {
   const handleCategoryChange = (category: CategoryName) => {
     if (category === activeCategory) return;
     
+    // Se sono attive le preferenze per ridurre le animazioni, cambia direttamente
+    if (prefersReducedMotion) {
+      setActiveCategory(category);
+      return;
+    }
+    
     setAnimateItems(false);
     setTimeout(() => {
       setActiveCategory(category);
       setAnimateItems(true);
     }, 300);
+  };
+
+  // Configura le proprietà di animazione in base alle preferenze dell'utente
+  const getAnimationProps = (delay = 0) => {
+    if (prefersReducedMotion) {
+      return {};
+    }
+    return {
+      initial: { opacity: 0, y: 20 },
+      animate: { opacity: 1, y: 0 },
+      transition: { duration: 0.3, delay }
+    };
   };
 
   return (
@@ -79,25 +99,31 @@ const Menu = () => {
         
         <div className="container mx-auto px-4 relative">
           <motion.h1 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            {...(prefersReducedMotion ? {} : {
+              initial: { opacity: 0, y: -20 },
+              animate: { opacity: 1, y: 0 },
+              transition: { duration: 0.5 }
+            })}
             className="text-4xl md:text-5xl font-playfair text-center mb-2"
           >
             {t("menu.title")}
           </motion.h1>
           
           <motion.div 
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            {...(prefersReducedMotion ? {} : {
+              initial: { scaleX: 0 },
+              animate: { scaleX: 1 },
+              transition: { duration: 0.5, delay: 0.2 }
+            })}
             className="w-24 h-1 bg-pizza-red mx-auto mb-4"
           />
           
           <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            {...(prefersReducedMotion ? {} : {
+              initial: { opacity: 0 },
+              animate: { opacity: 1 },
+              transition: { duration: 0.5, delay: 0.3 }
+            })}
             className="text-center text-gray-200 max-w-2xl mx-auto"
           >
             {t("menu.subtitle")}
@@ -145,9 +171,7 @@ const Menu = () => {
             {filteredItems.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: index * 0.05 }}
+                {...getAnimationProps(index * 0.05)}
                 className="pizza-card p-4 relative overflow-hidden group"
               >
                 {/* Background pattern */}

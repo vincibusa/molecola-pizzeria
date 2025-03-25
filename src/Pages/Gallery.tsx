@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 import { useNavbar } from "../contexts/NavbarContenxt";
 import Loader from "../components/Loader";
+import { useTranslation } from "react-i18next";
+import OptimizedImage from "../components/OptimizedImage";
 
 interface Image {
   id: number;
@@ -12,7 +14,7 @@ interface Image {
 }
 
 const importAllImages = (): Image[] => {
-  const modules = import.meta.glob("../assets/fermento 2.0 FOTO/*.{png,jpg,jpeg,svg}", { eager: true });
+  const modules = import.meta.glob("../assets/molecola/*.{png,jpg,jpeg,svg}", { eager: true });
   const imagesArray: Image[] = Object.entries(modules).map(([path, module], index) => {
     const url = (module as any).default || module;
     const altText = path.split("/").pop() || "";
@@ -30,6 +32,7 @@ const importAllImages = (): Image[] => {
 const images: Image[] = importAllImages();
 
 const Gallery: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedImage, setSelectedImage] = useState<Image | null>(null);
   const [filteredImages] = useState<Image[]>(images);
   const { setIsVisible } = useNavbar();
@@ -89,10 +92,10 @@ const Gallery: React.FC = () => {
             className="text-heading text-center mb-5 md:mb-10 text-4xl lg:text-6xl"
             style={{ fontFamily: '"IBM Plex Sans", sans-serif' }}
           >
-           QUESTO È FERMENTO 2.0
+            {t("gallery.title")}
           </h1>
           <p className="text-accent text-lg">
-            Impasto unico, ingredienti di prima scelta e un'atmosfera calda e accogliente.
+            {t("gallery.subtitle")}
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -103,11 +106,12 @@ const Gallery: React.FC = () => {
               onClick={() => setSelectedImage(image)}
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              <img
+              <OptimizedImage
                 src={image.url}
-                alt={image.alt}
-                onLoad={handleImageLoad}
+                alt={t("gallery.imageAlt")}
                 className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+                height={256}
+                onLoad={handleImageLoad}
               />
               <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 ease-in-out flex items-center justify-center">
                 <div className="text-white opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out transform group-hover:translate-y-0 translate-y-4">
@@ -135,13 +139,15 @@ const Gallery: React.FC = () => {
             <button
               onClick={() => setSelectedImage(null)}
               className="absolute top-4 right-4 text-white hover:text-primary-foreground transition-colors duration-300"
+              aria-label={t("gallery.close")}
             >
               <FiX size={24} />
             </button>
-            <img
+            <OptimizedImage
               src={selectedImage.url}
-              alt={selectedImage.alt}
+              alt={t("gallery.imageAlt")}
               className="max-w-full max-h-[90vh] object-contain animate-scaleIn"
+              loading="eager"
             />
           </div>
         )}

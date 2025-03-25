@@ -1,132 +1,329 @@
 // src/components/VideoBackground.tsx
-import { useState } from "react";
-import { motion } from "framer-motion";
-import Loader from "./Loader";
-import VideoBack from "../assets/videoDef.mp4";
+import React, { useState, useEffect, useRef } from "react";
+import { motion, useReducedMotion, AnimatePresence, useAnimation } from "framer-motion";
 import CallToActionButtons from "./CallToActionButtons";
-import { useTranslation } from "react-i18next";
+import { useTranslation, Trans } from "react-i18next";
+import { IoArrowForward, IoArrowBack } from "react-icons/io5";
+import OptimizedImage from "./OptimizedImage";
+
+// Importazione delle immagini per il carosello
+import pizza1 from "../assets/molecola/DSCF8191.png";
+import ingredients from "../assets/molecola/DSCF8147.png";
+import restaurant1 from "../assets/molecola/DSCF7915.jpg";
+import pizza2 from "../assets/molecola/DSCF8076.jpg";
+import restaurant2 from "../assets/molecola/DSCF8158.png";
 
 interface VideoBackgroundProps {
   onReservationClick: () => void;
 }
 
 const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick }) => {
-  const [videoLoaded, setVideoLoaded] = useState<boolean>(false);
   const { t } = useTranslation();
+  const prefersReducedMotion = useReducedMotion();
+  const progressControls = useAnimation();
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const SLIDE_DURATION = 5000; // Durata di ogni slide in millisecondi
+  
+  // Immagini per il carosello dalle foto di Molecola Pizzeria
+  const carouselImages = [
+    { 
+      id: 1, 
+      src: pizza1, // Pizza di alta qualità
+      alt: t("carousel.pizzaAlt")
+    },
+    { 
+      id: 2, 
+      src: ingredients, // Ingredienti
+      alt: t("carousel.ingredientsAlt")
+    },
+    { 
+      id: 3, 
+      src: restaurant1, // Interno del ristorante
+      alt: t("carousel.restaurantAlt")
+    },
+    { 
+      id: 4, 
+      src: pizza2, // Altra pizza
+      alt: t("carousel.pizzaAlt")
+    },
+    { 
+      id: 5, 
+      src: restaurant2, // Dettaglio interno ristorante
+      alt: t("carousel.restaurantAlt")
+    }
+  ];
+  
+  // Stato per tenere traccia dell'immagine corrente
+  const [currentImage, setCurrentImage] = useState(0);
+  const [direction, setDirection] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  
+  // Animazione ridotta su mobile
+  const isMobile = window.innerWidth < 768;
+  const shouldReduceMotion = prefersReducedMotion || isMobile;
+  
+  // Funzioni per la navigazione del carosello
+  const goToPrevious = () => {
+    resetProgressBar();
+    setDirection(-1);
+    setCurrentImage((prev) => (prev === 0 ? carouselImages.length - 1 : prev - 1));
+  };
+  
+  const goToNext = () => {
+    resetProgressBar();
+    setDirection(1);
+    setCurrentImage((prev) => (prev + 1) % carouselImages.length);
+  };
+
+  const resetProgressBar = () => {
+    // Resetta l'animazione della barra di progresso
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    
+    progressControls.set({ scaleX: 0 });
+    
+    if (isAutoPlaying && !shouldReduceMotion) {
+      // Avvia una nuova animazione di progresso
+      progressControls.start({
+        scaleX: 1,
+        transition: { 
+          duration: SLIDE_DURATION / 1000, 
+          ease: "linear" 
+        }
+      });
+      
+      // Imposta un nuovo intervallo per il cambio automatico
+      intervalRef.current = setInterval(() => {
+        goToNext();
+      }, SLIDE_DURATION);
+    }
+  };
+  
+  // Pausa l'autoplay quando l'utente interagisce con il carosello
+  const handleUserInteraction = () => {
+    setIsAutoPlaying(false);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+    progressControls.stop();
+  };
+  
+  // Riprendi l'autoplay dopo un po' di inattività
+  const resumeAutoplay = () => {
+    if (!isAutoPlaying) {
+      setIsAutoPlaying(true);
+      resetProgressBar();
+    }
+  };
+  
+  // Effetto per il cambio automatico delle immagini
+  useEffect(() => {
+    // Non cambiare automaticamente se riduciamo le animazioni
+    if (shouldReduceMotion) return;
+    
+    // Inizializza la barra di progresso
+    resetProgressBar();
+    
+    // Pulisci l'intervallo quando il componente viene smontato
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+    };
+  }, [shouldReduceMotion, isAutoPlaying]);
+  
+  // Imposta un timer per riprendere l'autoplay dopo 10 secondi di inattività
+  useEffect(() => {
+    if (!isAutoPlaying && !shouldReduceMotion) {
+      const resumeTimer = setTimeout(() => {
+        resumeAutoplay();
+      }, 10000); // 10 secondi
+      
+      return () => clearTimeout(resumeTimer);
+    }
+  }, [isAutoPlaying, shouldReduceMotion]);
+  
+  // Varianti di animazione per il carosello
+  const slideVariants = {
+    enter: (direction: number) => ({
+      opacity: 0,
+      scale: 1.03,
+    }),
+    center: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        opacity: { duration: 1.2, ease: "easeInOut" },
+        scale: { duration: 1.5, ease: "easeOut" },
+      }
+    },
+    exit: (direction: number) => ({
+      opacity: 0,
+      scale: 1.05,
+      transition: {
+        opacity: { duration: 0.8, ease: "easeInOut" },
+        scale: { duration: 1, ease: "easeIn" },
+      }
+    }),
+  };
+
+  // Varianti per i pulsanti di navigazione del carosello
+  const navButtonVariants = {
+    initial: { opacity: 0 },
+    hover: { opacity: 1, scale: 1.1 },
+    tap: { scale: 0.95 },
+  };
 
   return (
-    <>
-      {!videoLoaded && <Loader />}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        className="relative h-screen w-full overflow-hidden"
-        style={{ display: videoLoaded ? "block" : "none" }}
-      >
-        <div className="absolute inset-0">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            onCanPlayThrough={() => setVideoLoaded(true)}
-            className="w-full h-full object-cover"
-          >
-            <source src={VideoBack} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
-          
-          {/* Pattern overlay */}
-          <div className="absolute inset-0 bg-pizza-red opacity-5 mix-blend-multiply" style={{ 
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'44\' height=\'44\' viewBox=\'0 0 44 44\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg id=\'Page-1\' fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg id=\'brick-wall\' fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M0 0h22v22H0V0zm22 22h22v22H22V22z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-          }}></div>
-        </div>
-        
-        <div className="relative h-full flex flex-col items-center justify-center text-center px-4 max-w-6xl mx-auto">
-          {/* Animated Pizza Logo */}
-          <motion.div 
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ 
-              duration: 0.8, 
-              delay: 0.2,
-              type: "spring",
-              stiffness: 100
-            }}
-            className="mb-6"
-          >
-            <div className="w-24 h-24 md:w-32 md:h-32 bg-white rounded-full flex items-center justify-center p-3 shadow-2xl">
-              <img src="/logo-icon.svg" alt="Pizza Logo" className="w-16 h-16 md:w-20 md:h-20" />
-            </div>
-          </motion.div>
-          
-          {/* Hero Text */}
-          <motion.h1 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-playfair text-white mb-4 drop-shadow-lg"
-          >
-            {t("heroTitle")}
-          </motion.h1>
-          
-          <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="text-xl md:text-2xl text-white mb-8 max-w-3xl drop-shadow-md font-montserrat"
-          >
-            {t("heroSubtitle")}
-          </motion.p>
-          
-          {/* Decorative divider */}
+    <div className="relative w-full h-screen overflow-hidden">
+      {/* Carosello di immagini di sfondo */}
+      <div className="absolute inset-0">
+        <AnimatePresence initial={false} mode="wait" custom={direction}>
           <motion.div
-            initial={{ scaleX: 0, opacity: 0 }}
-            animate={{ scaleX: 1, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.9 }}
-            className="w-24 h-1 bg-pizza-red rounded-full mb-10"
-          />
-          
-          {/* Call to action */}
-          <CallToActionButtons onReservationClick={onReservationClick} />
-          
-          {/* Scroll indicator */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, y: [0, 10, 0] }}
-            transition={{ 
-              delay: 1.5, 
-              duration: 2,
-              repeat: Infinity,
-              repeatType: "loop"
-            }}
-            className="absolute bottom-8 left-0 right-0 flex justify-center"
+            key={currentImage}
+            custom={direction}
+            initial={shouldReduceMotion ? { opacity: 1 } : "enter"}
+            animate={shouldReduceMotion ? { opacity: 1 } : "center"}
+            exit={shouldReduceMotion ? { opacity: 1 } : "exit"}
+            variants={slideVariants}
+            className="absolute inset-0"
           >
-            <div className="flex flex-col items-center">
-              <p className="text-white text-sm mb-2">{t("scrollDown")}</p>
-              <svg 
-                width="24" 
-                height="24" 
-                viewBox="0 0 24 24" 
-                fill="none" 
-                xmlns="http://www.w3.org/2000/svg"
-                className="text-white"
-              >
-                <path 
-                  d="M12 5V19M12 19L19 12M12 19L5 12" 
-                  stroke="currentColor" 
-                  strokeWidth="2" 
-                  strokeLinecap="round" 
-                  strokeLinejoin="round"
-                />
-              </svg>
+            <div className="relative w-full h-full">
+              <OptimizedImage 
+                src={carouselImages[currentImage].src} 
+                alt={carouselImages[currentImage].alt}
+                className="w-full h-full object-cover transform hover:scale-105 transition-transform duration-[8s] ease-out"
+                loading="eager"
+                onLoad={() => {
+                  // Forzare il reflow per migliorare la qualità del rendering
+                  window.dispatchEvent(new Event('resize'));
+                }}
+              />
+              {/* Sfumatura per migliorare la leggibilità del testo */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/10"></div>
             </div>
           </motion.div>
-        </div>
-      </motion.div>
-    </>
+        </AnimatePresence>
+        
+        {/* Controlli del carosello */}
+        {!shouldReduceMotion && (
+          <>
+            {/* Pulsante precedente */}
+            <motion.button
+              onClick={() => {
+                handleUserInteraction();
+                goToPrevious();
+              }}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-white/30 shadow-lg"
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              variants={navButtonVariants}
+              aria-label={t("carousel.prevImage")}
+            >
+              <IoArrowBack size={24} />
+            </motion.button>
+            
+            {/* Pulsante successivo */}
+            <motion.button
+              onClick={() => {
+                handleUserInteraction();
+                goToNext();
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-white/30 shadow-lg"
+              initial="initial"
+              whileHover="hover"
+              whileTap="tap"
+              variants={navButtonVariants}
+              aria-label={t("carousel.nextImage")}
+            >
+              <IoArrowForward size={24} />
+            </motion.button>
+            
+            {/* Indicatori del carosello */}
+            <div className="absolute bottom-16 left-0 right-0 flex flex-col items-center gap-3 z-10">
+              <div className="flex justify-center gap-2">
+                {carouselImages.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      handleUserInteraction();
+                      setDirection(index > currentImage ? 1 : -1);
+                      setCurrentImage(index);
+                    }}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 hover:bg-white ${
+                      currentImage === index 
+                        ? "bg-white w-8" 
+                        : "bg-white/50 hover:bg-white/70"
+                    }`}
+                    aria-label={t("carousel.goToImage", { number: index + 1 })}
+                  />
+                ))}
+              </div>
+              
+              {/* Barra di progresso */}
+              <div className="w-48 h-1 bg-white/20 rounded-full overflow-hidden">
+                <motion.div
+                  className="h-full bg-pizza-red rounded-full origin-left"
+                  animate={progressControls}
+                  initial={{ scaleX: 0 }}
+                />
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Overlay scuro */}
+      <div className="absolute inset-0 bg-black/20"></div>
+
+      {/* Contenitore del contenuto */}
+      <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 text-center">
+        <motion.h1
+          {...(shouldReduceMotion ? {} : {
+            initial: { opacity: 0, y: -20 },
+            animate: { opacity: 1, y: 0 },
+            transition: { duration: 1 }
+          })}
+          className="text-5xl md:text-7xl font-playfair mb-4 leading-tight text-white drop-shadow-lg"
+        >
+          {t("heroSection.title")}
+        </motion.h1>
+
+        <motion.div
+          {...(shouldReduceMotion ? {} : {
+            initial: { scaleX: 0 },
+            animate: { scaleX: 1 },
+            transition: { duration: 0.8, delay: 0.5 }
+          })}
+          className="w-32 h-1 bg-pizza-red mx-auto mb-8"
+        />
+
+        <motion.p
+          {...(shouldReduceMotion ? {} : {
+            initial: { opacity: 0 },
+            animate: { opacity: 1 },
+            transition: { duration: 0.8, delay: 0.7 }
+          })}
+          className="text-xl md:text-2xl mb-12 max-w-2xl font-montserrat text-gray-100 drop-shadow-md"
+        >
+          {t("heroSection.subtitle")}
+        </motion.p>
+
+        <motion.div
+          {...(shouldReduceMotion ? {} : {
+            initial: { opacity: 0, y: 20 },
+            animate: { opacity: 1, y: 0 },
+            transition: { duration: 0.8, delay: 0.9 }
+          })}
+        >
+          <CallToActionButtons onReservationClick={onReservationClick} />
+        </motion.div>
+      </div>
+    </div>
   );
 };
 
