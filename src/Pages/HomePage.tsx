@@ -1,7 +1,7 @@
 // src/pages/HomePage.tsx
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+
 import ReservationModal from "../components/ReservationModal";
 import AboutPage from "./AboutPage";
 import VideoBackground from "../components/VideoBackground";
@@ -10,7 +10,7 @@ import useScrollToHash from "../hooks/useScrollToHash";
 
 const HomePage: React.FC = () => {
   const [isReservationModalOpen, setIsReservationModalOpen] = useState<boolean>(false);
-  const { t } = useTranslation();
+ 
 
   // Utilizza il custom hook per lo scroll basato sull'hash
   useScrollToHash();

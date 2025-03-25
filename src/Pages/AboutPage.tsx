@@ -1,7 +1,7 @@
 // src/pages/AboutPage.tsx
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { useTranslation } from "react-i18next";
+
 import HistorySection from "../components/HistorySection";
 import TeamGallerySection from "../components/TeamGallerySection";
 import CulinaryPhilosophySection from "../components/CulinaryPhilosophySection";
@@ -10,7 +10,7 @@ import BackToTopButton from "../components/BackToTopButton";
 
 
 const AboutPage: React.FC = () => {
-  const { t } = useTranslation();
+
   const [showTopBtn, setShowTopBtn] = useState<boolean>(false);
 
   useEffect(() => {

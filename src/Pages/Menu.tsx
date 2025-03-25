@@ -18,14 +18,7 @@ type CategoryName =
   | "Pizze Doppia Cottura"
   | "Bevande";
 
-// Interfaccia per gli elementi del menu
-interface MenuItem {
-  name: string;
-  description: string;
-  price: string;
-  image: string;
-  isVegetarian?: boolean;
-}
+
 
 const Menu = () => {
   const { t } = useTranslation();
