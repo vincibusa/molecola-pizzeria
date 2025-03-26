@@ -1,8 +1,8 @@
 // src/components/VideoBackground.tsx
 import React, { useState, useEffect, useRef } from "react";
-import { motion, useReducedMotion, AnimatePresence, useAnimation } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import CallToActionButtons from "./CallToActionButtons";
-import { useTranslation,  } from "react-i18next";
+import { useTranslation } from "react-i18next";
 import { IoArrowForward, IoArrowBack } from "react-icons/io5";
 import OptimizedImage from "./OptimizedImage";
 
@@ -19,7 +19,6 @@ interface VideoBackgroundProps {
 
 const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick }) => {
   const { t } = useTranslation();
-  const prefersReducedMotion = useReducedMotion();
   const progressControls = useAnimation();
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const SLIDE_DURATION = 5000; // Durata di ogni slide in millisecondi
@@ -58,10 +57,6 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
   const [direction, setDirection] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   
-  // Animazione ridotta su mobile
-  const isMobile = window.innerWidth < 768;
-  const shouldReduceMotion = prefersReducedMotion || isMobile;
-  
   // Funzioni per la navigazione del carosello
   const goToPrevious = () => {
     resetProgressBar();
@@ -84,7 +79,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
     
     progressControls.set({ scaleX: 0 });
     
-    if (isAutoPlaying && !shouldReduceMotion) {
+    if (isAutoPlaying) {
       // Avvia una nuova animazione di progresso
       progressControls.start({
         scaleX: 1,
@@ -121,9 +116,6 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
   
   // Effetto per il cambio automatico delle immagini
   useEffect(() => {
-    // Non cambiare automaticamente se riduciamo le animazioni
-    if (shouldReduceMotion) return;
-    
     // Inizializza la barra di progresso
     resetProgressBar();
     
@@ -133,18 +125,18 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
         clearInterval(intervalRef.current);
       }
     };
-  }, [shouldReduceMotion, isAutoPlaying]);
+  }, [isAutoPlaying]);
   
   // Imposta un timer per riprendere l'autoplay dopo 10 secondi di inattività
   useEffect(() => {
-    if (!isAutoPlaying && !shouldReduceMotion) {
+    if (!isAutoPlaying) {
       const resumeTimer = setTimeout(() => {
         resumeAutoplay();
       }, 10000); // 10 secondi
       
       return () => clearTimeout(resumeTimer);
     }
-  }, [isAutoPlaying, shouldReduceMotion]);
+  }, [isAutoPlaying]);
   
   // Varianti di animazione per il carosello
   const slideVariants = {
@@ -185,9 +177,9 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
           <motion.div
             key={currentImage}
             custom={direction}
-            initial={shouldReduceMotion ? { opacity: 1 } : "enter"}
-            animate={shouldReduceMotion ? { opacity: 1 } : "center"}
-            exit={shouldReduceMotion ? { opacity: 1 } : "exit"}
+            initial="enter"
+            animate="center"
+            exit="exit"
             variants={slideVariants}
             className="absolute inset-0 will-change-transform"
           >
@@ -208,73 +200,71 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
           </motion.div>
         </AnimatePresence>
         
-        {/* Controlli del carosello */}
-        {!shouldReduceMotion && (
-          <>
-            {/* Pulsante precedente */}
-            <motion.button
-              onClick={() => {
-                handleUserInteraction();
-                goToPrevious();
-              }}
-              className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-white/30 shadow-lg"
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-              variants={navButtonVariants}
-              aria-label={t("carousel.prevImage")}
-            >
-              <IoArrowBack size={24} />
-            </motion.button>
-            
-            {/* Pulsante successivo */}
-            <motion.button
-              onClick={() => {
-                handleUserInteraction();
-                goToNext();
-              }}
-              className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-white/30 shadow-lg"
-              initial="initial"
-              whileHover="hover"
-              whileTap="tap"
-              variants={navButtonVariants}
-              aria-label={t("carousel.nextImage")}
-            >
-              <IoArrowForward size={24} />
-            </motion.button>
-            
-            {/* Indicatori del carosello */}
-            <div className="absolute bottom-16 left-0 right-0 flex flex-col items-center gap-3 z-10">
-              <div className="flex justify-center gap-2">
-                {carouselImages.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => {
-                      handleUserInteraction();
-                      setDirection(index > currentImage ? 1 : -1);
-                      setCurrentImage(index);
-                    }}
-                    className={`w-3 h-3 rounded-full transition-all duration-300 hover:bg-white ${
-                      currentImage === index 
-                        ? "bg-white w-8" 
-                        : "bg-white/50 hover:bg-white/70"
-                    }`}
-                    aria-label={t("carousel.goToImage", { number: index + 1 })}
-                  />
-                ))}
-              </div>
-              
-              {/* Barra di progresso */}
-              <div className="w-48 h-1 bg-white/20 rounded-full overflow-hidden">
-                <motion.div
-                  className="h-full bg-pizza-red rounded-full origin-left"
-                  animate={progressControls}
-                  initial={{ scaleX: 0 }}
+        {/* Controlli del carosello - ora visibili anche su mobile */}
+        <>
+          {/* Pulsante precedente */}
+          <motion.button
+            onClick={() => {
+              handleUserInteraction();
+              goToPrevious();
+            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-white/30 shadow-lg"
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
+            variants={navButtonVariants}
+            aria-label={t("carousel.prevImage")}
+          >
+            <IoArrowBack size={24} />
+          </motion.button>
+          
+          {/* Pulsante successivo */}
+          <motion.button
+            onClick={() => {
+              handleUserInteraction();
+              goToNext();
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-white/30 shadow-lg"
+            initial="initial"
+            whileHover="hover"
+            whileTap="tap"
+            variants={navButtonVariants}
+            aria-label={t("carousel.nextImage")}
+          >
+            <IoArrowForward size={24} />
+          </motion.button>
+          
+          {/* Indicatori del carosello */}
+          <div className="absolute bottom-16 left-0 right-0 flex flex-col items-center gap-3 z-10">
+            <div className="flex justify-center gap-2">
+              {carouselImages.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    handleUserInteraction();
+                    setDirection(index > currentImage ? 1 : -1);
+                    setCurrentImage(index);
+                  }}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 hover:bg-white ${
+                    currentImage === index 
+                      ? "bg-white w-8" 
+                      : "bg-white/50 hover:bg-white/70"
+                  }`}
+                  aria-label={t("carousel.goToImage", { number: index + 1 })}
                 />
-              </div>
+              ))}
             </div>
-          </>
-        )}
+            
+            {/* Barra di progresso - sempre visibile */}
+            <div className="w-48 h-1 bg-white/20 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-pizza-red rounded-full origin-left"
+                animate={progressControls}
+                initial={{ scaleX: 0 }}
+              />
+            </div>
+          </div>
+        </>
       </div>
 
       {/* Overlay scuro */}
@@ -283,42 +273,34 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
       {/* Contenitore del contenuto */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 text-center">
         <motion.h1
-          {...(shouldReduceMotion ? {} : {
-            initial: { opacity: 0, y: -20 },
-            animate: { opacity: 1, y: 0 },
-            transition: { duration: 1 }
-          })}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1 }}
           className="text-5xl md:text-7xl font-playfair mb-4 leading-tight text-white drop-shadow-lg will-change-transform"
         >
           {t("heroSection.title")}
         </motion.h1>
 
         <motion.div
-          {...(shouldReduceMotion ? {} : {
-            initial: { scaleX: 0 },
-            animate: { scaleX: 1 },
-            transition: { duration: 0.8, delay: 0.5 }
-          })}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
           className="w-32 h-1 bg-pizza-red mx-auto mb-8 will-change-transform"
         />
 
         <motion.p
-          {...(shouldReduceMotion ? {} : {
-            initial: { opacity: 0 },
-            animate: { opacity: 1 },
-            transition: { duration: 0.8, delay: 0.7 }
-          })}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
           className="text-xl md:text-2xl mb-12 max-w-2xl font-montserrat text-gray-100 drop-shadow-md will-change-transform"
         >
           {t("heroSection.subtitle")}
         </motion.p>
 
         <motion.div
-          {...(shouldReduceMotion ? {} : {
-            initial: { opacity: 0, y: 20 },
-            animate: { opacity: 1, y: 0 },
-            transition: { duration: 0.8, delay: 0.9 }
-          })}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.9 }}
           className="will-change-transform"
         >
           <CallToActionButtons onReservationClick={onReservationClick} />

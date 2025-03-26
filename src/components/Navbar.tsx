@@ -90,16 +90,13 @@ const Navbar = () => {
                 </motion.div>
                 
                 {/* Menu hamburger per mobile */}
-                <motion.button
-                  initial={{ scale: 1 }}
-                  whileTap={{ scale: 0.95 }}
-                  transition={{ duration: 0.2 }}
+                <button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                   className="lg:hidden rounded-full p-2 bg-pizza-red text-white focus:outline-none"
                   aria-label={t("navbar.toggleMenu")}
                 >
                   <FaBars size={20} />
-                </motion.button>
+                </button>
                 
                 {/* Menu desktop */}
                 <div className="hidden lg:flex items-center space-x-8">
@@ -146,71 +143,60 @@ const Navbar = () => {
               </div>
               
               {/* Menu mobile */}
-              <AnimatePresence>
-                {isMobileMenuOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ 
-                      duration: 0.25, 
-                      ease: "easeInOut" 
-                    }}
-                    className="lg:hidden mt-4 overflow-hidden"
-                  >
-                    <div className="flex flex-col py-4 space-y-3 bg-white rounded-xl shadow-lg p-4">
-                      {/* Elementi di navigazione principale */}
-                      {navItems.map((item) => (
-                        <Link
-                          key={item.key}
-                          to={item.route}
-                          className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg active:bg-gray-200 touch-manipulation"
-                          onClick={() => setIsMobileMenuOpen(false)}
-                        >
-                          {item.label}
-                        </Link>
-                      ))}
-                      
-                      {/* Link alla sezione Press */}
+              {isMobileMenuOpen && (
+                <div className="lg:hidden mt-4">
+                  <div className="flex flex-col py-4 space-y-3 bg-white rounded-xl shadow-lg p-4">
+                    {/* Elementi di navigazione principale */}
+                    {navItems.map((item) => (
                       <Link
-                        to="/#press"
+                        key={item.key}
+                        to={item.route}
                         className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg active:bg-gray-200 touch-manipulation"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          setIsMobileMenuOpen(false);
-                          
-                          if (location.pathname === "/") {
-                            setTimeout(() => {
-                              const pressSection = document.getElementById("press");
-                              if (pressSection) {
-                                pressSection.scrollIntoView({ 
-                                  behavior: "smooth",
-                                  block: "start"
-                                });
-                              }
-                            }, 100);
-                          } else {
-                            window.location.href = "/#press";
-                          }
-                        }}
+                        onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        {t("navbar.press")}
+                        {item.label}
                       </Link>
-                      
-                      {/* Bottone prenotazione */}
-                      <button
-                        onClick={() => {
-                          setIsReservationModalOpen(true);
-                          setIsMobileMenuOpen(false);
-                        }}
-                        className="pizza-btn bg-pizza-red text-white px-5 py-3 text-sm w-full mt-2 touch-manipulation active:opacity-90"
-                      >
-                        {t("navbar.reservation")}
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+                    ))}
+                    
+                    {/* Link alla sezione Press */}
+                    <Link
+                      to="/#press"
+                      className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg active:bg-gray-200 touch-manipulation"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setIsMobileMenuOpen(false);
+                        
+                        if (location.pathname === "/") {
+                          setTimeout(() => {
+                            const pressSection = document.getElementById("press");
+                            if (pressSection) {
+                              pressSection.scrollIntoView({ 
+                                behavior: "smooth",
+                                block: "start"
+                              });
+                            }
+                          }, 100);
+                        } else {
+                          window.location.href = "/#press";
+                        }
+                      }}
+                    >
+                      {t("navbar.press")}
+                    </Link>
+                    
+                    {/* Bottone prenotazione */}
+                    <button
+                      onClick={() => {
+                        setIsReservationModalOpen(true);
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="pizza-btn bg-pizza-red text-white px-5 py-3 text-sm w-full mt-2 touch-manipulation active:opacity-90"
+                    >
+                      {t("navbar.reservation")}
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </motion.nav>
         )}
