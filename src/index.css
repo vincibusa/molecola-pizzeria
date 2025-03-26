@@ -184,3 +184,8 @@ input, textarea, select {
 .menu-item-price {
   @apply text-pizza-red font-bold text-lg;
 }
+
+html {
+  scroll-padding-top: 80px; /* Altezza della navbar */
+  scroll-behavior: smooth;
+}

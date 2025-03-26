@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaPizzaSlice } from "react-icons/fa";
+import { FaBars } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ReservationModal from "./ReservationModal";
@@ -97,7 +97,7 @@ const Navbar = () => {
                   className="lg:hidden rounded-full p-2 bg-pizza-red text-white"
                   aria-label={t("navbar.toggleMenu")}
                 >
-                  <FaPizzaSlice size={20} />
+                  <FaBars size={20} />
                 </motion.button>
                 
                 {/* Menu desktop */}
@@ -115,12 +115,17 @@ const Navbar = () => {
                     to="/#press"
                     className={`${textColor} ${hoverClass} transition-colors font-medium`}
                     onClick={(e) => {
+                      e.preventDefault();
                       if (location.pathname === "/") {
-                        e.preventDefault();
                         const pressSection = document.getElementById("press");
                         if (pressSection) {
-                          pressSection.scrollIntoView({ behavior: "smooth" });
+                          pressSection.scrollIntoView({ 
+                            behavior: "smooth",
+                            block: "start"
+                          });
                         }
+                      } else {
+                        window.location.href = "/#press";
                       }
                     }}
                   >
@@ -150,37 +155,51 @@ const Navbar = () => {
                     className="lg:hidden mt-4"
                   >
                     <div className="flex flex-col py-4 space-y-4 bg-white rounded-xl shadow-lg p-4">
+                      {/* Elementi di navigazione principale */}
                       {navItems.map((item) => (
                         <Link
                           key={item.key}
                           to={item.route}
                           className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg hover:bg-gray-100"
+                          onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {item.label}
                         </Link>
                       ))}
+                      
+                      {/* Link alla sezione Press */}
                       <Link
                         to="/#press"
                         className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg hover:bg-gray-100"
                         onClick={(e) => {
+                          e.preventDefault();
+                          setIsMobileMenuOpen(false);
+                          
                           if (location.pathname === "/") {
-                            e.preventDefault();
-                            const pressSection = document.getElementById("press");
-                            if (pressSection) {
-                              pressSection.scrollIntoView({ behavior: "smooth" });
-                              setIsMobileMenuOpen(false);
-                            }
+                            setTimeout(() => {
+                              const pressSection = document.getElementById("press");
+                              if (pressSection) {
+                                pressSection.scrollIntoView({ 
+                                  behavior: "smooth",
+                                  block: "start"
+                                });
+                              }
+                            }, 100);
+                          } else {
+                            window.location.href = "/#press";
                           }
                         }}
                       >
                         {t("navbar.press")}
                       </Link>
+                      
+                      {/* Bottone prenotazione */}
                       <button
                         onClick={() => {
                           setIsReservationModalOpen(true);
                           setIsMobileMenuOpen(false);
                         }}
-                        className="pizza-btn bg-pizza-red text-white px-5 py-2 text-sm w-full"
+                        className="pizza-btn bg-pizza-red text-white px-5 py-3 text-sm w-full mt-2"
                       >
                         {t("navbar.reservation")}
                       </button>
