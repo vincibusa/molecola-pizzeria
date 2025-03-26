@@ -59,7 +59,7 @@ input, textarea, select {
 }
 
 /* Ottimizzazione delle animazioni in base alle preferenze */
-:root[data-reduced-motion="true"] {
+@media (prefers-reduced-motion) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
@@ -84,29 +84,8 @@ input, textarea, select {
 
 /* Media query per dispositivi mobili */
 @media (max-width: 768px) {
-  /* Forza reduced motion su dispositivi mobili */
-  :root:not([data-reduced-motion="true"]) {
-    --reduced-motion: true;
-  }
-  
-  html:not([data-reduced-motion="true"]) {
-    content: attr(data-reduced-motion, "true");
-  }
-  
   .hide-on-mobile {
     display: none !important;
-  }
-
-  /* Ottimizzazione delle animazioni per dispositivi mobili */
-  @media (prefers-reduced-motion), (max-width: 768px) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
   }
 }
 
