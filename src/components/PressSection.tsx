@@ -34,7 +34,7 @@ const pressArticles: PressArticle[] = [
     preview:
       "Un'esperienza culinaria che va oltre il gusto: Molecola Pizzeria ha lanciato 'La Fluorescente', una pizza che utilizza ingredienti naturali con proprietà bioluminescenti che creano un effetto visivo sorprendente. Questo piatto rappresenta perfettamente la filosofia dello chef Capizzi di creare esperienze gastronomiche che coinvolgono tutti i sensi.",
     image:
-      "https://images.unsplash.com/photo-1595854341625-f33e04f76a30?q=80&w=2070&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?q=80&w=2070&auto=format&fit=crop",
     link: "https://molecolapizzeria.it/blog/pizza-fluorescente",
     source: "Palermo Today",
     date: "Febbraio 2024"
