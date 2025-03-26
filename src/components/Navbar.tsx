@@ -91,10 +91,11 @@ const Navbar = () => {
                 
                 {/* Menu hamburger per mobile */}
                 <motion.button
-                  whileHover={{ scale: 1.1 }}
+                  initial={{ scale: 1 }}
                   whileTap={{ scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="lg:hidden rounded-full p-2 bg-pizza-red text-white"
+                  className="lg:hidden rounded-full p-2 bg-pizza-red text-white focus:outline-none"
                   aria-label={t("navbar.toggleMenu")}
                 >
                   <FaBars size={20} />
@@ -148,19 +149,22 @@ const Navbar = () => {
               <AnimatePresence>
                 {isMobileMenuOpen && (
                   <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="lg:hidden mt-4"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ 
+                      duration: 0.25, 
+                      ease: "easeInOut" 
+                    }}
+                    className="lg:hidden mt-4 overflow-hidden"
                   >
-                    <div className="flex flex-col py-4 space-y-4 bg-white rounded-xl shadow-lg p-4">
+                    <div className="flex flex-col py-4 space-y-3 bg-white rounded-xl shadow-lg p-4">
                       {/* Elementi di navigazione principale */}
                       {navItems.map((item) => (
                         <Link
                           key={item.key}
                           to={item.route}
-                          className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg hover:bg-gray-100"
+                          className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg active:bg-gray-200 touch-manipulation"
                           onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {item.label}
@@ -170,7 +174,7 @@ const Navbar = () => {
                       {/* Link alla sezione Press */}
                       <Link
                         to="/#press"
-                        className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg hover:bg-gray-100"
+                        className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg active:bg-gray-200 touch-manipulation"
                         onClick={(e) => {
                           e.preventDefault();
                           setIsMobileMenuOpen(false);
@@ -199,7 +203,7 @@ const Navbar = () => {
                           setIsReservationModalOpen(true);
                           setIsMobileMenuOpen(false);
                         }}
-                        className="pizza-btn bg-pizza-red text-white px-5 py-3 text-sm w-full mt-2"
+                        className="pizza-btn bg-pizza-red text-white px-5 py-3 text-sm w-full mt-2 touch-manipulation active:opacity-90"
                       >
                         {t("navbar.reservation")}
                       </button>
