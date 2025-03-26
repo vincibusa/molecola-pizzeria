@@ -164,8 +164,7 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
 
   // Varianti per i pulsanti di navigazione del carosello
   const navButtonVariants = {
-    initial: { opacity: 0 },
-    hover: { opacity: 1, scale: 1.1 },
+    initial: { opacity: 0.7 },
     tap: { scale: 0.95 },
   };
 
@@ -210,7 +209,6 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
             }}
             className="absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-white/30 shadow-lg"
             initial="initial"
-            whileHover="hover"
             whileTap="tap"
             variants={navButtonVariants}
             aria-label={t("carousel.prevImage")}
@@ -226,7 +224,6 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
             }}
             className="absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-white/30 shadow-lg"
             initial="initial"
-            whileHover="hover"
             whileTap="tap"
             variants={navButtonVariants}
             aria-label={t("carousel.nextImage")}

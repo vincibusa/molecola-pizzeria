@@ -142,10 +142,14 @@ const SocialPosts: React.FC = () => {
               variants={itemVariants}
               className="flex-none w-[326px] snap-center"
             >
-              <motion.div
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-                className="h-full"
+              {/* Card post */}
+              <motion.a
+                href={post.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={itemVariants}
+                className="block p-6 bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-[1.02] transition-transform duration-300"
+                whileTap={{ scale: 0.98 }}
               >
                 {post.type === "instagram" ? (
                   <blockquote
@@ -180,7 +184,7 @@ const SocialPosts: React.FC = () => {
     </div>
                   )
                 )}
-              </motion.div>
+              </motion.a>
             </motion.div>
           ))}
         </motion.div>

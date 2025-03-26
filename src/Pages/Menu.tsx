@@ -149,8 +149,6 @@ const Menu = () => {
                     ? "bg-pizza-red text-white shadow-md"
                     : "bg-white hover:bg-gray-100 text-pizza-brown"
                 }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
               >
                 <span>{category.icon}</span>
                 <span className="font-medium text-sm md:text-base whitespace-nowrap">
@@ -225,8 +223,6 @@ const Menu = () => {
             <p className="text-gray-600 max-w-2xl mx-auto">{t("menu.footer.text")}</p>
             
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
               className="pizza-btn bg-pizza-brown text-white px-6 py-3 mt-6"
             >
               {t("reservationButton")}

@@ -74,7 +74,6 @@ const HistorySection: React.FC = () => {
               <motion.span 
                 variants={scaleIn}
                 className="inline-block bg-pizza-red text-white p-3 rounded-full mb-4"
-                whileHover={shouldAnimate ? { scale: 1.1, rotate: 5, transition: { duration: 0.4 } } : {}}
               >
                 <FaHistory size={30} />
               </motion.span>
@@ -97,8 +96,7 @@ const HistorySection: React.FC = () => {
               {/* Contenuto testuale */}
               <motion.div
                 variants={fadeInLeft}
-                className="space-y-6 bg-white bg-opacity-90 p-8 rounded-xl shadow-lg"
-                whileHover={shouldAnimate ? { y: -8, transition: { duration: 0.5 } } : {}}
+                className="space-y-6 bg-white bg-opacity-90 p-8 rounded-xl shadow-lg hover:translate-y-[-8px] transition-transform duration-500"
               >
                 {/* Testi lunghi per desktop */}
                 <div className="hidden lg:block space-y-6">
@@ -176,16 +174,11 @@ const HistorySection: React.FC = () => {
               >
                 {/* Effetti con stratificazione */}
                 <motion.div 
-                  className="absolute inset-0 bg-pizza-red rounded-2xl transform -rotate-3 shadow-xl"
-                  whileHover={shouldAnimate ? { rotate: -1, scale: 1.02, transition: { duration: 0.5 } } : {}}
+                  className="absolute inset-0 bg-pizza-red rounded-2xl transform -rotate-3 shadow-xl hover:rotate-[-1deg] hover:scale-[1.02] transition-all duration-500"
                 ></motion.div>
                 <motion.div 
-                  className="absolute inset-0 bg-white rounded-2xl transform rotate-3 shadow-xl overflow-hidden"
+                  className="absolute inset-0 bg-white rounded-2xl transform rotate-3 shadow-xl overflow-hidden hover:scale-[1.03] hover:rotate-0 transition-all duration-600"
                   initial="initial"
-                  whileHover="hover"
-                  variants={shouldAnimate ? { 
-                    hover: { scale: 1.03, rotate: 0, transition: { duration: 0.6 } } 
-                  } : {}}
                 >
                   <OptimizedImage
                     src={molecolaAbout}
@@ -198,8 +191,7 @@ const HistorySection: React.FC = () => {
                 {/* Didascalia */}
                 <motion.div 
                   variants={fadeIn}
-                  className="absolute -bottom-6 right-8 bg-white p-4 rounded-lg shadow-lg transform rotate-3 max-w-[250px]"
-                  whileHover={shouldAnimate ? { rotate: 0, y: -8, transition: { duration: 0.4 } } : {}}
+                  className="absolute -bottom-6 right-8 bg-white p-4 rounded-lg shadow-lg transform rotate-3 max-w-[250px] hover:rotate-0 hover:translate-y-[-8px] transition-all duration-400"
                 >
                   <p className="text-pizza-brown font-medium font-montserrat flex items-center">
                     <motion.span

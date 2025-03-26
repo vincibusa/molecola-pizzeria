@@ -15,9 +15,8 @@ const BackToTopButton: React.FC<BackToTopButtonProps> = ({ onClick }) => {
       exit={{ opacity: 0, y: 20 }}
       transition={{ type: "spring", stiffness: 300, damping: 25 }}
       onClick={onClick}
-      className="fixed bottom-8 right-8 bg-pizza-red text-white p-3 rounded-full shadow-lg z-50 flex items-center justify-center w-12 h-12"
+      className="fixed bottom-8 right-8 bg-pizza-red hover:bg-pizza-brown text-white p-3 rounded-full shadow-lg z-50 flex items-center justify-center w-12 h-12 transition-colors duration-200"
       aria-label="Torna in cima"
-      whileHover={{ scale: 1.1, backgroundColor: "var(--pizza-brown)" }}
       whileTap={{ scale: 0.9 }}
     >
       <IoArrowUp size={24} />

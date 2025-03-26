@@ -7,6 +7,7 @@ import OptimizedImage from "../components/OptimizedImage";
 import { useInView } from "react-intersection-observer";
 import { motion, AnimatePresence } from "framer-motion";
 
+
 interface Image {
   id: number;
   url: string;
@@ -188,8 +189,6 @@ const Gallery: React.FC = () => {
               variants={scaleIn}
               className="relative group overflow-hidden rounded-lg cursor-pointer"
               onClick={() => setSelectedImage(image)}
-              whileHover={{ scale: 1.03 }}
-              transition={{ duration: 0.2 }}
             >
               <OptimizedImage
                 src={image.url}
@@ -200,20 +199,15 @@ const Gallery: React.FC = () => {
                 onLoad={handleImageLoad}
                 loading={index < 6 ? "eager" : "lazy"} // Carica immediatamente solo le prime immagini
               />
-              <motion.div 
-                className="absolute inset-0 bg-black flex items-center justify-center"
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 0.4 }}
-                transition={{ duration: 0.2 }}
+              <div 
+                className="absolute inset-0 bg-black opacity-0 hover:opacity-40 flex items-center justify-center transition-opacity duration-200"
               >
-                <motion.div 
-                  className="text-white"
-                  initial={{ opacity: 0, y: 10 }}
-                  whileHover={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.2 }}
+                <div 
+                  className="text-white opacity-0 hover:opacity-100 transition-opacity duration-200 transform translate-y-2 hover:translate-y-0"
                 >
-                </motion.div>
-              </motion.div>
+                  <span className="sr-only">{t("gallery.viewImage")}</span>
+                </div>
+              </div>
             </motion.div>
           ))}
         </motion.div>
@@ -227,11 +221,9 @@ const Gallery: React.FC = () => {
             <motion.button
               key={i}
               onClick={() => paginate(i + 1)}
-              className={`mx-1 px-3 py-1 rounded ${
+              className={`mx-1 px-3 py-1 rounded hover:scale-110 active:scale-95 transition-transform duration-200 ${
                 currentPage === i + 1 ? "bg-primary text-white" : "bg-gray-200 text-gray-700"
               }`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
             >
               {i + 1}
             </motion.button>
@@ -250,10 +242,8 @@ const Gallery: React.FC = () => {
             >
               <motion.button
                 onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 text-white hover:text-primary-foreground"
+                className="absolute top-4 right-4 text-white hover:text-primary-foreground hover:scale-110 active:scale-90 transition-all duration-200"
                 aria-label={t("gallery.close")}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
               >
                 <FiX size={24} />
               </motion.button>

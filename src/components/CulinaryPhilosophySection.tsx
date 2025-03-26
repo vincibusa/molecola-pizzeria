@@ -1,26 +1,11 @@
 import React from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { FaPizzaSlice, FaLeaf, FaUtensils } from "react-icons/fa";
-import { GiCook, GiWheat } from "react-icons/gi";
+import { GiCook, GiWheat, } from "react-icons/gi";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
 
-// Varianti migliorate per animazioni più fluide e lente
-const iconVariants = {
-  initial: { scale: 1, rotate: 0 },
-  hover: { scale: 1.15, rotate: 10, transition: { duration: 0.6, ease: "easeOut" } }
-};
 
-const titleVariants = {
-  initial: { color: "var(--pizza-brown)" },
-  hover: { color: "var(--pizza-red)", transition: { duration: 0.6, ease: "easeOut" } }
-};
-
-// Overlay sempre visibile con opacità variabile
-const overlayVariants = {
-  initial: { opacity: 0.05 },
-  hover: { opacity: 0.2, transition: { duration: 0.8, ease: "easeOut" } }
-};
 
 const cardVariants = {
   hidden: { opacity: 0, y: 50 },
@@ -42,8 +27,8 @@ const quoteVariants = {
 
 const CulinaryPhilosophySection: React.FC = () => {
   const { t } = useTranslation();
-  const prefersReducedMotion = useReducedMotion();
-  const shouldAnimate = !prefersReducedMotion;
+
+
   
   const { ref, inView } = useInView({
     threshold: 0.1,
@@ -89,8 +74,7 @@ const CulinaryPhilosophySection: React.FC = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
-            className="inline-block bg-white text-pizza-brown p-3 rounded-full mb-4"
-            whileHover={shouldAnimate ? { scale: 1.1, rotate: 5, transition: { duration: 0.5 } } : {}}
+            className="inline-block bg-white text-pizza-brown p-3 rounded-full mb-4 hover:scale-110 hover:rotate-5 transition-all duration-500"
           >
             <GiCook size={30} />
           </motion.span>
@@ -144,42 +128,27 @@ const CulinaryPhilosophySection: React.FC = () => {
                 animate="visible"
                 transition={{ delay: index * 0.3 }}
                 className="relative pizza-card overflow-hidden bg-white text-gray-800 group"
-                whileHover="hover"
               >
                 {/* Colorful top section */}
                 <div className={`${item.color} p-8 flex justify-center items-center relative overflow-hidden`}>
-                  {/* Overlay sempre visibile con opacità che cambia al passaggio del mouse */}
-                  <motion.div 
-                    className="absolute inset-0 bg-white" 
-                    initial={{ opacity: 0.05 }}
-                    variants={overlayVariants}
+                  {/* Overlay con opacità che cambia al passaggio del mouse */}
+                  <div 
+                    className="absolute inset-0 bg-white opacity-5 group-hover:opacity-20 transition-opacity duration-500"
                   />
-                  <motion.div 
-                    className="z-10" 
-                    variants={iconVariants}
-                    animate={{ 
-                      rotate: [0, 3, 0, -3, 0],
-                      scale: [1, 1.05, 1, 1.05, 1]
-                    }}
-                    transition={{
-                      duration: 8,
-                      repeat: Infinity,
-                      repeatType: "reverse",
-                      ease: "easeInOut"
-                    }}
+                  <div 
+                    className="z-10 transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500" 
                   >
                     {item.icon}
-                  </motion.div>
+                  </div>
                 </div>
                 
                 {/* Content */}
                 <div className="p-6">
-                  <motion.h3 
-                    className="text-xl md:text-2xl font-playfair mb-3"
-                    variants={titleVariants}
+                  <h3 
+                    className="text-xl md:text-2xl font-playfair mb-3 text-pizza-brown group-hover:text-pizza-red transition-colors duration-500"
                   >
                     {t(item.titleKey)}
-                  </motion.h3>
+                  </h3>
                   <motion.p 
                     className="text-gray-600 font-montserrat leading-relaxed"
                     initial={{ opacity: 0 }}
@@ -191,14 +160,11 @@ const CulinaryPhilosophySection: React.FC = () => {
                 </div>
                 
                 {/* Decorative number */}
-                <motion.div 
-                  className="absolute top-4 right-4 border border-white/50 text-white rounded-full w-8 h-8 flex items-center justify-center"
-                  whileHover={{ scale: 1.2, rotate: 0, transition: { duration: 0.5 } }}
-                  initial={{ rotate: 10 }}
-                  animate={{ rotate: [10, 0, 10], transition: { duration: 6, repeat: Infinity, ease: "easeInOut" } }}
+                <div 
+                  className="absolute top-4 right-4 border border-white/50 text-white rounded-full w-8 h-8 flex items-center justify-center rotate-10 hover:scale-120 hover:rotate-0 transition-all duration-500"
                 >
                   <span className="text-sm font-medium">{index + 1}</span>
-                </motion.div>
+                </div>
               </motion.div>
             ))}
           </AnimatePresence>
