@@ -2,14 +2,49 @@ import React from "react";
 import { GiCook, GiWheat } from "react-icons/gi";
 import { FaPizzaSlice, FaLeaf, FaUtensils } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
-import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
 
 const CulinaryPhilosophySection: React.FC = () => {
   const { t } = useTranslation();
-  const { ref } = useInView({
-    threshold: 0.1,
-    triggerOnce: true
-  });
+  
+  // Animazioni
+  const fadeInUp = {
+    hidden: { 
+      opacity: 0, 
+      y: 20, 
+      scale: 0.9 
+    },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      scale: 1, 
+      transition: { duration: 0.6 } 
+    }
+  };
+  
+  const scaleIn = {
+    hidden: { 
+      opacity: 0, 
+      scale: 0 
+    },
+    visible: { 
+      opacity: 1, 
+      scale: 1, 
+      transition: { duration: 0.5 } 
+    }
+  };
+  
+  const line = {
+    hidden: { 
+      scaleX: 0 
+    },
+    visible: { 
+      scaleX: 1, 
+      transition: { duration: 0.7 } 
+    }
+  };
+  
+
 
   // Items per la filosofia culinaria
   const philosophyItems = [
@@ -34,7 +69,7 @@ const CulinaryPhilosophySection: React.FC = () => {
   ];
 
   return (
-    <section id="philosophy" ref={ref} className="pizza-section bg-white relative overflow-hidden">
+    <section id="philosophy" className="pizza-section bg-white relative overflow-hidden">
       {/* Pattern di sfondo */}
       <div
         className="absolute inset-0 opacity-5"
@@ -45,27 +80,47 @@ const CulinaryPhilosophySection: React.FC = () => {
       
       <div className="container mx-auto px-4 py-16 relative z-10">
         {/* Intestazione della sezione */}
-        <div className="text-center mb-20">
-          <span 
+        <motion.div 
+          className="text-center mb-20"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <motion.span 
+            variants={scaleIn}
             className="inline-block bg-white text-pizza-brown p-3 rounded-full mb-4 hover:scale-110 hover:rotate-5 transition-all duration-500"
           >
             <GiCook size={30} />
-          </span>
-          <h2 className="pizza-title">
+          </motion.span>
+          <motion.h2 
+            variants={fadeInUp}
+            className="pizza-title"
+          >
             {t("culinaryPhilosophy.title")}
-          </h2>
-          <div className="h-1 w-24 bg-pizza-red mx-auto mt-6 mb-6"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto font-montserrat">
+          </motion.h2>
+          <motion.div 
+            variants={line}
+            className="h-1 w-24 bg-pizza-red mx-auto mt-6 mb-6"
+          ></motion.div>
+          <motion.p 
+            variants={fadeInUp}
+            className="text-gray-600 max-w-2xl mx-auto font-montserrat"
+          >
             {t("culinaryPhilosophy.subtitle")}
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
         
         {/* Griglia di carte */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {philosophyItems.map((item, index) => (
-            <div
+            <motion.div
               key={item.titleKey}
               className="relative pizza-card overflow-hidden bg-white text-gray-800 group"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+              variants={fadeInUp}
+              transition={{ delay: index * 0.2 }}
             >
               {/* Colorful top section */}
               <div className={`${item.color} p-8 flex justify-center items-center relative overflow-hidden`}>
@@ -73,11 +128,12 @@ const CulinaryPhilosophySection: React.FC = () => {
                 <div 
                   className="absolute inset-0 bg-white opacity-5 group-hover:opacity-20 transition-opacity duration-500"
                 />
-                <div 
+                <motion.div 
                   className="z-10 transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500" 
+                  variants={scaleIn}
                 >
                   {item.icon}
-                </div>
+                </motion.div>
               </div>
               
               {/* Content */}
@@ -95,30 +151,44 @@ const CulinaryPhilosophySection: React.FC = () => {
               </div>
               
               {/* Decorative number */}
-              <div 
+              <motion.div 
+                variants={scaleIn}
                 className="absolute top-4 right-4 border border-white/50 text-white rounded-full w-8 h-8 flex items-center justify-center rotate-10 hover:scale-120 hover:rotate-0 transition-all duration-500"
               >
                 <span className="text-sm font-medium">{index + 1}</span>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
         </div>
         
         {/* Call to action */}
-        <div className="text-center mt-16">
-          <p className="text-lg text-gray-700 font-montserrat mb-6">
+        <motion.div 
+          className="text-center mt-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInUp}
+          transition={{ delay: 0.5 }}
+        >
+          <motion.p 
+            variants={fadeInUp}
+            className="text-lg text-gray-700 font-montserrat mb-6"
+          >
             {t("culinaryPhilosophy.quote")}
-          </p>
-          <a 
-            href="#menu" 
+          </motion.p>
+          <motion.a 
+            href="https://molecola.dwmenu.it/le-pizze/" 
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-block pizza-btn bg-pizza-red text-white px-8 py-3 hover:bg-pizza-brown transition-colors duration-300"
+            variants={scaleIn}
           >
             <span className="flex items-center">
               <FaUtensils className="mr-2" />
               {t("viewMenuButton")}
             </span>
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
       </div>
     </section>
   );

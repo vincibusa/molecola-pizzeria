@@ -68,7 +68,13 @@ const Navbar = () => {
   // Definisci gli elementi della navbar con le rispettive chiavi di traduzione e rotte
   const navItems = [
     { key: "home", label: t("navbar.home"), route: "/", icon: <FaHome /> },
-    { key: "menu", label: t("navbar.menu"), route: "/menu", icon: <FaUtensils /> },
+    { 
+      key: "menu", 
+      label: t("navbar.menu"), 
+      route: "https://molecola.dwmenu.it/le-pizze/", 
+      external: true, 
+      icon: <FaUtensils /> 
+    },
     { key: "gallery", label: t("navbar.gallery"), route: "/galleria", icon: <FaImages /> },
   ];
 
@@ -186,13 +192,25 @@ const Navbar = () => {
                       animate="visible"
                       variants={navLinkVariants}
                     >
-                      <Link
-                        to={item.route}
-                        className={`${textColor} ${hoverClass} transition-colors font-medium relative group overflow-hidden`}
-                      >
-                        <span className="relative z-10">{item.label}</span>
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pizza-red group-hover:w-full transition-all duration-300 ease-out"></span>
-                      </Link>
+                      {item.external ? (
+                        <a
+                          href={item.route}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className={`${textColor} ${hoverClass} transition-colors font-medium relative group overflow-hidden`}
+                        >
+                          <span className="relative z-10">{item.label}</span>
+                          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pizza-red group-hover:w-full transition-all duration-300 ease-out"></span>
+                        </a>
+                      ) : (
+                        <Link
+                          to={item.route}
+                          className={`${textColor} ${hoverClass} transition-colors font-medium relative group overflow-hidden`}
+                        >
+                          <span className="relative z-10">{item.label}</span>
+                          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pizza-red group-hover:w-full transition-all duration-300 ease-out"></span>
+                        </Link>
+                      )}
                     </motion.div>
                   ))}
                   <motion.div
@@ -242,7 +260,7 @@ const Navbar = () => {
                       whileTap={{ scale: 0.97 }}
                     >
                       <FaCalendarAlt className="mr-2" />
-                      <span className="font-montserrat font-medium">{t("navbar.reservation")}</span>
+                      <span className="font-montserrat font-medium">{t("reservationButton")}</span>
                     </motion.button>
                   </motion.div>
                 </div>
@@ -271,27 +289,53 @@ const Navbar = () => {
                     variants={mobileNavItemVariants}
                     className="border-b border-gray-100 pb-6"
                   >
-                    <Link
-                      to={item.route}
-                      className="text-pizza-brown hover:text-pizza-red transition-all duration-300 text-2xl font-medium flex items-center group"
-                      onClick={() => setIsMobileMenuOpen(false)}
-                    >
-                      <span className="text-pizza-red mr-4 text-xl">
-                        {item.icon}
-                      </span>
-                      <span className="relative overflow-hidden">
-                        {item.label}
-                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pizza-red group-hover:w-full transition-all duration-300 ease-out"></span>
-                      </span>
-                      <motion.span 
-                        className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                        initial={{ x: -10 }}
-                        animate={{ x: 0 }}
-                        transition={{ duration: 0.3 }}
+                    {item.external ? (
+                      <a
+                        href={item.route}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-pizza-brown hover:text-pizza-red transition-all duration-300 text-2xl font-medium flex items-center group"
+                        onClick={() => setIsMobileMenuOpen(false)}
                       >
-                        →
-                      </motion.span>
-                    </Link>
+                        <span className="text-pizza-red mr-4 text-xl">
+                          {item.icon}
+                        </span>
+                        <span className="relative overflow-hidden">
+                          {item.label}
+                          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pizza-red group-hover:w-full transition-all duration-300 ease-out"></span>
+                        </span>
+                        <motion.span 
+                          className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          initial={{ x: -10 }}
+                          animate={{ x: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          →
+                        </motion.span>
+                      </a>
+                    ) : (
+                      <Link
+                        to={item.route}
+                        className="text-pizza-brown hover:text-pizza-red transition-all duration-300 text-2xl font-medium flex items-center group"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <span className="text-pizza-red mr-4 text-xl">
+                          {item.icon}
+                        </span>
+                        <span className="relative overflow-hidden">
+                          {item.label}
+                          <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pizza-red group-hover:w-full transition-all duration-300 ease-out"></span>
+                        </span>
+                        <motion.span 
+                          className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                          initial={{ x: -10 }}
+                          animate={{ x: 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          →
+                        </motion.span>
+                      </Link>
+                    )}
                   </motion.div>
                 ))}
                 
@@ -354,7 +398,7 @@ const Navbar = () => {
                   className="pizza-btn bg-pizza-red text-white px-8 py-4 rounded-lg shadow-lg hover:shadow-xl active:shadow-md active:translate-y-0.5 transition-all duration-200 flex items-center justify-center w-full touch-manipulation"
                 >
                   <FaCalendarAlt className="mr-2" />
-                  <span className="font-montserrat font-medium">{t("navbar.reservation")}</span>
+                  <span className="font-montserrat font-medium">{t("reservationButton")}</span>
                 </button>
               </motion.div>
             </div>

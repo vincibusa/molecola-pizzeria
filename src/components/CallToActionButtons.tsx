@@ -19,7 +19,9 @@ const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservation
       </button>
       
       <a
-        href="#menu"
+        href="https://molecola.dwmenu.it/le-pizze/"
+        target="_blank"
+        rel="noopener noreferrer"
         className="pizza-btn bg-pizza-yellow text-pizza-brown px-8 py-4 rounded-lg shadow-lg hover:shadow-xl active:shadow-md active:translate-y-0.5 transition-all duration-200 flex items-center justify-center"
       >
         <FaUtensils className="mr-2" />
