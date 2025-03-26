@@ -1,5 +1,3 @@
-import { motion } from "framer-motion";
-
 import { useTranslation } from "react-i18next";
 import { FaUtensils, FaCalendarAlt } from "react-icons/fa";
 
@@ -11,28 +9,22 @@ const CallToActionButtons: React.FC<CallToActionButtonsProps> = ({ onReservation
   const { t } = useTranslation();
 
   return (
-    <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-6">
-      <motion.button
+    <div className="flex flex-col sm:flex-row gap-4">
+      <button
         onClick={onReservationClick}
-        className="pizza-btn bg-pizza-red text-white px-8 py-3 active:scale-95 transition-colors"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
+        className="pizza-btn bg-pizza-red text-white px-8 py-4 rounded-lg shadow-lg hover:shadow-xl active:shadow-md active:translate-y-0.5 transition-all duration-200 flex items-center justify-center"
       >
         <FaCalendarAlt className="mr-2" />
         <span className="font-montserrat font-medium">{t("reservationButton")}</span>
-      </motion.button>
+      </button>
       
-      <motion.a
+      <a
         href="#menu"
-        className="pizza-btn bg-pizza-yellow text-pizza-brown px-8 py-3 active:scale-95 transition-colors"
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
+        className="pizza-btn bg-pizza-yellow text-pizza-brown px-8 py-4 rounded-lg shadow-lg hover:shadow-xl active:shadow-md active:translate-y-0.5 transition-all duration-200 flex items-center justify-center"
       >
         <FaUtensils className="mr-2" />
         <span className="font-montserrat font-medium">{t("viewMenuButton")}</span>
-      </motion.a>
+      </a>
     </div>
   );
 };

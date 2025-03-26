@@ -1,49 +1,16 @@
 import React from "react";
-import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { useTranslation, Trans } from "react-i18next";
 import molecolaAbout from "../assets/molecolaAbout.jpeg";
 import { FaPizzaSlice, FaHistory } from "react-icons/fa";
 import OptimizedImage from "./OptimizedImage";
 
-// Varianti di animazione più lente e fluide
-const fadeIn = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.5 } }
-};
-
-const fadeInUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-};
-
-const fadeInLeft = {
-  hidden: { opacity: 0, x: -30 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } }
-};
-
-const fadeInRight = {
-  hidden: { opacity: 0, x: 30 },
-  visible: { opacity: 1, x: 0, transition: { duration: 0.7, ease: "easeOut" } }
-};
-
-const scaleIn = {
-  hidden: { opacity: 0, scale: 0.9 },
-  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: "easeOut" } }
-};
-
-
-
 const HistorySection: React.FC = () => {
-  const { ref, inView } = useInView({ 
+  const { ref } = useInView({ 
     threshold: 0.1,
     triggerOnce: true 
   });
   const { t } = useTranslation();
-  const prefersReducedMotion = useReducedMotion();
-
-  // Se l'utente preferisce ridurre il movimento, disabilita le animazioni
-  const shouldAnimate = !prefersReducedMotion;
 
   return (
     <section id="about" ref={ref} className="pizza-section bg-pizza-background relative overflow-hidden">
@@ -55,167 +22,88 @@ const HistorySection: React.FC = () => {
         }}
       ></div>
       
-      <AnimatePresence>
-        {inView && (
-          <motion.div 
-            className="container mx-auto px-4 relative z-10"
-            initial="hidden"
-            animate={shouldAnimate ? "visible" : "hidden"}
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.15  // Rallentato lo staggering per dare più spazio tra le animazioni
-                }
-              }
-            }}
-          >
-            {/* Titolo con decorazione */}
-            <div className="text-center mb-16">
-              <motion.span 
-                variants={scaleIn}
-                className="inline-block bg-pizza-red text-white p-3 rounded-full mb-4"
-              >
-                <FaHistory size={30} />
-              </motion.span>
-              <motion.h2
-                variants={fadeInUp}
-                className="pizza-title font-playfair text-5xl md:text-6xl"
-              >
-                {t("historySection.title")}
-              </motion.h2>
-              <motion.div
-                variants={prefersReducedMotion ? fadeIn : {
-                  hidden: { scaleX: 0 },
-                  visible: { scaleX: 1, transition: { duration: 0.8, delay: 0.3 } }
-                }}
-                className="h-1 w-24 bg-pizza-red mx-auto mt-6"
+      <div className="container mx-auto px-4 relative z-10">
+        {/* Titolo con decorazione */}
+        <div className="text-center mb-16">
+          <span className="inline-block bg-pizza-red text-white p-3 rounded-full mb-4">
+            <FaHistory size={30} />
+          </span>
+          <h2 className="pizza-title font-playfair text-5xl md:text-6xl">
+            {t("historySection.title")}
+          </h2>
+          <div className="h-1 w-24 bg-pizza-red mx-auto mt-6"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Contenuto testuale */}
+          <div className="space-y-6 bg-white bg-opacity-90 p-8 rounded-xl shadow-lg hover:translate-y-[-8px] transition-transform duration-500">
+            {/* Testi lunghi per desktop */}
+            <div className="hidden lg:block space-y-6">
+              <p className="text-gray-700 text-lg font-montserrat leading-relaxed">
+                <Trans
+                  i18nKey="historySection.paragraph1"
+                  components={{ b: <span className="text-pizza-red font-medium" /> }}
+                />
+              </p>
+              <p className="text-gray-700 text-lg font-montserrat leading-relaxed">
+                <Trans
+                  i18nKey="historySection.paragraph2"
+                  components={{ b: <span className="text-pizza-red font-medium" /> }}
+                />
+              </p>
+              <p className="text-gray-700 text-lg font-montserrat leading-relaxed">
+                <Trans
+                  i18nKey="historySection.paragraph3"
+                  components={{ b: <span className="text-pizza-red font-medium" /> }}
+                />
+              </p>
+            </div>
+
+            {/* Testi brevi per mobile */}
+            <div className="block lg:hidden space-y-4">
+              <p className="text-gray-700 text-base font-montserrat leading-relaxed">
+                <Trans
+                  i18nKey="historySection.shortParagraph1"
+                  components={{ b: <span className="text-pizza-red font-medium" /> }}
+                />
+              </p>
+              <p className="text-gray-700 text-base font-montserrat leading-relaxed">
+                <Trans
+                  i18nKey="historySection.shortParagraph2"
+                  components={{ b: <span className="text-pizza-red font-medium" /> }}
+                />
+              </p>
+            </div>
+          </div>
+
+          {/* Immagine */}
+          <div className="relative h-[500px] w-full">
+            {/* Effetti con stratificazione */}
+            <div className="absolute inset-0 bg-pizza-red rounded-2xl transform -rotate-3 shadow-xl hover:rotate-[-1deg] hover:scale-[1.02] transition-all duration-500"></div>
+            <div className="absolute inset-0 bg-white rounded-2xl transform rotate-3 shadow-xl overflow-hidden hover:scale-[1.03] hover:rotate-0 transition-all duration-600">
+              <OptimizedImage
+                src={molecolaAbout}
+                alt={t("historySection.image.alt")}
+                className="w-full h-full object-cover"
+                loading="eager"
               />
             </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              {/* Contenuto testuale */}
-              <motion.div
-                variants={fadeInLeft}
-                className="space-y-6 bg-white bg-opacity-90 p-8 rounded-xl shadow-lg hover:translate-y-[-8px] transition-transform duration-500"
-              >
-                {/* Testi lunghi per desktop */}
-                <div className="hidden lg:block space-y-6">
-                  <motion.p 
-                    variants={{
-                      hidden: { opacity: 0, y: 10 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.1 } }
-                    }}
-                    className="text-gray-700 text-lg font-montserrat leading-relaxed"
-                  >
-                    <Trans
-                      i18nKey="historySection.paragraph1"
-                      components={{ b: <span className="text-pizza-red font-medium" /> }}
-                    />
-                  </motion.p>
-                  <motion.p 
-                    variants={{
-                      hidden: { opacity: 0, y: 10 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.3 } }
-                    }}
-                    className="text-gray-700 text-lg font-montserrat leading-relaxed"
-                  >
-                    <Trans
-                      i18nKey="historySection.paragraph2"
-                      components={{ b: <span className="text-pizza-red font-medium" /> }}
-                    />
-                  </motion.p>
-                  <motion.p 
-                    variants={{
-                      hidden: { opacity: 0, y: 10 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.5 } }
-                    }}
-                    className="text-gray-700 text-lg font-montserrat leading-relaxed"
-                  >
-                    <Trans
-                      i18nKey="historySection.paragraph3"
-                      components={{ b: <span className="text-pizza-red font-medium" /> }}
-                    />
-                  </motion.p>
-                </div>
-
-                {/* Testi brevi per mobile */}
-                <div className="block lg:hidden space-y-4">
-                  <motion.p 
-                    variants={{
-                      hidden: { opacity: 0, y: 10 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.2 } }
-                    }}
-                    className="text-gray-700 text-base font-montserrat leading-relaxed"
-                  >
-                    <Trans
-                      i18nKey="historySection.shortParagraph1"
-                      components={{ b: <span className="text-pizza-red font-medium" /> }}
-                    />
-                  </motion.p>
-                  <motion.p 
-                    variants={{
-                      hidden: { opacity: 0, y: 10 },
-                      visible: { opacity: 1, y: 0, transition: { duration: 0.6, delay: 0.4 } }
-                    }}
-                    className="text-gray-700 text-base font-montserrat leading-relaxed"
-                  >
-                    <Trans
-                      i18nKey="historySection.shortParagraph2"
-                      components={{ b: <span className="text-pizza-red font-medium" /> }}
-                    />
-                  </motion.p>
-                </div>
-              </motion.div>
-
-              {/* Immagine */}
-              <motion.div
-                variants={fadeInRight}
-                className="relative h-[500px] w-full will-change-transform"
-              >
-                {/* Effetti con stratificazione */}
-                <motion.div 
-                  className="absolute inset-0 bg-pizza-red rounded-2xl transform -rotate-3 shadow-xl hover:rotate-[-1deg] hover:scale-[1.02] transition-all duration-500"
-                ></motion.div>
-                <motion.div 
-                  className="absolute inset-0 bg-white rounded-2xl transform rotate-3 shadow-xl overflow-hidden hover:scale-[1.03] hover:rotate-0 transition-all duration-600"
-                  initial="initial"
-                >
-                  <OptimizedImage
-                    src={molecolaAbout}
-                    alt={t("historySection.image.alt")}
-                    className="w-full h-full object-cover"
-                    loading="eager"
-                  />
-                </motion.div>
-                
-                {/* Didascalia */}
-                <motion.div 
-                  variants={fadeIn}
-                  className="absolute -bottom-6 right-8 bg-white p-4 rounded-lg shadow-lg transform rotate-3 max-w-[250px] hover:rotate-0 hover:translate-y-[-8px] transition-all duration-400"
-                >
-                  <p className="text-pizza-brown font-medium font-montserrat flex items-center">
-                    <motion.span
-                      animate={{ rotate: [0, 15, 0] }}
-                      transition={{ 
-                        duration: 2.5, 
-                        repeat: Infinity,
-                        repeatDelay: 4, 
-                        ease: "easeInOut"
-                      }}
-                    >
-                      <FaPizzaSlice className="mr-2 text-pizza-red" />
-                    </motion.span>
-                    <Trans
-                      i18nKey="historySection.image.caption"
-                      components={{ b: <span className="text-pizza-red" /> }}
-                    />
-                  </p>
-                </motion.div>
-              </motion.div>
+            
+            {/* Didascalia */}
+            <div className="absolute -bottom-6 right-8 bg-white p-4 rounded-lg shadow-lg transform rotate-3 max-w-[250px] hover:rotate-0 hover:translate-y-[-8px] transition-all duration-400">
+              <p className="text-pizza-brown font-medium font-montserrat flex items-center">
+                <span>
+                  <FaPizzaSlice className="mr-2 text-pizza-red" />
+                </span>
+                <Trans
+                  i18nKey="historySection.image.caption"
+                  components={{ b: <span className="text-pizza-red" /> }}
+                />
+              </p>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

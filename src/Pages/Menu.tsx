@@ -1,236 +1,161 @@
-import { useState } from "react";
-import { FaPizzaSlice, FaLeaf, FaWineGlassAlt } from "react-icons/fa";
-import { GiFullPizza, GiHotMeal, GiFrenchFries, GiCookingPot, GiChefToque, GiPizzaCutter } from "react-icons/gi";
-import { motion, useReducedMotion } from "framer-motion";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { menuItems } from "../data/menuData";
-import { JSX } from "react/jsx-runtime";
+import { FaPizzaSlice, FaLeaf, FaWineBottle } from "react-icons/fa";
+import { GiCupcake } from "react-icons/gi";
 
-type CategoryName =
-  | "Antipasti"
-  | "Pizze Classiche"
-  | "Pizze Speciali"
-  | "Vegetariane"
-  | "Pizze fritte"
-  | "Pizze 180 Grammi"
-  | "Pizze al Padellino"
-  | "Padellino Farcito"
-  | "Pizze Doppia Cottura"
-  | "Bevande";
+interface MenuItem {
+  id: string;
+  name: string;
+  description: string;
+  price: string;
+  category: string;
+  isVegetarian?: boolean;
+  isSpicy?: boolean;
+  isNew?: boolean;
+}
 
-
-
-const Menu = () => {
+const Menu: React.FC = () => {
   const { t } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState<CategoryName>("Pizze Classiche");
-  const [animateItems, setAnimateItems] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("pizza");
 
-  const prefersReducedMotion = useReducedMotion();
-
-  // Array delle categorie
-  const categories: { name: CategoryName; icon: JSX.Element }[] = [
-    { name: "Antipasti", icon: <GiFrenchFries className="text-pizza-red" /> },
-    { name: "Pizze Classiche", icon: <FaPizzaSlice className="text-pizza-red" /> },
-    { name: "Pizze Speciali", icon: <GiChefToque className="text-pizza-red" /> },
-    { name: "Vegetariane", icon: <FaLeaf className="text-pizza-red" /> },
-    { name: "Pizze fritte", icon: <GiPizzaCutter className="text-pizza-red" /> },
-    { name: "Pizze 180 Grammi", icon: <GiFullPizza className="text-pizza-red" /> },
-    { name: "Pizze al Padellino", icon: <GiCookingPot className="text-pizza-red" /> },
-    { name: "Padellino Farcito", icon: <GiHotMeal className="text-pizza-red" /> },
-    { name: "Pizze Doppia Cottura", icon: <GiFullPizza className="text-pizza-red" /> },
-    { name: "Bevande", icon: <FaWineGlassAlt className="text-pizza-red" /> },
+  // Categorie del menu
+  const categories = [
+    {
+      id: "pizza",
+      name: t("menu.categories.pizza"),
+      icon: <FaPizzaSlice className="mr-2" />
+    },
+    {
+      id: "starters",
+      name: t("menu.categories.starters"),
+      icon: <FaLeaf className="mr-2" />
+    },
+    {
+      id: "drinks",
+      name: t("menu.categories.drinks"),
+      icon: <FaWineBottle className="mr-2" />
+    },
+    {
+      id: "desserts",
+      name: t("menu.categories.desserts"),
+      icon: <GiCupcake className="mr-2" />
+    }
   ];
 
-  // Mappatura dei nomi delle categorie alle chiavi di traduzione
-  const categoryTranslations: Record<CategoryName, string> = {
-    "Antipasti": "menu.categories.antipasti",
-    "Pizze Classiche": "menu.categories.pizzeClassiche",
-    "Pizze Speciali": "menu.categories.pizzeSpeciali",
-    "Vegetariane": "menu.categories.vegetariane",
-    "Pizze fritte": "menu.categories.pizzeFritte",
-    "Pizze 180 Grammi": "menu.categories.pizze180Grammi",
-    "Pizze al Padellino": "menu.categories.pizzeAlPadellino",
-    "Padellino Farcito": "menu.categories.padellinoFarcito",
-    "Pizze Doppia Cottura": "menu.categories.pizzeDoppiaCottura",
-    "Bevande": "menu.categories.bevande",
-  };
-
-  // Filtra gli items in base alla categoria attiva
-  const filteredItems = menuItems.filter((cat) => cat.category === activeCategory)[0]?.items || [];
-
-  // Gestisce il cambio di categoria con animazione
-  const handleCategoryChange = (category: CategoryName) => {
-    if (category === activeCategory) return;
+  // Ottieni gli elementi del menu filtrati per categoria
+  const getMenuItems = (): MenuItem[] => {
+    // Questi sono solo esempi di menu items, nella versione reale verrebbero caricati da un'API
+    const menuItems: MenuItem[] = [
+      // Pizze
+      { id: "p1", name: t("menu.items.molecola.name"), description: t("menu.items.molecola.description"), price: "14,90€", category: "pizza", isNew: true },
+      { id: "p2", name: t("menu.items.margherita.name"), description: t("menu.items.margherita.description"), price: "9,90€", category: "pizza", isVegetarian: true },
+      { id: "p3", name: t("menu.items.diavola.name"), description: t("menu.items.diavola.description"), price: "12,90€", category: "pizza", isSpicy: true },
+      { id: "p4", name: t("menu.items.vegetariana.name"), description: t("menu.items.vegetariana.description"), price: "13,90€", category: "pizza", isVegetarian: true },
+      { id: "p5", name: t("menu.items.tartufo.name"), description: t("menu.items.tartufo.description"), price: "16,90€", category: "pizza" },
+      { id: "p6", name: t("menu.items.quattroformaggi.name"), description: t("menu.items.quattroformaggi.description"), price: "13,90€", category: "pizza", isVegetarian: true },
+      
+      // Antipasti
+      { id: "s1", name: t("menu.items.bruschetta.name"), description: t("menu.items.bruschetta.description"), price: "7,90€", category: "starters", isVegetarian: true },
+      { id: "s2", name: t("menu.items.capresesalad.name"), description: t("menu.items.capresesalad.description"), price: "9,90€", category: "starters", isVegetarian: true },
+      { id: "s3", name: t("menu.items.frittura.name"), description: t("menu.items.frittura.description"), price: "10,90€", category: "starters" },
+      
+      // Bevande
+      { id: "d1", name: t("menu.items.redwine.name"), description: t("menu.items.redwine.description"), price: "21,90€", category: "drinks" },
+      { id: "d2", name: t("menu.items.whitewine.name"), description: t("menu.items.whitewine.description"), price: "19,90€", category: "drinks" },
+      { id: "d3", name: t("menu.items.craftbeer.name"), description: t("menu.items.craftbeer.description"), price: "6,90€", category: "drinks" },
+      
+      // Dessert
+      { id: "de1", name: t("menu.items.tiramisu.name"), description: t("menu.items.tiramisu.description"), price: "6,90€", category: "desserts" },
+      { id: "de2", name: t("menu.items.pannacotta.name"), description: t("menu.items.pannacotta.description"), price: "5,90€", category: "desserts" }
+    ];
     
-    // Se sono attive le preferenze per ridurre le animazioni, cambia direttamente
-    if (prefersReducedMotion) {
-      setActiveCategory(category);
-      return;
-    }
-    
-    setAnimateItems(false);
-    setTimeout(() => {
-      setActiveCategory(category);
-      setAnimateItems(true);
-    }, 300);
+    return menuItems.filter(item => item.category === selectedCategory);
   };
 
-  // Configura le proprietà di animazione in base alle preferenze dell'utente
-  const getAnimationProps = (delay = 0) => {
-    if (prefersReducedMotion) {
-      return {};
-    }
-    return {
-      initial: { opacity: 0, y: 20 },
-      animate: { opacity: 1, y: 0 },
-      transition: { duration: 0.3, delay }
-    };
-  };
+  const filteredItems = getMenuItems();
 
   return (
-    <div className="min-h-screen bg-pizza-background">
-      {/* Header del menu */}
-      <div className="bg-pizza-brown text-white py-8 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-repeat" style={{ 
-            backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")',
-          }}></div>
-        </div>
-        
-        <div className="container mx-auto px-4 relative">
-          <motion.h1 
-            {...(prefersReducedMotion ? {} : {
-              initial: { opacity: 0, y: -20 },
-              animate: { opacity: 1, y: 0 },
-              transition: { duration: 0.5 }
-            })}
-            className="text-4xl md:text-5xl font-playfair text-center mb-2"
-          >
+    <section className="py-20 bg-pizza-background">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-playfair text-pizza-brown mb-4">
             {t("menu.title")}
-          </motion.h1>
-          
-          <motion.div 
-            {...(prefersReducedMotion ? {} : {
-              initial: { scaleX: 0 },
-              animate: { scaleX: 1 },
-              transition: { duration: 0.5, delay: 0.2 }
-            })}
-            className="w-24 h-1 bg-pizza-red mx-auto mb-4"
-          />
-          
-          <motion.p 
-            {...(prefersReducedMotion ? {} : {
-              initial: { opacity: 0 },
-              animate: { opacity: 1 },
-              transition: { duration: 0.5, delay: 0.3 }
-            })}
-            className="text-center text-gray-200 max-w-2xl mx-auto"
-          >
-            {t("menu.subtitle")}
-          </motion.p>
+          </h1>
+          <div className="h-1 w-24 bg-pizza-red mx-auto mb-6"></div>
+          <p className="text-gray-600 max-w-2xl mx-auto font-montserrat">
+            {t("menu.description")}
+          </p>
         </div>
-      </div>
 
-      <div className="container mx-auto px-4 py-8">
-        {/* Sezione Categorie */}
-        <motion.div 
-          initial={{ y: -20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mb-8"
-        >
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4">
-            {categories.map((category) => (
-              <motion.button
-                key={category.name}
-                onClick={() => handleCategoryChange(category.name)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                  activeCategory === category.name
-                    ? "bg-pizza-red text-white shadow-md"
-                    : "bg-white hover:bg-gray-100 text-pizza-brown"
-                }`}
-              >
-                <span>{category.icon}</span>
-                <span className="font-medium text-sm md:text-base whitespace-nowrap">
-                  {t(categoryTranslations[category.name])}
-                </span>
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
+        {/* Tabs per le categorie */}
+        <div className="flex flex-wrap justify-center gap-2 mb-10">
+          {categories.map(category => (
+            <button
+              key={category.id}
+              onClick={() => setSelectedCategory(category.id)}
+              className={`flex items-center px-4 py-2 rounded-full font-medium transition-colors duration-300 ${
+                selectedCategory === category.id
+                  ? "bg-pizza-red text-white"
+                  : "bg-white text-pizza-brown hover:bg-gray-100"
+              }`}
+            >
+              <span>{category.icon}</span>
+              {category.name}
+            </button>
+          ))}
+        </div>
 
-        {/* Sezione Items del Menu */}
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            animate={{ opacity: animateItems ? 1 : 0 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
-          >
-            {filteredItems.map((item, index) => (
-              <motion.div
-                key={index}
-                {...getAnimationProps(index * 0.05)}
-                className="pizza-card p-4 relative overflow-hidden group"
-              >
-                {/* Background pattern */}
-                <div className="absolute inset-0 bg-pizza-yellow opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
-                
-                <div className="flex justify-between">
-                  <div className="flex-1 pr-4">
-                    <h3 className="text-xl font-playfair text-pizza-brown group-hover:text-pizza-red transition-colors duration-300">
-                      {t(item.name)}
-                    </h3>
-                    
-                    <p className="text-gray-600 text-sm mt-1 line-clamp-2">
-                      {t(item.description)}
-                    </p>
-                  </div>
-                  
-                  <div className="flex flex-col items-end">
-                    <span className="text-lg font-bold text-pizza-red">
-                      €{item.price}
-                    </span>
-                    
-                    {activeCategory === "Vegetariane" && (
-                      <span className="flex items-center text-xs text-pizza-green mt-1">
-                        <FaLeaf className="mr-1" />
-                        {t("menu.vegetarian")}
+        {/* Lista elementi menu */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {filteredItems.map(item => (
+            <div
+              key={item.id}
+              className="bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+            >
+              <div className="p-6">
+                <div className="flex justify-between items-start mb-2">
+                  <h3 className="text-xl font-playfair text-pizza-brown">
+                    {item.name}
+                    {item.isVegetarian && (
+                      <span className="ml-2 text-green-600 text-sm" title={t("menu.vegetarian")}>
+                        <FaLeaf />
                       </span>
                     )}
-                  </div>
+                    {item.isSpicy && (
+                      <span className="ml-2 text-red-600 text-sm" title={t("menu.spicy")}>
+                        🌶️
+                      </span>
+                    )}
+                  </h3>
+                  <div className="text-pizza-red font-medium">{item.price}</div>
                 </div>
+                <p className="text-gray-600 font-montserrat text-sm">{item.description}</p>
                 
-                {/* Decorative pizza slice */}
-                <div className="absolute -bottom-4 -right-4 w-12 h-12 text-pizza-yellow opacity-10 transform rotate-45">
-                  <GiFullPizza size={48} />
-                </div>
-              </motion.div>
-            ))}
-          </motion.div>
+                {item.isNew && (
+                  <div className="mt-3">
+                    <span className="inline-block bg-pizza-red text-white text-xs px-2 py-1 rounded-full">
+                      {t("menu.new")}
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
         </div>
-      </div>
-      
-      {/* Footer del menu */}
-      <div className="bg-white py-8 mt-12 text-center">
-        <div className="container mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
+
+        {/* Note aggiuntive */}
+        <div className="mt-12 text-center">
+          <p className="text-gray-600 text-sm font-montserrat">
+            {t("menu.additionalNotes")}
+          </p>
+          <button
+            className="pizza-btn bg-pizza-brown text-white px-6 py-3 mt-6"
           >
-            <h2 className="font-playfair text-2xl text-pizza-brown mb-4">{t("menu.footer.title")}</h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">{t("menu.footer.text")}</p>
-            
-            <motion.button
-              className="pizza-btn bg-pizza-brown text-white px-6 py-3 mt-6"
-            >
-              {t("reservationButton")}
-            </motion.button>
-          </motion.div>
+            {t("menu.downloadPdfButton")}
+          </button>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
