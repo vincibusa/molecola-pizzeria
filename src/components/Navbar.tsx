@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaHome, FaUtensils, FaImages, FaNewspaper, FaCalendarAlt } from "react-icons/fa";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import ReservationModal from "./ReservationModal";
@@ -34,28 +34,42 @@ const Navbar = () => {
     setIsMobileMenuOpen(false);
   }, [location.pathname]);
 
+  // Blocca lo scroll quando il menu mobile è aperto
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMobileMenuOpen]);
+
+  // La navbar principale può essere trasparente nella home page
   const navbarBg =
     location.pathname === "/"
-      ? isNavbarTransparent
+      ? isNavbarTransparent && !isMobileMenuOpen // Non rendere trasparente quando il menu mobile è aperto
         ? "bg-transparent backdrop-blur-sm bg-opacity-0"
         : "bg-white shadow-md"
       : "bg-white shadow-md";
 
+  // Anche il colore del testo cambia solo quando il menu mobile è chiuso
   const textColor = 
-    location.pathname === "/" && isNavbarTransparent
+    location.pathname === "/" && isNavbarTransparent && !isMobileMenuOpen
       ? "text-white"
       : "text-pizza-brown";
 
   const hoverClass =
-    location.pathname === "/" && isNavbarTransparent
+    location.pathname === "/" && isNavbarTransparent && !isMobileMenuOpen
       ? "hover:text-pizza-yellow"
       : "hover:text-pizza-red";
 
   // Definisci gli elementi della navbar con le rispettive chiavi di traduzione e rotte
   const navItems = [
-    { key: "home", label: t("navbar.home"), route: "/" },
-    { key: "menu", label: t("navbar.menu"), route: "/menu" },
-    { key: "gallery", label: t("navbar.gallery"), route: "/galleria" },
+    { key: "home", label: t("navbar.home"), route: "/", icon: <FaHome /> },
+    { key: "menu", label: t("navbar.menu"), route: "/menu", icon: <FaUtensils /> },
+    { key: "gallery", label: t("navbar.gallery"), route: "/galleria", icon: <FaImages /> },
   ];
 
   // Varianti per le animazioni dei link della navbar
@@ -72,24 +86,46 @@ const Navbar = () => {
     })
   };
 
-  // Varianti semplificate per il menu mobile
+  // Varianti per il menu mobile a tutto schermo da destra verso sinistra
   const mobileMenuVariants = {
-    hidden: { opacity: 0, height: 0 },
+    hidden: { x: "100%", opacity: 0 },
     visible: { 
-      opacity: 1, 
-      height: "auto",
+      x: 0, 
+      opacity: 1,
       transition: {
-        duration: 0.25,
-        ease: "easeOut"
+        type: "tween",
+        duration: 0.4,
+        ease: "easeOut",
+        when: "beforeChildren",
+        staggerChildren: 0.1
       }
     },
     exit: { 
-      opacity: 0, 
-      height: 0,
+      x: "100%", 
+      opacity: 0,
       transition: {
-        duration: 0.2,
-        ease: "easeIn"
+        type: "tween",
+        duration: 0.3,
+        ease: "easeIn",
+        when: "afterChildren",
+        staggerChildren: 0.05,
+        staggerDirection: -1
       }
+    }
+  };
+
+  // Variante per gli elementi del menu mobile
+  const mobileNavItemVariants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: { 
+      opacity: 1, 
+      x: 0,
+      transition: { duration: 0.3 }
+    },
+    exit: { 
+      opacity: 0, 
+      x: 20,
+      transition: { duration: 0.2 }
     }
   };
 
@@ -132,7 +168,7 @@ const Navbar = () => {
                 {/* Menu hamburger per mobile */}
                 <motion.button
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                  className="lg:hidden rounded-full p-2 bg-pizza-red text-white focus:outline-none"
+                  className="lg:hidden rounded-full p-2 bg-pizza-red text-white focus:outline-none z-[200]"
                   aria-label={t("navbar.toggleMenu")}
                   whileTap={{ scale: 0.9 }}
                   transition={{ duration: 0.2 }}
@@ -198,106 +234,134 @@ const Navbar = () => {
                   >
                     <motion.button
                       onClick={() => setIsReservationModalOpen(true)}
-                      className="pizza-btn bg-pizza-red text-white px-5 py-2 text-sm relative overflow-hidden group"
+                      className="pizza-btn bg-pizza-red text-white px-5 py-2 rounded-lg shadow-lg hover:shadow-xl active:shadow-md active:translate-y-0.5 transition-all duration-200 flex items-center justify-center"
                       whileHover={{ 
                         scale: 1.03,
                         transition: { duration: 0.2 }
                       }}
                       whileTap={{ scale: 0.97 }}
                     >
-                      <span className="relative z-10">{t("navbar.reservation")}</span>
-                      <span className="absolute inset-0 bg-pizza-brown transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
+                      <FaCalendarAlt className="mr-2" />
+                      <span className="font-montserrat font-medium">{t("navbar.reservation")}</span>
                     </motion.button>
                   </motion.div>
                 </div>
               </div>
-              
-              {/* Menu mobile con animazioni semplificate */}
-              <AnimatePresence>
-                {isMobileMenuOpen && (
-                  <motion.div
-                    className="lg:hidden mt-4 overflow-hidden"
-                    initial="hidden"
-                    animate="visible"
-                    exit="exit"
-                    variants={mobileMenuVariants}
-                  >
-                    <div className="flex flex-col py-4 space-y-3 bg-white rounded-xl shadow-lg p-4">
-                      {/* Elementi di navigazione principale con CSS Transitions invece di framer-motion */}
-                      {navItems.map((item, i) => (
-                        <div
-                          key={item.key}
-                          className={`transition-all duration-300 ease-out ${isMobileMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}`}
-                          style={{ transitionDelay: `${i * 50}ms` }}
-                        >
-                          <Link
-                            to={item.route}
-                            className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg active:bg-gray-200 touch-manipulation flex items-center"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            <span className="relative overflow-hidden">
-                              {item.label}
-                              <span className="absolute bottom-0 left-0 w-0 bg-pizza-red h-0.5 transition-all duration-300 ease-out group-hover:w-full"></span>
-                            </span>
-                          </Link>
-                        </div>
-                      ))}
-                      
-                      {/* Link alla sezione Press */}
-                      <div 
-                        className={`transition-all duration-300 ease-out ${isMobileMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}`}
-                        style={{ transitionDelay: `${navItems.length * 50}ms` }}
-                      >
-                        <Link
-                          to="/#press"
-                          className="text-pizza-brown hover:text-pizza-red transition-colors font-medium px-3 py-2 rounded-lg active:bg-gray-200 touch-manipulation block"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setIsMobileMenuOpen(false);
-                            
-                            if (location.pathname === "/") {
-                              setTimeout(() => {
-                                const pressSection = document.getElementById("press");
-                                if (pressSection) {
-                                  pressSection.scrollIntoView({ 
-                                    behavior: "smooth",
-                                    block: "start"
-                                  });
-                                }
-                              }, 100);
-                            } else {
-                              window.location.href = "/#press";
-                            }
-                          }}
-                        >
-                          {t("navbar.press")}
-                        </Link>
-                      </div>
-                      
-                      {/* Bottone prenotazione */}
-                      <div 
-                        className={`transition-all duration-300 ease-out ${isMobileMenuOpen ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"}`}
-                        style={{ transitionDelay: `${(navItems.length + 1) * 50}ms` }}
-                      >
-                        <button
-                          onClick={() => {
-                            setIsReservationModalOpen(true);
-                            setIsMobileMenuOpen(false);
-                          }}
-                          className="pizza-btn bg-pizza-red text-white px-5 py-3 text-sm w-full mt-2 touch-manipulation active:opacity-90 relative overflow-hidden group transition-transform duration-200 active:scale-[0.98]"
-                        >
-                          <span className="relative z-10">{t("navbar.reservation")}</span>
-                          <span className="absolute inset-0 bg-pizza-brown transform scale-x-0 origin-left group-hover:scale-x-100 transition-transform duration-300 ease-out"></span>
-                        </button>
-                      </div>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
             </div>
           </motion.nav>
         )}
       </AnimatePresence>
+      
+      {/* Menu mobile come dropdown che appare sotto la navbar */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            className="fixed top-[61px] inset-x-0 bottom-0 bg-white z-[90] lg:hidden flex flex-col"
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            variants={mobileMenuVariants}
+          >
+            <div className="container mx-auto px-6 py-10 flex flex-col flex-grow overflow-y-auto">
+              <div className="flex flex-col space-y-8 flex-grow">
+                {/* Elementi di navigazione principale con icone */}
+                {navItems.map((item) => (
+                  <motion.div
+                    key={item.key}
+                    variants={mobileNavItemVariants}
+                    className="border-b border-gray-100 pb-6"
+                  >
+                    <Link
+                      to={item.route}
+                      className="text-pizza-brown hover:text-pizza-red transition-all duration-300 text-2xl font-medium flex items-center group"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      <span className="text-pizza-red mr-4 text-xl">
+                        {item.icon}
+                      </span>
+                      <span className="relative overflow-hidden">
+                        {item.label}
+                        <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pizza-red group-hover:w-full transition-all duration-300 ease-out"></span>
+                      </span>
+                      <motion.span 
+                        className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        initial={{ x: -10 }}
+                        animate={{ x: 0 }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        →
+                      </motion.span>
+                    </Link>
+                  </motion.div>
+                ))}
+                
+                {/* Link alla sezione Press */}
+                <motion.div 
+                  variants={mobileNavItemVariants}
+                  className="border-b border-gray-100 pb-6"
+                >
+                  <Link
+                    to="/#press"
+                    className="text-pizza-brown hover:text-pizza-red transition-all duration-300 text-2xl font-medium flex items-center group"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setIsMobileMenuOpen(false);
+                      
+                      if (location.pathname === "/") {
+                        setTimeout(() => {
+                          const pressSection = document.getElementById("press");
+                          if (pressSection) {
+                            pressSection.scrollIntoView({ 
+                              behavior: "smooth",
+                              block: "start"
+                            });
+                          }
+                        }, 100);
+                      } else {
+                        window.location.href = "/#press";
+                      }
+                    }}
+                  >
+                    <span className="text-pizza-red mr-4 text-xl">
+                      <FaNewspaper />
+                    </span>
+                    <span className="relative overflow-hidden">
+                      {t("navbar.press")}
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-pizza-red group-hover:w-full transition-all duration-300 ease-out"></span>
+                    </span>
+                    <motion.span 
+                      className="ml-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      initial={{ x: -10 }}
+                      animate={{ x: 0 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      →
+                    </motion.span>
+                  </Link>
+                </motion.div>
+              </div>
+              
+              {/* Bottone prenotazione */}
+              <motion.div 
+                variants={mobileNavItemVariants}
+                className="mt-auto py-8"
+              >
+                <button
+                  onClick={() => {
+                    setIsReservationModalOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="pizza-btn bg-pizza-red text-white px-8 py-4 rounded-lg shadow-lg hover:shadow-xl active:shadow-md active:translate-y-0.5 transition-all duration-200 flex items-center justify-center w-full touch-manipulation"
+                >
+                  <FaCalendarAlt className="mr-2" />
+                  <span className="font-montserrat font-medium">{t("navbar.reservation")}</span>
+                </button>
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+      
       <ReservationModal
         isOpen={isReservationModalOpen}
         onClose={() => setIsReservationModalOpen(false)}
