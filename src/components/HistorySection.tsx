@@ -28,7 +28,7 @@ const HistorySection: React.FC = () => {
   
   // Animazioni con scale e rotazione (semplificate)
   const popIn = `${baseAnimation} ${inView ? "scale-100 rotate-0" : "scale-0 rotate-6"}`;
-  const slideInRotate = `${baseAnimation} ${inView ? "translate-y-0 rotate-0" : "translate-y-10 rotate-6"}`;
+ 
 
   // Effetto di animazione a cascata per paragrafi
   const staggerDelay = (index: number) => ({
