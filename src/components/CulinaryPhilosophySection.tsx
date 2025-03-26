@@ -14,20 +14,20 @@ const CulinaryPhilosophySection: React.FC = () => {
   // Items per la filosofia culinaria
   const philosophyItems = [
     {
-      titleKey: "culinaryPhilosophy.items.freshness.title",
-      descriptionKey: "culinaryPhilosophy.items.freshness.description",
+      titleKey: "culinaryPhilosophy.item1.title",
+      descriptionKey: "culinaryPhilosophy.item1.description",
       color: "bg-gradient-to-br from-green-400 to-green-600",
       icon: <FaLeaf size={40} className="text-white" />
     },
     {
-      titleKey: "culinaryPhilosophy.items.tradition.title",
-      descriptionKey: "culinaryPhilosophy.items.tradition.description",
+      titleKey: "culinaryPhilosophy.item2.title",
+      descriptionKey: "culinaryPhilosophy.item2.description",
       color: "bg-gradient-to-br from-amber-400 to-amber-600",
       icon: <GiWheat size={40} className="text-white" />
     },
     {
-      titleKey: "culinaryPhilosophy.items.innovation.title",
-      descriptionKey: "culinaryPhilosophy.items.innovation.description",
+      titleKey: "culinaryPhilosophy.item3.title",
+      descriptionKey: "culinaryPhilosophy.item3.description",
       color: "bg-gradient-to-br from-blue-400 to-blue-600",
       icon: <FaPizzaSlice size={40} className="text-white" />
     }
@@ -107,7 +107,7 @@ const CulinaryPhilosophySection: React.FC = () => {
         {/* Call to action */}
         <div className="text-center mt-16">
           <p className="text-lg text-gray-700 font-montserrat mb-6">
-            {t("culinaryPhilosophy.callToAction")}
+            {t("culinaryPhilosophy.quote")}
           </p>
           <a 
             href="#menu" 
@@ -115,7 +115,7 @@ const CulinaryPhilosophySection: React.FC = () => {
           >
             <span className="flex items-center">
               <FaUtensils className="mr-2" />
-              {t("culinaryPhilosophy.viewMenu")}
+              {t("viewMenuButton")}
             </span>
           </a>
         </div>
