@@ -78,7 +78,7 @@ const CulinaryPhilosophySection: React.FC = () => {
         }}
       ></div>
       
-      <div className="container mx-auto px-4 py-16 relative z-10">
+      <div className="container mx-auto px-4  relative z-10">
         {/* Intestazione della sezione */}
         <motion.div 
           className="text-center mb-20"

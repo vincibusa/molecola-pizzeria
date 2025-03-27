@@ -250,7 +250,7 @@ const resources = {
       // Team gallery texts
       "teamGallerySection.heading": "GALLERIA",
       "teamGallerySection.viewGallery": "Visualizza Galleria Completa",
-      "teamGallerySection.description": "Incontra le persone dietro il successo di Molecola Pizzeria. Il nostro talentuoso team lavora insieme per creare esperienze culinarie indimenticabili attraverso l'innovazione molecolare.",
+      "teamGallerySection.description": "Lavoriamo con passione ed attenzione, studiando i prodotti e trasformando la materia per esaltare il gusto di ogni ingrediente.",
 
       // ReservationModal texts
       "reservationModal.title": "Prenota il tuo tavolo",

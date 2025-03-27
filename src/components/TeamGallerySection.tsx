@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { FaUtensils } from "react-icons/fa";
 import OptimizedImage from "./OptimizedImage";
 import { motion } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
 
 // Importa immagini rappresentative del locale e dei piatti
 import image1 from "../assets/molecola/DSCF8189.png"; // Preparazione pizza
@@ -12,6 +13,7 @@ import image4 from "../assets/molecola/DSCF8097.png"; // Pizza finita
 
 const TeamGallerySection: React.FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   // Animazioni
   const fadeInUp = {
@@ -59,6 +61,11 @@ const TeamGallerySection: React.FC = () => {
         delayChildren: 0.3
       }
     }
+  };
+
+  // Funzione per navigare alla pagina galleria
+  const handleNavigateToGallery = () => {
+    navigate('/galleria');
   };
 
   // Dati delle immagini della galleria
@@ -138,8 +145,9 @@ const TeamGallerySection: React.FC = () => {
           {galleryImages.map((item, index) => (
             <motion.div
               key={index}
-              className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl"
+              className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl cursor-pointer"
               variants={fadeInUp}
+              onClick={handleNavigateToGallery}
             >
               {/* Immagine */}
               <motion.div 
@@ -160,6 +168,10 @@ const TeamGallerySection: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-90 flex flex-col justify-end p-6">
                 <h3 className="text-white text-xl font-playfair mb-1 transition-transform duration-300 group-hover:translate-y-[-5px]">{item.name}</h3>
                 <p className="text-pizza-red font-medium transition-transform duration-300 group-hover:translate-y-[-5px]">{item.role}</p>
+                {/* Visualizza icona o testo per indicare che è cliccabile */}
+                <div className="absolute bottom-6 right-6 text-white text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <span>→</span>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -174,15 +186,12 @@ const TeamGallerySection: React.FC = () => {
           variants={fadeInUp}
           transition={{ delay: 0.5 }}
         >
-          <motion.a 
-            href="#contact" 
+          <Link
+            to="/galleria"
             className="inline-block pizza-btn bg-pizza-red text-white px-8 py-3 hover:bg-pizza-brown transition-colors duration-300"
-            variants={scaleIn}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
           >
             {t("teamGallerySection.viewGallery")}
-          </motion.a>
+          </Link>
         </motion.div>
       </div>
     </section>
