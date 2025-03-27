@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { FaFacebookF, FaInstagram, FaTiktok, FaTripadvisor, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaChevronRight } from 'react-icons/fa';
+import { FaFacebookF, FaInstagram, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock, FaChevronRight } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
 
 import ReservationModal from './ReservationModal';
@@ -14,10 +14,8 @@ const Footer: React.FC = () => {
 
 
   const socialLinks = [
-    { icon: <FaFacebookF />, url: 'https://www.facebook.com/fermento2.0cefalu/' },
-    { icon: <FaInstagram />, url: 'https://www.instagram.com/fermento2.0cefalu/' },
-    { icon: <FaTiktok />, url: 'https://www.tiktok.com/' },
-    { icon: <FaTripadvisor />, url: 'https://www.tripadvisor.it/' },
+    { icon: <FaFacebookF />, url: 'https://www.facebook.com/share/14kBCbDmg3/?mibextid=wwXIfr' },
+    { icon: <FaInstagram />, url: 'https://www.instagram.com/molecolapizzeria?igsh=MThyeW1qOGQzZzlsZg==' },
   ];
 
   // Utilizziamo le stesse chiavi della Navbar per i link rapidi
