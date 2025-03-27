@@ -3,19 +3,19 @@ import { useTranslation } from "react-i18next";
 import { FiX } from "react-icons/fi";
 import OptimizedImage from "../components/OptimizedImage";
 
-// Importazione delle foto della galleria
-import gallery1 from "../assets/molecola/DSCF7969.jpg";
-import gallery2 from "../assets/molecola/DSCF8020.jpg";
-import gallery3 from "../assets/molecola/DSCF8037.jpg";
-import gallery4 from "../assets/molecola/DSCF8063.jpg";
-import gallery5 from "../assets/molecola/DSCF8076.jpg";
-import gallery6 from "../assets/molecola/DSCF8120.jpg";
-import gallery7 from "../assets/molecola/DSCF8147.png";
-import gallery8 from "../assets/molecola/DSCF8158.png";
-import gallery9 from "../assets/molecola/DSCF8177.png";
-import gallery10 from "../assets/molecola/DSCF8191.png";
-import gallery11 from "../assets/molecola/DSCF8205.png";
-import gallery12 from "../assets/molecola/DSCF8218.jpg";
+// Importazione delle foto della galleria con selezioni più significative
+import gallery1 from "../assets/molecola/DSCF8189.png"; // Preparazione pizza
+import gallery2 from "../assets/molecola/DSCF8058.png"; // Dettaglio locale
+import gallery3 from "../assets/molecola/DSCF8035.png"; // Forno
+import gallery4 from "../assets/molecola/DSCF8097.png"; // Pizza finita
+import gallery5 from "../assets/molecola/DSCF8158.png"; // Dettaglio interno
+import gallery6 from "../assets/molecola/DSCF8162.png"; // Dettaglio preparazione
+import gallery7 from "../assets/molecola/DSCF8147.png"; // Ingredienti
+import gallery8 from "../assets/molecola/DSCF8083.png"; // Atmosfera del locale
+import gallery9 from "../assets/molecola/DSCF8010.png"; // Pizza speciale
+import gallery10 from "../assets/molecola/DSCF8191.png"; // Pizza tradizionale
+import gallery11 from "../assets/molecola/DSCF8102.png"; // Dettaglio ingredienti
+import gallery12 from "../assets/molecola/DSCF8205.png"; // Vista bancone
 
 interface GalleryImage {
   src: string;
@@ -30,20 +30,20 @@ const Gallery: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const imagesPerPage = 9;
 
-  // Array di immagini della galleria
+  // Array di immagini della galleria con categorie appropriate
   const galleryImages: GalleryImage[] = [
-    { src: gallery1, alt: t("gallery.pizzaAlt"), category: "restaurant" },
-    { src: gallery2, alt: t("gallery.pizzaAlt"), category: "pizza" },
-    { src: gallery3, alt: t("gallery.ingredientsAlt"), category: "ingredients" },
-    { src: gallery4, alt: t("gallery.restaurantAlt"), category: "restaurant" },
-    { src: gallery5, alt: t("gallery.pizzaAlt"), category: "pizza" },
-    { src: gallery6, alt: t("gallery.teamAlt"), category: "team" },
+    { src: gallery1, alt: t("gallery.preparation"), category: "preparation" },
+    { src: gallery2, alt: t("gallery.ambiance"), category: "restaurant" },
+    { src: gallery3, alt: t("gallery.oven"), category: "preparation" },
+    { src: gallery4, alt: t("gallery.pizza"), category: "pizza" },
+    { src: gallery5, alt: t("gallery.restaurantAlt"), category: "restaurant" },
+    { src: gallery6, alt: t("gallery.preparation"), category: "preparation" },
     { src: gallery7, alt: t("gallery.ingredientsAlt"), category: "ingredients" },
-    { src: gallery8, alt: t("gallery.ingredientsAlt"), category: "ingredients" },
-    { src: gallery9, alt: t("gallery.pizzaAlt"), category: "pizza" },
-    { src: gallery10, alt: t("gallery.pizzaAlt"), category: "pizza" },
-    { src: gallery11, alt: t("gallery.restaurantAlt"), category: "restaurant" },
-    { src: gallery12, alt: t("gallery.teamAlt"), category: "team" },
+    { src: gallery8, alt: t("gallery.ambiance"), category: "restaurant" },
+    { src: gallery9, alt: t("gallery.pizza"), category: "pizza" },
+    { src: gallery10, alt: t("gallery.pizza"), category: "pizza" },
+    { src: gallery11, alt: t("gallery.ingredientsAlt"), category: "ingredients" },
+    { src: gallery12, alt: t("gallery.restaurantAlt"), category: "restaurant" },
   ];
 
   // Filtra le immagini in base alla categoria selezionata
@@ -71,7 +71,7 @@ const Gallery: React.FC = () => {
     { id: "pizza", label: t("gallery.categories.pizza") },
     { id: "ingredients", label: t("gallery.categories.ingredients") },
     { id: "restaurant", label: t("gallery.categories.restaurant") },
-    { id: "team", label: t("gallery.categories.team") },
+    { id: "preparation", label: t("gallery.categories.preparation") },
   ];
 
   return (

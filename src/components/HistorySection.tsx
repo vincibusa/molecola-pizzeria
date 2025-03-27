@@ -2,7 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useTranslation, Trans } from "react-i18next";
 import molecolaAbout from "../assets/molecolaAbout.jpeg";
-import { FaPizzaSlice, FaHistory } from "react-icons/fa";
+import { FaPizzaSlice } from "react-icons/fa";
 import OptimizedImage from "./OptimizedImage";
 
 const HistorySection: React.FC = () => {
@@ -145,7 +145,7 @@ const HistorySection: React.FC = () => {
             whileInView="visible"
             className="inline-block bg-pizza-red text-white p-3 rounded-full mb-4"
           >
-            <FaHistory size={30} />
+            <FaPizzaSlice size={30} />
           </motion.span>
           <motion.h2
             variants={fadeInUp}

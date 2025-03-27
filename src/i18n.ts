@@ -120,7 +120,6 @@ const resources = {
       "reservationModal.error.emailInvalid": "Please enter a valid email",
 
       // Hero Section / VideoBackground
-      "heroSection.title": "MOLECULAR PIZZA INNOVATION",
       "heroSection.subtitle": "A unique experience of taste and innovation in the heart of Palermo",
       "scrollDown": "Scroll Down",
       
@@ -151,6 +150,24 @@ const resources = {
       "action.cancel": "Cancel",
       "action.submit": "Submit",
       "action.readMore": "Read More",
+      
+      // Gallery section
+      "gallery.preparation": "Pizza Preparation",
+      "gallery.preparation.description": "Artisanal dough crafting",
+      "gallery.ambiance": "Restaurant Ambiance",
+      "gallery.ambiance.description": "Modern and welcoming atmosphere",
+      "gallery.oven": "Wood-fired Oven",
+      "gallery.oven.description": "Traditional cooking methods",
+      "gallery.pizza": "Molecular Pizza",
+      "gallery.pizza.description": "Innovative creations",
+      
+      // Gallery categories
+      "gallery.categories.all": "All",
+      "gallery.categories.pizza": "Pizzas",
+      "gallery.categories.ingredients": "Ingredients",
+      "gallery.categories.restaurant": "Restaurant",
+      "gallery.categories.preparation": "Preparation",
+      "gallery.description": "Discover our passion for molecular pizza through images of our venue, dishes, and preparation methods."
     },
   },
   it: {
@@ -167,13 +184,13 @@ const resources = {
       "navbar.press": "Press",
       "navbar.reservation": "Prenotazioni",
       // HistorySection texts
-      "historySection.title": "LA NOSTRA STORIA",
+      "historySection.title": "LABORATORIO CREATIVO DAL CONCEPT MOLECOLARE",
       "historySection.paragraph1":
-        "Nel cuore del centro di Palermo, a pochi passi da Piazza Politeama, Molecola è il progetto innovativo nato con l'intento di far vivere un'esperienza di gusto e sperimentazione unica incentrata sulla pizza molecolare.",
+        "Più che una pizzeria, il locale di <b>Salvo Capizzi</b> si può definire un laboratorio in continua evoluzione. Nel cuore del centro storico di Palermo, a pochi passi da Piazza Politeama, <b>Molecola</b> è un progetto innovativo nato con l'intento di far vivere un'esperienza di gusto e sperimentazione unica, incentrata sulla <b>pizza molecolare</b>.",
       "historySection.paragraph2":
-        "In un locale dallo stile moderno e dal carattere personale, la <b>pizza</b> proposta parla un linguaggio contemporaneo. Utilizzando un <b>blend di farine selezionate</b> e un processo di fermentazione speciale, prende vita un impasto leggero dalla texture unica, in grado di conquistare anche i palati più esigenti. Non una semplice pizza ma un <b>racconto gastronomico</b> che porta in tavola tutti i sapori della Sicilia.",
+        "Il concept si basa sull’elaborazione raffinata degli ingredienti che arricchiscono una pizza <b>contemporanea</b>, giocando con le consistenze e alternando i sapori. Ad affiancare <b>Capizzi</b>, un team fatto di pizzaioli, impastatori, fornai e passisti proiettato sulla “Ricerca dell’eccellenza in ogni dettaglio”.",
       "historySection.paragraph3":
-        "Non mancano opzioni alternative come il <b>Crunch</b>, dalla croccantezza distintiva, o i <b>Padellini</b> che prevedono tecniche speciali di preparazione dell'impasto prima di essere cotti e farciti, rendendo giustizia alle <b>materie prime di alta qualità</b> accuratamente selezionate dai produttori locali.",
+        "Dal <b>laboratorio creativo</b>, la sperimentazione sconfina negli impasti, con blend di farine selezionate e  processi di fermentazione speciali che danno vita anche a <b>Crunch</b> e <b>Padellini</b>. Fra le proposte, oltre alla contemporanea in versione “molecolare” anche la “quasi molecolare” e “non solo molecolare”, senza dimenticare la spettacolarità dei dolci.",
       "historySection.shortParagraph1":
         "Nel cuore del centro di Palermo, a pochi passi da Piazza Politeama, Molecola è il progetto innovativo nato con l'intento di far vivere un'esperienza di gusto e sperimentazione unica incentrata sulla pizza molecolare.",
       "historySection.shortParagraph2":
@@ -223,9 +240,9 @@ const resources = {
       "pressSection.subtitle": "Cosa dicono critici e appassionati di gastronomia sulla nostra innovativa pizza molecolare",
       "pressSection.award": "Premio Innovazione",
       "pressSection.leftArticle.title":
-        "Premiata per l'Innovazione nella Preparazione della Pizza Siciliana con Tecniche Molecolari",
+        "Premiata per l'Innovazione nella Préparation de la Pizza Sicilienne avec Tecniche Molecolari",
       "pressSection.leftArticle.preview":
-        "Molecola Pizzeria a Palermo è stata riconosciuta per il suo approccio innovativo alla preparazione della pizza utilizzando tecniche di gastronomia molecolare. Il loro creativo menú che include elementi come 'Molecola Fluorescente' e 'Tre Consistenze di Formaggi' ha captato la attenzione di critici gastronomici e appassionati, elogiando la loro dedizione nel superare i confini della pizza tradizionale.",
+        "Molecola Pizzeria a Palermo è stata riconosciuta per il suo approccio innovante alla preparazione della pizza utilizzando tecniche di gastronomia molecolare. Il loro creativo menú che include elementi come 'Molecola Fluorescente' e 'Tre Consistenze di Formaggi' ha captato la attenzione di critici gastronomici e appassionati, elogiando la loro dedizione nel superare i confini della pizza tradizionale.",
       "pressSection.leftArticle.imageAlt": "Premio Innovazione Molecola",
       "pressSection.leftArticle.source": "SiciliaGourmet - Dicembre 2023",
       "pressSection.article.readMore": "Leggi l'articolo completo",
@@ -271,7 +288,6 @@ const resources = {
       "reservationModal.error.emailInvalid": "Inserisci un'email valida",
 
       // Hero Section / VideoBackground
-      "heroSection.title": "INNOVAZIONE PIZZA MOLECOLARE",
       "heroSection.subtitle": "Un'esperienza unica di gusto e innovazione nel cuore di Palermo",
       "scrollDown": "Scorri Giù",
       
@@ -302,6 +318,24 @@ const resources = {
       "action.cancel": "Annulla",
       "action.submit": "Invia",
       "action.readMore": "Leggi di più",
+      
+      // Gallery section
+      "gallery.preparation": "Preparazione Pizza",
+      "gallery.preparation.description": "Impasto artigianale creativo",
+      "gallery.ambiance": "Atmosfera del Locale",
+      "gallery.ambiance.description": "Ambiente moderno e accogliente",
+      "gallery.oven": "Forno a Legna",
+      "gallery.oven.description": "Metodi di cottura tradizionali",
+      "gallery.pizza": "Pizza Molecolare",
+      "gallery.pizza.description": "Creazioni innovative",
+      
+      // Gallery categories
+      "gallery.categories.all": "Tutti",
+      "gallery.categories.pizza": "Pizze",
+      "gallery.categories.ingredients": "Ingredienti",
+      "gallery.categories.restaurant": "Ristorante",
+      "gallery.categories.preparation": "Preparazione",
+      "gallery.description": "Scopri la nostra passione per la pizza molecolare attraverso immagini del nostro locale, dei piatti e dei metodi di preparazione."
     },
   },
   es: {
@@ -422,8 +456,7 @@ const resources = {
       "reservationModal.error.emailInvalid": "Por favor ingresa un email válido",
 
       // Hero Section / VideoBackground
-      "heroSection.title": "MOLECULAR PIZZA INNOVATION",
-      "heroSection.subtitle": "A unique experience of taste and innovation in the heart of Palermo",
+      "heroSection.subtitle": "Una experiencia única de sabor e innovación en el corazón de Palermo",
       "scrollDown": "Desplazarse hacia Abajo",
       
       // Gallery Page
@@ -453,6 +486,24 @@ const resources = {
       "action.cancel": "Cancelar",
       "action.submit": "Enviar",
       "action.readMore": "Leer Más",
+      
+      // Gallery section
+      "gallery.preparation": "Preparación de Pizza",
+      "gallery.preparation.description": "Elaboración artesanal de masa",
+      "gallery.ambiance": "Ambiente del Restaurante",
+      "gallery.ambiance.description": "Atmósfera moderna y acogedora",
+      "gallery.oven": "Horno de Leña",
+      "gallery.oven.description": "Métodos de cocción tradicionales",
+      "gallery.pizza": "Pizza Molecular",
+      "gallery.pizza.description": "Creaciones innovadoras",
+      
+      // Gallery categories
+      "gallery.categories.all": "Todos",
+      "gallery.categories.pizza": "Pizzas",
+      "gallery.categories.ingredients": "Ingredientes",
+      "gallery.categories.restaurant": "Restaurante",
+      "gallery.categories.preparation": "Preparación",
+      "gallery.description": "Descubre nuestra pasión por la pizza molecular a través de imágenes de nuestro local, platos y métodos de preparación."
     },
   },
   fr: {
@@ -567,10 +618,13 @@ const resources = {
       "reservationModal.holdTimeMessage": "Votre table sera réservée pendant 15 minutes après l'heure de réservation",
       "reservationModal.closeButton": "Fermer",
       "reservationModal.contactInfo": "Contactez-nous par téléphone: +39 375 5600 247",
+      "reservationModal.emailLabel": "Email",
+      "reservationModal.emailPlaceholder": "Entrez votre email",
+      "reservationModal.error.emailRequired": "E-Mail est requis",
+      "reservationModal.error.emailInvalid": "Veuillez entrer une adresse email valide",
 
       // Hero Section / VideoBackground
-      "heroSection.title": "AUTHENTIQUE PIZZA NAPOLITAINE",
-      "heroSection.subtitle": "Une expérience unique de goût et tradition au cœur de Cefalù",
+      "heroSection.subtitle": "Une expérience unique de goût et innovation au cœur de Palerme",
       "scrollDown": "Défiler vers le bas",
       
       // Gallery Page
@@ -600,6 +654,24 @@ const resources = {
       "action.cancel": "Annuler",
       "action.submit": "Soumettre",
       "action.readMore": "Lire plus",
+      
+      // Gallery section
+      "gallery.preparation": "Préparation de la Pizza",
+      "gallery.preparation.description": "Façonnage artisanal de la pâte",
+      "gallery.ambiance": "Ambiance du Restaurant",
+      "gallery.ambiance.description": "Atmosphère moderne et accueillante",
+      "gallery.oven": "Four à Bois",
+      "gallery.oven.description": "Méthodes de cuisson traditionnelles",
+      "gallery.pizza": "Pizza Moléculaire",
+      "gallery.pizza.description": "Créations innovantes",
+      
+      // Gallery categories
+      "gallery.categories.all": "Tous",
+      "gallery.categories.pizza": "Pizzas",
+      "gallery.categories.ingredients": "Ingrédients",
+      "gallery.categories.restaurant": "Restaurant",
+      "gallery.categories.preparation": "Préparation",
+      "gallery.description": "Découvrez notre passion pour la pizza moléculaire à travers des images de notre établissement, nos plats et nos méthodes de préparation."
     },
   },
   de: {
@@ -700,15 +772,14 @@ const resources = {
       "reservationModal.successMessage": "Vielen Dank, dass Sie sich für Molecola Pizzeria entschieden haben",
       "reservationModal.holdTimeMessage": "Ihr Tisch bleibt 15 Minuten nach der Reservierungszeit für Sie reserviert",
       "reservationModal.closeButton": "Schließen",
-
+      "reservationModal.contactInfo": "Contact us by phone: +39 375 5600 247",
       "reservationModal.emailLabel": "E-Mail",
       "reservationModal.emailPlaceholder": "Geben Sie Ihre E-Mail ein",
       "reservationModal.error.emailRequired": "E-Mail ist erforderlich",
       "reservationModal.error.emailInvalid": "Bitte geben Sie eine gültige E-Mail-Adresse ein",
 
       // Hero Section / VideoBackground
-      "heroSection.title": "AUTHENTISCHE NEAPOLITANISCHE PIZZA",
-      "heroSection.subtitle": "Ein einzigartiges Geschmacks- und Traditionserlebnis im Herzen von Cefalù",
+      "heroSection.subtitle": "Ein einzigartiges Geschmacks- und Innovationserlebnis im Herzen von Palermo",
       "scrollDown": "Nach unten scrollen",
       
       // Gallery Page
@@ -738,6 +809,24 @@ const resources = {
       "action.cancel": "Abbrechen",
       "action.submit": "Absenden",
       "action.readMore": "Mehr lesen",
+      
+      // Gallery section
+      "gallery.preparation": "Pizza-Zubereitung",
+      "gallery.preparation.description": "Handwerkliche Teigherstellung",
+      "gallery.ambiance": "Restaurant-Ambiente",
+      "gallery.ambiance.description": "Moderne und einladende Atmosphäre",
+      "gallery.oven": "Holzofen",
+      "gallery.oven.description": "Traditionelle Garmethoden",
+      "gallery.pizza": "Molekulare Pizza",
+      "gallery.pizza.description": "Innovative Kreationen",
+      
+      // Gallery categories
+      "gallery.categories.all": "Alle",
+      "gallery.categories.pizza": "Pizzen",
+      "gallery.categories.ingredients": "Zutaten",
+      "gallery.categories.restaurant": "Restaurant",
+      "gallery.categories.preparation": "Zubereitung",
+      "gallery.description": "Entdecken Sie unsere Leidenschaft für molekulare Pizza durch Bilder unseres Lokals, unserer Gerichte und unserer Zubereitungsmethoden."
     }
   }
 };

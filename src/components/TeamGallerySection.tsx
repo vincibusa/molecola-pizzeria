@@ -4,11 +4,11 @@ import { FaUtensils } from "react-icons/fa";
 import OptimizedImage from "./OptimizedImage";
 import { motion } from "framer-motion";
 
-// Importa immagini dello staff
-import chef1 from "../assets/molecola/DSCF7889.jpg";
-import chef2 from "../assets/molecola/DSCF7913.jpg";
-import chef3 from "../assets/molecola/DSCF7936.jpg";
-import chef4 from "../assets/molecola/DSCF8118.jpg";
+// Importa immagini rappresentative del locale e dei piatti
+import image1 from "../assets/molecola/DSCF8189.png"; // Preparazione pizza
+import image2 from "../assets/molecola/DSCF8058.png"; // Dettaglio locale
+import image3 from "../assets/molecola/DSCF8035.png"; // Forno
+import image4 from "../assets/molecola/DSCF8097.png"; // Pizza finita
 
 const TeamGallerySection: React.FC = () => {
   const { t } = useTranslation();
@@ -61,27 +61,27 @@ const TeamGallerySection: React.FC = () => {
     }
   };
 
-  // Dati del team
-  const teamMembers = [
+  // Dati delle immagini della galleria
+  const galleryImages = [
     {
-      name: t("team.chef1.name"),
-      role: t("team.chef1.role"),
-      image: chef1,
+      name: t("gallery.preparation"),
+      role: t("gallery.preparation.description"),
+      image: image1,
     },
     {
-      name: t("team.chef2.name"),
-      role: t("team.chef2.role"),
-      image: chef2,
+      name: t("gallery.ambiance"),
+      role: t("gallery.ambiance.description"),
+      image: image2,
     },
     {
-      name: t("team.chef3.name"),
-      role: t("team.chef3.role"),
-      image: chef3,
+      name: t("gallery.oven"),
+      role: t("gallery.oven.description"),
+      image: image3,
     },
     {
-      name: t("team.chef4.name"),
-      role: t("team.chef4.role"),
-      image: chef4,
+      name: t("gallery.pizza"),
+      role: t("gallery.pizza.description"),
+      image: image4,
     }
   ];
 
@@ -127,7 +127,7 @@ const TeamGallerySection: React.FC = () => {
           </motion.p>
         </motion.div>
 
-        {/* Griglia team con animazioni */}
+        {/* Griglia galleria con animazioni */}
         <motion.div 
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
           variants={staggerContainer}
@@ -135,7 +135,7 @@ const TeamGallerySection: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
         >
-          {teamMembers.map((member, index) => (
+          {galleryImages.map((item, index) => (
             <motion.div
               key={index}
               className="group relative overflow-hidden rounded-lg shadow-lg hover:shadow-xl"
@@ -148,8 +148,8 @@ const TeamGallerySection: React.FC = () => {
                 transition={{ duration: 0.3 }}
               >
                 <OptimizedImage
-                  src={member.image}
-                  alt={member.name}
+                  src={item.image}
+                  alt={item.name}
                   className="w-full h-full object-cover transform transition-all duration-500 group-hover:scale-105"
                   width={350}
                   height={320}
@@ -158,8 +158,8 @@ const TeamGallerySection: React.FC = () => {
               
               {/* Overlay con informazioni */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent opacity-90 flex flex-col justify-end p-6">
-                <h3 className="text-white text-xl font-playfair mb-1 transition-transform duration-300 group-hover:translate-y-[-5px]">{member.name}</h3>
-                <p className="text-pizza-red font-medium transition-transform duration-300 group-hover:translate-y-[-5px]">{member.role}</p>
+                <h3 className="text-white text-xl font-playfair mb-1 transition-transform duration-300 group-hover:translate-y-[-5px]">{item.name}</h3>
+                <p className="text-pizza-red font-medium transition-transform duration-300 group-hover:translate-y-[-5px]">{item.role}</p>
               </div>
             </motion.div>
           ))}
