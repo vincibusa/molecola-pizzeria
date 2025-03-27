@@ -1,6 +1,6 @@
 import React from "react";
 import { GiCook, GiWheat } from "react-icons/gi";
-import { FaPizzaSlice, FaLeaf, FaUtensils } from "react-icons/fa";
+import { FaPizzaSlice, FaUtensils } from "react-icons/fa";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 
@@ -44,32 +44,33 @@ const CulinaryPhilosophySection: React.FC = () => {
     }
   };
   
-
-
   // Items per la filosofia culinaria
   const philosophyItems = [
     {
       titleKey: "culinaryPhilosophy.item1.title",
       descriptionKey: "culinaryPhilosophy.item1.description",
-      color: "bg-gradient-to-br from-green-400 to-green-600",
-      icon: <FaLeaf size={40} className="text-white" />
+      color: "text-green-600",
+      bgColor: "bg-green-100",
+      icon: <FaUtensils size={32} className="text-green-600" />
     },
     {
       titleKey: "culinaryPhilosophy.item2.title",
       descriptionKey: "culinaryPhilosophy.item2.description",
-      color: "bg-gradient-to-br from-amber-400 to-amber-600",
-      icon: <GiWheat size={40} className="text-white" />
+      color: "text-amber-600",
+      bgColor: "bg-amber-100",
+      icon: <GiWheat size={32} className="text-amber-600" />
     },
     {
       titleKey: "culinaryPhilosophy.item3.title",
       descriptionKey: "culinaryPhilosophy.item3.description",
-      color: "bg-gradient-to-br from-blue-400 to-blue-600",
-      icon: <FaPizzaSlice size={40} className="text-white" />
+      color: "text-blue-600",
+      bgColor: "bg-blue-100",
+      icon: <FaPizzaSlice size={32} className="text-blue-600" />
     }
   ];
 
   return (
-    <section id="philosophy" className="pizza-section bg-white relative overflow-hidden">
+    <section id="philosophy" className="pizza-section bg-white relative overflow-hidden py-24">
       {/* Pattern di sfondo */}
       <div
         className="absolute inset-0 opacity-5"
@@ -78,7 +79,7 @@ const CulinaryPhilosophySection: React.FC = () => {
         }}
       ></div>
       
-      <div className="container mx-auto px-4  relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         {/* Intestazione della sezione */}
         <motion.div 
           className="text-center mb-20"
@@ -94,7 +95,7 @@ const CulinaryPhilosophySection: React.FC = () => {
           </motion.span>
           <motion.h2 
             variants={fadeInUp}
-            className="pizza-title"
+            className="pizza-title text-3xl md:text-4xl"
           >
             {t("culinaryPhilosophy.title")}
           </motion.h2>
@@ -104,62 +105,60 @@ const CulinaryPhilosophySection: React.FC = () => {
           ></motion.div>
           <motion.p 
             variants={fadeInUp}
-            className="text-gray-600 max-w-2xl mx-auto font-montserrat"
+            className="text-gray-600 max-w-3xl mx-auto font-montserrat text-base md:text-lg"
           >
             {t("culinaryPhilosophy.subtitle")}
           </motion.p>
         </motion.div>
         
-        {/* Griglia di carte */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Griglia dei principi culinari in layout orizzontale (3 colonne) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto mb-24">
           {philosophyItems.map((item, index) => (
             <motion.div
               key={item.titleKey}
-              className="relative pizza-card overflow-hidden bg-white text-gray-800 group"
+              className="text-center px-4 py-2"
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true, amount: 0.3 }}
               variants={fadeInUp}
               transition={{ delay: index * 0.2 }}
             >
-              {/* Colorful top section */}
-              <div className={`${item.color} p-8 flex justify-center items-center relative overflow-hidden`}>
-                {/* Overlay con opacità che cambia al passaggio del mouse */}
-                <div 
-                  className="absolute inset-0 bg-white opacity-5 group-hover:opacity-20 transition-opacity duration-500"
-                />
-                <motion.div 
-                  className="z-10 transform group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500" 
-                  variants={scaleIn}
-                >
-                  {item.icon}
-                </motion.div>
+              <div className={`${item.bgColor} p-5 rounded-full mx-auto mb-6 w-24 h-24 flex items-center justify-center transition-transform duration-300 hover:scale-110`}>
+                {item.icon}
               </div>
-              
-              {/* Content */}
-              <div className="p-6">
-                <h3 
-                  className="text-xl md:text-2xl font-playfair mb-3 text-pizza-brown group-hover:text-pizza-red transition-colors duration-500"
-                >
-                  {t(item.titleKey)}
-                </h3>
-                <p 
-                  className="text-gray-600 font-montserrat leading-relaxed"
-                >
-                  {t(item.descriptionKey)}
-                </p>
-              </div>
-              
-              {/* Decorative number */}
-              <motion.div 
-                variants={scaleIn}
-                className="absolute top-4 right-4 border border-white/50 text-white rounded-full w-8 h-8 flex items-center justify-center rotate-10 hover:scale-120 hover:rotate-0 transition-all duration-500"
-              >
-                <span className="text-sm font-medium">{index + 1}</span>
-              </motion.div>
+              <h3 className={`text-xl md:text-2xl font-playfair mb-4 ${item.color}`}>
+                {t(item.titleKey)}
+              </h3>
+              <p className="text-gray-600 font-montserrat max-w-xs mx-auto">
+                {t(item.descriptionKey)}
+              </p>
             </motion.div>
           ))}
         </div>
+        
+        {/* Citazione in evidenza */}
+        <motion.div 
+          className="max-w-3xl mx-auto py-10 px-10 bg-pizza-background rounded-lg mb-16 relative"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={fadeInUp}
+        >
+          <div className="text-5xl text-pizza-red opacity-20 font-serif leading-none absolute -top-2 left-4">"</div>
+          <motion.p 
+            variants={fadeInUp}
+            className="text-lg md:text-xl text-gray-700 font-montserrat mb-6 italic text-center relative z-10"
+          >
+            {t("culinaryPhilosophy.quote")}
+          </motion.p>
+          <motion.p 
+            variants={fadeInUp}
+            className="text-right text-pizza-red font-medium"
+          >
+            {t("culinaryPhilosophy.quoteAuthor")}
+          </motion.p>
+          <div className="text-5xl text-pizza-red opacity-20 font-serif leading-none absolute -bottom-6 right-4">"</div>
+        </motion.div>
         
         {/* Call to action */}
         <motion.div 
@@ -168,19 +167,13 @@ const CulinaryPhilosophySection: React.FC = () => {
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
           variants={fadeInUp}
-          transition={{ delay: 0.5 }}
+          transition={{ delay: 0.3 }}
         >
-          <motion.p 
-            variants={fadeInUp}
-            className="text-lg text-gray-700 font-montserrat mb-6"
-          >
-            {t("culinaryPhilosophy.quote")}
-          </motion.p>
           <motion.a 
             href="https://molecola.dwmenu.it/le-pizze/" 
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block pizza-btn bg-pizza-red text-white px-8 py-3 hover:bg-pizza-brown transition-colors duration-300"
+            className="inline-block pizza-btn bg-pizza-red text-white px-8 py-4 text-lg hover:bg-pizza-brown transition-colors duration-300"
             variants={scaleIn}
           >
             <span className="flex items-center">

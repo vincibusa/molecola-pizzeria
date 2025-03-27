@@ -18,37 +18,28 @@ interface PressArticle {
 
 const pressArticles: PressArticle[] = [
   {
-    title:
-      "Molecola: L'innovazione gastronomica nel cuore di Palermo conquista i foodie siciliani",
-    preview:
-      "Nel centro di Palermo, a pochi passi da Piazza Politeama, Molecola si distingue per il suo approccio rivoluzionario alla pizza. Lo chef Salvatore Capizzi ha creato un menu che esplora tecniche molecolari avanzate, trasformando la tradizionale pizza siciliana in un'esperienza gastronomica multisensoriale che sta conquistando appassionati e critici.",
-    image:
-      "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?q=80&w=2070&auto=format&fit=crop",
-    link: "https://molecolapizzeria.it/blog/innovazione-gastronomica-palermo",
-    source: "FoodBlogSicilia",
-    date: "Marzo 2024"
+    title: "A Palermo c'é una nuova Molecola, ma è la pizzeria del pizzaiolo Salvo Capizzi",
+    preview: "Nel 2023 una nuova pizzeria ha aperto nel centro storico di Palermo, in via Velasquez a due passi dal Teatro Politeama, e fin qui nulla di strano, ma la sua inconsueta formula ha catalizzato la nostra attenzione, sia per il nome che per il suo ideatore e conduttore, essa si chiama Molecola Pizzeria e lui è Salvo Capizzi.",
+    image: "https://www.allfoodsicily.it/wp-content/uploads/2024/03/pizzeria_molecola_2024_001.jpg",
+    link: "https://www.allfoodsicily.it/a-palermo-ce-una-nuova-molecola-ma-e-la-pizzeria-del-pizzaiolo-salvo-capizzi/",
+    source: "All Food Sicily",
+    date: "Aprile 2024"
   },
   {
-    title:
-      "Le nuove frontiere della pizza: Molecola Pizzeria presenta 'La Fluorescente'",
-    preview:
-      "Un'esperienza culinaria che va oltre il gusto: Molecola Pizzeria ha lanciato 'La Fluorescente', una pizza che utilizza ingredienti naturali con proprietà bioluminescenti che creano un effetto visivo sorprendente. Questo piatto rappresenta perfettamente la filosofia dello chef Capizzi di creare esperienze gastronomiche che coinvolgono tutti i sensi.",
-    image:
-      "https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?q=80&w=2070&auto=format&fit=crop",
-    link: "https://molecolapizzeria.it/blog/pizza-fluorescente",
-    source: "Palermo Today",
+    title: "Da Molecola a Palermo la sperimentazione approda in un menù tutto vegan",
+    preview: "La passione per la chimica sta alla base della cucina molecolare e Salvatore Capizzi, patron di Molecola Pizzeria e istruttore dell'Accademia Pizza DOC, la chimica continua a studiarla in cucina attraverso lo studio delle materie prime.",
+    image: "https://www.allfoodsicily.it/wp-content/uploads/2025/02/Salvo-Capizzi.jpg",
+    link: "https://www.allfoodsicily.it/da-molecola-il-nuovo-menu-vegan-salvo-capizzi-sperimentazione-sulle-materie-prime/",
+    source: "All Food Sicily",
+    date: "Febbraio 2025"
+  },
+  {
+    title: "Pizza molecolare in Sicilia? Il pizzaiolo Salvo Capizzi apre Molecola",
+    preview: "Salvatore Capizzi, patron e pizzaiolo di Molecola, ha intrapreso il percorso della cucina dopo gli studi in ingegneria, seguendo la sua passione per il mondo dei lievitati e della gastronomia in generale, come dimostra il suo ruolo di istruttore presso l'Accademia Pizza DOC e uno studio approfondito sulle metodologie, che gli ha consentito di diventare tecnico di un noto molino nazionale.",
+    image: "https://www.allfoodsicily.it/wp-content/uploads/2024/01/Molecola.jpeg",
+    link: "https://www.allfoodsicily.it/pizza-molecolare-in-sicilia-il-pizzaiolo-salvo-capizzi-apre-molecola/",
+    source: "All Food Sicily",
     date: "Febbraio 2024"
-  },
-  {
-    title:
-      "Molecola Pizzeria: Quando la scienza incontra la tradizione siciliana",
-    preview:
-      "Dalla fermentazione controllata agli impasti arricchiti con ingredienti inaspettati, dalla cottura perfettamente calibrata alle presentazioni scenografiche, Molecola Pizzeria a Palermo sta ridefinendo cosa significhi essere una pizzeria in Sicilia. Con piatti che sembrano usciti da un laboratorio scientifico ma che mantengono saldo il legame con i sapori autentici dell'isola.",
-    image:
-      "https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=2070&auto=format&fit=crop",
-    link: "https://molecolapizzeria.it/blog/scienza-incontra-tradizione",
-    source: "Sicilia Gourmet",
-    date: "Gennaio 2024"
   }
 ];
 

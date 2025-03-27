@@ -13,27 +13,35 @@ interface Article {
 const RestaurantBlog: React.FC = () => {
   const [articles, setArticles] = useState<Article[]>([]);
 
-  const dummyArticles: Article[] = [
+  const realArticles: Article[] = [
     {
       id: 1,
-      title: "La pizza di Fermento 2.0 a Cefalù è un viaggio tra sapori genuini e innovazione",
-      excerpt: "il locale immerso nel centro storico di Cefalù che punta tutto su un mix di tradizione e contemporaneità",
-      date: "20-06-2024",
-      image: "https://www.allfoodsicily.it/wp-content/uploads/2024/04/PRIMO-PIANO.jpeg",
-      link: "https://www.allfoodsicily.it/la-pizza-di-fermento-2-0-a-cefalu-e-un-viaggio-tra-sapori-genuini-e-innovazione/"
+      title: "A Palermo c'é una nuova Molecola, ma è la pizzeria del pizzaiolo Salvo Capizzi",
+      excerpt: "Nel 2023 una nuova pizzeria ha aperto nel centro storico di Palermo, in via Velasquez a due passi dal Teatro Politeama, e fin qui nulla di strano, ma la sua inconsueta formula ha catalizzato la nostra attenzione, sia per il nome che per il suo ideatore e conduttore, essa si chiama Molecola Pizzeria e lui è Salvo Capizzi.",
+      date: "04-04-2024",
+      image: "	https://www.allfoodsicily.it/wp-content/uploads/2024/03/pizzeria_molecola_2024_001.jpg",
+      link: "https://www.allfoodsicily.it/a-palermo-ce-una-nuova-molecola-ma-e-la-pizzeria-del-pizzaiolo-salvo-capizzi/"
     },
     {
       id: 2,
-      title: "Fermento 2.0, la scommessa di due fratelli e della loro pizzeria nel cuore di Cefalù",
-      excerpt: "fatto di attenzione per gli ingredienti usati, di complessità e intensità dei profumi e dei sapori e dagli impasti perfetti, leggeri e fragranti, arriva un imprimatur da parte di nuove realtà che si stanno imponendo in una clientela sempre più esigente e competente",
-      date: "11-04-2024",
-      image: "https://www.allfoodsicily.it/wp-content/uploads/2024/04/Pizzeria-Fermento-20-1.jpg",
-      link: "https://www.allfoodsicily.it/fermento-2-0-la-scommessa-di-due-fratelli-e-della-loro-pizzeria-nel-cuore-di-cefalu/"
+      title: "Da Molecola a Palermo la sperimentazione approda in un menù tutto vegan",
+      excerpt: "La passione per la chimica sta alla base della cucina molecolare e Salvatore Capizzi, patron di Molecola Pizzeria e istruttore dell’Accademia Pizza DOC, la chimica continua a studiarla in cucina attraverso lo studio delle materie prime.",
+      date: "18-02-2025",
+      image: "https://www.allfoodsicily.it/wp-content/uploads/2025/02/Salvo-Capizzi.jpg",
+      link: "https://www.allfoodsicily.it/da-molecola-il-nuovo-menu-vegan-salvo-capizzi-sperimentazione-sulle-materie-prime/"
     },
+    {
+      id: 3,
+      title: "Pizza molecolare in Sicilia? Il pizzaiolo Salvo Capizzi apre Molecola",
+      excerpt: "Salvatore Capizzi, patron e pizzaiolo di Molecola, ha intrapreso il percorso della cucina dopo gli studi in ingegneria, seguendo la sua passione per il mondo dei lievitati e della gastronomia in generale, come dimostra il suo ruolo di istruttore presso l’Accademia Pizza DOC e uno studio approfondito sulle metodologie, che gli ha consentito di diventare tecnico di un noto molino nazionale.",
+      date: "01-02-2024",
+      image: "https://www.allfoodsicily.it/wp-content/uploads/2024/01/Molecola.jpeg",
+      link: "https://www.allfoodsicily.it/a-palermo-ce-una-nuova-molecola-ma-e-la-pizzeria-del-pizzaiolo-salvo-capizzi/"
+    }
   ];
 
   useEffect(() => {
-    setArticles(dummyArticles);
+    setArticles(realArticles);
   }, []);
 
   interface ArticleCardProps {

@@ -126,12 +126,6 @@ const TeamGallerySection: React.FC = () => {
             variants={line}
             className="h-1 bg-pizza-red mx-auto mt-6 mb-6 w-24"
           ></motion.div>
-          <motion.p 
-            variants={fadeInUp}
-            className="text-gray-600 max-w-2xl mx-auto font-montserrat"
-          >
-            {t("teamGallerySection.description")}
-          </motion.p>
         </motion.div>
 
         {/* Griglia galleria con animazioni */}

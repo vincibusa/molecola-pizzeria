@@ -208,13 +208,13 @@ const resources = {
         "Amiamo prenderci cura dei nostri clienti",
       "culinaryPhilosophy.item2.title": "Ingredienti di qualità",
       "culinaryPhilosophy.item2.description":
-        "Selezioniamo le migliori farine e scegliamo i prodotti di stagione più pregiati",
+        "Selezioniamo le migliori farine dal territorio e scegliamo prodotti i prodotti di stagione più pregiati. ",
       "culinaryPhilosophy.item3.title": "Abbinamenti perfetti",
       "culinaryPhilosophy.item3.description":
-        "La nostra carta di vini offre molte proposte, non solo locali",
-      "culinaryPhilosophy.title": "LA NOSTRA FILOSOFIA CULINARIA",
-      "culinaryPhilosophy.subtitle": "Crediamo che una pizza eccezionale nasca dall'innovazione, dalle tecniche molecolari e dagli ingredienti migliori.",
-      "culinaryPhilosophy.quote": "Una pizza ben preparata è più che cibo; è una fusione scientifica di sapori, consistenze ed emozioni - un'esperienza completa da gustare con tutti i sensi.",
+        "Studiamo gli ingredienti e creiamo abbinamenti perfetti",
+      "culinaryPhilosophy.title": "IL NOSTRO CONCEPT",
+      "culinaryPhilosophy.subtitle": "Lavoriamo con passione ed attenzione, studiando i prodotti e trasformando la materia per esaltare il gusto di ogni ingrediente.",
+      "culinaryPhilosophy.quote": "La nostra pizza molecolare è il risultato di una fusione scientifica di sapori, consistenze ed emozioni. Un'esperienza completa da gustare con tutti i sensi.",
       "culinaryPhilosophy.quoteAuthor": "Team Pizzeria Molecola",
       // Footer texts
       "footer.tagline": "Innovazione molecolare in ogni morso.",
@@ -238,7 +238,7 @@ const resources = {
       // PressSection texts
       "pressSection.heading": "RICONOSCIMENTI E PRESS",
       "pressSection.subtitle": "Cosa dicono critici e appassionati di gastronomia sulla nostra innovativa pizza molecolare",
-      "pressSection.award": "Premio Innovazione",
+      "pressSection.award": "Premio ",
       "pressSection.leftArticle.title":
         "Premiata per l'Innovazione nella Préparation de la Pizza Sicilienne avec Tecniche Molecolari",
       "pressSection.leftArticle.preview":
