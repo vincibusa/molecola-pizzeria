@@ -73,10 +73,7 @@ const CulinaryPhilosophySection: React.FC = () => {
     <section id="philosophy" className="pizza-section bg-white relative overflow-hidden py-24">
       {/* Pattern di sfondo */}
       <div
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: 'url("data:image/svg+xml,%3Csvg width=\'44\' height=\'44\' viewBox=\'0 0 44 44\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg id=\'Page-1\' fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg id=\'brick-wall\' fill=\'%23000000\' fill-opacity=\'0.4\'%3E%3Cpath d=\'M0 0h22v22H0V0zm22 22h22v22H22V22z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")'
-        }}
+        className="absolute inset-0 bg-white"
       ></div>
       
       <div className="container mx-auto px-6 relative z-10">

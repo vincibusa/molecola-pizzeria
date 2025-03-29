@@ -5,8 +5,7 @@ import { FaFacebookF, FaInstagram, FaMapMarkerAlt, FaPhone, FaEnvelope, FaClock,
 import { useTranslation } from 'react-i18next';
 
 import ReservationModal from './ReservationModal';
-import logo from '../assets/logo.png';
-import OptimizedImage from './OptimizedImage';
+
 
 const Footer: React.FC = () => {
   const { t } = useTranslation();
@@ -38,23 +37,6 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="container mx-auto px-4 pt-16 pb-8 relative">
-          {/* Logo con forma a fetta di pizza */}
-          <div className="flex justify-center mb-10">
-            <motion.div 
-              className="w-56 h-56 rounded-full bg-white p-3 shadow-xl transform rotate-12"
-              whileHover={{ rotate: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <OptimizedImage
-                src={logo}
-                alt={t("navbar.logoAlt")}
-                className="w-full h-full object-contain"
-                width={224}
-                height={224}
-              />
-            </motion.div>
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-12">
             {/* About Us */}
             <motion.div

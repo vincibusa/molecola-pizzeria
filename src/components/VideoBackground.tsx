@@ -11,7 +11,6 @@ import ingredients from "../assets/molecola/DSCF8147.png";
 import restaurant1 from "../assets/molecola/DSCF7915.jpg";
 import pizza2 from "../assets/molecola/DSCF8076.jpg";
 import restaurant2 from "../assets/molecola/DSCF8158.png";
-import logo from "../assets/logo.png"; // Importo il logo
 
 interface VideoBackgroundProps {
   onReservationClick: () => void;
@@ -276,17 +275,15 @@ const VideoBackground: React.FC<VideoBackgroundProps> = ({ onReservationClick })
 
       {/* Contenitore del contenuto */}
       <div className="relative z-10 h-full flex flex-col items-center justify-center text-white px-4 text-center">
-        <motion.div 
-          className="mb-6"
+        <motion.h1 
+          className="text-6xl md:text-7xl lg:text-8xl font-playfair mb-6 text-white drop-shadow-lg"
           initial={{ opacity: 0, y: 30 }}
           animate={titleControls}
         >
-          <img 
-            src={logo} 
-            alt={t("navbar.logoAlt")} 
-            className="w-[350px] h-[350px] mx-auto drop-shadow-lg"
-          />
-        </motion.div>
+          <span className="text-pizza-red">Molecola</span>
+          <br />
+          <span className="italic">Pizzeria</span>
+        </motion.h1>
 
         <motion.div 
           className="h-1 bg-pizza-red mx-auto mb-8"

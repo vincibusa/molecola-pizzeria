@@ -58,8 +58,8 @@ const resources = {
       "footer.address.line2": "90141, Palermo, PA",
       "footer.phone": "Tel: +39 375 5600 247",
       "footer.email": "info@molecolapizzeria.it",
-      "footer.hours.weekdays": "Monday-Thursday: 17:00-21:30",
-      "footer.hours.monday": "Friday-Saturday: 17:00-22:00",
+      "footer.hours.weekdays": "Tuesday-Sunday: 18:00-23:30",
+      "footer.hours.monday": "Monday: Closed",
       "footer.copyright":
         "© {{year}} Molecola Pizzeria. All rights reserved.",
       "footer.about": "About Us",
@@ -188,13 +188,13 @@ const resources = {
       "historySection.paragraph1":
         "Più che una pizzeria, il locale di <b>Salvo Capizzi</b> si può definire un laboratorio in continua evoluzione. Nel cuore del centro storico di Palermo, a pochi passi da Piazza Politeama, <b>Molecola</b> è un progetto innovativo nato con l'intento di far vivere un'esperienza di gusto e sperimentazione unica, incentrata sulla <b>pizza molecolare</b>.",
       "historySection.paragraph2":
-        "Il concept si basa sull’elaborazione raffinata degli ingredienti che arricchiscono una pizza <b>contemporanea</b>, giocando con le consistenze e alternando i sapori. Ad affiancare <b>Capizzi</b>, un team fatto di pizzaioli, impastatori, fornai e passisti proiettato sulla “Ricerca dell’eccellenza in ogni dettaglio”.",
+        "Il concept si basa sull'elaborazione raffinata degli ingredienti che arricchiscono una pizza <b>contemporanea</b>, giocando con le consistenze e alternando i sapori. Ad affiancare <b>Capizzi</b>, un team fatto di pizzaioli, impastatori, fornai e passisti proiettato sulla \"Ricerca dell'eccellenza in ogni dettaglio\".",
       "historySection.paragraph3":
-        "Dal <b>laboratorio creativo</b>, la sperimentazione sconfina negli impasti, con blend di farine selezionate e  processi di fermentazione speciali che danno vita anche a <b>Crunch</b> e <b>Padellini</b>. Fra le proposte, oltre alla contemporanea in versione “molecolare” anche la “quasi molecolare” e “non solo molecolare”, senza dimenticare la spettacolarità dei dolci.",
+        "Dal <b>laboratorio creativo</b>, la sperimentazione sconfina negli impasti, con blend di farine selezionate e processi di fermentazione speciali che danno vita anche a <b>Crunch</b> e <b>Padellini</b>. Fra le proposte, oltre alla contemporanea in versione \"molecolare\" anche la \"quasi molecolare\" e \"non solo molecolare\", senza dimenticare la spettacolarità dei dolci.",
       "historySection.shortParagraph1":
         "Nel cuore del centro di Palermo, a pochi passi da Piazza Politeama, Molecola è il progetto innovativo nato con l'intento di far vivere un'esperienza di gusto e sperimentazione unica incentrata sulla pizza molecolare.",
       "historySection.shortParagraph2":
-        "In un locale dallo stile moderno e dal carattere personale, la <b>pizza</b> proposta parla un linguaggio contemporaneo. L'impasto unico e leggero conquista anche i palati più esigenti, rendendo giustizia alle <b>materie prime di alta qualità</b>. Non una semplice pizza ma un <b>racconto gastronomico</b> che porta in tavola tutti i sapori della Sicilia.",
+        "In un locale dallo stile moderno e dal carattere personale, la <b>pizza</b> proposta parla un linguaggio contemporaneo. L'impasto unico e leggero conquista anche i palati più esigenti, rendendo giustizia alle <b>materie prime di alta qualità</b>. Not just a pizza but a <b>gastronomic story</b> that brings all the flavors of Sicily to the table.",
       "historySection.image.alt": "Team Pizzeria Molecola",
       "historySection.image.caption": "Il team di Pizzeria Molecola",
       // Cookie consent texts
@@ -208,12 +208,12 @@ const resources = {
         "Amiamo prenderci cura dei nostri clienti",
       "culinaryPhilosophy.item2.title": "Ingredienti di qualità",
       "culinaryPhilosophy.item2.description":
-        "Selezioniamo le migliori farine dal territorio e scegliamo prodotti i prodotti di stagione più pregiati. ",
+        "We select the best flours and choose the finest seasonal products",
       "culinaryPhilosophy.item3.title": "Abbinamenti perfetti",
       "culinaryPhilosophy.item3.description":
         "Studiamo gli ingredienti e creiamo abbinamenti perfetti",
       "culinaryPhilosophy.title": "IL NOSTRO CONCEPT",
-      "culinaryPhilosophy.subtitle": "Lavoriamo con passione ed attenzione, studiando i prodotti e trasformando la materia per esaltare il gusto di ogni ingrediente.",
+      "culinaryPhilosophy.subtitle": "Lavoriamo con passione ed attenzione, studiando i prodotti e trasformando la materia per esaltare il gusto di ogni ingrediente.",
       "culinaryPhilosophy.quote": "La nostra pizza molecolare è il risultato di una fusione scientifica di sapori, consistenze ed emozioni. Un'esperienza completa da gustare con tutti i sensi.",
       "culinaryPhilosophy.quoteAuthor": "Team Pizzeria Molecola",
       // Footer texts
@@ -226,8 +226,8 @@ const resources = {
       "footer.address.line2": "90141, Palermo, PA",
       "footer.phone": "Tel: +39 375 5600 247",
       "footer.email": "info@molecolapizzeria.it",
-      "footer.hours.weekdays": "Lunedì-Giovedì: 17:00-21:30",
-      "footer.hours.monday": "Venerdì-Sabato: 17:00-22:00",
+      "footer.hours.weekdays": "Martedì-Domenica: 18:00-23:30",
+      "footer.hours.monday": "Lunedì: Chiuso",
       "footer.copyright":
         "© {{year}} Molecola Pizzeria. Tutti i diritti riservati.",
       "footer.about": "Chi Siamo",
@@ -323,7 +323,7 @@ const resources = {
       "gallery.preparation": "Preparazione Pizza",
       "gallery.preparation.description": "Impasto artigianale creativo",
       "gallery.ambiance": "Atmosfera del Locale",
-      "gallery.ambiance.description": "Ambiente moderno e accogliente",
+      "gallery.ambiance.description": "Modern and welcoming atmosphere",
       "gallery.oven": "Forno a Legna",
       "gallery.oven.description": "Metodi di cottura tradizionali",
       "gallery.pizza": "Pizza Molecolare",
@@ -394,8 +394,8 @@ const resources = {
       "footer.address.line2": "90141, Palermo, PA",
       "footer.phone": "Tel: +39 375 5600 247",
       "footer.email": "info@molecolapizzeria.it",
-      "footer.hours.weekdays": "Lunes-Jueves: 17:00-21:30",
-      "footer.hours.monday": "Viernes-Sábado: 17:00-22:00",
+      "footer.hours.weekdays": "Martes-Domingo: 18:00-23:30",
+      "footer.hours.monday": "Lunes: Cerrado",
       "footer.copyright":
         "© {{year}} Molecola Pizzeria. Todos los derechos reservados.",
       "footer.about": "Sobre Nosotros",
@@ -495,7 +495,7 @@ const resources = {
       "gallery.oven": "Horno de Leña",
       "gallery.oven.description": "Métodos de cocción tradicionales",
       "gallery.pizza": "Pizza Molecular",
-      "gallery.pizza.description": "Creaciones innovadoras",
+      "gallery.pizza.description": "Creaciones innovantes",
       
       // Gallery categories
       "gallery.categories.all": "Todos",
@@ -562,7 +562,7 @@ const resources = {
       "footer.address.line2": "90015, Cefalù, PA",
       "footer.phone": "Tél: +39 331 872 7612",
       "footer.email": "info@fermento2.0.com",
-      "footer.hours.weekdays": "Mardi-Dimanche: 19:00-23:00",
+      "footer.hours.weekdays": "Mardi-Dimanche: 18:00-23:00",
       "footer.hours.monday": "Lundi: fermé",
       "footer.copyright":
         "© {{year}} Fermento 2.0. Tous droits réservés.",
@@ -720,8 +720,8 @@ const resources = {
       "footer.address.line2": "90141, Palermo, PA",
       "footer.phone": "Tel: +39 375 5600 247",
       "footer.email": "info@molecolapizzeria.it",
-      "footer.hours.weekdays": "Montag-Donnerstag: 17:00-21:30",
-      "footer.hours.monday": "Freitag-Samstag: 17:00-22:00",
+      "footer.hours.weekdays": "Dienstag-Sonntag: 18:00-23:30",
+      "footer.hours.monday": "Montag: Geschlossen",
       "footer.copyright": "© {{year}} Molecola Pizzeria. Alle Rechte vorbehalten.",
       "footer.about": "Über Uns",
       "footer.newsletter.title": "Abonnieren Sie Unseren Newsletter",
