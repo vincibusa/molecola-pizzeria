@@ -8,7 +8,6 @@ import { Link, useNavigate } from "react-router-dom";
 // Importa immagini rappresentative del locale e dei piatti
 import image1 from "../assets/molecola/DSCF8189.png"; // Preparazione pizza
 import image2 from "../assets/molecola/DSCF8058.png"; // Dettaglio locale
-import image3 from "../assets/molecola/DSCF8035.png"; // Forno
 import image4 from "../assets/molecola/DSCF8097.png"; // Pizza finita
 
 const TeamGallerySection: React.FC = () => {
@@ -81,11 +80,6 @@ const TeamGallerySection: React.FC = () => {
       image: image2,
     },
     {
-      name: t("gallery.oven"),
-      role: t("gallery.oven.description"),
-      image: image3,
-    },
-    {
       name: t("gallery.pizza"),
       role: t("gallery.pizza.description"),
       image: image4,
@@ -125,7 +119,7 @@ const TeamGallerySection: React.FC = () => {
 
         {/* Griglia galleria con animazioni */}
         <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8"
+          className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-8 max-w-5xl mx-auto"
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"

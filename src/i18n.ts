@@ -156,8 +156,6 @@ const resources = {
       "gallery.preparation.description": "Artisanal dough crafting",
       "gallery.ambiance": "Restaurant Ambiance",
       "gallery.ambiance.description": "Modern and welcoming atmosphere",
-      "gallery.oven": "Wood-fired Oven",
-      "gallery.oven.description": "Traditional cooking methods",
       "gallery.pizza": "Molecular Pizza",
       "gallery.pizza.description": "Innovative creations",
       
@@ -194,7 +192,7 @@ const resources = {
       "historySection.shortParagraph1":
         "Nel cuore del centro di Palermo, a pochi passi da Piazza Politeama, Molecola è il progetto innovativo nato con l'intento di far vivere un'esperienza di gusto e sperimentazione unica incentrata sulla pizza molecolare.",
       "historySection.shortParagraph2":
-        "In un locale dallo stile moderno e dal carattere personale, la <b>pizza</b> proposta parla un linguaggio contemporaneo. L'impasto unico e leggero conquista anche i palati più esigenti, rendendo giustizia alle <b>materie prime di alta qualità</b>. Not just a pizza but a <b>gastronomic story</b> that brings all the flavors of Sicily to the table.",
+        "In un locale dallo stile moderno e dal carattere personale, la <b>pizza</b> offered speaks a contemporary language. The unique light dough satisfies even the most demanding palates, doing justice to the <b>high-quality ingredients</b>. Not just a pizza but a <b>gastronomic story</b> that brings all the flavors of Sicily to the table.",
       "historySection.image.alt": "Team Pizzeria Molecola",
       "historySection.image.caption": "Il team di Pizzeria Molecola",
       // Cookie consent texts
@@ -208,7 +206,7 @@ const resources = {
         "Amiamo prenderci cura dei nostri clienti",
       "culinaryPhilosophy.item2.title": "Ingredienti di qualità",
       "culinaryPhilosophy.item2.description":
-        "We select the best flours and choose the finest seasonal products",
+        "Selezioniamo le migliori farine e scegliamo i prodotti stagionali più pregiati",
       "culinaryPhilosophy.item3.title": "Abbinamenti perfetti",
       "culinaryPhilosophy.item3.description":
         "Studiamo gli ingredienti e creiamo abbinamenti perfetti",
@@ -323,9 +321,7 @@ const resources = {
       "gallery.preparation": "Preparazione Pizza",
       "gallery.preparation.description": "Impasto artigianale creativo",
       "gallery.ambiance": "Atmosfera del Locale",
-      "gallery.ambiance.description": "Modern and welcoming atmosphere",
-      "gallery.oven": "Forno a Legna",
-      "gallery.oven.description": "Metodi di cottura tradizionali",
+      "gallery.ambiance.description": "Atmosfera moderna e accogliente",
       "gallery.pizza": "Pizza Molecolare",
       "gallery.pizza.description": "Creazioni innovative",
       
@@ -362,7 +358,7 @@ const resources = {
       "historySection.shortParagraph1":
         "En el corazón del centro de Palermo, a pocos pasos de la Plaza Politeama, Molecola es el proyecto innovador que nació con el objetivo de ofrecer una experiencia única de sabor y experimentación centrada en la pizza molecular.",
       "historySection.shortParagraph2":
-        "En un local con estilo moderno y carácter personal, la <b>pizza</b> ofrecida habla un lenguaje contemporáneo. La masa única y ligera satisface incluso los paladares más exigentes, haciendo justicia a los <b>ingredientes de alta calidad</b>. No solo una pizza sino una <b>historia gastronómica</b> que trae a la mesa todos los sabores de Sicilia.",
+        "En un local con estilo moderno y carácter personal, la <b>pizza</b> ofrecida habla un lenguaje contemporáneo. La masa única y ligera satisface incluso los paladares más exigeantes, haciendo justicia a los <b>ingredientes de alta calidad</b>. No solo una pizza sino una <b>historia gastronómica</b> que trae a la mesa todos los sabores de Sicilia.",
       "historySection.image.alt": "Equipo de Pizzeria Molecola",
       "historySection.image.caption": "El equipo de Pizzeria Molecola",
       // Cookie consent texts
@@ -492,8 +488,6 @@ const resources = {
       "gallery.preparation.description": "Elaboración artesanal de masa",
       "gallery.ambiance": "Ambiente del Restaurante",
       "gallery.ambiance.description": "Atmósfera moderna y acogedora",
-      "gallery.oven": "Horno de Leña",
-      "gallery.oven.description": "Métodos de cocción tradicionales",
       "gallery.pizza": "Pizza Molecular",
       "gallery.pizza.description": "Creaciones innovantes",
       
@@ -660,8 +654,6 @@ const resources = {
       "gallery.preparation.description": "Façonnage artisanal de la pâte",
       "gallery.ambiance": "Ambiance du Restaurant",
       "gallery.ambiance.description": "Atmosphère moderne et accueillante",
-      "gallery.oven": "Four à Bois",
-      "gallery.oven.description": "Méthodes de cuisson traditionnelles",
       "gallery.pizza": "Pizza Moléculaire",
       "gallery.pizza.description": "Créations innovantes",
       
@@ -692,8 +684,10 @@ const resources = {
       "historySection.paragraph1": "Im Herzen des Zentrums von Palermo, nur wenige Schritte vom Politeama-Platz entfernt, ist Molecola das innovative Projekt, das mit dem Ziel gegründet wurde, ein einzigartiges Geschmacks- und Experimentiererlebnis rund um molekulare Pizza zu bieten.",
       "historySection.paragraph2": "In einem Lokal mit modernem Stil und persönlichem Charakter spricht die <b>Pizza</b> eine zeitgenössische Sprache. Aus einer <b>Mischung ausgewählter Mehle</b> mit einem speziellen Fermentationsprozess entsteht ein leichter Teig mit einzigartiger Textur, der selbst die anspruchsvollsten Gaumen zufriedenstellt. Es ist nicht nur eine Pizza, sondern eine <b>geschmackliche Geschichte</b>, die alle Aromen Siziliens auf den Tisch bringt.",
       "historySection.paragraph3": "Alternative Optionen sind verfügbar, wie der <b>Crunch</b> mit seiner charakteristischen Knusprigkeit oder die <b>Padellini</b>, bei denen spezielle Techniken zur Teigzubereitung vor dem Backen und Belegen verwendet werden, um den <b>hochwertigen Zutaten</b>, die sorgfältig von lokalen Produzenten ausgewählt wurden, gerecht zu werden.",
-      "historySection.shortParagraph1": "Im Herzen des Zentrums von Palermo, nur wenige Schritte vom Politeama-Platz entfernt, ist Molecola das innovative Projekt, das mit dem Ziel gegründet wurde, ein einzigartiges Geschmacks- und Experimentiererlebnis rund um molekulare Pizza zu bieten.",
-      "historySection.shortParagraph2": "In einem Lokal mit modernem Stil und persönlichem Charakter spricht die <b>Pizza</b> eine zeitgenössische Sprache. Der einzigartige, leichte Teig überzeugt selbst die anspruchsvollsten Gaumen und wird den <b>hochwertigen Zutaten</b> gerecht. Es ist nicht nur eine Pizza, sondern eine <b>geschmackliche Geschichte</b>, die alle Aromen Siziliens auf den Tisch bringt.",
+      "historySection.shortParagraph1":
+        "Nel cuore del centro di Palermo, a pochi passi da Piazza Politeama, Molecola è il progetto innovativo nato con l'intento di far vivere un'esperienza di gusto e sperimentazione unica incentrata sulla pizza molecolare.",
+      "historySection.shortParagraph2":
+        "In un locale dallo stile moderno e dal carattere personale, la <b>pizza</b> proposta parla un linguaggio contemporaneo. L'impasto unico e leggero conquista anche i palati più esigenti, rendendo giustizia alle <b>materie prime di alta qualità</b>. Non solo una pizza ma una <b>storia gastronomica</b> che porta in tavola tutti i sapori della Sicilia.",
       "historySection.image.alt": "Team von Molecola Pizzeria",
       "historySection.image.caption": "Das Team von Molecola Pizzeria",
       // Cookie consent texts
@@ -815,8 +809,6 @@ const resources = {
       "gallery.preparation.description": "Handwerkliche Teigherstellung",
       "gallery.ambiance": "Restaurant-Ambiente",
       "gallery.ambiance.description": "Moderne und einladende Atmosphäre",
-      "gallery.oven": "Holzofen",
-      "gallery.oven.description": "Traditionelle Garmethoden",
       "gallery.pizza": "Molekulare Pizza",
       "gallery.pizza.description": "Innovative Kreationen",
       
