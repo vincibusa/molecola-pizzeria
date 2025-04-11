@@ -23,19 +23,20 @@ export interface Shift {
 export const allTimes = [
   "19:00", "19:15", "19:30", "19:45", 
   "20:00", "20:15", "20:30", "20:45", 
-  "21:00", "21:15", "21:30"
+  "21:00", "21:15", "21:30", "21:45",
+  "22:00", "22:15", "22:30", "22:45",
+  "23:00", 
 ];
 
 /**
  * Inizializza gli shift di default per una data specifica.
- * Per ogni orario in allTimes crea uno Shift; di default vengono abilitati solo "19:00", "20:00" e "21:30".
+ * Per ogni orario in allTimes crea uno Shift; di default vengono abilitati tutti gli orari.
  */
 export const initializeShiftsForDate = async (date: string): Promise<void> => {
   const shiftsRef = database.ref(`shifts/${date}`);
   const defaultShifts: Shift[] = allTimes.map((time) => {
-    // Imposta attivi di default solo 19:00, 20:00 e 21:30
-    const enabled = (time === "19:00" || time === "20:00" || time === "21:30");
-    return { time, enabled, maxReservations: 100 };
+    // Tutti gli orari sono abilitati di default
+    return { time, enabled: true, maxReservations: 100 };
   });
   for (const shift of defaultShifts) {
     await shiftsRef.child(shift.time).set(shift);
