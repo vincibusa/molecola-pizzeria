@@ -1,6 +1,6 @@
 import { database } from '../firebase-config';
 import { addDays, format } from 'date-fns';
-import { initializeShiftsForDate, Shift } from './Reservation';
+import { initializeShiftsForDate } from './Reservation';
 
 // Import condizionale di node-cron solo in ambiente server
 let cron: any;
