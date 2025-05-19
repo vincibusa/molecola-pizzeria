@@ -11,6 +11,7 @@ import RestaurantBlog from "./Pages/RestaurantBlog";
 import LanguageSelector from "./components/LanguageSelector";
 import LoginPage from "./Pages/LoginPage";
 import SEOSchema from "./components/SEOSchema";
+import ShiftInitializer from "./components/ShiftInitializer";
 
 function App() {
   const location = useLocation();
@@ -27,6 +28,9 @@ function App() {
 
   return (
     <NavbarProvider>
+      {/* Componente che controlla e inizializza gli shift all'avvio */}
+      <ShiftInitializer />
+      
       {/* Mostra la navbar solo se non è la pagina di login */}
       {!isLoginPage && <Navbar />}
       

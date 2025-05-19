@@ -1,15 +1,9 @@
-import { initializeShiftsForDate } from "../services/Reservation";
-import { addDays, format } from "date-fns";
+import { ensureShiftsForNextDays } from "../services/ShiftScheduler";
 
 async function preInitializeShifts() {
-  const today = new Date();
-  // Inizializza gli shift per i prossimi 30 giorni
-  for (let i = 0; i < 30; i++) {
-    const date = addDays(today, i);
-    const formattedDate = format(date, "yyyy-MM-dd");
-    await initializeShiftsForDate(formattedDate);
-    console.log(`Shifts initialized for ${formattedDate}`);
-  }
+  // Verifica e inizializza gli shift per i prossimi 30 giorni
+  await ensureShiftsForNextDays(30);
+  console.log("Processo di verifica e inizializzazione degli shift completato.");
 }
 
 preInitializeShifts().catch(console.error);
