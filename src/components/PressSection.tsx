@@ -17,6 +17,14 @@ interface PressArticle {
 }
 
 const pressArticles: PressArticle[] = [
+    {
+    title: "Lievitati, fermentati e dolci. Salvo Capizzi: “Molecolare si, ma occhio a gusto e tradizione",
+    preview: "Da Molecola, una costante sperimentazione, quella di Salvo Capizzi, che nella sua pizzeria molecolare si destreggia fra impasti, fermentazioni e dolci, senza mai perdere di vista la tradizione e il gusto autentico della materia prima.",
+    image: "https://www.allfoodsicily.it/wp-content/uploads/2025/06/Salvo-Capizzi.jpg",
+    link: "https://www.allfoodsicily.it/lievitati-fermentati-e-dolci-salvo-capizzi-molecolare-si-ma-occhio-a-gusto-e-tradizione/",
+    source: "All Food Sicily",
+    date: "Giugno 2025"
+  },
   {
     title: "A Palermo c'é una nuova Molecola, ma è la pizzeria del pizzaiolo Salvo Capizzi",
     preview: "Nel 2023 una nuova pizzeria ha aperto nel centro storico di Palermo, in via Velasquez a due passi dal Teatro Politeama, e fin qui nulla di strano, ma la sua inconsueta formula ha catalizzato la nostra attenzione, sia per il nome che per il suo ideatore e conduttore, essa si chiama Molecola Pizzeria e lui è Salvo Capizzi.",
