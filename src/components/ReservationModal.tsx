@@ -1,7 +1,7 @@
-import React, { useState, useEffect, ChangeEvent, FormEvent } from "react";
+import React, { useState,  ChangeEvent, FormEvent } from "react";
 import { FiCalendar, FiClock, FiUsers, FiCheck, FiX, FiAlertCircle } from "react-icons/fi";
 import { format } from "date-fns";
-import { addReservation, getShiftsForDate } from "../services/Reservation";
+import { addReservation, allTimes } from "../services/Reservation";
 import { useTranslation } from "react-i18next";
 import { motion } from "framer-motion";
 
@@ -41,32 +41,10 @@ const ReservationModal: React.FC<ReservationModalProps> = ({ isOpen, onClose }) 
   const [showError, setShowError] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string>("");
 
-  // Stato per memorizzare le fasce orarie disponibili per la data selezionata
-  const [availableTimeSlots, setAvailableTimeSlots] = useState<string[]>([]);
+  // Ora tutti gli orari sono sempre disponibili (basati su allTimes)
+  const availableTimeSlots = allTimes;
 
-  useEffect(() => {
-    const loadAvailableTimes = async () => {
-      if (formData.date) {
-        try {
-          const shifts = await getShiftsForDate(formData.date);
-          // Filtriamo solo gli shift abilitati
-          const available = shifts.filter((shift) => shift.enabled).map((shift) => shift.time);
-          setAvailableTimeSlots(available);
-          // Se l'orario selezionato non è più disponibile, lo resettiamo
-          if (!available.includes(formData.time)) {
-            setFormData((prev) => ({ ...prev, time: "" }));
-          }
-        } catch (error) {
-          console.error("Error loading available times", error);
-          setAvailableTimeSlots([]);
-        }
-      } else {
-        setAvailableTimeSlots([]);
-      }
-    };
-
-    loadAvailableTimes();
-  }, [formData.date, formData.time]);
+  // Rimuovo l'useEffect che caricava gli shifts - ora non più necessario
 
   const validateForm = (): boolean => {
     const newErrors: Record<string, string> = {};

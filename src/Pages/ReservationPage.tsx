@@ -7,25 +7,19 @@ import "react-toastify/dist/ReactToastify.css";
 import emailjs from '@emailjs/browser';
 import {
   Reservation,
-  Shift,
   subscribeToReservations,
   updateReservation,
   deleteReservation,
-  getShiftsForDate,
-  updateShift,
-  initializeShiftsForDate,
-  allTimes,
   acceptReservation,
-  rejectReservation
+  rejectReservation,
+  allTimes
 } from "../services/Reservation";
 import ReservationModalEdit from "../components/ReservationModalEdit";
 
 const ReservationPage: React.FC = () => {
-  // Stati per le prenotazioni, la data selezionata e i turni
+  // Stati per le prenotazioni e la data selezionata
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [selectedDate, setSelectedDate] = useState<string>(format(new Date(), "yyyy-MM-dd"));
-  const [shifts, setShifts] = useState<Shift[]>([]);
-  const [selectedShift, setSelectedShift] = useState<string>(allTimes[0]);
 
   // Stati per modale edit e delete
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
@@ -45,26 +39,6 @@ const ReservationPage: React.FC = () => {
     });
     return () => unsubscribe();
   }, []);
-
-  // Carica i turni per la data selezionata
-  useEffect(() => {
-    const loadShifts = async () => {
-      try {
-        let shiftsData = await getShiftsForDate(selectedDate);
-        if (shiftsData.length === 0) {
-          await initializeShiftsForDate(selectedDate);
-          shiftsData = await getShiftsForDate(selectedDate);
-        }
-        setShifts(shiftsData);
-        if (!shiftsData.find((s) => s.time === selectedShift)) {
-          setSelectedShift(allTimes[0]);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    loadShifts();
-  }, [selectedDate]);
 
   // Filtra le prenotazioni in base alla data selezionata
   const filteredReservations = reservations.filter(
@@ -97,26 +71,9 @@ const ReservationPage: React.FC = () => {
     }
   }, [selectedReservation]);
 
-  // Gestione della modifica della data e del turno
+  // Gestione della modifica della data
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSelectedDate(e.target.value);
-  };
-
-  const handleShiftChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    setSelectedShift(e.target.value);
-  };
-
-  const toggleShiftStatus = async () => {
-    try {
-      const currentShift = shifts.find((s) => s.time === selectedShift);
-      const shiftToUpdate = currentShift || { time: selectedShift, enabled: false, maxReservations: 15 };
-      await updateShift(selectedDate, selectedShift, { enabled: !shiftToUpdate.enabled });
-      const updatedShifts = await getShiftsForDate(selectedDate);
-      setShifts(updatedShifts);
-      toast.success(`Turno ${selectedShift} ${!shiftToUpdate.enabled ? "attivato" : "bloccato"}`);
-    } catch (error) {
-      toast.error("Errore nell'aggiornamento dello stato del turno");
-    }
   };
 
   const handleAccept = useCallback(async (reservation: Reservation) => {
@@ -160,8 +117,8 @@ const ReservationPage: React.FC = () => {
       };
 
       await emailjs.send(
-        'service_jlzz6px',
-        'template_3cehio9',
+        'service_jlzz6px', 
+        'template_reject',
         templateParams,
         'iIz1ynV6Pc7STPfuf'
       );
@@ -173,10 +130,16 @@ const ReservationPage: React.FC = () => {
     }
   }, []);
 
+  // Raggruppa prenotazioni per orario per una migliore visualizzazione
+  const groupedReservations = allTimes.reduce((acc, time) => {
+    acc[time] = filteredReservations.filter(res => res.time === time);
+    return acc;
+  }, {} as Record<string, Reservation[]>);
+
   return (
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header: titolo, selezione data e gestione dei turni */}
+        {/* Header: titolo e selezione data */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8 mb-8">
           <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
             Prenotazioni
@@ -194,133 +157,131 @@ const ReservationPage: React.FC = () => {
                   text-gray-700 cursor-pointer hover:border-blue-500 transition-colors"
               />
             </div>
-
-            {/* Select per il turno */}
-            <div className="relative">
-              <select
-                value={selectedShift}
-                onChange={handleShiftChange}
-                className="w-full sm:w-auto appearance-none px-4 py-2.5 pr-10 bg-white border border-gray-300 rounded-lg shadow-sm
-                  focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent
-                  text-gray-700 cursor-pointer hover:border-blue-500 transition-colors"
-              >
-                {allTimes.map((time) => {
-                  const shift = shifts.find((s) => s.time === time);
-                  const enabled = shift ? shift.enabled : false;
-                  return (
-                    <option 
-                      key={time} 
-                      value={time}
-                      className="py-2"
-                    >
-                      {time} {enabled ? "(Attivo)" : "(Bloccato)"}
-                    </option>
-                  );
-                })}
-              </select>
-              {/* Icona freccia custom */}
-              <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                </svg>
-              </div>
-            </div>
-
-            {/* Bottone per alternare lo stato del turno */}
-            <button
-              onClick={toggleShiftStatus}
-              className="w-full sm:w-auto px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 
-                active:bg-blue-800 transition-colors duration-200 shadow-sm
-                focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-            >
-              {shifts.find((s) => s.time === selectedShift)?.enabled ? "Blocca" : "Sblocca"}
-            </button>
           </div>
         </div>
 
-        {/* Lista delle prenotazioni per la data selezionata */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredReservations.length > 0 ? (
-            filteredReservations.map((reservation) => (
-              <div key={reservation.id} className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
-                <div className="flex justify-between items-start mb-4">
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-800">
-                      {reservation.fullName}
-                    </h3>
-                    <p className="text-gray-600">{reservation.phone}</p>
-                    <p className="text-gray-600">{reservation.email}</p>
-                    <span className={`inline-block px-2 py-1 rounded-full text-sm ${
-                      reservation.status === 'accepted' ? 'bg-green-100 text-green-800' :
-                      reservation.status === 'rejected' ? 'bg-red-100 text-red-800' :
-                      'bg-yellow-100 text-yellow-800'
-                    }`}>
-                      {reservation.status === 'accepted' ? 'Accettata' :
-                       reservation.status === 'rejected' ? 'Rifiutata' :
-                       'In attesa'}
-                    </span>
-                  </div>
-                  <div className="flex space-x-2">
-                    {(!reservation.status || reservation.status === 'pending') && (
-                      <>
-                        <button
-                          onClick={() => handleAccept(reservation)}
-                          className="p-2 text-green-600 hover:bg-green-600 hover:text-white rounded-full transition-all duration-200"
-                          title="Accetta prenotazione"
-                        >
-                          <FiCheck className="w-5 h-5" />
-                        </button>
-                        <button
-                          onClick={() => handleReject(reservation)}
-                          className="p-2 text-red-600 hover:bg-red-600 hover:text-white rounded-full transition-all duration-200"
-                          title="Rifiuta prenotazione"
-                        >
-                          <FiX className="w-5 h-5" />
-                        </button>
-                      </>
-                    )}
-                    <button
-                      onClick={() => handleEdit(reservation)}
-                      className="p-2 text-blue-600 hover:bg-blue-600 hover:text-white rounded-full transition-all duration-200"
-                      title="Modifica prenotazione"
-                    >
-                      <FiEdit2 className="w-5 h-5" />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(reservation)}
-                      className="p-2 text-red-600 hover:bg-red-600 hover:text-white rounded-full transition-all duration-200"
-                      title="Elimina prenotazione"
-                    >
-                      <FiTrash2 className="w-5 h-5" />
-                    </button>
-                  </div>
-                </div>
-                {/* Dettagli della prenotazione */}
-                <div className="space-y-2">
-                  <div className="flex items-center text-gray-600">
-                    <FiCalendar className="mr-2" />
-                    <span>{format(new Date(reservation.date), "dd/MM/yyyy")}</span>
-                  </div>
-                  <div className="flex items-center text-gray-600">
+        {/* Sezione informazioni sistema */}
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-8">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-blue-400" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-blue-800">
+                Sistema Semplificato
+              </h3>
+              <div className="mt-2 text-sm text-blue-700">
+                <p>Le prenotazioni sono ora sempre disponibili per tutti gli orari. Non è più necessario gestire i turni.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Lista delle prenotazioni raggruppate per orario */}
+        <div className="space-y-8">
+          {Object.entries(groupedReservations).map(([time, timeReservations]) => {
+            if (timeReservations.length === 0) return null;
+            
+            return (
+              <div key={time} className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+                <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
+                  <h2 className="text-lg font-semibold text-gray-800 flex items-center">
                     <FiClock className="mr-2" />
-                    <span>{reservation.time}</span>
+                    Orario: {time}
+                    <span className="ml-2 text-sm font-normal text-gray-600">
+                      ({timeReservations.length} {timeReservations.length === 1 ? 'prenotazione' : 'prenotazioni'})
+                    </span>
+                  </h2>
+                </div>
+                
+                <div className="p-6">
+                  <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {timeReservations.map((reservation) => (
+                      <div key={reservation.id} className="bg-gray-50 p-4 rounded-lg border border-gray-100">
+                        <div className="flex justify-between items-start mb-4">
+                          <div>
+                            <h3 className="text-lg font-semibold text-gray-800">
+                              {reservation.fullName}
+                            </h3>
+                            <p className="text-gray-600">{reservation.phone}</p>
+                            <p className="text-gray-600">{reservation.email}</p>
+                            <span className={`inline-block px-2 py-1 rounded-full text-sm mt-2 ${
+                              reservation.status === 'accepted' ? 'bg-green-100 text-green-800' :
+                              reservation.status === 'rejected' ? 'bg-red-100 text-red-800' :
+                              'bg-yellow-100 text-yellow-800'
+                            }`}>
+                              {reservation.status === 'accepted' ? 'Accettata' :
+                               reservation.status === 'rejected' ? 'Rifiutata' :
+                               'In attesa'}
+                            </span>
+                          </div>
+                          <div className="flex space-x-2">
+                            {(!reservation.status || reservation.status === 'pending') && (
+                              <>
+                                <button
+                                  onClick={() => handleAccept(reservation)}
+                                  className="p-2 text-green-600 hover:bg-green-600 hover:text-white rounded-full transition-all duration-200"
+                                  title="Accetta prenotazione"
+                                >
+                                  <FiCheck className="w-5 h-5" />
+                                </button>
+                                <button
+                                  onClick={() => handleReject(reservation)}
+                                  className="p-2 text-red-600 hover:bg-red-600 hover:text-white rounded-full transition-all duration-200"
+                                  title="Rifiuta prenotazione"
+                                >
+                                  <FiX className="w-5 h-5" />
+                                </button>
+                              </>
+                            )}
+                            <button
+                              onClick={() => handleEdit(reservation)}
+                              className="p-2 text-blue-600 hover:bg-blue-600 hover:text-white rounded-full transition-all duration-200"
+                              title="Modifica prenotazione"
+                            >
+                              <FiEdit2 className="w-5 h-5" />
+                            </button>
+                            <button
+                              onClick={() => handleDelete(reservation)}
+                              className="p-2 text-red-600 hover:bg-red-600 hover:text-white rounded-full transition-all duration-200"
+                              title="Elimina prenotazione"
+                            >
+                              <FiTrash2 className="w-5 h-5" />
+                            </button>
+                          </div>
+                        </div>
+                        {/* Dettagli della prenotazione */}
+                        <div className="space-y-2">
+                          <div className="flex items-center text-gray-600">
+                            <FiCalendar className="mr-2" />
+                            <span>{format(new Date(reservation.date), "dd/MM/yyyy")}</span>
+                          </div>
+                          <div className="flex items-center text-gray-600">
+                            <FiUsers className="mr-2" />
+                            <span>{reservation.seats} {reservation.seats === 1 ? 'persona' : 'persone'}</span>
+                          </div>
+                          {reservation.specialRequests && (
+                            <div className="mt-2 text-gray-600 bg-white p-2 rounded-md border">
+                              <span className="block font-medium">Note speciali:</span>
+                              <span>{reservation.specialRequests}</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <div className="flex items-center text-gray-600">
-                    <FiUsers className="mr-2" />
-                    <span>{reservation.seats} {reservation.seats === 1 ? 'persona' : 'persone'}</span>
-                  </div>
-                  {reservation.specialRequests && (
-                    <div className="mt-2 text-gray-600 bg-gray-50 p-2 rounded-md">
-                      <span className="block font-medium">Note speciali:</span>
-                      <span>{reservation.specialRequests}</span>
-                    </div>
-                  )}
                 </div>
               </div>
-            ))
-          ) : (
-            <div className="md:col-span-2 lg:col-span-3 text-center py-16 text-gray-500">
-              Non ci sono prenotazioni per questa data.
+            );
+          })}
+
+          {filteredReservations.length === 0 && (
+            <div className="text-center py-16 text-gray-500">
+              <FiCalendar className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+              <h3 className="text-lg font-medium text-gray-900 mb-2">Nessuna prenotazione</h3>
+              <p>Non ci sono prenotazioni per il {format(new Date(selectedDate + 'T00:00:00'), 'dd/MM/yyyy')}.</p>
             </div>
           )}
         </div>

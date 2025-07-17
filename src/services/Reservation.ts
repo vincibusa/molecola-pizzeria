@@ -62,42 +62,46 @@ export const getShiftsForDate = async (date: string): Promise<Shift[]> => {
   const shiftsRef = database.ref(`shifts/${date}`);
   const snapshot = await shiftsRef.once('value');
   const shifts: Shift[] = [];
-  snapshot.forEach(childSnapshot => {
+  snapshot.forEach((childSnapshot: any) => {
     shifts.push(childSnapshot.val());
   });
   return shifts;
 };
 
+// Limite massimo globale di posti per ogni orario (opzionale, impostabile)
+const MAX_SEATS_PER_TIME_SLOT = 100; // Puoi modificare questo valore o renderlo configurabile
+
 /**
- * Aggiunge una prenotazione, controllando che il turno esista, sia abilitato e che il numero totale di posti prenotati non superi il limite.
+ * Aggiunge una prenotazione senza dipendere dagli shifts.
+ * Opzionalmente controlla il limite massimo di posti per orario.
  */
 export const addReservation = async (reservation: Reservation): Promise<string | null> => {
   try {
-    // Verifica che il turno esista e sia abilitato
-    const shiftRef = database.ref(`shifts/${reservation.date}/${reservation.time}`);
-    const shiftSnapshot = await shiftRef.once('value');
-    if (!shiftSnapshot.exists() || !shiftSnapshot.val().enabled) {
-      throw new Error('Turno non disponibile');
+    // Verifica che l'orario sia valido (facoltativo)
+    if (!allTimes.includes(reservation.time)) {
+      throw new Error('Orario non valido');
     }
-    const shift: Shift = shiftSnapshot.val();
 
-    // Somma i posti prenotati per quel turno nella data
-    const reservationsRef = database.ref('reservations');
-    const snapshot = await reservationsRef.orderByChild('date').equalTo(reservation.date).once('value');
-    let totalSeats = 0;
-    snapshot.forEach(childSnapshot => {
-      const res: Reservation = childSnapshot.val();
-      if (res.time === reservation.time) {
-        totalSeats += res.seats;
+    // Opzionale: controlla il limite massimo di posti per questo orario
+    if (MAX_SEATS_PER_TIME_SLOT > 0) {
+      const reservationsRef = database.ref('reservations');
+      const snapshot = await reservationsRef.orderByChild('date').equalTo(reservation.date).once('value');
+      let totalSeats = 0;
+             snapshot.forEach((childSnapshot: any) => {
+         const res: Reservation = childSnapshot.val();
+         if (res.time === reservation.time && res.status !== 'rejected') {
+           totalSeats += res.seats;
+         }
+       });
+
+      // Se superiamo il limite globale, genera un errore
+      if (totalSeats + reservation.seats > MAX_SEATS_PER_TIME_SLOT) {
+        throw new Error('Orario al completo');
       }
-    });
-
-    // Se superiamo il limite, genera un errore
-    if (totalSeats + reservation.seats > shift.maxReservations) {
-      throw new Error('Turno al completo');
     }
 
     // Aggiunge la prenotazione con stato pending di default
+    const reservationsRef = database.ref('reservations');
     const newReservationRef = reservationsRef.push();
     await newReservationRef.set({ ...reservation, status: 'pending' });
     return newReservationRef.key;
@@ -114,9 +118,9 @@ export const subscribeToReservations = (
   callback: (reservations: Reservation[]) => void
 ): (() => void) => {
   const reservationsRef = database.ref('reservations');
-  const listener = reservationsRef.on('value', (snapshot) => {
+  const listener = reservationsRef.on('value', (snapshot: any) => {
     const reservations: Reservation[] = [];
-    snapshot.forEach((childSnapshot) => {
+    snapshot.forEach((childSnapshot: any) => {
       const reservation: Reservation = childSnapshot.val();
       reservation.id = childSnapshot.key ?? "";
       reservations.push(reservation);
